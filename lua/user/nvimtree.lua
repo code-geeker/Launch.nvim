@@ -16,6 +16,8 @@ function M.config()
     sync_root_with_cwd = true,
     view = {
       relativenumber = true,
+      signcolumn = "no",
+      width = 40,
     },
     renderer = {
       add_trailing = false,

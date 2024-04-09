@@ -20,6 +20,12 @@ function M.config()
     },
     icons = require("user.icons").kind,
     lsp = { auto_attach = true },
+     source_buffer = {
+        follow_node = true,    -- Keep the current node in focus on the source buffer
+        highlight = true,      -- Highlight the currently focused node
+        reorient = "smart",    -- "smart", "top", "mid" or "none"
+        scrolloff = nil        -- scrolloff value when navbuddy is open
+    },
   }
 
   local opts = { noremap = true, silent = true }

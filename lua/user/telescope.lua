@@ -1,25 +1,31 @@
 local M = {
   "nvim-telescope/telescope.nvim",
-  dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
+  dependencies = {
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    { "nvim-lua/plenary.nvim" },
+    { "code-geeker/nvim-telescope-ctags-plus" },
+    { "fcying/telescope-ctags-outline.nvim" }
+  },
 }
 
 function M.config()
   local wk = require "which-key"
-  wk.register {
-    ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
-    ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-    ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-    ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-    ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
-    ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
-    ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-  }
+  -- wk.register {
+  --   ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+  --   ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+  --   ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+  --   ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
+  --   ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  --   ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+  --   ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+  --   ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+  --   ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+  -- }
 
   local icons = require "user.icons"
   local actions = require "telescope.actions"
 
+  require('telescope').load_extension('ctags_plus')
 
   require("telescope").setup {
     defaults = {
@@ -28,7 +34,7 @@ function M.config()
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      path_display = { "smart" },
+      path_display = { "" },
       color_devicons = true,
       vimgrep_arguments = {
         "rg",
@@ -59,13 +65,13 @@ function M.config()
       },
     },
     pickers = {
-      live_grep = {
+      --[[ live_grep = {
         theme = "dropdown",
-      },
+      }, ]]
 
-      grep_string = {
+      --[[ grep_string = {
         theme = "dropdown",
-      },
+      }, ]]
 
       find_files = {
         theme = "dropdown",
@@ -122,6 +128,17 @@ function M.config()
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
+
+      ctags_outline = {
+        --ctags option
+        ctags = {'ctags'},
+        --ctags filetype option
+        ft_opt = {
+          php = '--php-kinds=f',
+        },
+        sorting_strategy = 'ascending',
+      },
+
     },
   }
 end

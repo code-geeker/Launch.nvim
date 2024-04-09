@@ -32,8 +32,8 @@ vim.opt.ruler = false
 vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
-vim.opt.wrap = false -- display lines as one long line
-vim.opt.scrolloff = 0
+vim.opt.wrap = true -- display lines as one long line
+vim.opt.scrolloff = 3
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.title = false
@@ -46,9 +46,27 @@ vim.opt.fillchars:append {
 
 vim.opt.shortmess:append "c"
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
 
+
+vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd "set noerrorbells"
+
+--记录上次关闭的文件及状态
+-- set viminfo='10,\"100,:20,%,n~/.viminfo
+-- au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = {"*"},
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"",false)
+        end
+    end
+})
+
+
+vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=html"
+vim.cmd "au BufRead,BufNewFile *.cfm set filetype=html"

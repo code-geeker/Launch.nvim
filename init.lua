@@ -6,25 +6,49 @@ spec "user.colorscheme"
 spec "user.devicons"
 spec "user.treesitter"
 spec "user.mason"
-spec "user.schemastore"
+-- spec "user.schemastore"
+
+
 spec "user.lspconfig"
 spec "user.cmp"
+
 spec "user.telescope"
-spec "user.none-ls"
 spec "user.illuminate"
 spec "user.gitsigns"
 spec "user.whichkey"
 spec "user.nvimtree"
 spec "user.comment"
-spec "user.lualine"
-spec "user.navic"
-spec "user.breadcrumbs"
-spec "user.harpoon"
-spec "user.neotest"
-spec "user.autopairs"
-spec "user.neogit"
+--spec "user.navic"       --显示导航函数
+--spec "user.breadcrumbs" --增强导航显示
+--spec "user.null-ls"
+
+-- spec "user.harpoon"
+-- spec "user.autopairs"
+-- spec "user.neogit"
 spec "user.alpha"
 spec "user.project"
 spec "user.indentline"
-spec "user.toggleterm"
+-- spec "user.toggleterm"
+spec "user.bufferline"
+spec "user.lualine"
+
+-- spec "user.extras.leap"
+
+spec "user.extras.flash"
+-- spec "user.extras.leap"
+
+-- spec "user.extras.modicator"
+spec "user.extras.colorizer"
+--spec "user.extras.neoscroll"
+spec "user.extras.rainbow"    --彩色括号
+spec "user.extras.cmp-tabnine"
+spec "user.extras.fidget"
+spec "user.extras.matchup"
+spec "user.extras.surround"
+--spec "user.extras.eyeliner"  -- F快速选择
+spec "user.extras.numb"   --:数字 定位
+spec "user.extras.navbuddy"   -- 查看tag
+--spec "user.extras.various-textobjs"  --块选择
+
+spec "user.extras.gentags"
 require "user.lazy"
