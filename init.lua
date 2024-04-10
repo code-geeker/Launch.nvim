@@ -3,6 +3,9 @@ require "user.options"
 require "user.keymaps"
 require "user.autocmds"
 spec "user.colorscheme"
+-- spec "user.onedark"
+
+
 spec "user.devicons"
 spec "user.treesitter"
 spec "user.mason"
@@ -18,8 +21,8 @@ spec "user.gitsigns"
 spec "user.whichkey"
 spec "user.nvimtree"
 spec "user.comment"
---spec "user.navic"       --显示导航函数
---spec "user.breadcrumbs" --增强导航显示
+spec "user.navic"       --显示导航函数
+-- spec "user.breadcrumbs" --增强导航显示
 --spec "user.null-ls"
 
 -- spec "user.harpoon"
