@@ -44,12 +44,16 @@ vim.opt.fillchars:append {
   stl = " ",
 }
 
+vim.opt.list = true
+vim.opt.listchars="tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶"
+
+
 vim.opt.shortmess:append "c"
 
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
-
+vim.g.python3_host_prog="/usr/local/bin/python3.9"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd "set noerrorbells"
@@ -68,5 +72,5 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 
-vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=html"
+vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
 vim.cmd "au BufRead,BufNewFile *.cfm set filetype=html"

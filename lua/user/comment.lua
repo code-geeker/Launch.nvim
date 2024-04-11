@@ -31,6 +31,8 @@ function M.config()
 
   local ft = require('Comment.ft')
   ft.cf = {'<!--- %s --->', '<!--- %s --->'}
+  -- ft.blade = {'{{-- %s --}}', '{{-- %s --}}'}
+
 end
 
 return M
