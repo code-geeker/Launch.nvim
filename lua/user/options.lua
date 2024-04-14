@@ -73,4 +73,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 
 vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
-vim.cmd "au BufRead,BufNewFile *.cfm set filetype=html"
+vim.cmd "au BufRead,BufNewFile *.cfm,*.cfc set filetype=html"
+
+

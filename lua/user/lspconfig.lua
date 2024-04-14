@@ -35,18 +35,26 @@ end ]]
 
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
+local allowed_filetypes = {
+  "javascript",
+  "php",
+}
 M.on_attach = function(client, bufnr)
   vim.bo.tagfunc = nil  -- cmp-nvim-tags
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format()
-      end,
-    })
+
+    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+    if allowed_filetypes[filetype] then
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+    end
   end
 end
 

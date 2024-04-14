@@ -25,13 +25,31 @@ function M.config()
     enable_autocmd = false,
   }
 
+
+  require('ts_context_commentstring').setup {
+    custom_calculation = function(node, language_tree)
+      local filename = vim.fn.expand('%:t')
+      if language_tree:lang() == 'html' then
+        if filename:match("%.blade.php$") then
+          return "{{-- %s --}}"
+        elseif  filename:match("%.cfm$") or filename:match("%.cfc$") then
+          return "<!--- %s --->"
+        else
+          return nil
+        end
+      else
+        return nil
+      end
+    end,
+  }
+
   require("Comment").setup {
     pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
   }
 
-  local ft = require('Comment.ft')
+  --[[ local ft = require('Comment.ft')
   ft.cf = {'<!--- %s --->', '<!--- %s --->'}
-  -- ft.blade = {'{{-- %s --}}', '{{-- %s --}}'}
+  ft.blade = {'{{-- %s --}}', '{{-- %s --}}'} ]]
 
 end
 

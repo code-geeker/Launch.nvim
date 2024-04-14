@@ -1,13 +1,15 @@
 local M = {
   "folke/which-key.nvim",
 }
-
+-- :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 function M.config()
   local mappings = {
     q = { "<cmd>confirm q<CR>", "Quit" },
-    v = { "<cmd>vsplit<CR>", "Split" },
+    -- v = { "<cmd>vsplit<CR>", "Split" },
+    v = { "<cmd>source $HOME/.config/nvim/init.lua<CR>:filetype detect<CR>:exe \":echo 'vimrc reloaded'\"<CR>", "Reload Config" },
     h = {"<cmd>BufferLineCyclePrev<CR>","BufferLineCyclePrev"},
     l = {"<cmd>BufferLineCycleNext<CR>","BufferLineCycleNext"},
+    g = { name = "Git" },
     m = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     f = { "<cmd>Telescope find_files<cr>", "Find files" },
     w = { "<cmd>Telescope grep_string<cr>", "Search Word" },
