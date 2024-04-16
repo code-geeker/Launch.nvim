@@ -118,3 +118,9 @@ keymap('n', '<CR>', 'o<Esc>', opts)
 
 -- keymap({ "n", "o", "x" }, "g]", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
 keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
+
+
+keymap('n', '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", opts)
+
+
+keymap('n', '<leader>r', '<cmd>luafile $MYVIMRC<CR>', {noremap = true, silent = true})
