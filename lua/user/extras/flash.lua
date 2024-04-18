@@ -20,6 +20,7 @@ function M.config()
       char = {
         enabled = true,
         jump_labels = true,
+        keys = { "f", "F", "t", "T" },
         -- multi_line = false,
       },
     },

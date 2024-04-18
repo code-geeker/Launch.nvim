@@ -39,13 +39,15 @@ vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applicati
 vim.opt.title = false
 -- colorcolumn = "80",
 -- colorcolumn = "120",
+vim.wo.colorcolumn = "160"
+
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
 }
 
-vim.opt.list = true
-vim.opt.listchars="tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶"
+-- vim.opt.list = true
+-- vim.opt.listchars="tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶"
 
 
 vim.opt.shortmess:append "c"
@@ -74,5 +76,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
 vim.cmd "au BufRead,BufNewFile *.cfm,*.cfc set filetype=html"
+
 
 

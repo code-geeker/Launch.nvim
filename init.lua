@@ -43,7 +43,7 @@ spec "user.extras.flash"
 
 -- spec "user.extras.modicator"
 spec "user.extras.colorizer"
---spec "user.extras.neoscroll"
+spec "user.extras.neoscroll"
 spec "user.extras.rainbow"    --彩色括号
 spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
@@ -51,7 +51,7 @@ spec "user.extras.matchup"
 spec "user.extras.surround"
 --spec "user.extras.eyeliner"  -- F快速选择
 spec "user.extras.numb"   --:数字 定位
---spec "user.extras.various-textobjs"  --块选择
+-- spec "user.extras.various-textobjs"  --块选择
 
 -- spec "user.extras.navbuddy"   -- 查看tag
 spec "user.extras.outline"    -- 查看tag

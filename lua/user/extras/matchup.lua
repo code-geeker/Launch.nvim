@@ -13,6 +13,7 @@ function M.config()
 --       \ b:matchup_matchparen_enabled] = [0, 0]
 -- augroup END
 -- ]]
+
 end
 
 return M

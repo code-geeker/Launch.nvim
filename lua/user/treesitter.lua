@@ -25,9 +25,18 @@ function M.config()
 
 
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "markdown", "markdown_inline", "bash", "python" },
-      highlight = { enable = true },
-      indent = { enable = true },
+    --[[ sync_install = false,
+    auto_install = true,
+    ignore_install = {},
+    modules ={}, ]]
+
+    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "markdown", "markdown_inline", "bash", "python", "yaml" },
+    highlight = { enable = true, additional_vim_regex_highlighting = false, },
+    indent = { enable = true },
+    matchup = {
+      enable = true,              -- mandatory, false will disable the whole extension
+      disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+    },
   }
 end
 
