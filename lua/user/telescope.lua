@@ -4,7 +4,7 @@ local M = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
     { "nvim-lua/plenary.nvim" },
     { "code-geeker/nvim-telescope-ctags-plus" },
-    { "fcying/telescope-ctags-outline.nvim" }
+    { "fcying/telescope-ctags-outline.nvim" },
   },
 }
 

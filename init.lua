@@ -63,6 +63,9 @@ spec "user.extras.codeium"
 
 spec "user.extras.undotree"
 
-spec "user.extras.gentags"
+-- spec "user.extras.gentags"
+spec "user.extras.nvim_gentags"
+
+
 require "user.lazy"
 
