@@ -29,6 +29,8 @@ function M.config()
   require('ts_context_commentstring').setup {
     custom_calculation = function(node, language_tree)
       local filename = vim.fn.expand('%:t')
+
+      -- print(language_tree:lang())
       if language_tree:lang() == 'html' then
         if filename:match("%.blade.php$") then
           return "{{-- %s --}}"

@@ -30,8 +30,8 @@ function M.config()
     ignore_install = {},
     modules ={}, ]]
 
-    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "markdown", "markdown_inline", "bash", "python", "yaml" },
-    highlight = { enable = true, additional_vim_regex_highlighting = false, },
+    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "phpdoc", "markdown", "bash", "python", "yaml" },
+    highlight = { enable = true, additional_vim_regex_highlighting = false,  --[[ disable = { "php" }  ]]},
     indent = { enable = true },
     matchup = {
       enable = true,              -- mandatory, false will disable the whole extension

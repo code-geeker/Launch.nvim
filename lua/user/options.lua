@@ -77,5 +77,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
 vim.cmd "au BufRead,BufNewFile *.cfm,*.cfc set filetype=html"
 
+-- 关掉ts才有效
+-- vim.g.php_sql_query = 1
 
 

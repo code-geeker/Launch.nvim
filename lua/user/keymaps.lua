@@ -85,12 +85,12 @@ keymap("n", "ww", "<cmd>w<CR>",opts)
 
 
 -- vertical movement keeps cursor in middle
-keymap('n', '<C-d>', '<C-d>zz', opts)
-keymap('n', '<C-u>', '<C-u>zz', opts)
+-- keymap('n', '<C-d>', '<C-d>zz', opts)
+-- keymap('n', '<C-u>', '<C-u>zz', opts)
 
 -- vertical movement keeps cursor in middle (visual mode)
-keymap('v', '<C-d>', '<C-d>zz', opts)
-keymap('v', '<C-u>', '<C-u>zz', opts)
+-- keymap('v', '<C-d>', '<C-d>zz', opts)
+-- keymap('v', '<C-u>', '<C-u>zz', opts)
 
 
 -- indent and outdent lines quickly
@@ -121,4 +121,11 @@ keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('telescope').extensions.cta
 
 keymap('n', '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", opts)
 
+keymap('i', 'jj', '<Esc>', opts)
 
+
+-- TIP: Disable arrow keys in normal mode
+keymap('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+keymap('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+keymap('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+keymap('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')

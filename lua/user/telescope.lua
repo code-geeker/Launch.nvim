@@ -5,6 +5,7 @@ local M = {
     { "nvim-lua/plenary.nvim" },
     { "code-geeker/nvim-telescope-ctags-plus" },
     { "fcying/telescope-ctags-outline.nvim" },
+    { "nvim-telescope/telescope-frecency.nvim" }
   },
 }
 
@@ -25,7 +26,6 @@ function M.config()
   local icons = require "user.icons"
   local actions = require "telescope.actions"
 
-  require('telescope').load_extension('ctags_plus')
 
   require("telescope").setup {
     defaults = {
@@ -141,6 +141,12 @@ function M.config()
 
     },
   }
+
+  require('telescope').load_extension('ctags_plus')
+  require("telescope").load_extension "frecency"
+  require('telescope').load_extension('fzf')
+
+  vim.api.nvim_command('highlight! link TelescopePathSeparator NONE')
 end
 
 return M

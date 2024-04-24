@@ -131,6 +131,7 @@ function M.config()
     "pyright",
     --"bashls",
     --"lemminx",
+    "tsserver",
     "jsonls",
     "yamlls",
     "intelephense",

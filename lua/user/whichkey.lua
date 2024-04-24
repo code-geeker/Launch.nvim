@@ -11,6 +11,7 @@ function M.config()
     l = {"<cmd>BufferLineCycleNext<CR>","BufferLineCycleNext"},
     g = { name = "Git" },
     m = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    r = { "<cmd>Telescope frecency<cr>", "Frecent File" },
     f = { "<cmd>Telescope find_files<cr>", "Find files" },
     w = { "<cmd>Telescope grep_string<cr>", "Search Word" },
     s = { "<cmd>Telescope live_grep<cr>", "Live Grep" },

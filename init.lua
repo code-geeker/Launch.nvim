@@ -12,12 +12,14 @@ spec "user.mason"
 
 spec "user.lspconfig"
 spec "user.cmp"
+-- spec "user.extras.bqf"
 
 spec "user.telescope"
 spec "user.illuminate"
 spec "user.gitsigns"
 spec "user.whichkey"
 spec "user.nvimtree"
+spec "user.neo-tree"
 spec "user.comment"
 
 spec "user.extras.mini_align"
@@ -36,12 +38,10 @@ spec "user.indentline"
 spec "user.bufferline"
 spec "user.lualine"
 
--- spec "user.extras.leap"
-
 spec "user.extras.flash"
--- spec "user.extras.leap"
 
--- spec "user.extras.modicator"
+--spec "user.extras.eyeliner"  -- F快速选择
+
 spec "user.extras.colorizer"
 spec "user.extras.neoscroll"
 spec "user.extras.rainbow"    --彩色括号
@@ -49,7 +49,6 @@ spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
 spec "user.extras.matchup"
 spec "user.extras.surround"
---spec "user.extras.eyeliner"  -- F快速选择
 spec "user.extras.numb"   --:数字 定位
 -- spec "user.extras.various-textobjs"  --块选择
 
@@ -63,7 +62,6 @@ spec "user.extras.codeium"
 
 spec "user.extras.undotree"
 
--- spec "user.extras.gentags"
 spec "user.extras.nvim_gentags"
 
 
