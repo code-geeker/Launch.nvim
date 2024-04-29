@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 160 }
+    vim.highlight.on_yank { higroup = "Search", timeout = 160 }
   end,
 })
 
@@ -74,3 +74,34 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = {"*"},
+    callback = function()
+        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+            vim.api.nvim_exec("normal! g'\"",false)
+        end
+    end
+})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  desc = "Automatically remove trailing whitespaces",
+  command = [[%s/\s\+$//e]],
+})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  desc = "Automatically remove trailing blank lines",
+  command = [[%s/\(\n\s*\)\+\%$//e]],
+})
+
+
+vim.cmd[[autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]
+
+
+--[[ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  pattern = { "*" },
+  desc = "",
+  command = "let @/ = ''",
+}) ]]

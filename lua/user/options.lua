@@ -60,22 +60,9 @@ vim.g.python3_host_prog="/usr/local/bin/python3.9"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd "set noerrorbells"
 
---记录上次关闭的文件及状态
--- set viminfo='10,\"100,:20,%,n~/.viminfo
--- au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-    pattern = {"*"},
-    callback = function()
-        if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-            vim.api.nvim_exec("normal! g'\"",false)
-        end
-    end
-})
-
 
 vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
-vim.cmd "au BufRead,BufNewFile *.cfm,*.cfc set filetype=html"
+-- vim.cmd "au BufRead,BufNewFile *.cfm,*.cfc set filetype=html"
 
 -- 关掉ts才有效
 -- vim.g.php_sql_query = 1

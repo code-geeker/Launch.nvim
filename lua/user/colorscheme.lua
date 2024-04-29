@@ -9,7 +9,7 @@ function M.config()
   vim.cmd.colorscheme "dracula"
 
   vim.cmd[[hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=#1e1f27 guifg=NONE]]
-  vim.cmd[[hi Visual ctermfg=17 ctermbg=228 cterm=NONE guifg=#282a36 guibg=#f1fa8c gui=NONE]]
+  -- vim.cmd[[hi Visual ctermfg=17 ctermbg=228 cterm=NONE guifg=#282a36 guibg=#f1fa8c gui=NONE]]
 
   -- vim.cmd.colorscheme "darkplus"
 end

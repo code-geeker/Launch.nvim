@@ -18,7 +18,7 @@ spec "user.telescope"
 spec "user.illuminate"
 spec "user.gitsigns"
 spec "user.whichkey"
-spec "user.nvimtree"
+-- spec "user.nvimtree"
 spec "user.neo-tree"
 spec "user.comment"
 
@@ -63,7 +63,8 @@ spec "user.extras.codeium"
 spec "user.extras.undotree"
 
 spec "user.extras.nvim_gentags"
-
+spec "user.noice"
+spec "user.extras.dressing"
 
 require "user.lazy"
 

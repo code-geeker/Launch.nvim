@@ -53,7 +53,8 @@ keymap({ "n", "x" }, "j", "gj", opts)
 keymap({ "n", "x" }, "k", "gk", opts)
 -- keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
 
-
+-- going back to normal mode which works even in vim's terminal
+-- eg: you may need this if you use floaterm to escape terminal
 vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
 
 
@@ -72,8 +73,6 @@ keymap("n", "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", op
 -- 已放到wk配置
 -- keymap("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
 -- keymap("n", "<leader>l", ":BufferLineCycleNext<CR>", opts)
-
-
 
 
 -- keymap({ "n", "o", "x" }, "<esc>", ":noh<CR>", opts)
@@ -108,13 +107,9 @@ keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- keep cursor at front when appending lines below
 keymap('n', 'J', 'mzJ`z', opts)
 
-
 -- creates a new line below the cursor and goes back into normal mode
 keymap('n', '<CR>', 'o<Esc>', opts)
 
-
--- :noremap <C-]> g<C-]>
--- keymap("n", "<C-]>", "g<C-]>", opts)
 
 -- keymap({ "n", "o", "x" }, "g]", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
 keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
@@ -129,3 +124,17 @@ keymap('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 keymap('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 keymap('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 keymap('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+keymap('n', ',m', ":%s/<C-V><cr>//ge<cr>'tzt'm")
+keymap('n', '<c-z>', "<nop>")
+
+
+
+local dd = function()
+		if vim.api.nvim_get_current_line():match("^%s*$") then
+			return '"_dd'
+		else
+			return "dd"
+		end
+	end
+keymap("n", "dd", dd, { noremap = true, expr = true })
