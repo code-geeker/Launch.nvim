@@ -20,13 +20,13 @@ keymap("n", "<m-tab>", "<c-6>", opts)
 -- keymap("n", "#", "#zz", opts)
 
 -- search movement keeps cursor in middle
--- keymap('n', 'n', 'nzzzv', opts)
--- keymap('n', 'N', 'Nzzzv', opts)
+keymap('n', 'n', 'nzzzv', opts)
+keymap('n', 'N', 'Nzzzv', opts)
 
-keymap("n", "n", "/<CR>", opts)
-keymap("n", "N", "?<CR>", opts)
-keymap("n", "#", "#``", opts)
-keymap("n", "*", "*``", opts)
+-- keymap("n", "n", "/<CR>", opts)
+-- keymap("n", "N", "?<CR>", opts)
+-- keymap("n", "#", "#``", opts)
+-- keymap("n", "*", "*``", opts)
 
 
 -- keymap("n", "g*", "g*zz", opts)
