@@ -19,8 +19,8 @@ local function copy_path(state)
 	local modify = vim.fn.fnamemodify
 
 	local results = {
-		filepath,
 		modify(filepath, ":."),
+		filepath,
 		modify(filepath, ":~"),
 		filename,
 		modify(filename, ":r"),
@@ -28,8 +28,8 @@ local function copy_path(state)
 	}
 
 	vim.ui.select({
-    "1. Absolute path: " .. results[1],
-		"2. Path relative to CWD: " .. results[2],
+		"1. Path relative to CWD: " .. results[1],
+    "2. Absolute path: " .. results[2],
 		"3. Path relative to HOME: " .. results[3],
 		"4. Filename: " .. results[4],
 		"5. Filename without extension: " .. results[5],

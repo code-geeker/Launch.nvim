@@ -12,7 +12,18 @@ function M.config()
         icon = "",
         name = "Blade"
       },
-
+      ["cfc"] = {
+        color = "#3399cc",
+        cterm_color = "140",
+        icon = "",
+        name = "Cf"
+      },
+      ["cfm"] = {
+        color = "#3399cc",
+        cterm_color = "140",
+        icon = "",
+        name = "Cf"
+      },
     };
   }
 end

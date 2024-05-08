@@ -1,16 +1,10 @@
 local M = {
   "nvim-pack/nvim-spectre",
-  --[[ "n1ckisthereu/nvim-spectre",
-   branch = "pcre2-support", ]]
 }
 
 function M.config()
   require('spectre').setup({
-    --[[ default = {
-      replace = {
-        cmd = "oxi"
-      }
-    } ]]
+    -- is_block_ui_break = true
   })
 end
 

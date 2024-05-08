@@ -65,6 +65,7 @@ spec "user.extras.undotree"
 spec "user.extras.nvim_gentags"
 spec "user.noice"
 spec "user.extras.dressing"
-spec "user.vim-cool"
+
+spec "user.extras.mini_ai"
 
 require "user.lazy"

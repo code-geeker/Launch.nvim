@@ -25,8 +25,10 @@ keymap('n', 'N', 'Nzzzv', opts)
 
 -- keymap("n", "n", "/<CR>", opts)
 -- keymap("n", "N", "?<CR>", opts)
--- keymap("n", "#", "#``", opts)
--- keymap("n", "*", "*``", opts)
+
+
+keymap("n", "#", "*``", opts)
+keymap("n", "*", "#``", opts)
 
 
 -- keymap("n", "g*", "g*zz", opts)
@@ -108,7 +110,7 @@ keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
 keymap('n', 'J', 'mzJ`z', opts)
 
 -- creates a new line below the cursor and goes back into normal mode
-keymap('n', '<CR>', 'o<Esc>', opts)
+-- keymap('n', '<CR>', 'o<Esc>', opts)
 
 
 -- keymap({ "n", "o", "x" }, "g]", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
