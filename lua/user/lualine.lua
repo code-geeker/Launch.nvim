@@ -9,7 +9,7 @@ function M.config()
   require("lualine").setup {
     options = {
       -- component_separators = { left = "", right = "" },
-      -- section_separators = { left = " ", right = "" }, 
+      -- section_separators = { left = " ", right = "" },
       -- section_separators = { left = "", right = "" },
       ignore_focus = { "NvimTree" },
     },
@@ -24,8 +24,8 @@ function M.config()
       },
 
       lualine_x = {'encoding', 'fileformat', 'filetype'},
-      lualine_y = { "progress" },
-      lualine_z = {'location'}
+      lualine_y = { require("recorder").displaySlots,require("recorder").recordingStatus },
+      lualine_z = {"progress",'location'}
 
     },
     extensions = { "quickfix", "man", "fugitive" },

@@ -38,7 +38,9 @@ spec "user.indentline"
 spec "user.bufferline"
 spec "user.lualine"
 
-spec "user.extras.flash"
+-- spec "user.extras.flash"
+
+spec "user.extras.hop"
 
 --spec "user.extras.eyeliner"  -- F快速选择
 
@@ -61,6 +63,7 @@ spec "user.extras.nvim-spectre"  --批量替换
 spec "user.extras.codeium"
 
 spec "user.extras.undotree"
+spec "user.extras.recorder"
 
 spec "user.extras.nvim_gentags"
 spec "user.noice"
