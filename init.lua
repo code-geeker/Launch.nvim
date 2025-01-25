@@ -24,7 +24,7 @@ spec "user.comment"
 
 spec "user.extras.mini_align"
 
-spec "user.navic"       --显示导航函数
+-- spec "user.navic"       --显示导航函数
 -- spec "user.breadcrumbs" --增强导航显示
 --spec "user.null-ls"
 

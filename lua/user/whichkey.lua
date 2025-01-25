@@ -26,7 +26,7 @@ function M.config()
     { "<leader>7", "<cmd>lua require('bufferline').go_to(7, true)<cr>", desc = "Go to Buffer 7", mode = "n" },
     { "<leader>8", "<cmd>lua require('bufferline').go_to(8, true)<cr>", desc = "Go to Buffer 8", mode = "n" },
     { "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", desc = "Go to Buffer 9", mode = "n" },
-
+    {"<leader>g", "", desc = "Git"},
 
     { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "BufferLineCyclePrev", mode = "n" },
     { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "BufferLineCycleNext", mode = "n" },
@@ -35,6 +35,7 @@ function M.config()
     { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
     { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
     { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = "" },
+    { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Status", mode = "n" },
   }
 
 
