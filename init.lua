@@ -45,8 +45,8 @@ spec "user.extras.hop"
 --spec "user.extras.eyeliner"  -- F快速选择
 
 spec "user.extras.colorizer"
-spec "user.extras.neoscroll"
-spec "user.extras.rainbow"    --彩色括号
+-- spec "user.extras.neoscroll"
+-- spec "user.extras.rainbow"    --彩色括号
 spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
 spec "user.extras.matchup"
@@ -57,7 +57,7 @@ spec "user.extras.numb"   --:数字 定位
 -- spec "user.extras.navbuddy"   -- 查看tag
 spec "user.extras.outline"    -- 查看tag
 
-spec "user.extras.nvim-spectre"  --批量替换
+-- spec "user.extras.nvim-spectre"  --批量替换
 
 
 spec "user.extras.codeium"

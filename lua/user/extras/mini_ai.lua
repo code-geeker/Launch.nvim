@@ -11,6 +11,8 @@ function M.config()
 
   require('mini.ai').setup({
     n_lines = 150,
+    -- use_icons = false,
+
     custom_textobjects = {
       o = require('mini.ai').gen_spec.treesitter({
         a = { "@block.outer", "@conditional.outer", "@loop.outer" },

@@ -62,15 +62,16 @@ vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
 
 keymap("n", "cc", ":bp|bd #<CR><ESC>", opts)
 
-keymap("n", "<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", opts)
-keymap("n", "<leader>2", "<cmd>lua require('bufferline').go_to(2, true)<cr>", opts)
-keymap("n", "<leader>3", "<cmd>lua require('bufferline').go_to(3, true)<cr>", opts)
-keymap("n", "<leader>4", "<cmd>lua require('bufferline').go_to(4, true)<cr>", opts)
-keymap("n", "<leader>5", "<cmd>lua require('bufferline').go_to(5, true)<cr>", opts)
-keymap("n", "<leader>6", "<cmd>lua require('bufferline').go_to(6, true)<cr>", opts)
-keymap("n", "<leader>7", "<cmd>lua require('bufferline').go_to(7, true)<cr>", opts)
-keymap("n", "<leader>8", "<cmd>lua require('bufferline').go_to(8, true)<cr>", opts)
-keymap("n", "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", opts)
+-- 已放到wk配置
+-- keymap("n", "<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", opts)
+-- keymap("n", "<leader>2", "<cmd>lua require('bufferline').go_to(2, true)<cr>", opts)
+-- keymap("n", "<leader>3", "<cmd>lua require('bufferline').go_to(3, true)<cr>", opts)
+-- keymap("n", "<leader>4", "<cmd>lua require('bufferline').go_to(4, true)<cr>", opts)
+-- keymap("n", "<leader>5", "<cmd>lua require('bufferline').go_to(5, true)<cr>", opts)
+-- keymap("n", "<leader>6", "<cmd>lua require('bufferline').go_to(6, true)<cr>", opts)
+-- keymap("n", "<leader>7", "<cmd>lua require('bufferline').go_to(7, true)<cr>", opts)
+-- keymap("n", "<leader>8", "<cmd>lua require('bufferline').go_to(8, true)<cr>", opts)
+-- keymap("n", "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", opts)
 
 -- 已放到wk配置
 -- keymap("n", "<leader>h", ":BufferLineCyclePrev<CR>", opts)
@@ -116,7 +117,7 @@ keymap('n', 'J', 'mzJ`z', opts)
 -- keymap({ "n", "o", "x" }, "g]", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
 keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
 
-keymap('n', '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", opts)
+-- keymap('n', '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", opts)
 
 keymap('i', 'jj', '<Esc>', opts)
 
