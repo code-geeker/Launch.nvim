@@ -187,6 +187,7 @@ function M.config()
             undefinedProperties = false,
             undefinedVariables = true,
             typeErrors = false,
+            unusedSymbols = false,
           }
         }
       }

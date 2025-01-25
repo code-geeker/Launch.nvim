@@ -45,8 +45,8 @@ spec "user.extras.hop"
 --spec "user.extras.eyeliner"  -- F快速选择
 
 spec "user.extras.colorizer"
--- spec "user.extras.neoscroll"
--- spec "user.extras.rainbow"    --彩色括号
+spec "user.extras.neoscroll"
+spec "user.extras.rainbow"    --彩色括号
 spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
 spec "user.extras.matchup"
