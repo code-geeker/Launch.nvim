@@ -53,7 +53,7 @@ end
 function M.config()
   local wk = require "which-key"
   wk.add{
-    { "<leader>e", "<cmd>Neotree toggle reveal<CR>", desc = "Explorer", icon = "󰙅"},
+    { "<leader>e", "<cmd>Neotree toggle reveal<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
   }
 
   require("neo-tree").setup({

@@ -8,7 +8,7 @@ function M.config()
 
   local wk = require "which-key"
   wk.add{
-    { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Undotree", icon = "" },
+    { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Undotree", icon = { icon = "", color = "red" } },
   }
 
   require("undotree").setup()
