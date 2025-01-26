@@ -4,17 +4,6 @@ local M = {
 }
 -- :source ~/.config/nvim/init.vim<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 function M.config()
-  --[[ local mappings = {
-    v = { "<cmd>vsplit<CR>", "Split" },
-    h = {"<cmd>BufferLineCyclePrev<CR>","BufferLineCyclePrev"},
-    l = {"<cmd>BufferLineCycleNext<CR>","BufferLineCycleNext"},
-    g = { name = "Git" },
-    m = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
-    r = { "<cmd>Telescope frecency<cr>", "Frecent File" },
-    f = { "<cmd>Telescope find_files<cr>", "Find files" },
-    w = { "<cmd>Telescope grep_string<cr>", "Search Word" },
-    s = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-  } ]]
 
   local mappings = {
     { "<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", desc = "Buffer 1", mode = "n", icon = { icon = "󰓩", color = "blue" } },
@@ -37,7 +26,7 @@ function M.config()
     { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
     { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
 
-    {"<leader>g", "", desc = "Git"},
+    {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
     { "<leader>p", "<cmd>lua require('user.utils').copy_current_buffer_path()<cr>", desc = "Copy File Path", mode = "n", icon = { icon = "", color = "green" } },
 
