@@ -2,12 +2,15 @@ local M = {
   "jiaoshijie/undotree",
   dependencies = "nvim-lua/plenary.nvim",
   config = true,
-  keys = {
-    { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Undotree", icon = "" },
-  },
 }
 
 function M.config()
+
+  local wk = require "which-key"
+  wk.add{
+    { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Undotree", icon = "" },
+  }
+
   require("undotree").setup()
 end
 

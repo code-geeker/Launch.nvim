@@ -26,20 +26,23 @@ function M.config()
     { "<leader>7", "<cmd>lua require('bufferline').go_to(7, true)<cr>", desc = "Buffer 7", mode = "n" },
     { "<leader>8", "<cmd>lua require('bufferline').go_to(8, true)<cr>", desc = "Buffer 8", mode = "n" },
     { "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", desc = "Buffer 9", mode = "n" },
-    {"<leader>g", "", desc = "Git"},
-
     { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Prev", mode = "n" },
     { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Next", mode = "n" },
     { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent File", mode = "n" },
-    { "<leader>r", "<cmd>Telescope frecency<cr>", desc = "Frecent File", mode = "n" },
     { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
-    { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
+    -- { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
+
+    { "<leader>w", "<cmd>w<cr>", desc = "Save", mode = "n" },
+
     { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = "" },
     { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Status", mode = "n" },
+
+    {"<leader>g", "", desc = "Git"},
+
   }
 
-
   local which_key = require "which-key"
+
   which_key.setup {
     plugins = {
       marks = true,
@@ -79,5 +82,7 @@ function M.config()
   -- which_key.register(mappings, opts)
   which_key.add(mappings, opts)
 end
+
+
 
 return M
