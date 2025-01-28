@@ -1,6 +1,6 @@
 local M = {
  'akinsho/bufferline.nvim',
-  version = "*", 
+  version = "*",
   -- dependencies = 'nvim-tree/nvim-web-devicons'
 }
 
@@ -11,6 +11,7 @@ function M.config()
   require("bufferline").setup{
       options = {
           numbers = "ordinal",
+          separator_style = "slope",
           offsets = {
             {
               -- filetype = "NvimTree",

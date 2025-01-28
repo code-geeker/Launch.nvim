@@ -38,7 +38,7 @@ spec "user.indentline"
 -- spec "user.toggleterm"
 spec "user.bufferline"
 spec "user.lualine"
-
+spec "user.snipe"
 -- spec "user.extras.flash"
 
 spec "user.extras.hop"
