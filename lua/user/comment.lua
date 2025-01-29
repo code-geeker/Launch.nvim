@@ -15,6 +15,12 @@ function M.config()
     { "<leader>/", "<Plug>(comment_toggle_linewise_current)", desc = "Comment", mode = "n", icon = { icon = "󰆈", color = "grey" } },
   }
 
+  wk.add {
+    { "<leader>/", "<Plug>(comment_toggle_linewise_visual)", desc = "Comment", mode = "v" },
+  }
+
+
+
 
   vim.g.skip_ts_context_commentstring_module = true
   ---@diagnostic disable: missing-fields

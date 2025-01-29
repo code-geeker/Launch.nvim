@@ -51,6 +51,7 @@ end
 M.on_attach = function(client, bufnr)
   vim.bo.tagfunc = nil  -- cmp-nvim-tags
   if client.supports_method("textDocument/formatting") then
+    vim.lsp.inlay_hint.enable(true, { bufnr })
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 
     local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
@@ -70,7 +71,8 @@ end
 
 M.toggle_inlay_hints = function()
   local bufnr = vim.api.nvim_get_current_buf()
-  vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+  -- vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled(bufnr))
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr }, { bufnr })
 end
 
 function M.common_capabilities()

@@ -57,7 +57,7 @@ keymap({ "n", "x" }, "k", "gk", opts)
 
 -- going back to normal mode which works even in vim's terminal
 -- eg: you may need this if you use floaterm to escape terminal
-vim.api.nvim_set_keymap('t', '<C-;>', '<C-\\><C-n>', opts)
+vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
 
 keymap("n", "cc", ":bp|bd #<CR><ESC>", opts)
