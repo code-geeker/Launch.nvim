@@ -105,3 +105,18 @@ vim.cmd[[autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatopt
   desc = "",
   command = "let @/ = ''",
 }) ]]
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "snipe-menu",
+  callback = function(args)
+    -- 绑定 WinLeave 事件（不限制单次触发）
+    vim.api.nvim_create_autocmd("WinLeave", {
+      buffer = args.buf,
+      callback = function()
+        if vim.bo.filetype == "snipe-menu" then
+          vim.api.nvim_win_close(0, true) -- 强制关闭窗口
+        end
+      end,
+    })
+  end,
+})

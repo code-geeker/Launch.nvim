@@ -16,7 +16,7 @@ function M.config()
         -- anything you override here. See `:h nvim_open_win`
         -- for config options
         open_win_override = {
-          -- title = "My Window Title",
+          title = "Buffers",
           border = "rounded", -- use "rounded" for rounded border
         },
 

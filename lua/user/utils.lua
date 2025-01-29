@@ -39,4 +39,22 @@ M.copy_current_buffer_path = function()
   end)
 end
 
+
+M.get_neotree_width = function()
+  -- 遍历所有窗口，识别 neo-tree 特征
+  for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+    local buf_id = vim.api.nvim_win_get_buf(win_id)
+    local buf_name = vim.api.nvim_buf_get_name(buf_id)
+    local filetype = vim.api.nvim_buf_get_option(buf_id, "filetype")
+
+    -- 判断是否为 neo-tree 窗口
+    if string.find(buf_name, "NeoTree") or filetype == "neo-tree" then
+      return vim.api.nvim_win_get_width(win_id)  -- 直接返回宽度
+    end
+  end
+  -- 未找到窗口时返回 nil 并提示
+  vim.notify("未找到 NeoTree 窗口", vim.log.levels.WARN)
+  return nil
+end
+
 return M
