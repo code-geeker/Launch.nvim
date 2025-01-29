@@ -1,5 +1,6 @@
 local M = {
-  "leath-dub/snipe.nvim",
+  -- "leath-dub/snipe.nvim",
+  "code-geeker/snipe.nvim",
 }
 
 function M.config()
