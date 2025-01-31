@@ -363,6 +363,7 @@ function M.config()
     })
 
     vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+    vim.api.nvim_command('highlight! NeoTreeDirectoryIcon guifg=#8094b4')
   end
 
 return M
