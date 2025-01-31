@@ -6,8 +6,8 @@ local M = {
 function M.config()
   require("oil").setup {
     float = {
-      max_height = 20,
-      max_width = 60,
+      max_height = 50,
+      max_width = 80,
     },
   }
   vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })

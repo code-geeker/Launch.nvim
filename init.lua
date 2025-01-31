@@ -16,7 +16,7 @@ spec "user.cmp"
 -- spec "user.extras.bqf"
 
 -- spec "user.floating-help"
-
+spec "user.extras.oil"
 spec "user.telescope"
 spec "user.illuminate"
 spec "user.gitsigns"
