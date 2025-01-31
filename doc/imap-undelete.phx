@@ -1,0 +1,49 @@
+*imap_undelete*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imap_undelete — Unmark the message which is marked deleted
+
+===============================================================================
+[ Description ]
+
+  imap_undelete(IMAP\Connection $imap, string $message_nums, int $flags = 0):~
+  true~
+
+Removes the deletion flag for a specified message, which is set by |imap_delete
+| or |imap_mail_move|.
+
+===============================================================================
+[ Parameters ]
+
+{imap}
+
+  An IMAP\Connection instance.
+
+{message_nums}
+
+  A string representing one or more messages in IMAP4-style sequence format
+  ("n", "n:m", or combination of these delimited by commas).
+
+{flags}
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {imap} parameter expects an IMAP\Connection instance now;
+        previously, a valid imap resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |imap_delete| - Mark a message for deletion from current mailbox
+ * |imap_mail_move| - Move specified messages to a mailbox
+
+
+vim:ft=help:

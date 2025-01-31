@@ -1,0 +1,51 @@
+*net_get_interfaces*
+
+(PHP 7 >= 7.3, PHP 8)
+
+net_get_interfaces — Get network interfaces
+
+===============================================================================
+[ Description ]
+
+  net_get_interfaces(): array|false~
+
+Returns an enumeration of network interfaces (adapters) on the local machine.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns an associative array where the key is the name of the interface and the
+value an associative array of interface attributes, or false on failure.
+
+Each interface associative array contains:
+
+                             Interface attributes
+   Name                                 Description
+description Optional string value for description of the interface. Windows
+            only.
+mac         Optional string value for MAC address of the interface. Windows
+            only.
+mtu         Integer value for Maximum transmission unit (MTU) of the interface.
+            Windows only.
+unicast     Array of associative arrays, see Unicast attributes below.
+up          Boolean status (on/off) for interface.
+
+                   Unicast attributes
+ Name                     Description
+flags   Integer value.
+family  Integer value.
+address String value for address in either IPv4 or IPv6.
+netmask String value for netmask in either IPv4 or IPv6.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Emits an E_WARNING on failure to get interface information.
+
+
+vim:ft=help:

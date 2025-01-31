@@ -1,0 +1,126 @@
+*assert_options*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+assert_options — Set/get the various assert flags
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.3.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  assert_options(int $option, mixed $value = ?): mixed~
+
+Set the various |assert| control options or just query their current settings.
+
+  Note: The use of assert_options() is discouraged in favor of setting and
+  getting the php.ini directives zend.assertions and assert.exception with 
+  |ini_set| and |ini_get|, respectively.
+
+===============================================================================
+[ Parameters ]
+
+{option}
+
+                                Assert Options
+       Option          INI Setting    Default            Description
+                                       value
+  ASSERT_ACTIVE     assert.active     1       enable |assert| evaluation
+  ASSERT_EXCEPTION  assert.exception  1       throws an AssertionError for each
+                                              failed assertions
+  ASSERT_WARNING    assert.warning    1       issue a PHP warning for each
+                                              failed assertion
+  ASSERT_BAIL       assert.bail       0       terminate execution on failed
+                                              assertions
+                                              disable error_reporting during
+  ASSERT_QUIET_EVAL assert.quiet_eval 0       assertion expression evaluation.
+                                              Removed as of PHP 8.0.0.
+  ASSERT_CALLBACK   assert.callback   (null)  Callback to call on failed
+                                              assertions
+
+{value}
+
+  An optional new value for the option.
+
+  The callback function set via ASSERT_CALLBACK or assert.callback should have
+  the following signature:
+
+  assert_callback(    string~
+  $file,    int $line,    ?string~
+  $assertion,    string $description = ?): void~
+
+  {file}
+    The file where |assert| has been called.
+  {line}
+    The line where |assert| has been called.
+  {assertion}
+    Prior to PHP 8.0.0, the assertion which has been passed to |assert|, but
+    only when the assertion is given as a string. (If the assertion is a
+    boolean condition, this parameter will be an empty string.) As of PHP
+    8.0.0, this parameter is always null.
+  {description}
+    The description that has been passed to |assert|.
+
+Passing an empty string as {value} resets the assert callback.
+
+===============================================================================
+[ Return Values ]
+
+Returns the original setting of any option.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If {option} is not a valid option a ValueError is thrown.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.3.0   assert_option() is now deprecated.
+8.0.0   If {option} is not a valid option, a ValueError is now thrown.
+        Previously false was returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 assert_options() example
+
+<?php >
+  // This is our function to handle
+  // assert failures
+  function assert_failure($file, $line, $assertion, $message)
+  {
+  echo "The assertion $assertion in $file on line $line has failed: $message";
+  }
+
+  // This is our test function
+  function test_assert($parameter)
+  {
+  assert(is_bool($parameter));
+  }
+
+  // Set our assert options
+  assert_options(ASSERT_ACTIVE, true);
+  assert_options(ASSERT_BAIL, true);
+  assert_options(ASSERT_WARNING, false);
+  assert_options(ASSERT_CALLBACK, 'assert_failure');
+
+  // Make an assert that would fail
+  test_assert(1);
+
+  // This is never reached due to ASSERT_BAIL
+  // being true
+  echo 'Never reached';
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |assert| - Checks an assertion
+
+
+vim:ft=help:

@@ -1,0 +1,36 @@
+*rnp_import_keys*
+
+(PECL rnp >= 0.1.1)
+
+rnp_import_keys — Import keys from PHP string to the keyring and receive JSON
+describing new/updated keys
+
+===============================================================================
+[ Description ]
+
+  rnp_import_keys(RnpFFI $ffi, string $input, int $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{input}
+
+  OpenPGP packets containing key(s) to be loaded. Can be either binary or ASCII
+  armored.
+
+{flags}
+
+  See RNP_LOAD_SAVE_* predefined constants.
+
+===============================================================================
+[ Return Values ]
+
+JSON string with information about new and updated keys on success or false on
+failure.
+
+
+vim:ft=help:

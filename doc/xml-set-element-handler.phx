@@ -1,0 +1,120 @@
+*xml_set_element_handler*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+xml_set_element_handler — Set up start and end element handlers
+
+===============================================================================
+[ Description ]
+
+  xml_set_element_handler(XMLParser $parser, callable|string|null~
+  $start_handler, callable|string|null $end_handler): true~
+
+Sets the element handler functions for the XML {parser}.
+
+{start_handler} is called when a new XML element is opened. {end_handler} is
+called when an XML element is closed.
+
+===============================================================================
+[ Parameters ]
+
+{parser}
+
+  The XML parser.
+
+{start_handler}
+
+  If null is passed, the handler is reset to its default state.
+  Warning
+
+  An empty string will also reset the handler, however this is deprecated as of
+  PHP 8.4.0.
+
+  If {handler} is a callable, the callable is set as the handler.
+
+  If {handler} is a string, it can be the name of a method of an object set
+  with |xml_set_object|.
+  Warning
+
+  This is deprecated as of PHP 8.4.0.
+
+  Warning
+
+  As of PHP 8.4.0, the callable is checked to be valid while setting the
+  handler, not when it is called. This means that |xml_set_object| must be
+  called prior to setting a method string as the callback. However, as this
+  behaviour is also deprecated as of PHP 8.4.0, using a proper callable for the
+  method is recommended instead.
+
+  The signature of the handler must be:
+
+  start_element_handler(XMLParser $parser, string $name, array $attributes):~
+  void~
+
+  {parser}
+    The XML parser calling the handler.
+  {name}
+    Contains the name of the element for which this handler is called. If
+    case-folding is in effect for this parser, the element name will be in
+    uppercase letters.
+  {attributes}
+    An associative array with the element's attributes. The array is empty if
+    the element has no attributes. The keys of this array are the attribute
+    names, the values are the attribute values. Attribute names are case-folded
+    on the same criteria as element names. Attribute values are not
+    case-folded. The order in which {attributes} is traversed is identical to
+    the order in which the attributes were declared.
+
+{end_handler}
+
+  If null is passed, the handler is reset to its default state.
+  Warning
+
+  An empty string will also reset the handler, however this is deprecated as of
+  PHP 8.4.0.
+
+  If {handler} is a callable, the callable is set as the handler.
+
+  If {handler} is a string, it can be the name of a method of an object set
+  with |xml_set_object|.
+  Warning
+
+  This is deprecated as of PHP 8.4.0.
+
+  Warning
+
+  As of PHP 8.4.0, the callable is checked to be valid while setting the
+  handler, not when it is called. This means that |xml_set_object| must be
+  called prior to setting a method string as the callback. However, as this
+  behaviour is also deprecated as of PHP 8.4.0, using a proper callable for the
+  method is recommended instead.
+
+  The signature of the handler must be:
+
+  end_element_handler(XMLParser $parser, string $name): void~
+
+  {parser}
+    The XML parser calling the handler.
+  {name}
+    Contains the name of the element for which this handler is called. If
+    case-folding is in effect for this parser, the element name will be in
+    uppercase letters.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Passing a non-callable string to {handler} is now deprecated, use a
+        proper callable for methods, or null to reset the handler.
+8.4.0   The validity of {handler} as a callable is now checked when setting the
+        handler instead of checking when calling it.
+8.0.0   {parser} expects an XMLParser instance now; previously, a valid xml 
+        resource was expected.
+
+
+vim:ft=help:

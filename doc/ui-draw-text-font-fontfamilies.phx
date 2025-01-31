@@ -1,0 +1,25 @@
+*UI\Draw\Text\Font\fontFamilies*
+
+(UI 0.9.9)
+
+UI\Draw\Text\Font\fontFamilies — Retrieve Font Families
+
+===============================================================================
+[ Description ]
+
+  UI\Draw\Text\Font\fontFamilies(): array~
+
+Returns an array of valid font families for the current system
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of valid font families for the current system.
+
+
+vim:ft=help:

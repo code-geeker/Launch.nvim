@@ -1,0 +1,40 @@
+*ldap_connect_wallet*
+
+(PHP 8 >= 8.3.0)
+
+ldap_connect_wallet — Connect to an LDAP server
+
+===============================================================================
+[ Description ]
+
+  ldap_connect_wallet(    ?string $uri =~
+  null,    string~
+  $wallet,    #[\SensitiveParameter] string~
+  $password,    int $auth_mode = GSLC_SSL_NO_AUTH):~
+  LDAP\Connection|false~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{uri}
+
+{wallet}
+
+{password}
+
+{auth_mode}
+
+===============================================================================
+[ Return Values ]
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_connect| - Connect to an LDAP server
+
+
+vim:ft=help:

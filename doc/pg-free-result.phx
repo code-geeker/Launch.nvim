@@ -1,0 +1,77 @@
+*pg_free_result*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+pg_free_result — Free result memory
+
+===============================================================================
+[ Description ]
+
+  pg_free_result(PgSql\Result $result): bool~
+
+pg_free_result() frees the memory and data associated with the specified PgSql\
+Result instance.
+
+This function need only be called if memory consumption during script execution
+is a problem. Otherwise, all result memory will be automatically freed when the
+script ends.
+
+  Note:
+
+  This function used to be called pg_freeresult().
+
+===============================================================================
+[ Parameters ]
+
+{result}
+
+  An PgSql\Result instance, returned by |pg_query|, |pg_query_params| or 
+  |pg_execute|(among others).
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {result} parameter expects an PgSql\Result instance now;
+        previously, a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_free_result() example
+
+<?php >
+  $db = pg_connect("dbname=users user=me");
+
+  $res = pg_query($db, "SELECT 1 UNION ALL SELECT 2");
+
+  $val = pg_fetch_result($res, 1, 0);
+
+  echo "First field in the second row is: ", $val, "\n";
+
+  pg_free_result($res);
+<?>
+
+The above example will output:
+
+First field in the second row is: 2
+
+===============================================================================
+[ See Also ]
+
+ * |pg_query| - Execute a query
+ * |pg_query_params| - Submits a command to the server and waits for the
+  result, with the ability to pass parameters separately from the SQL command
+  text
+ * |pg_execute| - Sends a request to execute a prepared statement with given
+  parameters, and waits for the result
+ * |pg_result_memory_size| - Returns the amount of memory allocated for a query
+  result
+
+
+vim:ft=help:

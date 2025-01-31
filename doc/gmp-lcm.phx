@@ -1,0 +1,40 @@
+*gmp_lcm*
+
+(PHP 7 >= 7.3.0, PHP 8)
+
+gmp_lcm — Calculate LCM
+
+===============================================================================
+[ Description ]
+
+  gmp_lcm(GMP|int|string $num1, GMP|int|string $num2): GMP~
+
+This function computes the least common multiple (lcm) of {num1} and {num2}.
+
+===============================================================================
+[ Parameters ]
+
+{num1}
+
+  A GMP object, an int, or a string that can be interpreted as a number
+  following the same logic as if the string was used in |gmp_init| with
+  automatic base detection (i.e. when {base} is equal to 0).
+
+{num2}
+
+  A GMP object, an int, or a string that can be interpreted as a number
+  following the same logic as if the string was used in |gmp_init| with
+  automatic base detection (i.e. when {base} is equal to 0).
+
+===============================================================================
+[ Return Values ]
+
+A GMP object.
+
+===============================================================================
+[ See Also ]
+
+ * |gmp_gcd| - Calculate GCD
+
+
+vim:ft=help:

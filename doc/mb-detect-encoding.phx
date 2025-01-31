@@ -1,0 +1,148 @@
+*mb_detect_encoding*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+mb_detect_encoding — Detect character encoding
+
+===============================================================================
+[ Description ]
+
+  mb_detect_encoding(string $string, array|string|null $encodings = null, bool~
+  $strict = false): string|false~
+
+Detects the most likely character encoding for string {string} from an ordered
+list of candidates.
+
+Automatic detection of the intended character encoding can never be entirely
+reliable; without some additional information, it is similar to decoding an
+encrypted string without the key. It is always preferable to use an indication
+of character encoding stored or transmitted with the data, such as a
+"Content-Type" HTTP header.
+
+This function is most useful with multibyte encodings, where not all sequences
+of bytes form a valid string. If the input string contains such a sequence,
+that encoding will be rejected, and the next encoding checked.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The string being inspected.
+
+{encodings}
+
+  A list of character encodings to try, in order. The list may be specified as
+  an array of strings, or a single string separated by commas.
+
+  If {encodings} is omitted or null, the current detect_order (set with the
+  mbstring.detect_order configuration option, or |mb_detect_order| function)
+  will be used.
+
+{strict}
+
+  Controls the behaviour when {string} is not valid in any of the listed
+  {encodings}. If {strict} is set to false, the closest matching encoding will
+  be returned; if {strict} is set to true, false will be returned.
+
+  The default value for {strict} can be set with the mbstring.strict_detection
+  configuration option.
+
+===============================================================================
+[ Return Values ]
+
+The detected character encoding, or false if the string is not valid in any of
+the listed encodings.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        mb_detect_encoding() will no longer return the following non text
+8.2.0   encodings: "Base64", "QPrint", "UUencode", "HTML entities", "7 bit" and
+        "8 bit".
+
+===============================================================================
+[ Examples ]
+
+Example #1 mb_detect_encoding() example
+
+<?php >
+  // Detect character encoding with current detect_order
+  echo mb_detect_encoding($str);
+
+  // "auto" is expanded according to mbstring.language
+  echo mb_detect_encoding($str, "auto");
+
+  // Specify "encodings" parameter by list separated by comma
+  echo mb_detect_encoding($str, "JIS, eucjp-win, sjis-win");
+
+  // Use array to specify "encodings" parameter
+  $encodings = [
+  "ASCII",
+  "JIS",
+  "EUC-JP"
+  ];
+  echo mb_detect_encoding($str, $encodings);
+<?>
+
+Example #2 Effect of {strict} parameter
+
+<?php >
+  // 'áéóú' encoded in ISO-8859-1
+  $str = "\xE1\xE9\xF3\xFA";
+
+  // The string is not valid ASCII or UTF-8, but UTF-8 is considered a closer
+  match
+  var_dump(mb_detect_encoding($str, ['ASCII', 'UTF-8'], false));
+  var_dump(mb_detect_encoding($str, ['ASCII', 'UTF-8'], true));
+
+  // If a valid encoding is found, the strict parameter does not change the
+  result
+  var_dump(mb_detect_encoding($str, ['ASCII', 'UTF-8', 'ISO-8859-1'], false));
+  var_dump(mb_detect_encoding($str, ['ASCII', 'UTF-8', 'ISO-8859-1'], true));
+<?>
+
+The above example will output:
+
+string(5) "UTF-8"
+bool(false)
+string(10) "ISO-8859-1"
+string(10) "ISO-8859-1"
+
+In some cases, the same sequence of bytes may form a valid string in multiple
+character encodings, and it is impossible to know which interpretation was
+intended. For instance, among many others, the byte sequence "\xC4\xA2" could
+be:
+
+ * "Ä¢" (U+00C4 LATIN CAPITAL LETTER A WITH DIAERESIS followed by U+00A2 CENT
+  SIGN) encoded in any of ISO-8859-1, ISO-8859-15, or Windows-1252
+ * "ФЂ" (U+0424 CYRILLIC CAPITAL LETTER EF followed by U+0402 CYRILLIC CAPITAL
+  LETTER DJE) encoded in ISO-8859-5
+ * "Ģ" (U+0122 LATIN CAPITAL LETTER G WITH CEDILLA) encoded in UTF-8
+
+Example #3 Effect of order when multiple encodings match
+
+<?php >
+  $str = "\xC4\xA2";
+
+  // The string is valid in all three encodings, so the first one listed will be
+  returned
+  var_dump(mb_detect_encoding($str, ['UTF-8', 'ISO-8859-1', 'ISO-8859-5']));
+  var_dump(mb_detect_encoding($str, ['ISO-8859-1', 'ISO-8859-5', 'UTF-8']));
+  var_dump(mb_detect_encoding($str, ['ISO-8859-5', 'UTF-8', 'ISO-8859-1']));
+<?>
+
+The above example will output:
+
+string(5) "UTF-8"
+string(10) "ISO-8859-1"
+string(10) "ISO-8859-5"
+
+===============================================================================
+[ See Also ]
+
+ * |mb_detect_order| - Set/Get character encoding detection order
+
+
+vim:ft=help:

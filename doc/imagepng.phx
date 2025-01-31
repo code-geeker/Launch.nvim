@@ -1,0 +1,95 @@
+*imagepng*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagepng — Output a PNG image to either the browser or a file
+
+===============================================================================
+[ Description ]
+
+  imagepng(    GdImage~
+  $image,    resource|string|null $file =~
+  null,    int $quality = -1,    int~
+  $filters = -1): bool~
+
+Outputs or saves a PNG image from the given {image}.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{file}
+
+  The path or an open stream resource (which is automatically closed after this
+  function returns) to save the file to. If not set or null, the raw image
+  stream will be output directly.
+
+    Note:
+
+    null is invalid if the {quality} and {filters} arguments are not used.
+
+{quality}
+
+  Compression level: from 0 (no compression) to 9. The default (-1) uses the
+  zlib compression default. For more information see the » zlib manual.
+
+{filters}
+
+  Allows reducing the PNG file size. It is a bitmask field which may be set to
+  any combination of the PNG_FILTER_* constants. PNG_NO_FILTER or
+  PNG_ALL_FILTERS may also be used to respectively disable or activate all
+  filters. The default value (-1) disables filtering.
+
+  Caution
+
+  The {filters} parameter is ignored by system libgd.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+Caution
+
+However, if libgd fails to output the image, this function returns true.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {quality} is invalid.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Now throws a ValueError if {quality} is invalid.
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+<?php >
+  $im = imagecreatefrompng("test.png");
+
+  header('Content-Type: image/png');
+
+  imagepng($im);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |imagegif| - Output image to browser or file
+ * |imagewbmp| - Output image to browser or file
+ * |imagejpeg| - Output image to browser or file
+ * |imagetypes| - Return the image types supported by this PHP build
+ * |imagesavealpha| - Whether to retain full alpha channel information when
+  saving images
+
+
+vim:ft=help:

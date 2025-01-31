@@ -1,0 +1,18 @@
+*ocisavelob*
+
+(PHP 4, PHP 5, PHP 7, PHP 8, PECL OCI8 >= 1.0.0)
+
+ocisavelob — Alias of OCILob::save()
+
+===============================================================================
+[ Description ]
+
+Alias of OCILob::save()
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is highly
+discouraged.
+
+
+vim:ft=help:

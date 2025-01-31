@@ -1,0 +1,21 @@
+*date_sub*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+date_sub — Alias of DateTime::sub()
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: DateTime::sub()
+
+===============================================================================
+[ See Also ]
+
+ * DateTimeImmutable::sub() - Subtracts an amount of days, months, years,
+  hours, minutes and seconds
+ * DateTime::sub() - Subtracts an amount of days, months, years, hours, minutes
+  and seconds from a DateTime object
+
+
+vim:ft=help:

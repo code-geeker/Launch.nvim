@@ -1,0 +1,52 @@
+*ldap_first_attribute*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_first_attribute — Return first attribute
+
+===============================================================================
+[ Description ]
+
+  ldap_first_attribute(LDAP\Connection $ldap, LDAP\ResultEntry $entry):~
+  string|false~
+
+Gets the first attribute in the given entry. Remaining attributes are retrieved
+by calling |ldap_next_attribute| successively.
+
+Similar to reading entries, attributes are also read one by one from a
+particular entry.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{entry}
+
+  An LDAP\ResultEntry instance.
+
+===============================================================================
+[ Return Values ]
+
+Returns the first attribute in the entry on success and false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {entry} parameter expects an LDAP\ResultEntry instance now;
+        previously, a valid ldap result entry resource was expected.
+8.0.0   The unused third parameter {ber_identifier} is no longer accepted.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_next_attribute| - Get the next attribute in result
+ * |ldap_get_attributes| - Get attributes from a search result entry
+
+
+vim:ft=help:

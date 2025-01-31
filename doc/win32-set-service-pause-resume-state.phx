@@ -1,0 +1,60 @@
+*win32_set_service_pause_resume_state*
+
+(PECL win32service >=1.1.0)
+
+win32_set_service_pause_resume_state — Define or return the pause/resume
+capability for the current running service
+
+===============================================================================
+[ Description ]
+
+  win32_set_service_pause_resume_state(bool $state = true): bool~
+
+If {state} parameter is provided, the pause/resume capability is changed.
+
+Caution
+
+This function work only in "cli" SAPI and in the Windows service running
+context. On other SAPI this function is disabled.
+
+===============================================================================
+[ Parameters ]
+
+{state}
+
+  true for enable the service pause/resume capability. false for disable the
+  service pause/resume capability.
+
+===============================================================================
+[ Return Values ]
+
+Return the current or old pause/resume capability state.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Prior to version 1.0.0, if the SAPI is not "cli", this function emits an
+E_ERROR level error.
+
+As of version 1.0.0, will throw a Win32ServiceException if SAPI is not "cli"
+
+===============================================================================
+[ Changelog ]
+
+     Version                               Description
+PECL win32service Throws a ValueError on invalid data in parameters, previously
+1.0.0             false was returned.
+PECL win32service Throws a Win32ServiceException on error, previously a Win32
+1.0.0             Error Code was returned.
+
+===============================================================================
+[ See Also ]
+
+ * |win32_start_service_ctrl_dispatcher| - Registers the script with the SCM,
+  so that it can act as the service with the given name
+ * |win32_set_service_status| - Update the service status
+ * |win32_set_service_exit_code| - Define or return the exit code for the
+  current running service
+
+
+vim:ft=help:

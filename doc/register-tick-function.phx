@@ -1,0 +1,52 @@
+*register_tick_function*
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7, PHP 8)
+
+register_tick_function — Register a function for execution on each tick
+
+===============================================================================
+[ Description ]
+
+  register_tick_function(callable $callback, mixed ...$args): bool~
+
+Registers the given {callback} to be executed when a tick is called.
+
+===============================================================================
+[ Parameters ]
+
+{callback}
+
+  The function to register.
+
+{args}
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 register_tick_function() example
+
+<?php >
+  declare(ticks=1);
+
+  // using a function as the callback
+  register_tick_function('my_function', true);
+
+  // using an object->method
+  $object = new my_class();
+  register_tick_function(array($object, 'my_method'), true);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * declare
+ * |unregister_tick_function| - De-register a function for execution on each
+  tick
+
+
+vim:ft=help:

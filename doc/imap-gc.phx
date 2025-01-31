@@ -1,0 +1,60 @@
+*imap_gc*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+imap_gc — Clears IMAP cache
+
+===============================================================================
+[ Description ]
+
+  imap_gc(IMAP\Connection $imap, int $flags): true~
+
+Purges the cache of entries of a specific type.
+
+===============================================================================
+[ Parameters ]
+
+{imap}
+
+  An IMAP\Connection instance.
+
+{flags}
+
+  Specifies the cache to purge. It may one or a combination of the following
+  constants: IMAP_GC_ELT (message cache elements), IMAP_GC_ENV (envelope and
+  bodies), IMAP_GC_TEXTS (texts).
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {flags} is invalid.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {imap} parameter expects an IMAP\Connection instance now;
+        previously, a valid imap resource was expected.
+8.0.0   A ValueError is now thrown on invalid {flags} parameter values.
+        Previously, a warning was emitted and the function returned false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imap_gc() example
+
+<?php >
+
+  $mbox = imap_open("{imap.example.org:143}", "username", "password");
+
+  imap_gc($mbox, IMAP_GC_ELT);
+
+<?>
+
+
+vim:ft=help:

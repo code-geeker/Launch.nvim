@@ -1,0 +1,25 @@
+*dba_list*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+dba_list — List all open database files
+
+===============================================================================
+[ Description ]
+
+  dba_list(): array~
+
+dba_list() list all open database files.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+An associative array, in the form resourceid => filename.
+
+
+vim:ft=help:

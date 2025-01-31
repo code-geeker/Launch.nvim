@@ -1,0 +1,45 @@
+*ldap_count_references*
+
+(PHP 8)
+
+ldap_count_references — Counts the number of references in a search result
+
+===============================================================================
+[ Description ]
+
+  ldap_count_references(LDAP\Connection $ldap, LDAP\Result $result): int~
+
+Counts the number of references in a search result.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{result}
+
+  An LDAP\Result instance, returned by |ldap_list| or |ldap_search|.
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of references in a search result.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {result} parameter expects an LDAP\Result instance now; previously,
+        a valid ldap result resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_connect| - Connect to an LDAP server
+
+
+vim:ft=help:

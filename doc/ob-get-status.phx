@@ -1,0 +1,111 @@
+*ob_get_status*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+ob_get_status — Get status of output buffers
+
+===============================================================================
+[ Description ]
+
+  ob_get_status(bool $full_status = false): array~
+
+ob_get_status() returns status information on either the top level output
+buffer or all active output buffer levels if {full_status} is set to true.
+
+===============================================================================
+[ Parameters ]
+
+{full_status}
+
+  true to return all active output buffer levels. If false or not set, only the
+  top level output buffer is returned.
+
+===============================================================================
+[ Return Values ]
+
+If {full_status} is omitted or false a simple array holding status information
+on the active output level is returned.
+
+If {full_status} is true an array with one element for each active output
+buffer level is returned. The output level is used as key of the top level
+array and each array element itself is another array holding status information
+on one active output level.
+
+An empty array is returned if output buffering is not turned on.
+
+                     ob_get_status() return array elements
+    Key                                    Value
+name        Name of active output handler (see the return values of 
+            |ob_list_handlers| for details)
+type        0 (internal handler) or 1 (user supplied handler)
+            Bitmask of flags set by |ob_start|, the type of output handler (see
+            above) and the status of the buffering process ( 
+            PHP_OUTPUT_HANDLER_* constants). If the handler successfully
+flags       processed the buffer and did not return false,
+            PHP_OUTPUT_HANDLER_STARTED and PHP_OUTPUT_HANDLER_PROCESSED will be
+            set. If the handler failed while processing the buffer or returned
+            false, PHP_OUTPUT_HANDLER_STARTED and PHP_OUTPUT_HANDLER_DISABLED
+            will be set.
+            Output nesting level (zero based). Note that the value returned for
+level       the same level by |ob_get_level| is off by one. The first level is
+            0 for ob_get_status(), and 1 for |ob_get_level|.
+chunk_size  Chunk size in bytes. Set by |ob_start| or output_buffering is
+            enabled and its value is set to a positive integer
+buffer_size Output buffer size in bytes
+buffer_used Size of data in output buffer in bytes (the same as the integer
+            return value of |ob_get_length|)
+
+===============================================================================
+[ Examples ]
+
+Example #1 Array returned when {full_status} is false
+
+Array
+(
+    [name] => URL-Rewriter
+    [type] => 0
+    [flags] => 112
+    [level] => 2
+    [chunk_size] => 0
+    [buffer_size] => 16384
+    [buffer_used] => 1024
+)
+
+Example #2 Array returned when {full_status} is true
+
+Array
+(
+    [0] => Array
+        (
+            [name] => default output handler
+            [type] => 0
+            [flags] => 112
+            [level] => 1
+            [chunk_size] => 0
+            [buffer_size] => 16384
+            [buffer_used] => 2048
+        )
+
+    [1] => Array
+        (
+            [name] => URL-Rewriter
+            [type] => 0
+            [flags] => 112
+            [level] => 2
+            [chunk_size] => 0
+            [buffer_size] => 16384
+            [buffer_used] => 1024
+        )
+
+)
+
+===============================================================================
+[ See Also ]
+
+ * |ob_get_level| - Return the nesting level of the output buffering mechanism
+ * |ob_list_handlers| - List all output handlers in use
+ * |ob_get_length| - Return the length of the output buffer
+ * |ob_start| - Turn on output buffering
+
+
+vim:ft=help:

@@ -1,0 +1,34 @@
+*rnp_key_export*
+
+(PECL rnp >= 0.1.1)
+
+rnp_key_export — Export a key
+
+===============================================================================
+[ Description ]
+
+  rnp_key_export(RnpFFI $ffi, string $key_fp, int $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{key_fp}
+
+  Key fingerprint.
+
+{flags}
+
+  See RNP_KEY_EXPORT_* predefined constants (except RNP_KEY_EXPORT_BASE64).
+
+===============================================================================
+[ Return Values ]
+
+OpenPGP packets of exported key (binary or ASCII-armored) on success or false
+on failure.
+
+
+vim:ft=help:

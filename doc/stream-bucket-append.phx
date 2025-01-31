@@ -1,0 +1,23 @@
+*stream_bucket_append*
+
+(PHP 5, PHP 7, PHP 8)
+
+stream_bucket_append — Append bucket to brigade
+
+===============================================================================
+[ Description ]
+
+  stream_bucket_append(resource $brigade, StreamBucket $bucket): void~
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {bucket} expects a StreamBucket instance now; previously, an stdClass
+        was expected.
+
+
+vim:ft=help:

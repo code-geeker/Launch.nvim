@@ -1,0 +1,43 @@
+*stream_bucket_make_writeable*
+
+(PHP 5, PHP 7, PHP 8)
+
+stream_bucket_make_writeable — Returns a bucket object from the brigade to
+operate on
+
+===============================================================================
+[ Description ]
+
+  stream_bucket_make_writeable(resource $brigade): ?StreamBucket~
+
+This function is called whenever there is the need to access and operate on the
+content contains in a brigade. It is typically called from 
+php_user_filter::filter().
+
+===============================================================================
+[ Parameters ]
+
+{brigade}
+
+  The brigade to return a bucket object from.
+
+===============================================================================
+[ Return Values ]
+
+Returns a bucket object or null.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   This function returns a StreamBucket instance now; previously, an 
+        stdClass was returned.
+
+===============================================================================
+[ See Also ]
+
+ * |stream_bucket_append| - Append bucket to brigade
+ * |stream_bucket_prepend| - Prepend bucket to brigade
+
+
+vim:ft=help:

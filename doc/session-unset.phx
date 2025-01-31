@@ -1,0 +1,56 @@
+*session_unset*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+session_unset — Free all session variables
+
+===============================================================================
+[ Description ]
+
+  session_unset(): bool~
+
+The session_unset() function frees all session variables currently registered.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+7.2.0   The return type of this function is bool now. Formerly, it has been 
+        void.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  If $_SESSION is used, use |unset| to unregister a session variable, i.e.
+  unset($_SESSION['varname']);.
+
+Caution
+
+Do NOT unset the whole $_SESSION with unset($_SESSION) as this will disable the
+registering of session variables through the $_SESSION superglobal.
+
+  Note:
+
+  The use of session_unset() is identical to $_SESSION = [].
+
+Caution
+
+This function works only if a session is active. It will not clear the
+$_SESSION array if the session has not been started yet or has already been
+destroyed. Use $_SESSION = [] to unset all session variables even if the
+session is not active.
+
+
+vim:ft=help:

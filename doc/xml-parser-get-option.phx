@@ -1,0 +1,50 @@
+*xml_parser_get_option*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+xml_parser_get_option — Get options from an XML parser
+
+===============================================================================
+[ Description ]
+
+  xml_parser_get_option(XMLParser $parser, int $option): string|int|bool~
+
+Gets an option value from an XML parser.
+
+===============================================================================
+[ Parameters ]
+
+{parser}
+  A reference to the XML parser to get an option from.
+{option}
+  Which option to fetch. XML_OPTION_CASE_FOLDING, XML_OPTION_PARSE_HUGE,
+  XML_OPTION_SKIP_TAGSTART, XML_OPTION_SKIP_WHITE and
+  XML_OPTION_TARGET_ENCODING are available. See |xml_parser_set_option| for
+  their description.
+
+===============================================================================
+[ Return Values ]
+
+Returns the option's value.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError when an invalid value is passed to {option}.
+
+Prior to PHP 8.0.0, passing an invalid value to {option} generated a E_WARNING
+as well as making the function return false.
+
+===============================================================================
+[ Changelog ]
+
+    Version                               Description
+8.3.0           The function now returns a boolean for boolean options.
+8.0.0           {parser} expects an XMLParser instance now; previously, a valid
+                xml resource was expected.
+8.0.0           A ValueError is now thrown if {option} is invalid.
+7.1.24, 7.2.12, {options} now supports XML_OPTION_SKIP_TAGSTART and
+7.3.0           XML_OPTION_SKIP_WHITE.
+
+
+vim:ft=help:

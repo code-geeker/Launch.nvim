@@ -1,0 +1,129 @@
+*range*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+range — Create an array containing a range of elements
+
+===============================================================================
+[ Description ]
+
+  range(string|int|float $start, string|int|float $end, int|float $step = 1):~
+  array~
+
+Create an array containing a range of elements.
+
+If both {start} and {end} are strings, and {step} is int the produced array
+will be a sequence of bytes. Otherwise, the produced array will be a sequence
+of numbers.
+
+The sequence is increasing if {start} is less than equal to {end}. Otherwise,
+the sequence is decreasing.
+
+===============================================================================
+[ Parameters ]
+
+{start}
+
+  First value of the sequence.
+
+{end}
+
+  Last possible value of the sequence.
+
+{step}
+
+  {step} indicates by how much is the produced sequence progressed between
+  values of the sequence.
+
+  {step} may be negative for decreasing sequences.
+
+  If {step} is a float without a fractional part, it is interpreted as int.
+
+===============================================================================
+[ Return Values ]
+
+Returns a sequence of elements as an array with the first element being {start}
+going up to {end}, with each value of the sequence being {step} values apart.
+
+The last element of the returned array is either {end} or the previous element
+of the sequence, depending on the value of {step}.
+
+If both {start} and {end} are strings, and {step} is int the produced array
+will be a sequence of bytes, generally latin ASCII characters.
+
+If at least one of {start}, {end}, or {step} is float the produced array will
+be a sequence of float.
+
+Otherwise, the produced array will be a sequence of int.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+ * If {step} is 0, a ValueError is thrown.
+ * If {start}, {end}, or {step} is not |is_finite|, a ValueError is thrown.
+ * If {step} is negative, but the produced range is increasing (i.e. $start <=
+  $end), a ValueError is thrown.
+ * If {start} or {end} is the empty string '', an E_WARNING is emitted and the
+  empty string will be interpreted as 0.
+ * If {start} or {end} is a non-numeric string with more than one byte, an
+  E_WARNING is emitted.
+ * If {start} or {end} is a string that is implicitly cast to an int because
+  the other boundary value is a number, an E_WARNING is emitted.
+ * If {step} is a float, and {start} and {end} are non-numeric string, an
+  E_WARNING is emitted.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        If both {start} and {end} are strings then range() will now always
+8.3.0   produce an array of bytes. Previously if one of the boundary values was
+        a numeric string, then the other boundary value was implicitly cast to 
+        int.
+8.3.0   An E_WARNING is now emitted if {start} or {end} is a string that is
+        implicitly cast to int because the other boundary value is a number.
+8.3.0   An E_WARNING is now emitted if {start} or {end} is a non-numeric string
+        with more than one byte.
+8.3.0   An E_WARNING is now emitted if {start} or {end} is the empty string.
+8.3.0   If {step} is a float with no fractional part, it will be interpreted as
+        an int.
+8.3.0   A ValueError is now thrown if {step} is negative when producing an
+        increasing range.
+8.3.0   A ValueError is now thrown if {step} is not finite.
+8.3.0   A TypeError is now thrown if {start} or {end} is an array, object, or 
+        resource. Previously they were implicitly cast to int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 range() examples
+
+<?php >
+  echo implode(', ', range(0, 12)), PHP_EOL;
+
+  echo implode(', ', range(0, 100, 10)), PHP_EOL;
+
+  echo implode(', ', range('a', 'i')), PHP_EOL;
+
+  echo implode(', ', range('c', 'a')), PHP_EOL;
+
+  echo implode(', ', range('A', 'z')), PHP_EOL;
+<?>
+
+The above example will output:
+
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+a, b, c, d, e, f, g, h, i
+c, b, a
+A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, [, \, ], ^, _, `, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+
+===============================================================================
+[ See Also ]
+
+ * |shuffle| - Shuffle an array
+ * |array_fill| - Fill an array with values
+ * foreach
+
+
+vim:ft=help:

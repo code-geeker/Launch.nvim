@@ -1,0 +1,37 @@
+*mb_lcfirst*
+
+(PHP 8 >= 8.4.0)
+
+mb_lcfirst — Make a string's first character lowercase
+
+===============================================================================
+[ Description ]
+
+  mb_lcfirst(string $string, ?string $encoding = null): string~
+
+Performs a multi-byte safe |lcfirst| operation, and returns a string with the
+first character of {string} lowercased.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+  The input string.
+{encoding}
+
+  The {encoding} parameter is the character encoding. If it is omitted or null,
+  the internal character encoding value will be used.
+
+===============================================================================
+[ Return Values ]
+
+Returns the resulting string.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_ucfirst| - Make a string's first character uppercase
+ * |lcfirst| - Make a string's first character lowercase
+
+
+vim:ft=help:

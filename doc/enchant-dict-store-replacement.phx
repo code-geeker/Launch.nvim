@@ -1,0 +1,46 @@
+*enchant_dict_store_replacement*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL enchant >= 0.1.0 )
+
+enchant_dict_store_replacement — Add a correction for a word
+
+===============================================================================
+[ Description ]
+
+  enchant_dict_store_replacement(EnchantDictionary $dictionary, string~
+  $misspelled, string $correct): void~
+
+Add a correction for 'mis' using 'cor'. Notes that you replaced @mis with @cor,
+so it's possibly more likely that future occurrences of @mis will be replaced
+with @cor. So it might bump @cor up in the suggestion list.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+{misspelled}
+
+  The work to fix
+
+{correct}
+
+  The correct word
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dictionary} expects an EnchantDictionary instance now; previoulsy, a 
+        resource was expected.
+
+
+vim:ft=help:

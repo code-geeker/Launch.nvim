@@ -1,0 +1,50 @@
+*gnupg_listsignatures*
+
+(PECL gnupg >= 0.5)
+
+gnupg_listsignatures — List key signatures
+
+===============================================================================
+[ Description ]
+
+  gnupg_listsignatures(resource $identifier, string $keyid): ?array~
+
+===============================================================================
+[ Parameters ]
+
+{identifier}
+
+  The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{keyid}
+
+  The key ID to list signatures for.
+
+===============================================================================
+[ Return Values ]
+
+On success, this function returns an array of key signatures. On failure, this
+function returns null.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Procedural gnupg_listsignatures() example
+
+<?php >
+  $res = gnupg_init();
+  $signatures = gnupg_listsignatures($res, 
+  "8660281B6051D071D94B5B230549F9DC851566DC");
+  print_r($signatures);
+<?>
+
+Example #2 OO gnupg_listsignatures() example
+
+<?php >
+  $gpg = new gnupg();
+  $signatures = $gpg->listsignatures("8660281B6051D071D94B5B230549F9DC851566DC");
+  print_r($signatures);
+<?>
+
+
+vim:ft=help:

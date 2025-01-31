@@ -1,0 +1,108 @@
+*snmp3_real_walk*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+snmp3_real_walk — Return all objects including their respective object ID
+within the specified one
+
+===============================================================================
+[ Description ]
+
+  snmp3_real_walk(    string~
+  $hostname,    string~
+  $security_name,    string~
+  $security_level,    string~
+  $auth_protocol,    string~
+  $auth_passphrase,    string~
+  $privacy_protocol,    string~
+  $privacy_passphrase,    array|string~
+  $object_id,    int $timeout =~
+  -1,    int $retries = -1): array|false~
+
+The snmp3_real_walk() function is used to traverse over a number of SNMP
+objects starting from {object_id} and return not only their values but also
+their object ids.
+
+===============================================================================
+[ Parameters ]
+
+{hostname}
+
+  The hostname of the SNMP agent (server).
+
+{security_name}
+
+  the security name, usually some kind of username
+
+{security_level}
+
+  the security level (noAuthNoPriv|authNoPriv|authPriv)
+
+{auth_protocol}
+
+  the authentication protocol (MD5 or SHA)
+
+{auth_passphrase}
+
+  the authentication pass phrase
+
+{privacy_protocol}
+
+  the authentication protocol ("MD5", "SHA", "SHA256", or "SHA512")
+
+{privacy_passphrase}
+
+  the privacy pass phrase
+
+{object_id}
+
+  The SNMP object id.
+
+{timeout}
+
+  The number of microseconds until the first timeout.
+
+{retries}
+
+  The number of times to retry if timeouts occur.
+
+===============================================================================
+[ Return Values ]
+
+Returns an associative array of the SNMP object ids and their values on success
+or false on error. In case of an error, an E_WARNING message is shown.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {auth_protocol} now accepts "SHA256" and "SHA512" when supported by
+        libnetsnmp.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Using snmp3_real_walk()
+
+<?php >
+  var_export(snmp3_real_walk('localhost', 'james', 'authPriv', 'SHA', 'secret007'
+  , 'AES', 'secret007', 'IF-MIB::ifName'));
+<?>
+
+The above will output something like:
+
+array (
+  'IF-MIB::ifName.1' => 'STRING: lo',
+  'IF-MIB::ifName.2' => 'STRING: eth0',
+  'IF-MIB::ifName.3' => 'STRING: eth2',
+  'IF-MIB::ifName.4' => 'STRING: sit0',
+  'IF-MIB::ifName.5' => 'STRING: sixxs',
+)
+
+===============================================================================
+[ See Also ]
+
+ * |snmpwalk| - Fetch all the SNMP objects from an agent
+
+
+vim:ft=help:

@@ -1,0 +1,23 @@
+*rnp_version_string_full*
+
+(PECL rnp >= 0.1.1)
+
+rnp_version_string_full — Full version string of RNP library
+
+===============================================================================
+[ Description ]
+
+  rnp_version_string_full(): string~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns full version string of RNP library.
+
+
+vim:ft=help:

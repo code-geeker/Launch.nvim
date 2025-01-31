@@ -1,0 +1,59 @@
+*ftp_raw*
+
+(PHP 5, PHP 7, PHP 8)
+
+ftp_raw — Sends an arbitrary command to an FTP server
+
+===============================================================================
+[ Description ]
+
+  ftp_raw(FTP\Connection $ftp, string $command): ?array~
+
+Sends an arbitrary {command} to the FTP server.
+
+===============================================================================
+[ Parameters ]
+
+{ftp}
+
+  An FTP\Connection instance.
+
+{command}
+
+  The command to execute.
+
+===============================================================================
+[ Return Values ]
+
+Returns the server's response as an array of strings, or null on failure. No
+parsing is performed on the response string, nor does ftp_raw() determine if
+the command succeeded.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ftp} parameter expects an FTP\Connection instance now; previously,
+        a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Using ftp_raw() to login to an FTP server manually.
+
+<?php >
+  $ftp = ftp_connect("ftp.example.com");
+
+  /* This is the same as:
+  ftp_login($ftp, "joeblow", "secret"); */
+  ftp_raw($ftp, "USER joeblow");
+  ftp_raw($ftp, "PASS secret");
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |ftp_exec| - Requests execution of a command on the FTP server
+
+
+vim:ft=help:

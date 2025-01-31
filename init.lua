@@ -15,6 +15,8 @@ spec "user.lspconfig"
 spec "user.cmp"
 -- spec "user.extras.bqf"
 
+-- spec "user.floating-help"
+
 spec "user.telescope"
 spec "user.illuminate"
 spec "user.gitsigns"

@@ -1,0 +1,54 @@
+*ldap_get_values_len*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_get_values_len — Get all binary values from a result entry
+
+===============================================================================
+[ Description ]
+
+  ldap_get_values_len(LDAP\Connection $ldap, LDAP\ResultEntry $entry, string~
+  $attribute): array|false~
+
+Reads all the values of the attribute in the entry in the result.
+
+This function is used exactly like |ldap_get_values| except that it handles
+binary data and not string data.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{entry}
+
+  An LDAP\ResultEntry instance.
+
+{attribute}
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of values for the attribute on success and false on error.
+Individual values are accessed by integer index in the array. The first index
+is 0. The number of values can be found by indexing "count" in the resultant
+array.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {entry} parameter expects an LDAP\ResultEntry instance now;
+        previously, a valid ldap result entry resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_get_values| - Get all values from a result entry
+
+
+vim:ft=help:

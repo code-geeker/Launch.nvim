@@ -1,0 +1,56 @@
+*pg_options*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+pg_options — Get the options associated with the connection
+
+===============================================================================
+[ Description ]
+
+  pg_options(?PgSql\Connection $connection = null): string~
+
+pg_options() will return a string containing the options specified on the given
+PostgreSQL {connection} instance.
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An PgSql\Connection instance. When {connection} is null, the default
+  connection is used. The default connection is the last connection made by 
+  |pg_connect| or |pg_pconnect|.
+  Warning
+
+  As of PHP 8.1.0, using the default connection is deprecated.
+
+===============================================================================
+[ Return Values ]
+
+A string containing the {connection} options.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+8.0.0   {connection} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_options() example
+
+<?php >
+  $pgsql_conn = pg_connect("dbname=mark host=localhost");
+  echo pg_options($pgsql_conn);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pg_connect| - Open a PostgreSQL connection
+
+
+vim:ft=help:

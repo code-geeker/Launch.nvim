@@ -1,0 +1,74 @@
+*mb_chr*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+mb_chr — Return character by Unicode code point value
+
+===============================================================================
+[ Description ]
+
+  mb_chr(int $codepoint, ?string $encoding = null): string|false~
+
+Returns a string containing the character specified by the Unicode code point
+value, encoded in the specified encoding.
+
+This function complements |mb_ord|.
+
+===============================================================================
+[ Parameters ]
+
+{codepoint}
+
+  A Unicode codepoint value, e.g. 128024 for U+1F418 ELEPHANT
+
+{encoding}
+
+  The {encoding} parameter is the character encoding. If it is omitted or null,
+  the internal character encoding value will be used.
+
+===============================================================================
+[ Return Values ]
+
+A string containing the requested character, if it can be represented in the
+specified encoding or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {encoding} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Testing different code points
+
+<?php >
+  $values = [65, 63, 0x20AC, 128024];
+  foreach ($values as $value) {
+  var_dump(mb_chr($value, 'UTF-8'));
+  var_dump(mb_chr($value, 'ISO-8859-1'));
+  }
+<?>
+
+The above example will output:
+
+string(1) "A"
+string(1) "A"
+string(1) "?"
+string(1) "?"
+string(3) "€"
+bool(false)
+string(4) "🐘"
+bool(false)
+
+===============================================================================
+[ See Also ]
+
+ * |mb_internal_encoding| - Set/Get internal character encoding
+ * |mb_ord| - Get Unicode code point of character
+ * IntlChar::ord() - Return Unicode code point value of character
+ * |chr| - Generate a single-byte string from a number
+
+
+vim:ft=help:

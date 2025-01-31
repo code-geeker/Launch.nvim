@@ -1,0 +1,26 @@
+*sodium_crypto_sign_keypair*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_sign_keypair — Randomly generate a secret key and a corresponding
+public key
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_sign_keypair(): string~
+
+Generate a random Ed25519 keypair as one string.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Ed25519 keypair.
+
+
+vim:ft=help:

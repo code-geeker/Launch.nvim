@@ -1,0 +1,52 @@
+*mhash*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+mhash — Computes hash
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.1.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] mhash(int $algo, string $data, ?string $key = null):~
+  string|false~
+
+mhash() applies a hash function specified by {algo} to the {data}.
+
+===============================================================================
+[ Parameters ]
+
+{algo}
+
+  The hash ID. One of the MHASH_hashname constants.
+
+{data}
+
+  The user input, as a string.
+
+{key}
+
+  If specified, the function will return the resulting HMAC instead. HMAC is
+  keyed hashing for message authentication, or simply a message digest that
+  depends on the specified key. Not all algorithms supported in mhash can be
+  used in HMAC mode.
+
+===============================================================================
+[ Return Values ]
+
+Returns the resulting hash (also called digest) or HMAC as a string, or false
+on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                              Description
+8.1.0   This function has been deprecated. Use the hash_*() functions instead.
+8.0.0   {key} is now nullable.
+
+
+vim:ft=help:

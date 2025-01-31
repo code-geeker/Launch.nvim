@@ -1,0 +1,86 @@
+*pcntl_sigwaitinfo*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+pcntl_sigwaitinfo — Waits for signals
+
+===============================================================================
+[ Description ]
+
+  pcntl_sigwaitinfo(array $signals, array &$info = []): int|false~
+
+The pcntl_sigwaitinfo() function suspends execution of the calling script until
+one of the signals given in {signals} are delivered. If one of the signal is
+already pending (e.g. blocked by |pcntl_sigprocmask|), pcntl_sigwaitinfo() will
+return immediately.
+
+===============================================================================
+[ Parameters ]
+
+{signals}
+
+  Array of signals to wait for.
+
+{info}
+
+  The {info} parameter is set to an array containing information about the
+  signal.
+
+  The following elements are set for all signals:
+   + signo: Signal number
+   + errno: An error number
+   + code: Signal code
+
+  The following elements may be set for the SIGCHLD signal:
+   + status: Exit value or signal
+   + utime: User time consumed
+   + stime: System time consumed
+   + pid: Sending process ID
+   + uid: Real user ID of sending process
+
+  The following elements may be set for the SIGILL, SIGFPE, SIGSEGV and SIGBUS
+  signals:
+   + addr: Memory location which caused fault
+
+  The following element may be set for the SIGPOLL signal:
+   + band: Band event
+   + fd: File descriptor number
+
+===============================================================================
+[ Return Values ]
+
+Returns a signal number on success, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                      Description
+8.4.0   A ValueError is thrown if {signal} is empty.
+8.4.0   A TypeError is thrown if {signal} value is not an int.
+8.4.0   A ValueError is thrown if {signal} value is invalid.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pcntl_sigwaitinfo() example
+
+<?php >
+  echo "Blocking SIGHUP signal\n";
+  pcntl_sigprocmask(SIG_BLOCK, array(SIGHUP));
+
+  echo "Sending SIGHUP to self\n";
+  posix_kill(posix_getpid(), SIGHUP);
+
+  echo "Waiting for signals\n";
+  $info = array();
+  pcntl_sigwaitinfo(array(SIGHUP), $info);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pcntl_sigprocmask| - Sets and retrieves blocked signals
+ * |pcntl_sigtimedwait| - Waits for signals, with a timeout
+
+
+vim:ft=help:

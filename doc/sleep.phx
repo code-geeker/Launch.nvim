@@ -1,0 +1,82 @@
+*sleep*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+sleep — Delay execution
+
+===============================================================================
+[ Description ]
+
+  sleep(int $seconds): int~
+
+Delays the program execution for the given number of {seconds}.
+
+  Note:
+
+  In order to delay program execution for a fraction of a second, use |usleep|
+  as the sleep() function expects an int. For example, sleep(0.25) will pause
+  program execution for 0 seconds.
+
+===============================================================================
+[ Parameters ]
+
+{seconds}
+
+  Halt time in seconds (must be greater than or equal to 0).
+
+===============================================================================
+[ Return Values ]
+
+Returns zero on success.
+
+If the call was interrupted by a signal, sleep() returns a non-zero value. On
+Windows, this value will always be 192 (the value of the WAIT_IO_COMPLETION
+constant within the Windows API). On other platforms, the return value will be
+the number of seconds left to sleep.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If the specified number of {seconds} is negative, this function will throw a 
+ValueError.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   The function throws a ValueError on negative {seconds}; previously, an
+        E_WARNING was raised instead, and the function returned false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 sleep() example
+
+<?php >
+
+  // current time
+  echo date('h:i:s') . "\n";
+
+  // sleep for 10 seconds
+  sleep(10);
+
+  // wake up !
+  echo date('h:i:s') . "\n";
+
+<?>
+
+This example will output (after 10 seconds)
+
+05:31:23
+05:31:33
+
+===============================================================================
+[ See Also ]
+
+ * |usleep| - Delay execution in microseconds
+ * |time_nanosleep| - Delay for a number of seconds and nanoseconds
+ * |time_sleep_until| - Make the script sleep until the specified time
+ * |set_time_limit| - Limits the maximum execution time
+
+
+vim:ft=help:

@@ -1,0 +1,33 @@
+*swoole_error_log*
+
+(PECL swoole >= 4.5.8)
+
+swoole_error_log — Output error messages to the log
+
+===============================================================================
+[ Description ]
+
+  swoole_error_log(int $level, string $msg): void~
+
+Output error messages to the log.
+
+===============================================================================
+[ Parameters ]
+
+{level}
+
+  Log Level, constants can be used: SWOOLE_LOG_DEBUG, SWOOLE_LOG_TRACE,
+  SWOOLE_LOG_INFO, SWOOLE_LOG_NOTICE, SWOOLE_LOG_WARNING, SWOOLE_LOG_ERROR,
+  SWOOLE_LOG_NONE
+
+{msg}
+
+  Message content to be written to the log.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+
+vim:ft=help:

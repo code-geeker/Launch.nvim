@@ -1,0 +1,51 @@
+*oci_new_collection*
+
+(PHP 5, PHP 7, PHP 8, PECL OCI8 >= 1.1.0)
+
+oci_new_collection — Allocates new collection object
+
+===============================================================================
+[ Description ]
+
+  oci_new_collection(resource $connection, string $type_name, ?string $schema~
+  = null): OCICollection|false~
+
+Allocates a new collection object.
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An Oracle connection identifier, returned by |oci_connect| or |oci_pconnect|.
+
+{type_name}
+
+  Should be a valid named type (uppercase).
+
+{schema}
+
+  Should point to the scheme, where the named type was created. The name of the
+  current user is used when null is passed.
+
+===============================================================================
+[ Return Values ]
+
+Returns a new OCICollection object or false on error.
+
+===============================================================================
+[ Changelog ]
+
+       Version                Description
+8.0.0, PECL OCI8 3.0.0 {schema} is now nullable.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The OCICollection class was called OCI-Collection prior to PHP 8 and OCI8
+  3.0.0.
+
+
+vim:ft=help:

@@ -1,0 +1,147 @@
+*ob_start*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ob_start — Turn on output buffering
+
+===============================================================================
+[ Description ]
+
+  ob_start(?callable $callback = null, int $chunk_size = 0, int $flags =~
+  PHP_OUTPUT_HANDLER_STDFLAGS): bool~
+
+This function will turn output buffering on. While output buffering is active
+no output is sent from the script, instead the output is stored in an internal
+buffer. See What Output Is Buffered? on exactly what output is affected.
+
+Output buffers are stackable, that is, ob_start() may be called while another
+buffer is active. If multiple output buffers are active, output is being
+filtered sequentially through each of them in nesting order. See Nesting Output
+Buffers for more details.
+
+See User-Level Output Buffers for a detailed description of output buffers.
+
+===============================================================================
+[ Parameters ]
+
+{callback}
+
+  An optional {callback} callable may be specified. It can also be bypassed by
+  passing null.
+
+  {callback} is invoked when the output buffer is flushed (sent), cleaned, or
+  when the output buffer is flushed at the end of the script.
+
+  The signature of the {callback} is as follows:
+
+
+  handler(string $buffer, int $phase = ?): string~
+
+  {buffer}
+    Contents of the output buffer.
+  {phase}
+    Bitmask of  PHP_OUTPUT_HANDLER_* constants . See Flags Passed To Output
+    Handlers for more details.
+
+  If {callback} returns false the contents of the buffer are returned. See
+  Output Handler Return Values for more details.
+
+  Warning
+
+  Calling any of the following functions from within an output handler will
+  result in a fatal error: |ob_clean|, |ob_end_clean|, |ob_end_flush|, 
+  |ob_flush|, |ob_get_clean|, |ob_get_flush|, ob_start().
+
+  See Output Handlers and Working With Output Handlers for more details on
+  {callback}s (output handlers).
+
+{chunk_size}
+
+  If the optional parameter {chunk_size} is passed, the buffer will be flushed
+  after any block of code resulting in output that causes the buffer's length
+  to equal or exceed {chunk_size}. The default value 0 means that all output is
+  buffered until the buffer is turned off. See Buffer Size for more details.
+
+{flags}
+
+  The {flags} parameter is a bitmask that controls the operations that can be
+  performed on the output buffer. The default is to allow output buffers to be
+  cleaned, flushed and removed, which can be set explicitly via the buffer
+  control flags . See Operations Allowed On Buffers for more details.
+
+  Each flag controls access to a set of functions, as described below:
+
+            Constant                              Functions
+  PHP_OUTPUT_HANDLER_CLEANABLE |ob_clean|
+  PHP_OUTPUT_HANDLER_FLUSHABLE |ob_flush|
+  PHP_OUTPUT_HANDLER_REMOVABLE |ob_end_clean|, |ob_end_flush|, |ob_get_clean|, 
+                               |ob_get_flush|
+
+    Note: Prior to PHP 8.4.0, the flags parameter could set the output handler
+    status flags as well.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 User defined callback function example
+
+<?php >
+
+  function callback($buffer)
+  {
+  // replace all the apples with oranges
+  return (str_replace("apples", "oranges", $buffer));
+  }
+
+  ob_start("callback");
+
+<?>
+<html>
+<body>
+<p>It's like comparing apples to oranges.</p>
+</body>
+</html>
+<?php >
+
+  ob_end_flush();
+
+<?>
+
+The above example will output:
+
+<html>
+<body>
+<p>It's like comparing oranges to oranges.</p>
+</body>
+</html>
+
+Example #2 Creating an unerasable output buffer
+
+<?php >
+
+  ob_start(null, 0, PHP_OUTPUT_HANDLER_STDFLAGS ^ PHP_OUTPUT_HANDLER_REMOVABLE);
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |ob_get_contents| - Return the contents of the output buffer
+ * |ob_end_clean| - Clean (erase) the contents of the active output buffer and
+  turn it off
+ * |ob_end_flush| - Flush (send) the return value of the active output handler
+  and turn the active output buffer off
+ * |ob_implicit_flush| - Turn implicit flush on/off
+ * |ob_gzhandler| - ob_start callback function to gzip output buffer
+ * |ob_iconv_handler| - Convert character encoding as output buffer handler
+ * |mb_output_handler| - Callback function converts character encoding in
+  output buffer
+ * |ob_tidyhandler| - ob_start callback function to repair the buffer
+
+
+vim:ft=help:

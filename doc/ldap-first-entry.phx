@@ -1,0 +1,53 @@
+*ldap_first_entry*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_first_entry — Return first result id
+
+===============================================================================
+[ Description ]
+
+  ldap_first_entry(LDAP\Connection $ldap, LDAP\Result $result):~
+  LDAP\ResultEntry|false~
+
+Returns the entry identifier for first entry in the result. This entry
+identifier is then supplied to |ldap_next_entry| routine to get successive
+entries from the result.
+
+Entries in the LDAP result are read sequentially using the ldap_first_entry()
+and |ldap_next_entry| functions.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{result}
+
+  An LDAP\Result instance, returned by |ldap_list| or |ldap_search|.
+
+===============================================================================
+[ Return Values ]
+
+Returns an LDAP\ResultEntry instance, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {result} parameter expects an LDAP\Result instance now; previously,
+        a valid ldap result resource was expected.
+8.1.0   Returns an LDAP\ResultEntry instance now; previously, a resource was
+        returned.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_get_entries| - Get all result entries
+
+
+vim:ft=help:

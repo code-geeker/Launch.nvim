@@ -1,0 +1,44 @@
+*stream_is_local*
+
+(PHP 5 >= 5.2.4, PHP 7, PHP 8)
+
+stream_is_local — Checks if a stream is a local stream
+
+===============================================================================
+[ Description ]
+
+  stream_is_local(resource|string $stream): bool~
+
+Checks if a stream, or a URL, is a local one or not.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  The stream resource or URL to check.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 stream_is_local() example
+
+Basic usage example.
+
+<?php >
+  var_dump(stream_is_local("http://example.com"));
+  var_dump(stream_is_local("/etc"));
+<?>
+
+The above example will output something similar to:
+
+bool(false)
+bool(true)
+
+
+vim:ft=help:

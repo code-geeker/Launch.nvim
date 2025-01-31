@@ -1,0 +1,79 @@
+*openssl_pkcs7_verify*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+openssl_pkcs7_verify — Verifies the signature of an S/MIME signed message
+
+===============================================================================
+[ Description ]
+
+  openssl_pkcs7_verify(    string~
+  $input_filename,    int~
+  $flags,    ?string $signers_certificates_filename =~
+  null,    array $ca_info =~
+  [],    ?string $untrusted_certificates_filename =~
+  null,    ?string $content =~
+  null,    ?string $output_filename = null): bool|int~
+
+openssl_pkcs7_verify() reads the S/MIME message contained in the given file and
+examines the digital signature.
+
+===============================================================================
+[ Parameters ]
+
+{input_filename}
+
+  Path to the message.
+
+{flags}
+
+  {flags} can be used to affect how the signature is verified - see PKCS7
+  constants for more information.
+
+{signers_certificates_filename}
+
+  If the {signers_certificates_filename} is specified, it should be a string
+  holding the name of a file into which the certificates of the persons that
+  signed the messages will be stored in PEM format.
+
+{ca_info}
+
+  If the {ca_info} is specified, it should hold information about the trusted
+  CA certificates to use in the verification process - see certificate
+  verification for more information about this parameter.
+
+{untrusted_certificates_filename}
+
+  If the {untrusted_certificates_filename} is specified, it is the filename of
+  a file containing a bunch of certificates to use as untrusted CAs.
+
+{content}
+
+  You can specify a filename with {content} that will be filled with the
+  verified data, but with the signature information stripped.
+
+{output_filename}
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the signature is verified, false if it is not correct (the
+message has been tampered with, or the signing certificate is invalid), or -1
+on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {signers_certificates_filename}, {untrusted_certificates_filename},
+        {content} and {output_filename} are nullable now.
+7.2.0   The {output_filename} parameter was added.
+
+===============================================================================
+[ Notes ]
+
+  Note: As specified in RFC 2045, lines may not be longer than 76 characters in
+  the {input_filename} parameter.
+
+
+vim:ft=help:

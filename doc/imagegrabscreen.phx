@@ -1,0 +1,54 @@
+*imagegrabscreen*
+
+(PHP 5 >= 5.2.2, PHP 7, PHP 8)
+
+imagegrabscreen — Captures the whole screen
+
+===============================================================================
+[ Description ]
+
+  imagegrabscreen(): GdImage|false~
+
+Grabs a screenshot of the whole screen.
+
+  Note:
+
+  This function is only available on Windows.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns an image object on success, false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   On success, this function returns a GDImage instance now; previously, a
+        resource was returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagegrabscreen() example
+
+This example demonstrates how to take a screenshot of the current screen and
+save it as a png image.
+
+<?php >
+  $im = imagegrabscreen();
+  imagepng($im, "myscreenshot.png");
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |imagegrabwindow| - Captures a window
+
+
+vim:ft=help:

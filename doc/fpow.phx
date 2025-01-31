@@ -1,0 +1,55 @@
+*fpow*
+
+(PHP 8 >= 8.4.0)
+
+fpow — Raise one number to the power of another, according to IEEE 754
+
+===============================================================================
+[ Description ]
+
+  fpow(float $num, float $exponent): float~
+
+Returns the floating point result of raising {num} to the power of {exponent}.
+If {num} is zero and {exponent} is less than zero, then INF is returned.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+  The base to use.
+{exponent}
+  The exponent.
+
+===============================================================================
+[ Return Values ]
+
+Returns a float corresponding to $num^$exponent.
+
+===============================================================================
+[ Examples ]
+
+Example #1 fpow() example
+
+<?php >
+  var_dump(fpow(10, 2));
+  var_dump(fpow(0, -3));
+  var_dump(fpow(-1, 5.5));
+<?>
+
+The above example will output:
+
+float(100)
+float(INF)
+float(NAN)
+
+===============================================================================
+[ See Also ]
+
+ * Exponentiation operator **
+ * |pow| - Exponential expression
+ * |fdiv| - Divides two numbers, according to IEEE 754
+ * |fmod| - Returns the floating point remainder (modulo) of the division of
+  the arguments
+
+
+vim:ft=help:

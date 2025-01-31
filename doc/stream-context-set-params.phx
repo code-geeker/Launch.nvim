@@ -1,0 +1,45 @@
+*stream_context_set_params*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+stream_context_set_params — Set parameters for a stream/wrapper/context
+
+===============================================================================
+[ Description ]
+
+  stream_context_set_params(resource $context, array $params): true~
+
+Sets parameters on the specified context.
+
+===============================================================================
+[ Parameters ]
+
+{context}
+
+  The stream or context to apply the parameters too.
+
+{params}
+
+  An associative array of parameters to be set in the following format: $params
+  ['paramname'] = "paramvalue";.
+
+                             Supported parameters
+   Parameter                               Purpose
+               Name of user-defined callback function to be called whenever a
+  notification stream triggers a notification. Only supported for http:// and
+               ftp:// stream wrappers.
+  options      Array of options as in context options and parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * |stream_notification_callback| - A callback function for the notification
+  context parameter
+
+
+vim:ft=help:

@@ -1,0 +1,133 @@
+*is_numeric*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+is_numeric — Finds whether a variable is a number or a numeric string
+
+===============================================================================
+[ Description ]
+
+  is_numeric(mixed $value): bool~
+
+Determines if the given variable is a number or a numeric string.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The variable being evaluated.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {value} is a number or a numeric string, false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   Numeric strings ending with whitespace ("42 ") will now return true.
+        Previously, false was returned instead.
+
+===============================================================================
+[ Examples ]
+
+Example #1 is_numeric() examples
+
+<?php >
+  $tests = array(
+  "42",
+  1337,
+  0x539,
+  02471,
+  0b10100111001,
+  1337e0,
+  "0x539",
+  "02471",
+  "0b10100111001",
+  "1337e0",
+  "not numeric",
+  array(),
+  9.1,
+  null,
+  '',
+  );
+
+  foreach ($tests as $element) {
+  if (is_numeric($element)) {
+  echo var_export($element, true) . " is numeric", PHP_EOL;
+  } else {
+  echo var_export($element, true) . " is NOT numeric", PHP_EOL;
+  }
+  }
+<?>
+
+The above example will output:
+
+'42' is numeric
+1337 is numeric
+1337 is numeric
+1337 is numeric
+1337 is numeric
+1337.0 is numeric
+'0x539' is NOT numeric
+'02471' is numeric
+'0b10100111001' is NOT numeric
+'1337e0' is numeric
+'not numeric' is NOT numeric
+array (
+) is NOT numeric
+9.1 is numeric
+NULL is NOT numeric
+'' is NOT numeric
+
+Example #2 is_numeric() with whitespace
+
+<?php >
+  $tests = [
+  " 42",
+  "42 ",
+  "\u{A0}9001", // non-breaking space
+  "9001\u{A0}", // non-breaking space
+  ];
+
+  foreach ($tests as $element) {
+  if (is_numeric($element)) {
+  echo var_export($element, true) . " is numeric", PHP_EOL;
+  } else {
+  echo var_export($element, true) . " is NOT numeric", PHP_EOL;
+  }
+  }
+<?>
+
+Output of the above example in PHP 8:
+
+' 42' is numeric
+'42 ' is numeric
+' 9001' is NOT numeric
+'9001 ' is NOT numeric
+
+Output of the above example in PHP 7:
+
+' 42' is numeric
+'42 ' is NOT numeric
+' 9001' is NOT numeric
+'9001 ' is NOT numeric
+
+===============================================================================
+[ See Also ]
+
+ * Numeric strings
+ * |ctype_digit| - Check for numeric character(s)
+ * |is_bool| - Finds out whether a variable is a boolean
+ * |is_null| - Finds whether a variable is null
+ * |is_float| - Finds whether the type of a variable is float
+ * |is_int| - Find whether the type of a variable is integer
+ * |is_string| - Find whether the type of a variable is string
+ * |is_object| - Finds whether a variable is an object
+ * |is_array| - Finds whether a variable is an array
+ * |filter_var| - Filters a variable with a specified filter
+
+
+vim:ft=help:

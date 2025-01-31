@@ -1,0 +1,62 @@
+*proc_get_status*
+
+(PHP 5, PHP 7, PHP 8)
+
+proc_get_status — Get information about a process opened by |proc_open|
+
+===============================================================================
+[ Description ]
+
+  proc_get_status(resource $process): array~
+
+proc_get_status() fetches data about a process opened using |proc_open|.
+
+===============================================================================
+[ Parameters ]
+
+{process}
+
+  The |proc_open| resource that will be evaluated.
+
+===============================================================================
+[ Return Values ]
+
+An array of collected information. The returned array contains the following
+elements:
+
+element   type                            description
+command  string The command string that was passed to |proc_open|.
+pid      int    process id
+running  bool   true if the process is still running, false if it has
+                terminated.
+signaled bool   true if the child process has been terminated by an uncaught
+                signal. Always set to false on Windows.
+stopped  bool   true if the child process has been stopped by a signal. Always
+                set to false on Windows.
+                The exit code returned by the process (which is only meaningful
+exitcode int    if running is false). Prior to PHP 8.3.0, only the first call
+                of this function returned the real value, the following calls
+                returned -1.
+                As of PHP 8.3.0, this is true when the exit code is cached.
+cached   bool   Caching is necessary to make sure the exit code is not lost by
+                subsequent calls to process APIs.
+termsig  int    The number of the signal that caused the child process to
+                terminate its execution (only meaningful if signaled is true).
+stopsig  int    The number of the signal that caused the child process to stop
+                its execution (only meaningful if stopped is true).
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        The "cached" entry has been added to the returned array. Prior to PHP
+8.3.0   8.3.0, only the first call returned the real exit code. The "cached"
+        entry indicates that the exit code was cached.
+
+===============================================================================
+[ See Also ]
+
+ * |proc_open| - Execute a command and open file pointers for input/output
+
+
+vim:ft=help:

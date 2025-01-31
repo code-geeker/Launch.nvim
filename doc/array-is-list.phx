@@ -1,0 +1,64 @@
+*array_is_list*
+
+(PHP 8 >= 8.1.0)
+
+array_is_list — Checks whether a given {array} is a list
+
+===============================================================================
+[ Description ]
+
+  array_is_list(array $array): bool~
+
+Determines if the given {array} is a list. An array is considered a list if its
+keys consist of consecutive numbers from 0 to count($array)-1.
+
+===============================================================================
+[ Parameters ]
+
+{array}
+
+  The array being evaluated.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {array} is a list, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 array_is_list() example
+
+<?php >
+
+  array_is_list([]); // true
+  array_is_list(['apple', 2, 3]); // true
+  array_is_list([0 => 'apple', 'orange']); // true
+
+  // The array does not start at 0
+  array_is_list([1 => 'apple', 'orange']); // false
+
+  // The keys are not in the correct order
+  array_is_list([1 => 'apple', 0 => 'orange']); // false
+
+  // Non-integer keys
+  array_is_list([0 => 'apple', 'foo' => 'bar']); // false
+
+  // Non-consecutive keys
+  array_is_list([0 => 'apple', 2 => 'bar']); // false
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function returns true on empty arrays.
+
+===============================================================================
+[ See Also ]
+
+ * |array_values| - Return all the values of an array
+
+
+vim:ft=help:

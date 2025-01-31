@@ -1,0 +1,82 @@
+*array_all*
+
+(PHP 8 >= 8.4.0)
+
+array_all — Checks if all array elements satisfy a callback function
+
+===============================================================================
+[ Description ]
+
+  array_all(array $array, callable $callback): bool~
+
+array_all() returns true, if the given {callback} returns true for all
+elements. Otherwise the function returns false.
+
+===============================================================================
+[ Parameters ]
+
+{array}
+  The array that should be searched.
+{callback}
+
+  The callback function to call to check each element, which must be
+
+  callback(mixed $value, mixed $key): bool~
+  If this function returns false, false is returned from array_all() and the
+  callback will not be called for further elements.
+
+===============================================================================
+[ Return Values ]
+
+The function returns true, if {callback} returns true for all elements.
+Otherwise the function returns false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 array_all() example
+
+<?php >
+  $array = [
+  'a' => 'dog',
+  'b' => 'cat',
+  'c' => 'cow',
+  'd' => 'duck',
+  'e' => 'goose',
+  'f' => 'elephant'
+  ];
+
+  // Check, if all animal names are shorter than 12 letters.
+  var_dump(array_all($array, function (string $value) {
+  return strlen($value) < 12;
+  }));
+
+  // Check, if all animal names are longer than 5 letters.
+  var_dump(array_all($array, function (string $value) {
+  return strlen($value) > 5;
+  }));
+
+  // Check, if all array keys are strings.
+  var_dump(array_all($array, function (string $value, $key) {
+  return is_string($key);
+  }));
+<?>
+
+The above example will output:
+
+bool(true)
+bool(false)
+bool(true)
+
+===============================================================================
+[ See Also ]
+
+ * |array_any| - Checks if at least one array element satisfies a callback
+  function
+ * |array_filter| - Filters elements of an array using a callback function
+ * |array_find| - Returns the first element satisfying a callback function
+ * |array_find_key| - Returns the key of the first element satisfying a
+  callback function
+
+
+vim:ft=help:

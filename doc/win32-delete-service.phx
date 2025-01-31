@@ -1,0 +1,76 @@
+*win32_delete_service*
+
+(PECL win32service >=0.1.0)
+
+win32_delete_service — Deletes a service entry from the SCM database
+
+===============================================================================
+[ Description ]
+
+  win32_delete_service(string $servicename, string $machine = null): void~
+
+Attempts to delete a service from the SCM database. Administrative privileges
+are required for this to succeed.
+
+This function really just marks the service for deletion. If other processes
+(such as the Services Applet) are open, then the deletion will be deferred
+until those applications are closed. If a service is marked for deletion,
+further attempts to delete it will fail, and attempts to create a new service
+with that name will also fail.
+
+===============================================================================
+[ Parameters ]
+
+{servicename}
+
+  The short name of the service.
+
+{machine}
+
+  The optional machine name. If omitted, the local machine will be used.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+Prior to version 1.0.0, returned WIN32_NO_ERROR on success, false if there is a
+problem with the parameters or a Win32 Error Code on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if the value of {servicename} parameter is empty.
+
+A Win32ServiceException is thrown on error.
+
+===============================================================================
+[ Changelog ]
+
+     Version                               Description
+PECL win32service Throws a ValueError on invalid data in parameters, previously
+1.0.0             false was returned.
+PECL win32service Throws a Win32ServiceException on error, previously a Win32
+1.0.0             Error Code was returned.
+PECL win32service The return type is now void, previously it was mixed.
+1.0.0
+
+===============================================================================
+[ Examples ]
+
+Example #1 A win32_delete_service() example
+
+Deletes the dummyphp service.
+
+<?php >
+  win32_delete_service('dummyphp');
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |win32_create_service| - Creates a new service entry in the SCM database
+ * Win32 Error Codes
+
+
+vim:ft=help:

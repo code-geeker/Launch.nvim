@@ -1,0 +1,13 @@
+*die*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+die — Alias of |exit|
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: |exit|.
+
+
+vim:ft=help:

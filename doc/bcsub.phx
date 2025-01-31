@@ -1,0 +1,71 @@
+*bcsub*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+bcsub — Subtract one arbitrary precision number from another
+
+===============================================================================
+[ Description ]
+
+  bcsub(string $num1, string $num2, ?int $scale = null): string~
+
+Subtracts {num2} from {num1}.
+
+===============================================================================
+[ Parameters ]
+
+{num1}
+
+  The left operand, as a string.
+
+{num2}
+
+  The right operand, as a string.
+
+{scale}
+  This parameter is used to set the number of digits after the decimal place in
+  the result. If null, it will default to the default scale set with |bcscale|,
+  or fallback to the value of the bcmath.scale INI directive.
+
+===============================================================================
+[ Return Values ]
+
+The result of the subtraction, as a string.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+This function throws a ValueError in the following cases:
+
+ * {num1} or {num2} is not a well-formed BCMath numeric string.
+ * {scale} is outside the valid range.
+
+===============================================================================
+[ Changelog ]
+
+Version       Description
+8.0.0   {scale} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 bcsub() example
+
+<?php >
+
+  $a = '1.234';
+  $b = '5';
+
+  echo bcsub($a, $b); // -3
+  echo bcsub($a, $b, 4); // -3.7660
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |bcadd| - Add two arbitrary precision numbers
+ * BcMath\Number::sub() - Subtracts an arbitrary precision number
+
+
+vim:ft=help:

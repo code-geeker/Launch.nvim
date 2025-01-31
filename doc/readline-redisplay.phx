@@ -1,0 +1,25 @@
+*readline_redisplay*
+
+(PHP 5 >= 5.1.0, PHP 7, PHP 8)
+
+readline_redisplay — Redraws the display
+
+===============================================================================
+[ Description ]
+
+  readline_redisplay(): void~
+
+Redraws readline to redraw the display.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+
+vim:ft=help:

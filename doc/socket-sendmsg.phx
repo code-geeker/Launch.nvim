@@ -1,0 +1,43 @@
+*socket_sendmsg*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8)
+
+socket_sendmsg — Send a message
+
+===============================================================================
+[ Description ]
+
+  socket_sendmsg(Socket $socket, array $message, int $flags = 0): int|false~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{socket}
+
+{message}
+
+{flags}
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of bytes sent, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                            Description
+8.0.0   {socket} is a Socket instance now; previously, it was a resource.
+
+===============================================================================
+[ See Also ]
+
+ * |socket_recvmsg| - Read a message
+ * |socket_cmsg_space| - Calculate message buffer size
+
+
+vim:ft=help:

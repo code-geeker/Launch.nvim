@@ -1,0 +1,48 @@
+*imageaffine*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8)
+
+imageaffine — Return an image containing the affine transformed src image,
+using an optional clipping area
+
+===============================================================================
+[ Description ]
+
+  imageaffine(GdImage $image, array $affine, ?array $clip = null):~
+  GdImage|false~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{affine}
+
+  Array with keys 0 to 5.
+
+{clip}
+
+  Array with keys "x", "y", "width" and "height"; or null.
+
+===============================================================================
+[ Return Values ]
+
+Return affined image object on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {clip} is now nullable.
+8.0.0   On success, this function returns a GDImage instance now; previously, a
+        resource was returned.
+
+
+vim:ft=help:

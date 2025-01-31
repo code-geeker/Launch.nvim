@@ -1,0 +1,34 @@
+*odbc_num_fields*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_num_fields — Number of columns in a result
+
+===============================================================================
+[ Description ]
+
+  odbc_num_fields(Odbc\Result $statement): int~
+
+Gets the number of fields (columns) in an ODBC result.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  The ODBC result object returned by |odbc_exec|.
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of fields, or -1 on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {statement} expects an Odbc\Result instance now; previously, a resource
+        was expected.
+
+
+vim:ft=help:

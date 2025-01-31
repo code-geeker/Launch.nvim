@@ -1,0 +1,63 @@
+*rnp_ffi_set_pass_provider*
+
+(PECL rnp >= 0.1.1)
+
+rnp_ffi_set_pass_provider — Set password provider callback function
+
+===============================================================================
+[ Description ]
+
+  rnp_ffi_set_pass_provider(RnpFFI $ffi, callable $password_callback): bool~
+
+Sets password provider function. This function can ask for the password on a
+standard input (if PHP script is executed in a command line environment),
+display GUI dialog or provide password in any other possible ways. Requested
+passwords are used to encrypt or decrypt secret keys or perform symmetric
+encryption/decryption operations.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{password_callback}
+
+  The function that is to be called for every password request. It has the
+  following signature:
+
+  password_callback(string $key_fp, string $pgp_context, string &$password):~
+  bool~
+   + $key_fp - The key fingerprint, if any. Can be empty.
+   + $pgp_context - String describing why the key is being requested.
+   + $password - Password string reference where provided password should be
+    stored to.
+  Callback function should return true if password was successfully set or
+  false on failure.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 simple callback function example
+
+<?php >
+function password_callback(string $key_fp, string $pgp_context, string &
+$password)
+{
+$password = "password";
+
+return true;
+}
+
+$ffi = rnp_ffi_create('GPG', 'GPG');
+
+rnp_ffi_set_pass_provider($ffi, 'password_callback');
+
+
+vim:ft=help:

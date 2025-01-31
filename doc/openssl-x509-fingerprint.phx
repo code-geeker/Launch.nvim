@@ -1,0 +1,49 @@
+*openssl_x509_fingerprint*
+
+(PHP 5 >= 5.6.0, PHP 7, PHP 8)
+
+openssl_x509_fingerprint — Calculates the fingerprint, or digest, of a given
+X.509 certificate
+
+===============================================================================
+[ Description ]
+
+  openssl_x509_fingerprint(OpenSSLCertificate|string $certificate, string~
+  $digest_algo = "sha1", bool $binary = false): string|false~
+
+openssl_x509_fingerprint() returns the digest of {certificate} as a string.
+
+===============================================================================
+[ Parameters ]
+
+{x509}
+
+  See Key/Certificate parameters for a list of valid values.
+
+{digest_algo}
+
+  The digest method or hash algorithm to use, e.g. "sha256", one of 
+  |openssl_get_md_methods|.
+
+{binary}
+
+  When set to true, outputs raw binary data. false outputs lowercase hexits.
+
+===============================================================================
+[ Return Values ]
+
+Returns a string containing the calculated certificate fingerprint as lowercase
+hexits unless {binary} is set to true in which case the raw binary
+representation of the message digest is returned.
+
+Returns false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {certificate} accepts an OpenSSLCertificate instance now; previously, a
+        resource of type OpenSSL X.509 was accepted.
+
+
+vim:ft=help:

@@ -1,0 +1,38 @@
+*mailparse_msg_parse*
+
+(PECL mailparse >= 0.9.0)
+
+mailparse_msg_parse — Incrementally parse data into buffer
+
+===============================================================================
+[ Description ]
+
+  mailparse_msg_parse(resource $mimemail, string $data): bool~
+
+Incrementally parse data into the supplied mime mail resource.
+
+This function allow you to stream portions of a file at a time, rather than
+read and parse the whole thing.
+
+===============================================================================
+[ Parameters ]
+
+{mimemail}
+
+  A valid MIME resource.
+
+{data}
+
+
+    Note:
+
+    The final chunk of {data} is supposed to end with a newline (CRLF);
+    otherwise the last line of the message will not be parsed.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,97 @@
+*glob*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+glob — Find pathnames matching a pattern
+
+===============================================================================
+[ Description ]
+
+  glob(string $pattern, int $flags = 0): array|false~
+
+The glob() function searches for all the pathnames matching {pattern} according
+to the rules used by the libc glob() function, which is similar to the rules
+used by common shells.
+
+The behavior on Unix systems and macOS is determined by the system's
+implementation of glob(). On Windows, an implementation that conforms to the
+POSIX 1003.2 definition for glob() is used, and it includes an extension to
+handle the [!...] convention for negating a range.
+
+===============================================================================
+[ Parameters ]
+
+{pattern}
+
+  The pattern. No tilde expansion or parameter substitution is done.
+
+  Special characters:
+   + * - Matches zero or more characters.
+   + ? - Matches exactly one character (any character).
+   + [...] - Matches one character from a group of characters. If the first
+    character is !, matches any character not in the group.
+   + \ - Escapes the following character, except when the GLOB_NOESCAPE flag is
+    used.
+
+{flags}
+
+  Any of the GLOB_* constants.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array containing the matched files/directories, an empty array if no
+file matched or false on error. Unless GLOB_NOSORT was used, the names will be
+sorted alphanumerically.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Convenient way how glob() can replace |opendir| and friends.
+
+<?php >
+  foreach (glob("*.txt") as $filename) {
+  echo "$filename size " . filesize($filename) . "\n";
+  }
+<?>
+
+The above example will output something similar to:
+
+funclist.txt size 44686
+funcsummary.txt size 267625
+quickref.txt size 137820
+
+Example #2 Example with a more complex pattern
+
+<?php >
+  foreach (glob("path/*/*.{txt,md}", \GLOB_BRACE) as $filename) {
+  echo "$filename\n";
+  }
+<?>
+
+The above example will output something similar to:
+
+path/docs/mailinglist-rules.md
+path/docs/README.md
+path/docs/release-process.md
+path/pear/install-pear.txt
+path/Zend/README.md
+
+===============================================================================
+[ Notes ]
+
+  Note: This function will not work on remote files as the file to be examined
+  must be accessible via the server's filesystem.
+
+  Note: This function isn't available on some systems (e.g. old Sun OS).
+
+===============================================================================
+[ See Also ]
+
+ * |opendir| - Open directory handle
+ * |readdir| - Read entry from directory handle
+ * |closedir| - Close directory handle
+ * |fnmatch| - Match filename against a pattern
+
+
+vim:ft=help:

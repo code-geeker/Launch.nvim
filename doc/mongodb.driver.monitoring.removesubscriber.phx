@@ -1,0 +1,51 @@
+*MongoDB\Driver\Monitoring\removeSubscriber*
+
+(mongodb >=1.3.0)
+
+MongoDB\Driver\Monitoring\removeSubscriber — Unregisters a monitoring event
+subscriber globally
+
+===============================================================================
+[ Description ]
+
+
+MongoDB\Driver\Monitoring\removeSubscriber(MongoDB\Driver\Monitoring\
+  Subscriber~
+  $subscriber): void~
+
+Unregisters a monitoring event subscriber globally.
+
+  Note: If {subscriber} is not already registered globally, this function is a
+  no-op.
+
+===============================================================================
+[ Parameters ]
+
+{subscriber} (MongoDB\Driver\Monitoring\Subscriber)
+
+  A monitoring event subscriber to unregister globally.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+ * Throws MongoDB\Driver\Exception\InvalidArgumentException on argument parsing
+  errors.
+
+===============================================================================
+[ See Also ]
+
+ * MongoDB\Driver\Monitoring\addSubscriber() - Registers a monitoring event
+  subscriber globally
+ * MongoDB\Driver\Monitoring\Subscriber
+ * MongoDB\Driver\Monitoring\CommandSubscriber
+ * MongoDB\Driver\Manager::removeSubscriber() - Unregisters a monitoring event
+  subscriber with this Manager
+ * Application Performance Monitoring (APM)
+
+
+vim:ft=help:

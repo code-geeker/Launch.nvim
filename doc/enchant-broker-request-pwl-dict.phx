@@ -1,0 +1,51 @@
+*enchant_broker_request_pwl_dict*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL enchant >= 0.1.0 )
+
+enchant_broker_request_pwl_dict — Creates a dictionary using a PWL file
+
+===============================================================================
+[ Description ]
+
+  enchant_broker_request_pwl_dict(EnchantBroker $broker, string $filename):~
+  EnchantDictionary|false~
+
+Creates a dictionary using a PWL file. A PWL file is personal word file one
+word per line.
+
+===============================================================================
+[ Parameters ]
+
+{broker}
+
+  An Enchant broker returned by |enchant_broker_init|.
+
+{filename}
+
+  Path to the PWL file. If there is no such file, a new one will be created if
+  possible.
+
+===============================================================================
+[ Return Values ]
+
+Returns a dictionary resource on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {broker} expects an EnchantBroker instance now; previoulsy, a resource
+        was expected.
+8.0.0   On success, this function returns an EnchantDictionary instance now;
+        previoulsy, a resource was retured.
+
+===============================================================================
+[ See Also ]
+
+ * |enchant_dict_describe| - Describes an individual dictionary
+ * |enchant_broker_dict_exists| - Whether a dictionary exists or not. Using
+  non-empty tag
+ * |enchant_broker_free_dict| - Free a dictionary resource
+
+
+vim:ft=help:

@@ -1,0 +1,73 @@
+*ftp_set_option*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+ftp_set_option — Set miscellaneous runtime FTP options
+
+===============================================================================
+[ Description ]
+
+  ftp_set_option(FTP\Connection $ftp, int $option, int|bool $value): bool~
+
+This function controls various runtime options for the specified FTP
+connection.
+
+===============================================================================
+[ Parameters ]
+
+{ftp}
+
+  An FTP\Connection instance.
+
+{option}
+
+  Currently, the following options are supported:
+
+                         Supported runtime FTP options
+                     Changes the timeout in seconds used for all network
+  FTP_TIMEOUT_SEC    related functions. {value} must be an integer that is
+                     greater than 0. The default timeout is 90 seconds.
+                     When enabled, GET or PUT requests with a {resumepos} or
+  FTP_AUTOSEEK       {startpos} parameter will first seek to the requested
+                     position within the file. This is enabled by default.
+                     When disabled, PHP will ignore the IP address returned by
+  FTP_USEPASVADDRESS the FTP server in response to the PASV command and instead
+                     use the IP address that was supplied in the ftp_connect().
+                     {value} must be a boolean.
+
+{value}
+
+  This parameter depends on which {option} is chosen to be altered.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the option could be set; false if not. A warning message will
+be thrown if the {option} is not supported or the passed {value} doesn't match
+the expected value for the given {option}.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ftp} parameter expects an FTP\Connection instance now; previously,
+        a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 ftp_set_option() example
+
+<?php >
+  // Set the network timeout to 10 seconds
+  ftp_set_option($ftp, FTP_TIMEOUT_SEC, 10);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |ftp_get_option| - Retrieves various runtime behaviours of the current FTP
+  connection
+
+
+vim:ft=help:

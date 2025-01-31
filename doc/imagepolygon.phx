@@ -1,0 +1,102 @@
+*imagepolygon*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagepolygon — Draws a polygon
+
+===============================================================================
+[ Description ]
+
+Signature as of PHP 8.0.0 (not supported with named arguments)
+
+  imagepolygon(GdImage $image, array $points, int $color): bool~
+
+Alternative signature (deprecated as of PHP 8.1.0)
+
+  imagepolygon(    GdImage~
+  $image,    array $points,    int~
+  $num_points,    int $color): bool~
+
+imagepolygon() creates a polygon in the given {image}.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{points}
+
+  An array containing the polygon's vertices, e.g.:
+
+  points[0]  = x0
+  points[1]  = y0
+  points[2]  = x1
+  points[3]  = y1
+
+{num_points}
+
+  Total number of points (vertices), which must be at least 3.
+
+  If this parameter is omitted as per the second signature, {points} must have
+  an even number of elements, and {num_points} is assumed to be count($points)/
+  2.
+{color}
+
+  A color identifier created with |imagecolorallocate|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The parameter {num_points} has been deprecated.
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagepolygon() example
+
+<?php >
+  // Create a blank image
+  $image = imagecreatetruecolor(400, 300);
+
+  // Allocate a color for the polygon
+  $col_poly = imagecolorallocate($image, 255, 255, 255);
+
+  // Draw the polygon
+  imagepolygon($image, array(
+  0, 0,
+  100, 200,
+  300, 200
+  ),
+  $col_poly);
+
+  // Output the picture to the browser
+  header('Content-type: image/png');
+
+  imagepng($image);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagepolygon()
+
+===============================================================================
+[ See Also ]
+
+ * |imagefilledpolygon| - Draw a filled polygon
+ * |imageopenpolygon| - Draws an open polygon
+ * |imagecreate| - Create a new palette based image
+ * |imagecreatetruecolor| - Create a new true color image
+
+
+vim:ft=help:

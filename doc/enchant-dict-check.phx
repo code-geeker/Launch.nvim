@@ -1,0 +1,39 @@
+*enchant_dict_check*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL enchant >= 0.1.0 )
+
+enchant_dict_check — Check whether a word is correctly spelled or not
+
+===============================================================================
+[ Description ]
+
+  enchant_dict_check(EnchantDictionary $dictionary, string $word): bool~
+
+If the word is correctly spelled return true, otherwise return false
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+{word}
+
+  The word to check
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the word is spelled correctly, false if not.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dictionary} expects an EnchantDictionary instance now; previoulsy, a 
+        resource was expected.
+
+
+vim:ft=help:

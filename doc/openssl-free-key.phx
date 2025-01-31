@@ -1,0 +1,39 @@
+*openssl_free_key*
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7, PHP 8)
+
+openssl_free_key — Free key resource
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.0.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] openssl_free_key(OpenSSLAsymmetricKey $key): void~
+
+openssl_free_key() frees the key associated with the specified {key} from
+memory.
+
+===============================================================================
+[ Parameters ]
+
+{key}
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   This function is now deprecated as it doesn't have an effect anymore.
+8.0.0   {key} accepts an OpenSSLAsymmetricKey now; previously, a resource of
+        type OpenSSL key was accepted.
+
+
+vim:ft=help:

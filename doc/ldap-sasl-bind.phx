@@ -1,0 +1,44 @@
+*ldap_sasl_bind*
+
+(PHP 5, PHP 7, PHP 8)
+
+ldap_sasl_bind — Bind to LDAP directory using SASL
+
+===============================================================================
+[ Description ]
+
+  ldap_sasl_bind(    LDAP\Connection~
+  $ldap,    ?string $dn =~
+  null,    #[\SensitiveParameter] ?string $password =~
+  null,    ?string $mech =~
+  null,    ?string $realm =~
+  null,    ?string $authc_id =~
+  null,    ?string $authz_id =~
+  null,    ?string $props = null): bool~
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.0.0   {dn}, {password}, {mech}, {realm}, {authc_id}, {authz_id} and {props}
+        are nullable now.
+
+===============================================================================
+[ Notes ]
+
+  Note: Requirement
+  ldap_sasl_bind() requires SASL support (sasl.h). Be sure --with-ldap-sasl is
+  used when configuring PHP otherwise this function will be undefined.
+
+
+vim:ft=help:

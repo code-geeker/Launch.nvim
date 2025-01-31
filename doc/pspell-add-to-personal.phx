@@ -1,0 +1,62 @@
+*pspell_add_to_personal*
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7, PHP 8)
+
+pspell_add_to_personal — Add the word to a personal wordlist
+
+===============================================================================
+[ Description ]
+
+  pspell_add_to_personal(PSpell\Dictionary $dictionary, string $word): bool~
+
+pspell_add_to_personal() adds a word to the personal wordlist. If you used 
+|pspell_new_config| with |pspell_config_personal| to open the dictionary, you
+can save the wordlist later with |pspell_save_wordlist|.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An PSpell\Dictionary instance.
+
+{word}
+
+  The added word.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {dictionary} parameter expects an PSpell\Dictionary instance now;
+        previously, a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pspell_add_to_personal()
+
+<?php >
+  $pspell_config = pspell_config_create("en");
+  pspell_config_personal($pspell_config, "/var/dictionaries/custom.pws");
+  $pspell = pspell_new_config($pspell_config);
+
+  pspell_add_to_personal($pspell, "Vlad");
+  pspell_save_wordlist($pspell);
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function will not work unless you have pspell .11.2 and aspell .32.5 or
+  later.
+
+
+vim:ft=help:

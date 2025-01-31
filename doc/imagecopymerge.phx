@@ -1,0 +1,94 @@
+*imagecopymerge*
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7, PHP 8)
+
+imagecopymerge — Copy and merge part of an image
+
+===============================================================================
+[ Description ]
+
+  imagecopymerge(    GdImage~
+  $dst_image,    GdImage~
+  $src_image,    int $dst_x,    int~
+  $dst_y,    int $src_x,    int~
+  $src_y,    int $src_width,    int~
+  $src_height,    int $pct): bool~
+
+Copy a part of {src_image} onto {dst_image} starting at the x,y coordinates
+{src_x}, {src_y} with a width of {src_width} and a height of {src_height}. The
+portion defined will be copied onto the x,y coordinates, {dst_x} and {dst_y}.
+
+===============================================================================
+[ Parameters ]
+
+{dst_image}
+
+  Destination image resource.
+
+{src_image}
+
+  Source image resource.
+
+{dst_x}
+
+  x-coordinate of destination point.
+
+{dst_y}
+
+  y-coordinate of destination point.
+
+{src_x}
+
+  x-coordinate of source point.
+
+{src_y}
+
+  y-coordinate of source point.
+
+{src_width}
+
+  Source width.
+
+{src_height}
+
+  Source height.
+
+{pct}
+
+  The two images will be merged according to {pct} which can range from 0 to
+  100. When {pct} = 0, no action is taken, when 100 this function behaves
+  identically to |imagecopy| for pallete images, except for ignoring alpha
+  components, while it implements alpha transparency for true colour images.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dst_image} and {src_image} expect GdImage instances now; previously, 
+        resources were expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Merging two copies of the PHP.net logo with 75% transparency
+
+<?php >
+  // Create image instances
+  $dest = imagecreatefromgif('php.gif');
+  $src = imagecreatefromgif('php.gif');
+
+  // Copy and merge
+  imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+
+  // Output
+  header('Content-Type: image/gif');
+  imagegif($dest);
+<?>
+
+
+vim:ft=help:

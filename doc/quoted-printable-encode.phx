@@ -1,0 +1,55 @@
+*quoted_printable_encode*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+quoted_printable_encode — Convert a 8 bit string to a quoted-printable string
+
+===============================================================================
+[ Description ]
+
+  quoted_printable_encode(string $string): string~
+
+Returns a quoted printable string created according to » RFC2045, section 6.7.
+
+This function is similar to |imap_8bit|, except this one does not require the
+IMAP module to work.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The input string.
+
+===============================================================================
+[ Return Values ]
+
+Returns the encoded string.
+
+===============================================================================
+[ Examples ]
+
+Example #1 quoted_printable_encode() example
+
+<?php >
+
+  $encoded = quoted_printable_encode('Möchten Sie ein paar Äpfel?');
+
+  var_dump($encoded);
+  var_dump(quoted_printable_decode($encoded));
+<?>
+
+The above example will output:
+
+string(37) "M=C3=B6chten Sie ein paar =C3=84pfel?"
+string(29) "Möchten Sie ein paar Äpfel?"
+
+===============================================================================
+[ See Also ]
+
+ * |quoted_printable_decode| - Convert a quoted-printable string to an 8 bit
+  string
+ * |iconv_mime_encode| - Composes a MIME header field
+
+
+vim:ft=help:

@@ -1,0 +1,67 @@
+*openssl_cms_verify*
+
+(PHP 8)
+
+openssl_cms_verify — Verify a CMS signature
+
+===============================================================================
+[ Description ]
+
+  openssl_cms_verify(    string~
+  $input_filename,    int $flags =~
+  0,    ?string $certificates =~
+  null,    array $ca_info =~
+  [],    ?string $untrusted_certificates_filename =~
+  null,    ?string $content =~
+  null,    ?string $pk7 =~
+  null,    ?string $sigfile =~
+  null,    int $encoding = OPENSSL_ENCODING_SMIME): bool~
+
+This function verifies a CMS signature, either attached or detached, with the
+specified encoding.
+
+===============================================================================
+[ Parameters ]
+
+{input_filename}
+
+  The input file.
+
+{flags}
+
+  Flags to pass to cms_verify().
+
+{certificates}
+
+  A file with the signer certificate and optionally intermediate certificates.
+
+{ca_info}
+
+  An array containing self-signed certificate authority certificates.
+
+{untrusted_certificates_filename}
+
+  A file containing additional intermediate certificates.
+
+{content}
+
+  A file pointing to the content when signatures are detached.
+
+{pk7}
+
+{sigfile}
+
+  A file to save the signature to.
+
+{encoding}
+
+  The encoding of the input file. One of OPENSSL_ENCODING_SMIME,
+  OPENSSL_ENCODING_DER or OPENSSL_ENCODING_PEM.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

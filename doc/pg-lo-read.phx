@@ -1,0 +1,66 @@
+*pg_lo_read*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+pg_lo_read — Read a large object
+
+===============================================================================
+[ Description ]
+
+  pg_lo_read(PgSql\Lob $lob, int $length = 8192): string|false~
+
+pg_lo_read() reads at most {length} bytes from a large object and returns it as
+a string.
+
+To use the large object interface, it is necessary to enclose it within a
+transaction block.
+
+  Note:
+
+  This function used to be called pg_loread().
+
+===============================================================================
+[ Parameters ]
+
+{lob}
+
+  An PgSql\Lob instance, returned by |pg_lo_open|.
+
+{length}
+
+  An optional maximum number of bytes to return.
+
+===============================================================================
+[ Return Values ]
+
+A string containing {length} bytes from the large object, or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {lob} parameter expects an PgSql\Lob instance now; previously, a 
+        resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_lo_read() example
+
+<?php >
+  $doc_oid = 189762345;
+  $database = pg_connect("dbname=jacarta");
+  pg_query($database, "begin");
+  $handle = pg_lo_open($database, $doc_oid, "r");
+  $data = pg_lo_read($handle, 50000);
+  pg_query($database, "commit");
+  echo $data;
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pg_lo_read_all| - Reads an entire large object and send straight to browser
+
+
+vim:ft=help:

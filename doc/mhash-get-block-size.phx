@@ -1,0 +1,49 @@
+*mhash_get_block_size*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+mhash_get_block_size — Gets the block size of the specified hash
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.1.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] mhash_get_block_size(int $algo): int|false~
+
+Gets the size of a block of the specified {algo}.
+
+===============================================================================
+[ Parameters ]
+
+{algo}
+
+  The hash ID. One of the MHASH_hashname constants.
+
+===============================================================================
+[ Return Values ]
+
+Returns the size in bytes or false, if the {algo} does not exist.
+
+===============================================================================
+[ Changelog ]
+
+Version                              Description
+8.1.0   This function has been deprecated. Use the hash_*() functions instead.
+
+===============================================================================
+[ Examples ]
+
+Example #1 mhash_get_block_size() Example
+
+<?php >
+
+  echo mhash_get_block_size(MHASH_MD5); // 16
+
+<?>
+
+
+vim:ft=help:

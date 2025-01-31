@@ -1,0 +1,148 @@
+*pcntl_waitid*
+
+(PHP 8 >= 8.4.0)
+
+pcntl_waitid — Waits for a child process to change state
+
+===============================================================================
+[ Description ]
+
+  pcntl_waitid(    int $idtype =~
+  P_ALL,    ?int $id = null,    array~
+  &$info = [],    int $flags = WEXITED): bool~
+
+Obtains status information pertaining to termination, stop, and/or continue
+events in one of the caller's child processes.
+
+Unless WNOHANG flag is passed, the calling process will become blocked until an
+error occurs, or status information becomes available that satisfies all of the
+following:
+
+ * The status information is from one of the child processes in the set of
+  child processes specified by the {idtype} and {id} arguments.
+ * The state change in the status information matches one of the state change
+  flags set in the {flags} argument.
+
+If matching status information is available prior to the call to pcntl_waitid()
+, return shall be immediate. If matching status information is available for
+two or more child processes, the order in which their status is reported is
+unspecified.
+
+  Note:
+
+  This documentation covers the POSIX specification of the waitid function,
+  along with some additional parameters specific to implementations on Linux,
+  NetBSD and FreeBSD. Please see your system's waitid(2) man page for specific
+  details as to how waitid works on your system.
+
+===============================================================================
+[ Parameters ]
+
+{idtype}
+{id}
+  The {idtype} and {id} arguments are used to specify which children to wait
+  for.
+
+                  POSIX standard {idtype} and {id} arguments
+  If {idtype} is P_ALL  wait for any child process, {id} is ignored.
+  If {idtype} is P_PID  wait for the child with process ID equal to {id}.
+  If {idtype} is P_PGID wait for any child with process group ID equal to {id}.
+
+                  Linux specific {idtype} and {id} arguments
+  If {idtype} is    wait for the child referred to by the PID file descriptor
+  P_PIDFD (since    specified in {id}. (See the Linux pidfd_open(2) man page
+  Linux 5.4)        for further information on PID file descriptors.)
+
+            NetBSD and FreeBSD specific {idtype} and {id} arguments
+  If
+  {idtype} wait for processes whose effective user ID is equal to {id}.
+  is P_UID
+  If
+  {idtype} wait for processes whose effective group ID is equal to {id}.
+  is P_GID
+  If       wait for processes whose session ID is equal to {id}. If the child
+  {idtype} process started its own session, its session ID will be the same as
+  is P_SID its process ID. Otherwise the session ID of a child process will
+           match the caller's session ID.
+
+                 FreeBSD specific {idtype} and {id} arguments
+  If {idtype} is     wait for processes within a jail whose jail identifier is
+  P_JAILID           equal to {id}.
+
+{info}
+
+  The {info} parameter is set to an array containing information about the
+  signal.
+
+  {info} array may contain the following keys:
+   + signo: Signal number
+   + errno: System error number
+   + code: Signal code
+   + status: Exit value or signal
+   + pid: Sending process ID
+   + uid: Real user ID of sending process
+   + utime: User time consumed
+   + stime: System time consumed
+
+{flags}
+
+  The value of {flags} is the value of zero or more of the following constants
+  OR'ed together:
+
+                          possible values for {flags}
+             Status shall be returned for any continued child process whose
+  WCONTINUED status either has not been reported since it continued from a job
+             control stop or has been reported only by calls to pcntl_waitid()
+             with the WNOWAIT flag set.
+  WEXITED    Wait for processes that have exited.
+  WNOHANG    Do not hang if no status is available; return immediately.
+             Keep the process whose status is returned in {info} in a waitable
+  WNOWAIT    state. This shall not affect the state of the process; the process
+             may be waited for again after this call completes.
+             Status shall be returned for any child that has stopped upon
+  WSTOPPED   receipt of a signal, and whose status either has not been reported
+             since it stopped or has been reported only by calls to 
+             pcntl_waitid() with the WNOWAIT flag set.
+
+===============================================================================
+[ Return Values ]
+
+pcntl_waitid() returns true if WNOHANG was specified and status is not
+available for any process specified by {idtype} and {id}.
+
+pcntl_waitid() returns true due to the change of state of one of its children.
+
+Otherwise, false is returned and |pcntl_get_last_error| can be used to get the
+errno error number.
+
+  Note:
+
+  Once an errno error number has been obtained, |pcntl_strerror| can be used to
+  get the text message associated with it.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+                          Error number (errno) values
+ECHILD The calling process has no existing unwaited-for child processes.
+EINTR  pcntl_waitid() was interrupted by a signal.
+EINVAL An invalid value was specified for {flags}, or {idtype} and {id} specify
+       an invalid set of processes.
+
+===============================================================================
+[ See Also ]
+
+ * |pcntl_waitpid| - Waits on or returns the status of a forked child
+ * |pcntl_wait| - Waits on or returns the status of a forked child
+ * |pcntl_fork| - Forks the currently running process
+ * |pcntl_signal| - Installs a signal handler
+ * |pcntl_wifexited| - Checks if status code represents a normal exit
+ * |pcntl_wifstopped| - Checks whether the child process is currently stopped
+ * |pcntl_wifsignaled| - Checks whether the status code represents a
+  termination due to a signal
+ * |pcntl_wexitstatus| - Returns the return code of a terminated child
+ * |pcntl_wtermsig| - Returns the signal which caused the child to terminate
+ * |pcntl_wstopsig| - Returns the signal which caused the child to stop
+
+
+vim:ft=help:

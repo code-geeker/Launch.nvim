@@ -1,0 +1,34 @@
+*finfo_close*
+
+(PHP >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)
+
+finfo_close — Close finfo instance
+
+===============================================================================
+[ Description ]
+
+  finfo_close(finfo $finfo): bool~
+
+This function closes the instance opened by |finfo_open|.
+
+===============================================================================
+[ Parameters ]
+
+{finfo}
+
+  An finfo instance, returned by |finfo_open|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {finfo} parameter expects an finfo instance now; previously, a 
+        resource was expected.
+
+
+vim:ft=help:

@@ -1,0 +1,43 @@
+*crypt_preferred_method*
+
+(PECL xpass >= 1.1.0)
+
+crypt_preferred_method — Get the prefix of the preferred hash method
+
+===============================================================================
+[ Description ]
+
+  crypt_preferred_method(): ?string~
+
+Get the prefix of the preferred hash method.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns a string with the prefix, or null in case of an error.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A crypt_preferred_method() example
+
+<?php >
+  var_dump(crypt_preferred_method());
+<?>
+
+The above example will output:
+
+string(3) "$y$"
+
+===============================================================================
+[ See Also ]
+
+ * |crypt_gensalt| - Compile a string for use as the salt argument to crypt
+
+
+vim:ft=help:

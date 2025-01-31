@@ -1,0 +1,48 @@
+*ldap_next_attribute*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_next_attribute — Get the next attribute in result
+
+===============================================================================
+[ Description ]
+
+  ldap_next_attribute(LDAP\Connection $ldap, LDAP\ResultEntry $entry):~
+  string|false~
+
+Retrieves the attributes in an entry. The first call to ldap_next_attribute()
+is made with the {entry} returned from |ldap_first_attribute|.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{entry}
+
+  An LDAP\ResultEntry instance.
+
+===============================================================================
+[ Return Values ]
+
+Returns the next attribute in an entry on success and false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {entry} parameter expects an LDAP\ResultEntry instance now;
+        previously, a valid ldap result entry resource was expected.
+8.0.0   The unused third parameter {ber_identifier} is no longer accepted.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_get_attributes| - Get attributes from a search result entry
+
+
+vim:ft=help:

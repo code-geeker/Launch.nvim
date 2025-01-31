@@ -1,0 +1,31 @@
+*rnp_list_keys*
+
+(PECL rnp >= 0.1.1)
+
+rnp_list_keys — Enumerate all keys present in a keyring by specified identifer
+type
+
+===============================================================================
+[ Description ]
+
+  rnp_list_keys(RnpFFI $ffi, string $identifier_type): array|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{identifier_type}
+
+  Key identifier type ("userid", "keyid", "grip", "fingerprint").
+
+===============================================================================
+[ Return Values ]
+
+An associative array where key is an identifier string and value is a PGP key
+fingerprint or false on failure.
+
+
+vim:ft=help:

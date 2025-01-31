@@ -1,0 +1,100 @@
+*imap_fetchstructure*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imap_fetchstructure — Read the structure of a particular message
+
+===============================================================================
+[ Description ]
+
+  imap_fetchstructure(IMAP\Connection $imap, int $message_num, int $flags =~
+  0): stdClass|false~
+
+Fetches all the structured information for a given message.
+
+===============================================================================
+[ Parameters ]
+
+{imap}
+
+  An IMAP\Connection instance.
+
+{message_num}
+
+  The message number
+
+{flags}
+
+  This optional parameter only has a single option, FT_UID, which tells the
+  function to treat the {message_num} argument as a UID.
+
+===============================================================================
+[ Return Values ]
+
+Returns an object with properties listed in the table below, or false on
+failure.
+
+                   Returned Object for imap_fetchstructure()
+type          Primary body type
+encoding      Body transfer encoding
+ifsubtype     true if there is a subtype string
+subtype       MIME subtype
+ifdescription true if there is a description string
+description   Content description string
+ifid          true if there is an identification string
+id            Identification string
+lines         Number of lines
+bytes         Number of bytes
+ifdisposition true if there is a disposition string
+disposition   Disposition string
+ifdparameters true if the dparameters array exists
+              An array of objects where each object has an "attribute" and a
+dparameters   "value" property corresponding to the parameters on the
+              Content-disposition MIME header.
+ifparameters  true if the parameters array exists
+parameters    An array of objects where each object has an "attribute" and a
+              "value" property.
+parts         An array of objects identical in structure to the top-level
+              object, each of which corresponds to a MIME body part.
+
+Primary body type (value may vary
+    with used library, use of
+    constants is recommended)
+Value    Type        Constant
+0     text        TYPETEXT
+1     multipart   TYPEMULTIPART
+2     message     TYPEMESSAGE
+3     application TYPEAPPLICATION
+4     audio       TYPEAUDIO
+5     image       TYPEIMAGE
+6     video       TYPEVIDEO
+7     model       TYPEMODEL
+8     other       TYPEOTHER
+
+ Transfer encodings (value may vary with
+    used library, use of constants is
+              recommended)
+Value       Type            Constant
+0     7bit             ENC7BIT
+1     8bit             ENC8BIT
+2     Binary           ENCBINARY
+3     Base64           ENCBASE64
+4     Quoted-Printable ENCQUOTEDPRINTABLE
+5     other            ENCOTHER
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {imap} parameter expects an IMAP\Connection instance now;
+        previously, a valid imap resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |imap_fetchbody| - Fetch a particular section of the body of the message
+ * |imap_bodystruct| - Read the structure of a specified body section of a
+  specific message
+
+
+vim:ft=help:

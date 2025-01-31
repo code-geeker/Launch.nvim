@@ -1,0 +1,84 @@
+*class_parents*
+
+(PHP 5, PHP 7, PHP 8)
+
+class_parents — Return the parent classes of the given class
+
+===============================================================================
+[ Description ]
+
+  class_parents(object|string $object_or_class, bool $autoload = true):~
+  array|false~
+
+This function returns an array with the name of the parent classes of the given
+{object_or_class}.
+
+===============================================================================
+[ Parameters ]
+
+{object_or_class}
+
+  An object (class instance) or a string (class name).
+
+{autoload}
+
+  Whether to autoload if not already loaded.
+
+===============================================================================
+[ Return Values ]
+
+An array on success, or false when the given class doesn't exist.
+
+===============================================================================
+[ Examples ]
+
+Example #1 class_parents() example
+
+<?php >
+
+  class foo { }
+  class bar extends foo {}
+
+  print_r(class_parents(new bar));
+
+  // you may also specify the parameter as a string
+  print_r(class_parents('bar'));
+
+  spl_autoload_register();
+
+  // use autoloading to load the 'not_loaded' class
+  print_r(class_parents('not_loaded', true));
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [foo] => foo
+)
+Array
+(
+    [foo] => foo
+)
+Array
+(
+    [parent_of_not_loaded] => parent_of_not_loaded
+)
+
+===============================================================================
+[ Notes ]
+
+  Note: To check that an object extends a class, instanceof or the |is_a|
+  function should be used instead.
+
+===============================================================================
+[ See Also ]
+
+ * |class_implements| - Return the interfaces which are implemented by the
+  given class or interface
+ * |is_a| - Checks whether the object is of a given type or subtype
+ * instanceof
+
+
+vim:ft=help:

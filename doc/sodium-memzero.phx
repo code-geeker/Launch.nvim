@@ -1,0 +1,27 @@
+*sodium_memzero*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_memzero — Overwrite a string with NUL characters
+
+===============================================================================
+[ Description ]
+
+  sodium_memzero(#[\SensitiveParameter] string &$string): void~
+
+sodium_memzero() zeroes out the string that is passed by reference.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  String.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+
+vim:ft=help:

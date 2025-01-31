@@ -1,0 +1,45 @@
+*zip_close*
+
+(PHP 4 >= 4.1.0, PHP 5 >= 5.2.0, PHP 7, PHP 8, PECL zip >= 1.0.0)
+
+zip_close — Close a ZIP file archive
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.0.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] zip_close(resource $zip): void~
+
+Closes the given ZIP file archive.
+
+===============================================================================
+[ Parameters ]
+
+{zip}
+
+  A ZIP file previously opened with |zip_open|.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   This function is deprecated in favor of the Object API, see 
+        ZipArchive::close().
+
+===============================================================================
+[ See Also ]
+
+ * |zip_open| - Open a ZIP file archive
+ * |zip_read| - Read next entry in a ZIP file archive
+
+
+vim:ft=help:

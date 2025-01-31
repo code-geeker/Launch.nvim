@@ -1,0 +1,38 @@
+*stream_socket_get_name*
+
+(PHP 5, PHP 7, PHP 8)
+
+stream_socket_get_name — Retrieve the name of the local or remote sockets
+
+===============================================================================
+[ Description ]
+
+  stream_socket_get_name(resource $socket, bool $remote): string|false~
+
+Returns the local or remote name of a given socket connection.
+
+===============================================================================
+[ Parameters ]
+
+{socket}
+
+  The socket to get the name of.
+
+{remote}
+
+  If set to true the remote socket name will be returned, if set to false the
+  local socket name will be returned.
+
+===============================================================================
+[ Return Values ]
+
+The name of the socket, or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * |stream_socket_accept| - Accept a connection on a socket created by
+  stream_socket_server
+
+
+vim:ft=help:

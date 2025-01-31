@@ -1,0 +1,141 @@
+*opcache_get_status*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8, PECL ZendOpcache > 7.0.2)
+
+opcache_get_status — Get status information about the cache
+
+===============================================================================
+[ Description ]
+
+  opcache_get_status(bool $include_scripts = true): array|false~
+
+This function returns state information about the in-memory cache instance. It
+will not return any information about the file cache.
+
+===============================================================================
+[ Parameters ]
+
+{include_scripts}
+
+  Include script specific state information
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of information, optionally containing script specific state
+information, or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If opcache.restrict_api is in use and the current path is in violation of the
+rule, an E_WARNING will be raised; no status information will be returned.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+PHP     opcache_get_status()['scripts'][n]['revalidate'] now contains a Unix
+8.3.0   timestamp of when the next revalidation of the scripts timestamp is
+        due, as dictated by the opcache.revalidate_freq INI directive.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A opcache_get_status() example
+
+<?php >
+  var_dump(opcache_get_status());
+<?>
+
+The above example will output something similar to:
+
+array(9) {
+  'opcache_enabled' =>
+  bool(true)
+  'cache_full' =>
+  bool(false)
+  'restart_pending' =>
+  bool(false)
+  'restart_in_progress' =>
+  bool(false)
+  'memory_usage' =>
+  array(4) {
+    'used_memory' =>
+    int(9167936)
+    'free_memory' =>
+    int(125049792)
+    'wasted_memory' =>
+    int(0)
+    'current_wasted_percentage' =>
+    double(0)
+  }
+  'interned_strings_usage' =>
+  array(4) {
+    'buffer_size' =>
+    int(8388608)
+    'used_memory' =>
+    int(2593616)
+    'free_memory' =>
+    int(5794992)
+    'number_of_strings' =>
+    int(10358)
+  }
+  'opcache_statistics' =>
+  array(13) {
+    'num_cached_scripts' =>
+    int(0)
+    'num_cached_keys' =>
+    int(0)
+    'max_cached_keys' =>
+    int(16229)
+    'hits' =>
+    int(0)
+    'start_time' =>
+    int(1733310010)
+    'last_restart_time' =>
+    int(0)
+    'oom_restarts' =>
+    int(0)
+    'hash_restarts' =>
+    int(0)
+    'manual_restarts' =>
+    int(0)
+    'misses' =>
+    int(0)
+    'blacklist_misses' =>
+    int(0)
+    'blacklist_miss_ratio' =>
+    double(0)
+    'opcache_hit_rate' =>
+    double(0)
+  }
+  'scripts' =>
+  array(0) {
+  }
+  'jit' =>
+  array(7) {
+    'enabled' =>
+    bool(false)
+    'on' =>
+    bool(false)
+    'kind' =>
+    int(5)
+    'opt_level' =>
+    int(4)
+    'opt_flags' =>
+    int(6)
+    'buffer_size' =>
+    int(0)
+    'buffer_free' =>
+    int(0)
+  }
+}
+
+===============================================================================
+[ See Also ]
+
+ * |opcache_get_configuration| - Get configuration information about the cache
+
+
+vim:ft=help:

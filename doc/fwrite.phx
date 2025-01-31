@@ -1,0 +1,138 @@
+*fwrite*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+fwrite — Binary-safe file write
+
+===============================================================================
+[ Description ]
+
+  fwrite(resource $stream, string $data, ?int $length = null): int|false~
+
+fwrite() writes the contents of {data} to the file stream pointed to by
+{stream}.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  A file system pointer resource that is typically created using |fopen|.
+
+{data}
+
+  The string that is to be written.
+
+{length}
+
+  If {length} is an int, writing will stop after {length} bytes have been
+  written or the end of {data} is reached, whichever comes first.
+
+===============================================================================
+[ Return Values ]
+
+fwrite() returns the number of bytes written, or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+fwrite() raises E_WARNING on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version        Description
+8.0.0   {length} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A simple fwrite() example
+
+<?php >
+  $filename = 'test.txt';
+  $somecontent = "Add this to the file\n";
+
+  // Let's make sure the file exists and is writable first.
+  if (is_writable($filename)) {
+
+  // In our example we're opening $filename in append mode.
+  // The file pointer is at the bottom of the file hence
+  // that's where $somecontent will go when we fwrite() it.
+  if (!$fp = fopen($filename, 'a')) {
+  echo "Cannot open file ($filename)";
+  exit;
+  }
+
+  // Write $somecontent to our opened file.
+  if (fwrite($fp, $somecontent) === FALSE) {
+  echo "Cannot write to file ($filename)";
+  exit;
+  }
+
+  echo "Success, wrote ($somecontent) to file ($filename)";
+
+  fclose($fp);
+
+  } else {
+  echo "The file $filename is not writable";
+  }
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  Writing to a network stream may end before the whole string is written.
+  Return value of fwrite() may be checked:
+  <?php >
+  function fwrite_stream($fp, $string) {
+  for ($written = 0; $written < strlen($string); $written += $fwrite) {
+  $fwrite = fwrite($fp, substr($string, $written));
+  if ($fwrite === false) {
+  return $written;
+  }
+  }
+  return $written;
+  }
+<  ?>
+
+  Note:
+
+  On systems which differentiate between binary and text files (i.e. Windows)
+  the file must be opened with 'b' included in |fopen| mode parameter.
+
+  Note:
+
+  If {stream} was |fopen|ed in append mode, fwrite()s are atomic (unless the
+  size of {data} exceeds the filesystem's block size, on some platforms, and as
+  long as the file is on a local filesystem). That is, there is no need to 
+  |flock| a resource before calling fwrite(); all of the data will be written
+  without interruption.
+
+  Note:
+
+  If writing twice to the file pointer, then the data will be appended to the
+  end of the file content:
+  <?php >
+  $fp = fopen('data.txt', 'w');
+  fwrite($fp, '1');
+  fwrite($fp, '23');
+  fclose($fp);
+
+  // the content of 'data.txt' is now 123 and not 23!
+<  ?>
+
+===============================================================================
+[ See Also ]
+
+ * |fread| - Binary-safe file read
+ * |fopen| - Opens file or URL
+ * |fsockopen| - Open Internet or Unix domain socket connection
+ * |popen| - Opens process file pointer
+ * |file_get_contents| - Reads entire file into a string
+ * |pack| - Pack data into binary string
+
+
+vim:ft=help:

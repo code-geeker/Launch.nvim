@@ -1,0 +1,79 @@
+*rnp_op_encrypt*
+
+(PECL rnp >= 0.1.1)
+
+rnp_op_encrypt — Encrypt message
+
+===============================================================================
+[ Description ]
+
+  rnp_op_encrypt(    RnpFFI~
+  $ffi,    string $message,    array~
+  $recipient_keys_fp,    array $options = ?): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{message}
+
+  Message to be encrypted.
+
+{recipient_keys_fp}
+
+  Array with fingerprints of recipient's keys. At least one key must be
+  present.
+
+{options}
+
+  An associative array with options.
+
+          Key          Data                      Description
+                       type
+                              Compression algorithm. Both "compression_alg" and
+  "compression_alg"   string  "compression_level" must be set in order to
+                              enable data compression.
+  "compression_level" integer Compression level, 0-9. 0 disables compression.
+  "armor"             boolean Enable ASCII-armored output. Disabled by default.
+  "add_signature"     boolean Encrypted message will be also signed.
+                              Set hash algorithm used during signature
+  "hash"              string  calculation. "add_signature" option should be set
+                              to true
+  "creation_time"     integer Set signature creation time in seconds since Jan,
+                              1 1970 UTC. By default current time is used.
+                              Set signature expiration time in seconds since
+  "expiration_time"   integer the creation time. 0 value is used to mark
+                              signature as non-expiring (default value).
+  "password"          string  Add password which is used to encrypt data.
+                              Set symmetric encryption algorithm. Possible
+                              values are "IDEA", "TRIPLEDES", "CAST5",
+  "cipher"            string  "BLOWFISH", "AES128", "AES192", "AES256",
+                              "TWOFISH", "CAMELLIA128", "CAMELLIA192",
+                              "CAMELLIA256", "SM4".
+  "aead"              string  Set AEAD mode algorithm. Possible values are
+                              "None" to disable AEAD, "EAX", "OCB".
+  "aead_bits"         integer Set chunk length for AEAD mode via number of
+                              chunk size bits. Must be between 0 to 56.
+                              Set additional encryption flags. Supported flags:
+  "flags"             integer RNP_ENCRYPT_NOWRAP - do not wrap the data in a
+                              literal data packet. This would allow to encrypt
+                              already signed data.
+                              Set the internally stored file name for the data
+                              being encrypted. Special value _CONSOLE may be
+  "file_name"         string  used to mark message as 'for your eyes only',
+                              i.e. it should not be stored anywhere but only
+                              displayed to the receiver. Default is the empty
+                              string.
+  "file_mtime"        integer Set input file modification date in seconds since
+                              Jan, 1 1970 UTC.
+
+===============================================================================
+[ Return Values ]
+
+Encrypted data on success or false on failure.
+
+
+vim:ft=help:

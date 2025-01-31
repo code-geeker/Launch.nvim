@@ -1,0 +1,17 @@
+*imap_header*
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_header — Alias of |imap_headerinfo|
+
+Warning
+
+This alias is REMOVED as of PHP 8.0.0.
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: |imap_headerinfo|.
+
+
+vim:ft=help:

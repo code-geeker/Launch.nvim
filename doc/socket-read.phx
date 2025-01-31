@@ -1,0 +1,67 @@
+*socket_read*
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7, PHP 8)
+
+socket_read — Reads a maximum of length bytes from a socket
+
+===============================================================================
+[ Description ]
+
+  socket_read(Socket $socket, int $length, int $mode = PHP_BINARY_READ):~
+  string|false~
+
+The function socket_read() reads from the Socket instance {socket} created by
+the |socket_create| or |socket_accept| functions.
+
+===============================================================================
+[ Parameters ]
+
+{socket}
+
+  A Socket instance created with |socket_create| or |socket_accept|.
+
+{length}
+
+  The maximum number of bytes read is specified by the {length} parameter.
+  Otherwise you can use \r, \n, or \0 to end reading (depending on the {mode}
+  parameter, see below).
+
+{mode}
+
+  Optional {mode} parameter is a named constant:
+   + PHP_BINARY_READ (Default) - use the system recv() function. Safe for
+    reading binary data.
+   + PHP_NORMAL_READ - reading stops at \n or \r.
+
+===============================================================================
+[ Return Values ]
+
+socket_read() returns the data as a string on success, or false on error
+(including if the remote host has closed the connection). The error code can be
+retrieved with |socket_last_error|. This code may be passed to |socket_strerror
+| to get a textual representation of the error.
+
+  Note:
+
+  socket_read() returns a zero length string ("") when there is no more data to
+  read.
+
+===============================================================================
+[ Changelog ]
+
+Version                            Description
+8.0.0   {socket} is a Socket instance now; previously, it was a resource.
+
+===============================================================================
+[ See Also ]
+
+ * |socket_accept| - Accepts a connection on a socket
+ * |socket_bind| - Binds a name to a socket
+ * |socket_connect| - Initiates a connection on a socket
+ * |socket_listen| - Listens for a connection on a socket
+ * |socket_last_error| - Returns the last error on the socket
+ * |socket_strerror| - Return a string describing a socket error
+ * |socket_write| - Write to a socket
+
+
+vim:ft=help:

@@ -1,0 +1,65 @@
+*php_sapi_name*
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7, PHP 8)
+
+php_sapi_name — Returns the type of interface between web server and PHP
+
+===============================================================================
+[ Description ]
+
+  php_sapi_name(): string|false~
+
+Returns a lowercase string that describes the type of interface (the Server
+API, SAPI) that PHP is using. For example, in CLI PHP this string will be "cli"
+whereas with Apache it may have several different values depending on the exact
+SAPI used. Possible values are listed below.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the interface type, as a lowercase string, or false on failure.
+
+Although not exhaustive, the possible return values include apache,
+apache2handler, cgi (until PHP 5.3), cgi-fcgi, cli, cli-server, embed,
+fpm-fcgi, litespeed, phpdbg.
+
+===============================================================================
+[ Examples ]
+
+Example #1 php_sapi_name() example
+
+This example checks for the substring cgi because it may also be cgi-fcgi.
+
+<?php >
+  $sapi_type = php_sapi_name();
+  if (substr($sapi_type, 0, 3) == 'cgi') {
+  echo "You are using CGI PHP\n";
+  } else {
+  echo "You are not using CGI PHP\n";
+  }
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note: An alternative approach
+
+  The PHP constant PHP_SAPI has the same value as php_sapi_name().
+
+Tip *A potential gotcha*
+
+The defined SAPI may not be obvious, because for example instead of apache it
+may be defined as apache2handler.
+
+===============================================================================
+[ See Also ]
+
+ * PHP_SAPI
+
+
+vim:ft=help:

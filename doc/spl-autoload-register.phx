@@ -1,0 +1,143 @@
+*spl_autoload_register*
+
+(PHP 5 >= 5.1.0, PHP 7, PHP 8)
+
+spl_autoload_register — Register given function as __autoload() implementation
+
+===============================================================================
+[ Description ]
+
+  spl_autoload_register(?callable $callback = null, bool $throw = true, bool~
+  $prepend = false): bool~
+
+Register a function with the spl provided __autoload queue. If the queue is not
+yet activated it will be activated.
+
+If your code has an existing |__autoload| function then this function must be
+explicitly registered on the __autoload queue. This is because 
+spl_autoload_register() will effectively replace the engine cache for the 
+|__autoload| function by either |spl_autoload| or |spl_autoload_call|.
+
+If there must be multiple autoload functions, spl_autoload_register() allows
+for this. It effectively creates a queue of autoload functions, and runs
+through each of them in the order they are defined. By contrast, |__autoload|
+may only be defined once.
+
+===============================================================================
+[ Parameters ]
+
+{callback}
+
+  The autoload function being registered. If null, then the default
+  implementation of |spl_autoload| will be registered.
+
+
+  callback(string $class): void~
+
+  The {class} will not contain the leading backslash of a fully-qualified
+  identifier.
+
+{throw}
+
+  This parameter specifies whether spl_autoload_register() should throw
+  exceptions when the {callback} cannot be registered.
+
+  Warning
+
+  This parameter is ignored as of PHP 8.0.0, and a notice will be emitted if
+  set to false. spl_autoload_register() will now always throw a TypeError on
+  invalid arguments.
+
+{prepend}
+
+  If true, spl_autoload_register() will prepend the autoloader on the autoload
+  queue instead of appending it.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {callback} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 spl_autoload_register() as a replacement for an |__autoload|
+function
+
+<?php >
+
+  // function __autoload($class) {
+  // include 'classes/' . $class . '.class.php';
+  // }
+
+  function my_autoloader($class) {
+  include 'classes/' . $class . '.class.php';
+  }
+
+  spl_autoload_register('my_autoloader');
+
+  // Or, using an anonymous function
+  spl_autoload_register(function ($class) {
+  include 'classes/' . $class . '.class.php';
+  });
+
+<?>
+
+Example #2 spl_autoload_register() example where the class is not loaded
+
+<?php >
+
+  namespace Foobar;
+
+  class Foo {
+  static public function test($class) {
+  print '[['. $class .']]';
+  }
+  }
+
+  spl_autoload_register(__NAMESPACE__ .'\Foo::test');
+
+  new InexistentClass;
+
+<?>
+
+The above example will output something similar to:
+
+[[Foobar\InexistentClass]]
+Fatal error: Class 'Foobar\InexistentClass' not found in ...
+
+Example #3 The identifier will be provided without the leading backslash
+
+<?php >
+
+  spl_autoload_register(static function ($class) {
+  var_dump($class);
+  });
+
+  class_exists('RelativeName');
+  class_exists('RelativeName\\WithNamespace');
+  class_exists('\\AbsoluteName');
+  class_exists('\\AbsoluteName\\WithNamespace');
+
+<?>
+
+The above example will output:
+
+string(12) "RelativeName"
+string(26) "RelativeName\WithNamespace"
+string(12) "AbsoluteName"
+string(26) "AbsoluteName\WithNamespace"
+
+===============================================================================
+[ See Also ]
+
+ * |__autoload| - Attempt to load undefined class
+
+
+vim:ft=help:

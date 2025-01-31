@@ -1,0 +1,25 @@
+*sodium_crypto_generichash_keygen*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_generichash_keygen — Generate a random generichash key
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_generichash_keygen(): string~
+
+Generate a random key for use with the generichash API.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+A random 256-bit key.
+
+
+vim:ft=help:

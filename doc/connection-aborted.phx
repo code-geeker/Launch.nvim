@@ -1,0 +1,34 @@
+*connection_aborted*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+connection_aborted — Check whether client disconnected
+
+===============================================================================
+[ Description ]
+
+  connection_aborted(): int~
+
+Checks whether the client disconnected.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns 1 if client disconnected, 0 otherwise.
+
+===============================================================================
+[ See Also ]
+
+ * |connection_status| - Returns connection status bitfield
+ * |ignore_user_abort| - Set whether a client disconnect should abort script
+  execution
+ * Connection Handling for a complete description of connection handling in
+  PHP.
+
+
+vim:ft=help:

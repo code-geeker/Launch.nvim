@@ -1,0 +1,43 @@
+*sem_remove*
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7, PHP 8)
+
+sem_remove — Remove a semaphore
+
+===============================================================================
+[ Description ]
+
+  sem_remove(SysvSemaphore $semaphore): bool~
+
+sem_remove() removes the given semaphore.
+
+After removing the semaphore, it is no longer accessible.
+
+===============================================================================
+[ Parameters ]
+
+{semaphore}
+
+  A semaphore as returned by |sem_get|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {semaphore} expects a SysvSemaphore instance now; previously, a 
+        resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |sem_get| - Get a semaphore id
+ * |sem_release| - Release a semaphore
+ * |sem_acquire| - Acquire a semaphore
+
+
+vim:ft=help:

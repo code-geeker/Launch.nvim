@@ -1,0 +1,74 @@
+*rnp_op_verify*
+
+(PECL rnp >= 0.1.1)
+
+rnp_op_verify — Verify embedded or cleartext signatures
+
+===============================================================================
+[ Description ]
+
+  rnp_op_verify(RnpFFI $ffi, string $data): array|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{data}
+
+  Signed data.
+
+===============================================================================
+[ Return Values ]
+
+An associative array with information about verification results or false on
+failure.
+
+         Key           Data                      Description
+                       type
+                              Overall verification result, either "Success"
+                              string or appropriate error message. "Success"
+"verification_status" string  result is set when at least one signature is
+                              valid and successfully verified. Individual
+                              verification results for each signature can be
+                              checked in the "signatures" array.
+"file_name"           string  File name.
+"file_mtime"          integer File modification time.
+                              Data protection (encryption) mode used in
+"mode"                string  processed message. Currently defined values are
+                              "none", "cfb", "cfb-mdc", "aead-ocb", "aead-eax".
+"cipher"              string  Symmetric cipher used for data encryption.
+                              true if message integrity protection was used
+"valid_integrity"     boolean (i.e. MDC or AEAD) and it was validated
+                              successfully.
+"signatures"          array   An associative array describing each signature
+                              found. See description below.
+
+"signatures" sub-array.
+
+         Key           Data                      Description
+                       type
+"verification_status" string  Signature verification status, either "Success"
+                              string or appropriate error message.
+"creation_time"       integer Signature creation time in seconds since Jan, 1
+                              1970 UTC.
+"expiration_time"     integer Signature expiration time in seconds since the
+                              creation time or 0 if signature never expires.
+"hash"                string  Hash function algorithm used to calculate the
+                              signature.
+                              Fingerprint of the key used for signing. Could be
+"signing_key"         string  "Not found" if corresponding public key is not
+                              loaded to the FFI object.
+                              Signature type. Currently defined values are:
+                              'binary', 'text', 'standalone', 'certification
+                              (generic)', 'certification (persona)',
+"signature_type"      string  'certification (casual)', 'certification
+                              (positive)', 'subkey binding', 'primary key
+                              binding', 'direct', 'key revocation', 'subkey
+                              revocation', 'certification revocation',
+                              'timestamp', 'uknown: 0..255'.
+
+
+vim:ft=help:

@@ -1,0 +1,40 @@
+*curl_pause*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8)
+
+curl_pause — Pause and unpause a connection
+
+===============================================================================
+[ Description ]
+
+  curl_pause(CurlHandle $handle, int $flags): int~
+
+Pause or unpause a cURL session. A session can be paused while a transfer is in
+progress, in either the read, write or both directions, by calling this
+function from a callback registered with |curl_setopt|.
+
+===============================================================================
+[ Parameters ]
+
+{handle}
+
+  A cURL handle returned by |curl_init|.
+
+{flags}
+
+  One of CURLPAUSE_* constants.
+
+===============================================================================
+[ Return Values ]
+
+Returns an error code (CURLE_OK for no error).
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {handle} expects a CurlHandle instance now; previously, a resource was
+        expected.
+
+
+vim:ft=help:

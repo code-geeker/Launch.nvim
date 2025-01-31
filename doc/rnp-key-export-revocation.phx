@@ -1,0 +1,51 @@
+*rnp_key_export_revocation*
+
+(PECL rnp >= 0.1.1)
+
+rnp_key_export_revocation — Generate and export primary key revocation
+signature
+
+===============================================================================
+[ Description ]
+
+  rnp_key_export_revocation(    RnpFFI~
+  $ffi,    string $key_fp,    int~
+  $flags,    array $options = ?): string|false~
+
+Note: to revoke a key you'll need to import this signature into the keystore or
+use |rnp_key_revoke| function.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{key_fp}
+
+  Key fingerprint of the primary key to be revoked.
+
+{flags}
+
+  RNP_KEY_EXPORT_ARMORED or 0.
+
+{options}
+
+  An associative array with options.
+
+    Key     Data                           Description
+            type
+  "hash"   string Set hash algorithm used during signature calculation.
+                  Code reason for revocation code. Possible values: 'no',
+  "code"   string 'superseded', 'compromised', 'retired'. If not defined, then
+                  value 'no' will be used by default.
+  "reason" string Textual representation of the reason for revocation.
+
+===============================================================================
+[ Return Values ]
+
+Exported revocation signature on success or false on failure.
+
+
+vim:ft=help:

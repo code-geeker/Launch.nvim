@@ -1,0 +1,92 @@
+*register_shutdown_function*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+register_shutdown_function — Register a function for execution on shutdown
+
+===============================================================================
+[ Description ]
+
+  register_shutdown_function(callable $callback, mixed ...$args): void~
+
+Registers a {callback} to be executed after script execution finishes or |exit|
+is called.
+
+Multiple calls to register_shutdown_function() can be made, and each will be
+called in the same order as they were registered. If you call |exit| within one
+registered shutdown function, processing will stop completely and no other
+registered shutdown functions will be called.
+
+Shutdown functions may also call register_shutdown_function() themselves to add
+a shutdown function to the end of the queue.
+
+===============================================================================
+[ Parameters ]
+
+{callback}
+
+  The shutdown callback to register.
+
+  The shutdown callbacks are executed as the part of the request, so it's
+  possible to send output from them and access output buffers.
+
+{args}
+
+  It is possible to pass parameters to the shutdown function by passing
+  additional parameters.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 register_shutdown_function() example
+
+<?php >
+  function shutdown()
+  {
+  // This is our shutdown function, in
+  // here we can do any last operations
+  // before the script is complete.
+
+  echo 'Script executed with success', PHP_EOL;
+  }
+
+  register_shutdown_function('shutdown');
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The working directory of the script can change inside the shutdown function
+  under some web servers, e.g. Apache.
+
+  Note:
+
+  Shutdown functions will not be executed if the process is killed with a
+  SIGTERM or SIGKILL signal. While you cannot intercept a SIGKILL, you can use 
+  |pcntl_signal| to install a handler for a SIGTERM which uses |exit| to end
+  cleanly.
+
+  Note:
+
+  Shutdown functions run separately from the time tracked by max_execution_time
+  . That means even if a process is terminated for running too long, shutdown
+  functions will still be called. Additionally, if the max_execution_time runs
+  out while a shutdown function is running it will not be terminated.
+
+===============================================================================
+[ See Also ]
+
+ * auto_append_file
+ * |exit| - Terminate the current script with a status code or message
+ * |fastcgi_finish_request| - Flushes all response data to the client
+ * The section on connection handling
+
+
+vim:ft=help:

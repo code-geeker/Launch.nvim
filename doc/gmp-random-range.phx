@@ -1,0 +1,69 @@
+*gmp_random_range*
+
+(PHP 5 >= 5.6.3, PHP 7, PHP 8)
+
+gmp_random_range — Get a uniformly selected integer
+
+===============================================================================
+[ Description ]
+
+  gmp_random_range(GMP|int|string $min, GMP|int|string $max): GMP~
+
+Generate a random number. The number will be between {min} and {max}.
+
+{min} and {max} can both be negative, but {min} must always be less than {max}.
+
+Caution
+
+This function does not generate cryptographically secure values, and must not
+be used for cryptographic purposes, or purposes that require returned values to
+be unguessable.
+
+If cryptographically secure randomness is required, the Random\Randomizer may
+be used with the Random\Engine\Secure engine. For simple use cases, the 
+|random_int| and |random_bytes| functions provide a convenient and secure API
+that is backed by the operating system’s CSPRNG.
+
+===============================================================================
+[ Parameters ]
+
+{min}
+
+  A GMP number representing the lower bound for the random number
+
+{max}
+
+  A GMP number representing the upper bound for the random number
+
+===============================================================================
+[ Return Values ]
+
+Returns a GMP object which contains a uniformly selected integer from the
+closed interval [{min}, {max}]. Both {min} and {max} are possible return
+values.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If {max} is less than {min}, a ValueError will be thrown.
+
+===============================================================================
+[ Examples ]
+
+Example #1 gmp_random_range() example
+
+<?php >
+  $rand1 = gmp_random_range(0, 100); // random number between 0 and 100
+  $rand2 = gmp_random_range(-100, -10); // random number between -100 and -10
+
+  echo gmp_strval($rand1) . "\n";
+  echo gmp_strval($rand2) . "\n";
+<?>
+
+The above example will output:
+
+42
+-67
+
+
+vim:ft=help:

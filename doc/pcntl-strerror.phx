@@ -1,0 +1,57 @@
+*pcntl_strerror*
+
+(PHP 5 >= 5.3.4, PHP 7, PHP 8)
+
+pcntl_strerror — Retrieve the system error message associated with the given
+errno
+
+===============================================================================
+[ Description ]
+
+  pcntl_strerror(int $error_code): string~
+
+Returns the system error message associated with the given {error_code} (errno)
+of the last pcntl function that failed. The {error_code} parameter may be
+obtained by calling |pcntl_get_last_error|.
+
+===============================================================================
+[ Parameters ]
+
+{error_code}
+
+  An error number (errno), returned by |pcntl_get_last_error|.
+
+===============================================================================
+[ Return Values ]
+
+Returns the error message, as a string.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pcntl_strerror() example
+
+This example will attempt to wait on child processes in a situation where no
+child process exists, then will print out the corresponding error message.
+
+<?php >
+$pid = pcntl_wait($status);
+if ($pid === -1) {
+$errno = pcntl_get_last_error();
+$message = pcntl_strerror($errno);
+fwrite(STDERR, 'pcntl_wait failed with errno ' . $errno
+. ': ' . $message . PHP_EOL);
+}
+
+The above example will output something similar to:
+
+pcntl_wait failed with errno 10: No child processes
+
+===============================================================================
+[ See Also ]
+
+ * |pcntl_get_last_error| - Retrieve the error number set by the last pcntl
+  function which failed
+
+
+vim:ft=help:

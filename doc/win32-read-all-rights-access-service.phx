@@ -1,0 +1,51 @@
+*win32_read_all_rights_access_service*
+
+(PECL win32service >=1.1.0)
+
+win32_read_all_rights_access_service — Read all service rights access
+
+===============================================================================
+[ Description ]
+
+  win32_read_all_rights_access_service(string $servicename, string $machine =~
+  null): array~
+
+Read all rights access on {servicename} service. Administrative privileges are
+required for this to succeed.
+
+===============================================================================
+[ Parameters ]
+
+{servicename}
+
+  The service name to read rights access.
+
+{machine}
+
+  The optional machine name on which you want to create a service. If omitted,
+  it will use the local machine.
+
+===============================================================================
+[ Return Values ]
+
+Return an array of Win32Service\RightInfo
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if the value of {service} parameter is empty.
+
+A Win32ServiceException is thrown on error.
+
+===============================================================================
+[ See Also ]
+
+ * win32_read_rights_access_service()
+ * |win32_add_right_access_service| - Add rights access for an username to the
+  service
+ * |win32_remove_right_access_service| - Remove the service rights access for
+  an username
+ * Win32 Rights constants
+
+
+vim:ft=help:

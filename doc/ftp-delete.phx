@@ -1,0 +1,63 @@
+*ftp_delete*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ftp_delete — Deletes a file on the FTP server
+
+===============================================================================
+[ Description ]
+
+  ftp_delete(FTP\Connection $ftp, string $filename): bool~
+
+ftp_delete() deletes the file specified by {filename} from the FTP server.
+
+===============================================================================
+[ Parameters ]
+
+{ftp}
+
+  An FTP\Connection instance.
+
+{filename}
+
+  The file to delete.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ftp} parameter expects an FTP\Connection instance now; previously,
+        a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 ftp_delete() example
+
+<?php >
+  $file = 'public_html/old.txt';
+
+  // set up basic connection
+  $ftp = ftp_connect($ftp_server);
+
+  // login with username and password
+  $login_result = ftp_login($ftp, $ftp_user_name, $ftp_user_pass);
+
+  // try to delete $file
+  if (ftp_delete($ftp, $file)) {
+  echo "$file deleted successful\n";
+  } else {
+  echo "could not delete $file\n";
+  }
+
+  // close the connection
+  ftp_close($ftp);
+<?>
+
+
+vim:ft=help:

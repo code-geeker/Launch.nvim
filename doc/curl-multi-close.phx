@@ -1,0 +1,44 @@
+*curl_multi_close*
+
+(PHP 5, PHP 7, PHP 8)
+
+curl_multi_close — Remove all cURL handles from a multi handle
+
+===============================================================================
+[ Description ]
+
+  curl_multi_close(CurlMultiHandle $multi_handle): void~
+
+Removes all CurlHandles attached to the CurlMultiHandle, as if 
+|curl_multi_remove_handle| was called for each of them.
+
+Prior to PHP 8.0.0 this function also closed the cURL multi handle resource,
+making it unusable.
+
+===============================================================================
+[ Parameters ]
+
+{multi_handle}
+
+  A cURL multi handle returned by |curl_multi_init|.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {multi_handle} expects a CurlMultiHandle instance now; previously, a 
+        resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |curl_multi_init| - Returns a new cURL multi handle
+ * |curl_close| - Close a cURL session
+
+
+vim:ft=help:

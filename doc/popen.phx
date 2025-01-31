@@ -1,0 +1,82 @@
+*popen*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+popen — Opens process file pointer
+
+===============================================================================
+[ Description ]
+
+  popen(string $command, string $mode): resource|false~
+
+Opens a pipe to a process executed by forking the command given by {command}.
+
+===============================================================================
+[ Parameters ]
+
+{command}
+
+  The command
+
+{mode}
+
+  The mode. Either 'r' for reading, or 'w' for writing.
+
+  On Windows, popen() defaults to text mode, i.e. any \n characters written to
+  or read from the pipe will be translated to \r\n. If this is not desired,
+  binary mode can be enforced by setting {mode} to 'rb' and 'wb', respectively.
+
+===============================================================================
+[ Return Values ]
+
+Returns a file pointer identical to that returned by |fopen|, except that it is
+unidirectional (may only be used for reading or writing) and must be closed
+with |pclose|. This pointer may be used with |fgets|, |fgetss|, and |fwrite|.
+When the mode is 'r', the returned file pointer equals to the STDOUT of the
+command, when the mode is 'w', the returned file pointer equals to the STDIN of
+the command.
+
+If an error occurs, returns false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 popen() example
+
+<?php >
+  $handle = popen("/bin/ls", "r");
+<?>
+
+If the command to be executed could not be found, a valid resource is returned.
+This may seem odd, but makes sense; it allows you to access any error message
+returned by the shell:
+
+Example #2 popen() example
+
+<?php >
+  error_reporting(E_ALL);
+
+  /* Add redirection so we can get stderr. */
+  $handle = popen('/path/to/executable 2>&1', 'r');
+  echo "'$handle'; " . gettype($handle) . "\n";
+  $read = fread($handle, 2096);
+  echo $read;
+  pclose($handle);
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  If you're looking for bi-directional support (two-way), use |proc_open|.
+
+===============================================================================
+[ See Also ]
+
+ * |pclose| - Closes process file pointer
+ * |fopen| - Opens file or URL
+ * |proc_open| - Execute a command and open file pointers for input/output
+
+
+vim:ft=help:

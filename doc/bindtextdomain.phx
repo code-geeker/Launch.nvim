@@ -1,0 +1,64 @@
+*bindtextdomain*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+bindtextdomain — Sets or gets the path for a domain
+
+===============================================================================
+[ Description ]
+
+  bindtextdomain(string $domain, ?string $directory = null): string|false~
+
+The bindtextdomain() function sets or gets the path for a domain.
+
+===============================================================================
+[ Parameters ]
+
+{domain}
+
+  The domain.
+
+{directory}
+
+  The directory path. An empty string means the current directory. If null, the
+  currently set directory is returned.
+
+===============================================================================
+[ Return Values ]
+
+The full pathname for the {domain} currently being set, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {directory} is optional now. Previously, the parameter always had to be
+        specified.
+8.0.3   {directory} is nullable now. Previously, it was not possible to
+        retrieve the currently set directory.
+
+===============================================================================
+[ Examples ]
+
+Example #1 bindtextdomain() example
+
+<?php >
+
+  $domain = 'myapp';
+  echo bindtextdomain($domain, '/usr/share/myapp/locale');
+
+<?>
+
+The above example will output:
+
+/usr/share/myapp/locale
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The bindtextdomain() information is maintained per process, not per thread.
+
+
+vim:ft=help:

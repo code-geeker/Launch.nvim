@@ -1,0 +1,51 @@
+*mb_get_info*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+mb_get_info — Get internal settings of mbstring
+
+===============================================================================
+[ Description ]
+
+  mb_get_info(string $type = "all"): array|string|int|false|null~
+
+mb_get_info() returns the internal setting parameters of mbstring.
+
+===============================================================================
+[ Parameters ]
+
+{type}
+
+  If {type} is not specified or is specified as "all", "internal_encoding",
+  "http_input", "http_output", "http_output_conv_mimetypes", "mail_charset",
+  "mail_header_encoding", "mail_body_encoding", "illegal_chars",
+  "encoding_translation", "language", "detect_order", "substitute_character"
+  and "strict_detection" will be returned.
+
+  If {type} is specified as "internal_encoding", "http_input", "http_output",
+  "http_output_conv_mimetypes", "mail_charset", "mail_header_encoding",
+  "mail_body_encoding", "illegal_chars", "encoding_translation", "language",
+  "detect_order", "substitute_character" or "strict_detection" the specified
+  setting parameter will be returned.
+
+===============================================================================
+[ Return Values ]
+
+An array of type information if {type} is not specified, otherwise a specific
+{type}, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   The {type}s "func_overload" and "func_overload_list" are no longer
+        supported.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+ * |mb_http_output| - Set/Get HTTP output character encoding
+
+
+vim:ft=help:

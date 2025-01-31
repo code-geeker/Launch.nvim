@@ -1,0 +1,38 @@
+*sodium_crypto_generichash*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_generichash — Get a hash of the message
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_generichash(string $message, #[\SensitiveParameter] string~
+  $key = "", int $length = SODIUM_CRYPTO_GENERICHASH_BYTES): string~
+
+Hash a message with BLAKE2b.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  The message being hashed.
+
+{key}
+
+  (Optional) cryptographic key. This serves the same function as a HMAC key,
+  but it's utilized as a reserved section of the internal BLAKE2 state.
+
+{length}
+
+  Output size.
+
+===============================================================================
+[ Return Values ]
+
+The cryptographic hash as raw bytes. If a hex-encoded output is desired, the
+result can be passed to |sodium_bin2hex|.
+
+
+vim:ft=help:

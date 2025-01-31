@@ -1,0 +1,56 @@
+*imagesy*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagesy — Get image height
+
+===============================================================================
+[ Description ]
+
+  imagesy(GdImage $image): int~
+
+Returns the height of the given {image} object.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+===============================================================================
+[ Return Values ]
+
+Return the height of the {image}.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Using imagesy()
+
+<?php >
+
+  // create a 300*200 image
+  $img = imagecreatetruecolor(300, 200);
+
+  echo imagesy($img); // 200
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |imagecreatetruecolor| - Create a new true color image
+ * |getimagesize| - Get the size of an image
+ * |imagesx| - Get image width
+
+
+vim:ft=help:

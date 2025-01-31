@@ -1,0 +1,43 @@
+*win32_get_service_env_vars*
+
+(PECL win32service >=1.1.0)
+
+win32_get_service_env_vars — Read all custom environment variables on service
+
+===============================================================================
+[ Description ]
+
+  win32_get_service_env_vars(string $servicename): array~
+
+Read all custom environment variables on {servicename} service. This function
+work only for the local computer. Administrative privileges are required for
+this to succeed.
+
+===============================================================================
+[ Parameters ]
+
+{servicename}
+
+  The service name to read environment variables.
+
+===============================================================================
+[ Return Values ]
+
+Return an array with variable name in key and variable value in value.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if the value of {service} parameter is empty.
+
+A Win32ServiceException is thrown on error.
+
+===============================================================================
+[ See Also ]
+
+ * |win32_add_service_env_var| - Add a custom environment variables on service
+ * |win32_remove_service_env_var| - Remove a custom environment variables on
+  service
+
+
+vim:ft=help:

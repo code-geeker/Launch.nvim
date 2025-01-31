@@ -1,0 +1,34 @@
+*sodium_crypto_sign*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_sign — Sign a message
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_sign(string $message, #[\SensitiveParameter] string~
+  $secret_key): string~
+
+Sign a message with a secret key, that can be verified by the corresponding
+public key. This function attaches the signature to the message. See 
+|sodium_crypto_sign_detached| for detached signatures.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  Message to sign.
+
+{secret_key}
+
+  Secret key. See |sodium_crypto_sign_secretkey|
+
+===============================================================================
+[ Return Values ]
+
+Signed message (not encrypted).
+
+
+vim:ft=help:

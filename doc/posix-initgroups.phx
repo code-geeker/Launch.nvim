@@ -1,0 +1,36 @@
+*posix_initgroups*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+posix_initgroups — Calculate the group access list
+
+===============================================================================
+[ Description ]
+
+  posix_initgroups(string $username, int $group_id): bool~
+
+Calculates the group access list for the user specified in name.
+
+===============================================================================
+[ Parameters ]
+
+{username}
+
+  The user to calculate the list for.
+
+{group_id}
+
+  Typically the group number from the password file.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * The Unix manual page for initgroups(3).
+
+
+vim:ft=help:

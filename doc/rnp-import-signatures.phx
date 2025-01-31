@@ -1,0 +1,35 @@
+*rnp_import_signatures*
+
+(PECL rnp >= 0.1.1)
+
+rnp_import_signatures — Import standalone signatures to the keyring and receive
+JSON describing updated keys
+
+===============================================================================
+[ Description ]
+
+  rnp_import_signatures(RnpFFI $ffi, string $input, int $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{input}
+
+  OpenPGP packets containing signatures to be imported. Can be either binary or
+  ASCII armored.
+
+{flags}
+
+  Currently must be 0.
+
+===============================================================================
+[ Return Values ]
+
+JSON string with information about updated keys on success or false on failure.
+
+
+vim:ft=help:

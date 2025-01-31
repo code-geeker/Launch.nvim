@@ -1,0 +1,132 @@
+*strtotime*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+strtotime — Parse about any English textual datetime description into a Unix
+timestamp
+
+===============================================================================
+[ Description ]
+
+  strtotime(string $datetime, ?int $baseTimestamp = null): int|false~
+
+The function expects to be given a string containing an English date format and
+will try to parse that format into a Unix timestamp (the number of seconds
+since January 1 1970 00:00:00 UTC), relative to the timestamp given in
+{baseTimestamp}, or the current time if {baseTimestamp} is not supplied. The
+date string parsing is defined in Date and Time Formats, and has several subtle
+considerations. Reviewing the full details there is strongly recommended.
+
+Warning
+
+The Unix timestamp that this function returns does not contain information
+about time zones. In order to do calculations with date/time information, you
+should use the more capable DateTimeImmutable.
+
+Each parameter of this function uses the default time zone unless a time zone
+is specified in that parameter. Be careful not to use different time zones in
+each parameter unless that is intended. See |date_default_timezone_get| on the
+various ways to define the default time zone.
+
+===============================================================================
+[ Parameters ]
+
+{datetime}
+
+  A date/time string. Valid formats are explained in Date and Time Formats.
+
+{baseTimestamp}
+
+  The timestamp which is used as a base for the calculation of relative dates.
+
+===============================================================================
+[ Return Values ]
+
+Returns a timestamp on success, false otherwise.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Every call to a date/time function will generate a E_WARNING if the time zone
+is not valid. See also |date_default_timezone_set|
+
+===============================================================================
+[ Changelog ]
+
+Version           Description
+8.0.0   {baseTimestamp} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A strtotime() example
+
+<?php >
+  echo strtotime("now"), "\n";
+  echo strtotime("10 September 2000"), "\n";
+  echo strtotime("+1 day"), "\n";
+  echo strtotime("+1 week"), "\n";
+  echo strtotime("+1 week 2 days 4 hours 2 seconds"), "\n";
+  echo strtotime("next Thursday"), "\n";
+  echo strtotime("last Monday"), "\n";
+<?>
+
+Example #2 Checking for failure
+
+<?php >
+  $str = 'Not Good';
+
+  if (($timestamp = strtotime($str)) === false) {
+  echo "The string ($str) is bogus";
+  } else {
+  echo "$str == " . date('l dS \o\f F Y h:i:s A', $timestamp);
+  }
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  "Relative" date in this case also means that if a particular component of the
+  date/time stamp is not provided, it will be taken verbatim from the
+  {baseTimestamp}. That is, strtotime('February'), if run on the 31st of May
+  2022, will be interpreted as 31 February 2022, which will overflow into a
+  timestamp on 3 March. (In a leap year, it would be 2 March.) Using strtotime
+  ('1 February') or strtotime('first day of February') would avoid that
+  problem.
+
+  Note:
+
+  If the number of the year is specified in a two digit format, the values
+  between 00-69 are mapped to 2000-2069 and 70-99 to 1970-1999. See the notes
+  below for possible differences on 32bit systems (possible dates might end on
+  2038-01-19 03:14:07).
+
+  Note:
+
+  The valid range of a timestamp is typically from Fri, 13 Dec 1901 20:45:54
+  UTC to Tue, 19 Jan 2038 03:14:07 UTC. (These are the dates that correspond to
+  the minimum and maximum values for a 32-bit signed integer.)
+
+  For 64-bit versions of PHP, the valid range of a timestamp is effectively
+  infinite, as 64 bits can represent approximately 293 billion years in either
+  direction.
+
+  Note:
+
+  Using this function for mathematical operations is not advisable. It is
+  better to use DateTime::add() and DateTime::sub().
+
+===============================================================================
+[ See Also ]
+
+ * DateTimeImmutable
+ * DateTimeImmutable::createFromFormat() - Parses a time string according to a
+  specified format
+ * Date and Time Formats
+ * |checkdate| - Validate a Gregorian date
+ * |strptime| - Parse a time/date generated with strftime
+
+
+vim:ft=help:

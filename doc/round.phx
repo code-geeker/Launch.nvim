@@ -1,0 +1,204 @@
+*round*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+round — Rounds a float
+
+===============================================================================
+[ Description ]
+
+  round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP):~
+  float~
+
+Returns the rounded value of {num} to specified {precision} (number of digits
+after the decimal point). {precision} can also be negative or zero (default).
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The value to round.
+
+{precision}
+
+  The optional number of decimal digits to round to.
+
+  If the {precision} is positive, {num} is rounded to {precision} significant
+  digits after the decimal point.
+
+  If the {precision} is negative, {num} is rounded to {precision} significant
+  digits before the decimal point, i.e. to the nearest multiple of pow(10,
+  -$precision), e.g. for a {precision} of -1 {num} is rounded to tens, for a
+  {precision} of -2 to hundreds, etc.
+
+{mode}
+
+  Use one of the following constants to specify the mode in which rounding
+  occurs.
+
+       Constants                             Description
+  PHP_ROUND_HALF_UP   Rounds {num} away from zero when it is half way there,
+                      making 1.5 into 2 and -1.5 into -2.
+  PHP_ROUND_HALF_DOWN Rounds {num} towards zero when it is half way there,
+                      making 1.5 into 1 and -1.5 into -1.
+  PHP_ROUND_HALF_EVEN Rounds {num} towards the nearest even value when it is
+                      half way there, making both 1.5 and 2.5 into 2.
+  PHP_ROUND_HALF_ODD  Rounds {num} towards the nearest odd value when it is
+                      half way there, making 1.5 into 1 and 2.5 into 3.
+
+===============================================================================
+[ Return Values ]
+
+The value rounded to the given {precision} as a float.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+The function throws a ValueError if {mode} is invalid. Prior to PHP 8.4.0, an
+invalid mode would silently default to PHP_ROUND_HALF_UP.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Now throws a ValueError if {mode} is invalid.
+8.0.0   {num} no longer accepts internal objects which support numeric
+        conversion.
+
+===============================================================================
+[ Examples ]
+
+Example #1 round() examples
+
+<?php >
+  var_dump(round(3.4));
+  var_dump(round(3.5));
+  var_dump(round(3.6));
+  var_dump(round(3.6, 0));
+  var_dump(round(5.045, 2));
+  var_dump(round(5.055, 2));
+  var_dump(round(345, -2));
+  var_dump(round(345, -3));
+  var_dump(round(678, -2));
+  var_dump(round(678, -3));
+<?>
+
+The above example will output:
+
+float(3)
+float(4)
+float(4)
+float(4)
+float(5.05)
+float(5.06)
+float(300)
+float(0)
+float(700)
+float(1000)
+
+Example #2 How {precision} affects a float
+
+<?php >
+  $number = 135.79;
+
+  var_dump(round($number, 3));
+  var_dump(round($number, 2));
+  var_dump(round($number, 1));
+  var_dump(round($number, 0));
+  var_dump(round($number, -1));
+  var_dump(round($number, -2));
+  var_dump(round($number, -3));
+<?>
+
+The above example will output:
+
+float(135.79)
+float(135.79)
+float(135.8)
+float(136)
+float(140)
+float(100)
+float(0)
+
+Example #3 {mode} examples
+
+<?php >
+  echo 'Rounding modes with 9.5' . PHP_EOL;
+  var_dump(round(9.5, 0, PHP_ROUND_HALF_UP));
+  var_dump(round(9.5, 0, PHP_ROUND_HALF_DOWN));
+  var_dump(round(9.5, 0, PHP_ROUND_HALF_EVEN));
+  var_dump(round(9.5, 0, PHP_ROUND_HALF_ODD));
+
+  echo PHP_EOL;
+  echo 'Rounding modes with 8.5' . PHP_EOL;
+  var_dump(round(8.5, 0, PHP_ROUND_HALF_UP));
+  var_dump(round(8.5, 0, PHP_ROUND_HALF_DOWN));
+  var_dump(round(8.5, 0, PHP_ROUND_HALF_EVEN));
+  var_dump(round(8.5, 0, PHP_ROUND_HALF_ODD));
+<?>
+
+The above example will output:
+
+Rounding modes with 9.5
+float(10)
+float(9)
+float(10)
+float(9)
+
+Rounding modes with 8.5
+float(9)
+float(8)
+float(8)
+float(9)
+
+Example #4 {mode} with {precision} examples
+
+<?php >
+  echo 'Using PHP_ROUND_HALF_UP with 1 decimal digit precision' . PHP_EOL;
+  var_dump(round( 1.55, 1, PHP_ROUND_HALF_UP));
+  var_dump(round(-1.55, 1, PHP_ROUND_HALF_UP));
+
+  echo PHP_EOL;
+  echo 'Using PHP_ROUND_HALF_DOWN with 1 decimal digit precision' . PHP_EOL;
+  var_dump(round( 1.55, 1, PHP_ROUND_HALF_DOWN));
+  var_dump(round(-1.55, 1, PHP_ROUND_HALF_DOWN));
+
+  echo PHP_EOL;
+  echo 'Using PHP_ROUND_HALF_EVEN with 1 decimal digit precision' . PHP_EOL;
+  var_dump(round( 1.55, 1, PHP_ROUND_HALF_EVEN));
+  var_dump(round(-1.55, 1, PHP_ROUND_HALF_EVEN));
+
+  echo PHP_EOL;
+  echo 'Using PHP_ROUND_HALF_ODD with 1 decimal digit precision' . PHP_EOL;
+  var_dump(round( 1.55, 1, PHP_ROUND_HALF_ODD));
+  var_dump(round(-1.55, 1, PHP_ROUND_HALF_ODD));
+<?>
+
+The above example will output:
+
+Using PHP_ROUND_HALF_UP with 1 decimal digit precision
+float(1.6)
+float(-1.6)
+
+Using PHP_ROUND_HALF_DOWN with 1 decimal digit precision
+float(1.5)
+float(-1.5)
+
+Using PHP_ROUND_HALF_EVEN with 1 decimal digit precision
+float(1.6)
+float(-1.6)
+
+Using PHP_ROUND_HALF_ODD with 1 decimal digit precision
+float(1.5)
+float(-1.5)
+
+===============================================================================
+[ See Also ]
+
+ * |ceil| - Round fractions up
+ * |floor| - Round fractions down
+ * |number_format| - Format a number with grouped thousands
+
+
+vim:ft=help:

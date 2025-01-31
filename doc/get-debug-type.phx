@@ -1,0 +1,115 @@
+*get_debug_type*
+
+(PHP 8)
+
+get_debug_type — Gets the type name of a variable in a way that is suitable for
+debugging
+
+===============================================================================
+[ Description ]
+
+  get_debug_type(mixed $value): string~
+
+Returns the resolved name of the PHP variable {value}. This function will
+resolve objects to their class name, resources to their resource type name, and
+scalar values to their common name as would be used in type declarations.
+
+This function differs from |gettype| in that it returns type names that are
+more consistent with actual usage, rather than those present for historical
+reasons.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The variable being type checked.
+
+===============================================================================
+[ Return Values ]
+
+Possible values for the returned string are:
+
+  Type +                 Return Value                          Notes
+  State
+null       "null"                                    -
+Booleans (
+true or    "bool"                                    -
+false)
+Integers   "int"                                     -
+Floats     "float"                                   -
+Strings    "string"                                  -
+Arrays     "array"                                   -
+Resources  "resource (resourcename)"                 -
+Resources                                            Example: A file stream
+(Closed)   "resource (closed)"                       after being closed with 
+                                                     |fclose|.
+Objects    The full name of the class including its
+from Named namespace e.g. Foo\Bar                    -
+Classes
+Objects    "class@anonymous" or parent class name/   Anonymous classes are
+from       interface name if the class extends       those created through the
+Anonymous  another class or implements an interface  $x = new class { ... }
+Classes    e.g. "Foo\Bar@anonymous"                  syntax
+
+===============================================================================
+[ Examples ]
+
+Example #1 get_debug_type() example
+
+<?php >
+
+  namespace Foo;
+
+  echo get_debug_type(null), PHP_EOL;
+  echo get_debug_type(true), PHP_EOL;
+  echo get_debug_type(1), PHP_EOL;
+  echo get_debug_type(0.1), PHP_EOL;
+  echo get_debug_type("foo"), PHP_EOL;
+  echo get_debug_type([]), PHP_EOL;
+
+  $fp = fopen(__FILE__, 'rb');
+  echo get_debug_type($fp), PHP_EOL;
+
+  fclose($fp);
+  echo get_debug_type($fp), PHP_EOL;
+
+  echo get_debug_type(new \stdClass), PHP_EOL;
+  echo get_debug_type(new class {}), PHP_EOL;
+
+  interface A {}
+  interface B {}
+  class C {}
+
+  echo get_debug_type(new class implements A {}), PHP_EOL;
+  echo get_debug_type(new class implements A,B {}), PHP_EOL;
+  echo get_debug_type(new class extends C {}), PHP_EOL;
+  echo get_debug_type(new class extends C implements A {}), PHP_EOL;
+
+<?>
+
+The above example will output something similar to:
+
+null
+bool
+int
+float
+string
+array
+resource (stream)
+resource (closed)
+stdClass
+class@anonymous
+Foo\A@anonymous
+Foo\A@anonymous
+Foo\C@anonymous
+Foo\C@anonymous
+
+===============================================================================
+[ See Also ]
+
+ * |gettype| - Get the type of a variable
+ * |get_class| - Returns the name of the class of an object
+
+
+vim:ft=help:

@@ -1,0 +1,30 @@
+*fpm_get_status*
+
+(PHP 7 >= 7.3, PHP 8)
+
+fpm_get_status — Returns the current FPM pool status
+
+===============================================================================
+[ Description ]
+
+  fpm_get_status(): array|false~
+
+This function returns the full current FPM pool status as an associative array.
+It always returns the full status, including per-process status information.
+See the FPM status page guide for further details.
+
+Note that this function will only be defined if FPM is being used to serve the
+script.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Associative array containing the full FPM pool status, or false on failure.
+
+
+vim:ft=help:

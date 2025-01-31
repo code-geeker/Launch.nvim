@@ -1,0 +1,236 @@
+*json_decode*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8, PECL json >= 1.2.0)
+
+json_decode — Decodes a JSON string
+
+===============================================================================
+[ Description ]
+
+  json_decode(    string~
+  $json,    ?bool $associative =~
+  null,    int $depth = 512,    int~
+  $flags = 0): mixed~
+
+Takes a JSON encoded string and converts it into a PHP value.
+
+===============================================================================
+[ Parameters ]
+
+{json}
+
+  The {json} string being decoded.
+
+  This function only works with UTF-8 encoded strings.
+
+    Note:
+
+    PHP implements a superset of JSON as specified in the original » RFC 7159.
+
+{associative}
+
+  When true, JSON objects will be returned as associative arrays; when false,
+  JSON objects will be returned as objects. When null, JSON objects will be
+  returned as associative arrays or objects depending on whether
+  JSON_OBJECT_AS_ARRAY is set in the {flags}.
+
+{depth}
+
+  Maximum nesting depth of the structure being decoded. The value must be
+  greater than 0, and less than or equal to 2147483647.
+
+{flags}
+
+  Bitmask of JSON_BIGINT_AS_STRING, JSON_INVALID_UTF8_IGNORE,
+  JSON_INVALID_UTF8_SUBSTITUTE, JSON_OBJECT_AS_ARRAY, JSON_THROW_ON_ERROR. The
+  behaviour of these constants is described on the JSON constants page.
+
+===============================================================================
+[ Return Values ]
+
+Returns the value encoded in {json} as an appropriate PHP type. Unquoted values
+true, false and null are returned as true, false and null respectively. null is
+returned if the {json} cannot be decoded or if the encoded data is deeper than
+the nesting limit.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If {depth} is outside the allowed range, a ValueError is thrown as of PHP
+8.0.0, while previously, an error of level E_WARNING was raised.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+7.3.0   JSON_THROW_ON_ERROR {flags} was added.
+7.2.0   {associative} is nullable now.
+7.2.0   JSON_INVALID_UTF8_IGNORE, and JSON_INVALID_UTF8_SUBSTITUTE {flags} were
+        added.
+7.1.0   An empty JSON key ("") can be encoded to the empty object property
+        instead of using a key with value _empty_.
+
+===============================================================================
+[ Examples ]
+
+Example #1 json_decode() examples
+
+<?php >
+  $json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
+
+  var_dump(json_decode($json));
+  var_dump(json_decode($json, true));
+
+<?>
+
+The above example will output:
+
+object(stdClass)#1 (5) {
+    ["a"] => int(1)
+    ["b"] => int(2)
+    ["c"] => int(3)
+    ["d"] => int(4)
+    ["e"] => int(5)
+}
+
+array(5) {
+    ["a"] => int(1)
+    ["b"] => int(2)
+    ["c"] => int(3)
+    ["d"] => int(4)
+    ["e"] => int(5)
+}
+
+Example #2 Accessing invalid object properties
+
+Accessing elements within an object that contain characters not permitted under
+PHP's naming convention (e.g. the hyphen) can be accomplished by encapsulating
+the element name within braces and the apostrophe.
+
+<?php >
+
+  $json = '{"foo-bar": 12345}';
+
+  $obj = json_decode($json);
+  print $obj->{'foo-bar'}; // 12345
+
+<?>
+
+Example #3 common mistakes using json_decode()
+
+<?php >
+
+  // the following strings are valid JavaScript but not valid JSON
+
+  // the name and value must be enclosed in double quotes
+  // single quotes are not valid
+  $bad_json = "{ 'bar': 'baz' }";
+  json_decode($bad_json); // null
+
+  // the name must be enclosed in double quotes
+  $bad_json = '{ bar: "baz" }';
+  json_decode($bad_json); // null
+
+  // trailing commas are not allowed
+  $bad_json = '{ bar: "baz", }';
+  json_decode($bad_json); // null
+
+<?>
+
+Example #4 {depth} errors
+
+<?php >
+  // Encode some data with a maximum depth of 4 (array -> array -> array ->
+  string)
+  $json = json_encode(
+  array(
+  1 => array(
+  'English' => array(
+  'One',
+  'January'
+  ),
+  'French' => array(
+  'Une',
+  'Janvier'
+  )
+  )
+  )
+  );
+
+  // Show the errors for different depths.
+  var_dump(json_decode($json, true, 4));
+  echo 'Last error: ', json_last_error_msg(), PHP_EOL, PHP_EOL;
+
+  var_dump(json_decode($json, true, 3));
+  echo 'Last error: ', json_last_error_msg(), PHP_EOL, PHP_EOL;
+<?>
+
+The above example will output:
+
+array(1) {
+  [1]=>
+  array(2) {
+    ["English"]=>
+    array(2) {
+      [0]=>
+      string(3) "One"
+      [1]=>
+      string(7) "January"
+    }
+    ["French"]=>
+    array(2) {
+      [0]=>
+      string(3) "Une"
+      [1]=>
+      string(7) "Janvier"
+    }
+  }
+}
+Last error: No error
+
+NULL
+Last error: Maximum stack depth exceeded
+
+Example #5 json_decode() of large integers
+
+<?php >
+  $json = '{"number": 12345678901234567890}';
+
+  var_dump(json_decode($json));
+  var_dump(json_decode($json, false, 512, JSON_BIGINT_AS_STRING));
+
+<?>
+
+The above example will output:
+
+object(stdClass)#1 (1) {
+  ["number"]=>
+  float(1.2345678901235E+19)
+}
+object(stdClass)#1 (1) {
+  ["number"]=>
+  string(20) "12345678901234567890"
+}
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The JSON spec is not JavaScript, but a subset of JavaScript.
+
+  Note:
+
+  In the event of a failure to decode, |json_last_error| can be used to
+  determine the exact nature of the error.
+
+===============================================================================
+[ See Also ]
+
+ * |json_encode| - Returns the JSON representation of a value
+ * |json_last_error| - Returns the last error occurred
+ * |json_last_error_msg| - Returns the error string of the last json_encode()
+  or json_decode() call
+
+
+vim:ft=help:

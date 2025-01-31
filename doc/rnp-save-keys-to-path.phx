@@ -1,0 +1,42 @@
+*rnp_save_keys_to_path*
+
+(PECL rnp >= 0.1.1)
+
+rnp_save_keys_to_path — Save keys to specified path
+
+===============================================================================
+[ Description ]
+
+  rnp_save_keys_to_path(    RnpFFI~
+  $ffi,    string $format,    string~
+  $output_path,    int $flags): bool~
+
+Saves keys present in the FFI object (loaded or generated) to the specified
+file or directory.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{format}
+
+  The key format of the data (GPG, KBX, G10).
+
+{output_path}
+
+  File or directory path where keys should be saved to.
+
+{flags}
+
+  See RNP_LOAD_SAVE_* flags description.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

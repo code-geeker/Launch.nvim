@@ -1,0 +1,77 @@
+*dir*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+dir — Return an instance of the Directory class
+
+===============================================================================
+[ Description ]
+
+  dir(string $directory, ?resource $context = null): Directory|false~
+
+A pseudo-object-oriented mechanism for reading a directory. The given
+{directory} is opened.
+
+===============================================================================
+[ Parameters ]
+
+{directory}
+
+  Directory to open
+
+{context}
+
+  A context stream resource.
+
+===============================================================================
+[ Return Values ]
+
+Returns an instance of Directory, or false in case of error.
+
+===============================================================================
+[ Changelog ]
+
+Version        Description
+8.0.0   {context} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 dir() example
+
+Please note the fashion in which Directory::read()'s return value is checked in
+the example below. We are explicitly testing whether the return value is
+identical to (equal to and of the same type as - see Comparison Operators for
+more information) false since otherwise, any directory entry whose name
+evaluates to false will stop the loop.
+
+<?php >
+  $d = dir("/etc/php5");
+  echo "Handle: " . $d->handle . "\n";
+  echo "Path: " . $d->path . "\n";
+  while (false !== ($entry = $d->read())) {
+  echo $entry."\n";
+  }
+  $d->close();
+<?>
+
+The above example will output something similar to:
+
+Handle: Resource id #2
+Path: /etc/php5
+.
+..
+apache
+cgi
+cli
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The order in which directory entries are returned by the read method is
+  system-dependent.
+
+
+vim:ft=help:

@@ -1,0 +1,64 @@
+*is_nan*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+is_nan — Checks whether a float is NAN
+
+===============================================================================
+[ Description ]
+
+  is_nan(float $num): bool~
+
+Returns whether the given {num} is NAN (`Not A Number').
+
+NAN is returned from mathematical operations that are undefined, for example
+when passing parameters outside of function’s input domain. The square root (
+|sqrt|) is only defined for positive numbers, passing a negative number will
+result in NAN. Other examples of operations returning NAN are dividing INF by
+INF and any operation involving an existing NAN value.
+
+  Note:
+
+  Despite its name of `Not A Number', NAN is a valid value of type float.
+
+Caution
+
+NAN does not compare equal to NAN. To check whether a float is NAN, is_nan()
+must be used. Checking $float === NAN will not work.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The float to check
+
+===============================================================================
+[ Return Values ]
+
+true if {num} is NAN, else false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 is_nan() example
+
+<?php >
+  $nan = sqrt(-1);
+
+  var_dump($nan, is_nan($nan));
+<?>
+
+The above example will output:
+
+float(NAN)
+bool(true)
+
+===============================================================================
+[ See Also ]
+
+ * |is_finite| - Checks whether a float is finite
+ * |is_infinite| - Checks whether a float is infinite
+
+
+vim:ft=help:

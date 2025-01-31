@@ -1,0 +1,59 @@
+*abs*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+abs — Absolute value
+
+===============================================================================
+[ Description ]
+
+  abs(int|float $num): int|float~
+
+Returns the absolute value of {num}.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The numeric value to process
+
+===============================================================================
+[ Return Values ]
+
+The absolute value of {num}. If the argument {num} is of type float, the return
+type is also float, otherwise it is int (as float usually has a bigger value
+range than int).
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {num} no longer accepts internal objects which support numeric
+        conversion.
+
+===============================================================================
+[ Examples ]
+
+Example #1 abs() example
+
+<?php >
+  var_dump(abs(-4.2));
+  var_dump(abs(5));
+  var_dump(abs(-5));
+<?>
+
+The above example will output:
+
+float(4.2)
+int(5)
+int(5)
+
+===============================================================================
+[ See Also ]
+
+ * |gmp_abs| - Absolute value
+ * |gmp_sign| - Sign of number
+
+
+vim:ft=help:

@@ -1,0 +1,96 @@
+*imagecopy*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagecopy — Copy part of an image
+
+===============================================================================
+[ Description ]
+
+  imagecopy(    GdImage~
+  $dst_image,    GdImage~
+  $src_image,    int $dst_x,    int~
+  $dst_y,    int $src_x,    int~
+  $src_y,    int $src_width,    int~
+  $src_height): bool~
+
+Copy a part of {src_image} onto {dst_image} starting at the x,y coordinates
+{src_x}, {src_y} with a width of {src_width} and a height of {src_height}. The
+portion defined will be copied onto the x,y coordinates, {dst_x} and {dst_y}.
+
+===============================================================================
+[ Parameters ]
+
+{dst_image}
+
+  Destination image resource.
+
+{src_image}
+
+  Source image resource.
+
+{dst_x}
+
+  x-coordinate of destination point.
+
+{dst_y}
+
+  y-coordinate of destination point.
+
+{src_x}
+
+  x-coordinate of source point.
+
+{src_y}
+
+  y-coordinate of source point.
+
+{src_width}
+
+  Source width.
+
+{src_height}
+
+  Source height.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dst_image} and {src_image} expect GdImage instances now; previously, 
+        resources were expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Cropping the PHP.net logo
+
+<?php >
+  // Create image instances
+  $src = imagecreatefromgif('php.gif');
+  $dest = imagecreatetruecolor(80, 40);
+
+  // Copy
+  imagecopy($dest, $src, 0, 0, 20, 13, 80, 40);
+
+  // Output and free from memory
+  header('Content-Type: image/gif');
+  imagegif($dest);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Cropping the PHP.net logo
+
+===============================================================================
+[ See Also ]
+
+ * |imagecrop| - Crop an image to the given rectangle
+
+
+vim:ft=help:

@@ -1,0 +1,77 @@
+*ctype_alpha*
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7, PHP 8)
+
+ctype_alpha — Check for alphabetic character(s)
+
+===============================================================================
+[ Description ]
+
+  ctype_alpha(mixed $text): bool~
+
+Checks if all of the characters in the provided string, {text}, are alphabetic.
+In the standard C locale letters are just [A-Za-z] and ctype_alpha() is
+equivalent to (ctype_upper($text) || ctype_lower($text)) if $text is just a
+single character, but other languages have letters that are considered neither
+upper nor lower case.
+
+===============================================================================
+[ Parameters ]
+
+{text}
+
+  The tested string.
+
+
+    Note:
+
+    If an int between -128 and 255 inclusive is provided, it is interpreted as
+    the ASCII value of a single character (negative values have 256 added in
+    order to allow characters in the Extended ASCII range). Any other integer
+    is interpreted as a string containing the decimal digits of the integer.
+
+  Warning
+
+  As of PHP 8.1.0, passing a non-string argument is deprecated. In the future,
+  the argument will be interpreted as a string instead of an ASCII codepoint.
+  Depending on the intended behavior, the argument should either be cast to 
+  string or an explicit call to |chr| should be made.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if every character in {text} is a letter from the current locale,
+false otherwise. When called with an empty string the result will always be
+false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A ctype_alpha() example (using the default locale)
+
+<?php >
+  $strings = array('KjgWZC', 'arf12');
+  foreach ($strings as $testcase) {
+  if (ctype_alpha($testcase)) {
+  echo "The string $testcase consists of all letters.\n";
+  } else {
+  echo "The string $testcase does not consist of all letters.\n";
+  }
+  }
+<?>
+
+The above example will output:
+
+The string KjgWZC consists of all letters.
+The string arf12 does not consist of all letters.
+
+===============================================================================
+[ See Also ]
+
+ * |ctype_upper| - Check for uppercase character(s)
+ * |ctype_lower| - Check for lowercase character(s)
+ * |setlocale| - Set locale information
+ * IntlChar::isalpha() - Check if code point is a letter character
+
+
+vim:ft=help:

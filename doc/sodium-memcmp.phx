@@ -1,0 +1,38 @@
+*sodium_memcmp*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_memcmp — Test for equality in constant-time
+
+===============================================================================
+[ Description ]
+
+  sodium_memcmp(#[\SensitiveParameter] string $string1, #[\SensitiveParameter]~
+  string $string2): int~
+
+Compare two strings in constant-time.
+
+In practice, you almost always want to use |hash_equals| instead, since it
+provides the same logic but returns a bool instead of an int. However, if
+you're using the return value of a comparison in a calculation that's
+timing-sensitive, and worried about timing leaks with bool-to-int conversions, 
+sodium_memcmp() is an ideal replacement.
+
+===============================================================================
+[ Parameters ]
+
+{string1}
+
+  String to compare
+
+{string2}
+
+  Other string to compare
+
+===============================================================================
+[ Return Values ]
+
+Returns 0 if both strings are equal; -1 otherwise.
+
+
+vim:ft=help:

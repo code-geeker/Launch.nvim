@@ -1,0 +1,84 @@
+*xml_set_start_namespace_decl_handler*
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
+
+xml_set_start_namespace_decl_handler — Set up start namespace declaration
+handler
+
+===============================================================================
+[ Description ]
+
+  xml_set_start_namespace_decl_handler(XMLParser $parser, callable|string|null~
+  $handler): true~
+
+Set a handler to be called when a namespace is declared. Namespace declarations
+occur inside start tags. But the namespace declaration start handler is called
+before the start tag handler for each namespace declared in that start tag.
+
+===============================================================================
+[ Parameters ]
+
+{parser}
+
+  The XML parser.
+
+{handler}
+
+  If null is passed, the handler is reset to its default state.
+  Warning
+
+  An empty string will also reset the handler, however this is deprecated as of
+  PHP 8.4.0.
+
+  If {handler} is a callable, the callable is set as the handler.
+
+  If {handler} is a string, it can be the name of a method of an object set
+  with |xml_set_object|.
+  Warning
+
+  This is deprecated as of PHP 8.4.0.
+
+  Warning
+
+  As of PHP 8.4.0, the callable is checked to be valid while setting the
+  handler, not when it is called. This means that |xml_set_object| must be
+  called prior to setting a method string as the callback. However, as this
+  behaviour is also deprecated as of PHP 8.4.0, using a proper callable for the
+  method is recommended instead.
+
+  The signature of the handler must be:
+
+  handler(XMLParser $parser, string|false $prefix, string $uri): void~
+
+  {parser}
+    The XML parser calling the handler.
+  {prefix}
+    The prefix is a string used to reference the namespace within an XML
+    object. false if no prefix exists.
+  {uri}
+    Uniform Resource Identifier (URI) of namespace.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Passing a non-callable string to {handler} is now deprecated, use a
+        proper callable for methods, or null to reset the handler.
+8.4.0   The validity of {handler} as a callable is now checked when setting the
+        handler instead of checking when calling it.
+8.0.0   {parser} expects an XMLParser instance now; previously, a valid xml 
+        resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |xml_set_end_namespace_decl_handler| - Set up end namespace declaration
+  handler
+
+
+vim:ft=help:

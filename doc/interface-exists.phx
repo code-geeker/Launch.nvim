@@ -1,0 +1,57 @@
+*interface_exists*
+
+(PHP 5 >= 5.0.2, PHP 7, PHP 8)
+
+interface_exists — Checks if the interface has been defined
+
+===============================================================================
+[ Description ]
+
+  interface_exists(string $interface, bool $autoload = true): bool~
+
+Checks if the given interface has been defined.
+
+===============================================================================
+[ Parameters ]
+
+{interface}
+
+  The interface name
+
+{autoload}
+
+  Whether to autoload if not already loaded.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the interface given by {interface} has been defined, false
+otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 interface_exists() example
+
+<?php >
+  // Check the interface exists before trying to use it
+  if (interface_exists('MyInterface')) {
+  class MyClass implements MyInterface
+  {
+  // Methods
+  }
+  }
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |get_declared_interfaces| - Returns an array of all declared interfaces
+ * |class_implements| - Return the interfaces which are implemented by the
+  given class or interface
+ * |class_exists| - Checks if the class has been defined
+ * |enum_exists| - Checks if the enum has been defined
+
+
+vim:ft=help:

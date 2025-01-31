@@ -1,0 +1,58 @@
+*ucfirst*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ucfirst — Make a string's first character uppercase
+
+===============================================================================
+[ Description ]
+
+  ucfirst(string $string): string~
+
+Returns a string with the first character of {string} capitalized, if that
+character is an ASCII character in the range from "a" (0x61) to "z" (0x7a).
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The input string.
+
+===============================================================================
+[ Return Values ]
+
+Returns the resulting string.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.2.0   Case conversion no longer depends on the locale set with |setlocale|.
+        Only ASCII characters will be converted.
+
+===============================================================================
+[ Examples ]
+
+Example #1 ucfirst() example
+
+<?php >
+  $foo = 'hello world!';
+  $foo = ucfirst($foo); // Hello world!
+
+  $bar = 'HELLO WORLD!';
+  $bar = ucfirst($bar); // HELLO WORLD!
+  $bar = ucfirst(strtolower($bar)); // Hello world!
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |lcfirst| - Make a string's first character lowercase
+ * |strtolower| - Make a string lowercase
+ * |strtoupper| - Make a string uppercase
+ * |ucwords| - Uppercase the first character of each word in a string
+ * |mb_convert_case| - Perform case folding on a string
+
+
+vim:ft=help:

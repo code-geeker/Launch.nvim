@@ -1,0 +1,115 @@
+*curl_multi_exec*
+
+(PHP 5, PHP 7, PHP 8)
+
+curl_multi_exec — Run the sub-connections of the current cURL handle
+
+===============================================================================
+[ Description ]
+
+  curl_multi_exec(CurlMultiHandle $multi_handle, int &$still_running): int~
+
+Processes each of the handles in the stack. This method can be called whether
+or not a handle needs to read or write data.
+
+===============================================================================
+[ Parameters ]
+
+{multi_handle}
+
+  A cURL multi handle returned by |curl_multi_init|.
+
+{still_running}
+
+  A reference to a flag to tell whether the operations are still running.
+
+===============================================================================
+[ Return Values ]
+
+A cURL code defined in the cURL Predefined Constants.
+
+  Note:
+
+  This only returns errors regarding the whole multi stack. There might still
+  have occurred problems on individual transfers even when this function
+  returns CURLM_OK.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {multi_handle} expects a CurlMultiHandle instance now; previously, a 
+        resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 curl_multi_exec() example
+
+This example will create curl handles for a list of URLs, add them to a multi
+handle, and process them asynchronously.
+
+<?php >
+
+  $urls = [
+  "https://www.php.net/",
+  "https://www.example.com/",
+  ];
+
+  $mh = curl_multi_init();
+  $map = new WeakMap();
+
+  foreach ($urls as $url) {
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_multi_add_handle($mh, $ch);
+  $map[$ch] = $url;
+  }
+
+  do {
+  $status = curl_multi_exec($mh, $unfinishedHandles);
+  if ($status !== CURLM_OK) {
+  throw new \Exception(curl_multi_strerror(curl_multi_errno($mh)));
+  }
+
+  while (($info = curl_multi_info_read($mh)) !== false) {
+  if ($info['msg'] === CURLMSG_DONE) {
+  $handle = $info['handle'];
+  curl_multi_remove_handle($mh, $handle);
+  $url = $map[$handle];
+
+  if ($info['result'] === CURLE_OK) {
+  $statusCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+
+  echo "Request to {$url} finished with HTTP status {$statusCode}:", PHP_EOL;
+  echo curl_multi_getcontent($handle);
+  echo PHP_EOL, PHP_EOL;
+  } else {
+  echo "Request to {$url} failed with error: ", PHP_EOL;
+  echo curl_strerror($info['result']);
+  echo PHP_EOL, PHP_EOL;
+  }
+  }
+  }
+
+  if ($unfinishedHandles) {
+  if (($updatedHandles = curl_multi_select($mh)) === -1) {
+  throw new \Exception(curl_multi_strerror(curl_multi_errno($mh)));
+  }
+  }
+  } while ($unfinishedHandles);
+
+  curl_multi_close($mh);
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |curl_multi_init| - Returns a new cURL multi handle
+ * |curl_multi_select| - Wait until reading or writing is possible for any cURL
+  multi handle connection
+ * |curl_exec| - Perform a cURL session
+
+
+vim:ft=help:

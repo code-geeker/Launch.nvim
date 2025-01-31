@@ -1,0 +1,213 @@
+*assert*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+assert — Checks an assertion
+
+===============================================================================
+[ Description ]
+
+  assert(mixed $assertion, Throwable|string|null $description = null): bool~
+
+assert() allows for the definition of expectations: assertions that take effect
+in development and testing environments, but are optimised away to have zero
+cost in production.
+
+Assertions should be used as a debugging feature only. One use case for them is
+to act as sanity-checks for preconditions that should always be true and that
+if they aren't upheld this indicates some programming errors. Another use case
+is to ensure the presence of certain features like extension functions or
+certain system limits and features.
+
+As assertions can be configured to be eliminated, they should not be used for
+normal runtime operations like input parameter checks. As a rule of thumb code
+should behave as expected even if assertion checking is deactivated.
+
+assert() will check that the expectation given in {assertion} holds. If not,
+and thus the result is false, it will take the appropriate action depending on
+how assert() was configured.
+
+The behaviour of assert() is dictated by the following INI settings:
+
+                           Assert Configure Options
+      Name       Default           Description                  Changelog
+                          * 1: generate and execute code
+                           (development mode)
+                          * 0: generate code but jump
+zend.assertions  1         around it at runtime            
+                          * -1: do not generate code
+                           (production mode)
+
+                         If false, assert() does not      Deprecated as of PHP
+assert.active    true    check the expectation and        8.3.0.
+                         returns true, unconditionally.
+                                                          Prior to PHP 8.0.0,
+                                                          the signature of the
+                         A user defined function to call  callback should be:
+                         when an assertion fails. It's
+                         signature should be:             assert_callback
+                                                          (    string~
+assert.callback  null    assert_callback(    string~      $file,    int
+                         $file,    int $line,    null~    $line,    string~
+                         $assertion,    string            $assertion,    string
+                         $description = ?): void~         $description = ?):
+                                                          void~
+
+                                                          Deprecated as of PHP
+                                                          8.3.0.
+                         If true will throw an            Deprecated as of PHP
+assert.exception true    AssertionError if the            8.3.0.
+                         expectation isn't upheld.
+                         If true will abort execution of  Deprecated as of PHP
+assert.bail      false   the PHP script if the            8.3.0.
+                         expectation isn't upheld.
+                         If true, will emit an E_WARNING
+assert.warning   true    if the expectation isn't upheld. Deprecated as of PHP
+                         This INI setting is ineffective  8.3.0.
+                         if assert.exception is enabled.
+
+===============================================================================
+[ Parameters ]
+
+{assertion}
+
+  This is any expression that returns a value, which will be executed and the
+  result is used to indicate whether the assertion succeeded or failed.
+
+  Warning
+
+  Prior to PHP 8.0.0, if {assertion} was a string it was interpreted as PHP
+  code and executed via |eval|. This string would be passed to the callback as
+  the third argument. This behaviour was DEPRECATED in PHP 7.2.0, and REMOVED
+  in PHP 8.0.0.
+
+{description}
+
+  If {description} is an instance of Throwable, it will be thrown only if the
+  {assertion} is executed and fails.
+
+
+    Note:
+
+    As of PHP 8.0.0, this is done prior to calling the potentially defined
+    assertion callback.
+
+    Note:
+
+    As of PHP 8.0.0, the object will be thrown regardless of the configuration
+    of assert.exception.
+
+    Note:
+
+    As of PHP 8.0.0, the assert.bail setting has no effect in this case.
+
+  If {description} is a string this message will be used if an exception or a
+  warning is emitted. An optional description that will be included in the
+  failure message if the {assertion} fails.
+
+  If {description} is omitted. A default description equal to the source code
+  for the invocation of assert() is created at compile time.
+
+===============================================================================
+[ Return Values ]
+
+assert() will always return true if at least one of the following is true:
+
+ * zend.assertions=0
+ * zend.assertions=-1
+ * assert.exception=1
+ * assert.bail=1
+ * A custom exception object is passed to {description}.
+
+If none of the conditions are true assert() will return true if {assertion} is
+truthy and false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.3.0   All assert. INI settings have been deprecated.
+        assert() will no longer evaluate string arguments, instead they will be
+        treated like any other argument. assert($a == $b) should be used
+8.0.0   instead of assert('$a == $b'). The assert.quiet_eval php.ini directive
+        and the ASSERT_QUIET_EVAL constant have also been removed, as they
+        would no longer have any effect.
+8.0.0   If {description} is an instance of Throwable, the object is thrown if
+        the assertion fails, regardless of the value of assert.exception.
+8.0.0   If {description} is an instance of Throwable, no user callback is
+        called even if it set.
+8.0.0   Declaring a function called assert() inside a namespace is no longer
+        allowed, and issues E_COMPILE_ERROR.
+7.3.0   Declaring a function called assert() inside a namespace became
+        deprecated. Such declaration now emits an E_DEPRECATED.
+        Usage of a string as the {assertion} became deprecated. It now emits an
+7.2.0   E_DEPRECATED notice when both assert.active and zend.assertions are set
+        to 1.
+
+===============================================================================
+[ Examples ]
+
+Example #1 assert() example
+
+<?php >
+assert(1 > 2);
+echo 'Hi!';
+
+If assertions are enabled (zend.assertions=1) the above example will output:
+
+Fatal error: Uncaught AssertionError: assert(1 > 2) in example.php:2
+Stack trace:
+#0 example.php(2): assert(false, 'assert(1 > 2)')
+#1 {main}
+  thrown in example.php on line 2
+
+If assertions are disabled (zend.assertions=0 or zend.assertions=-1) the above
+example will output:
+
+Hi!
+
+Example #2 Using a custom message
+
+<?php >
+assert(1 > 2, "Expected one to be greater than two");
+echo 'Hi!';
+
+If assertions are enabled the above example will output:
+
+Fatal error: Uncaught AssertionError: Expected one to be greater than two in example.php:2
+Stack trace:
+#0 example.php(2): assert(false, 'Expected one to...')
+#1 {main}
+  thrown in example.php on line 2
+
+If assertions are disabled the above example will output:
+
+Hi!
+
+Example #3 Using a custom exception class
+
+<?php >
+class ArithmeticAssertionError extends AssertionError {}
+
+assert(1 > 2, new ArithmeticAssertionError("Expected one to be greater than
+two"));
+echo 'Hi!';
+
+If assertions are enabled the above example will output:
+
+Fatal error: Uncaught ArithmeticAssertionError: Expected one to be greater than two in example.php:4
+Stack trace:
+#0 {main}
+  thrown in example.php on line 4
+
+If assertions are disabled the above example will output:
+
+Hi!
+
+===============================================================================
+[ See Also ]
+
+ * |assert_options| - Set/get the various assert flags
+
+
+vim:ft=help:

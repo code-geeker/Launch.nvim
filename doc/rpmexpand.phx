@@ -1,0 +1,47 @@
+*rpmexpand*
+
+(PECL rpminfo >= 1.2.0)
+
+rpmexpand — Retrieve expanded value of a RPM macro
+
+===============================================================================
+[ Description ]
+
+  rpmexpand(string $text): string~
+
+Retrieve expanded value of a RPM macro.
+
+===============================================================================
+[ Parameters ]
+
+{text}
+
+  Text with RPM macros to expand.
+
+===============================================================================
+[ Return Values ]
+
+A string with concatenated macro expansion(s).
+
+===============================================================================
+[ Examples ]
+
+Example #1 A rpmexpand() example
+
+<?php >
+  $distro = rpmexpand("%{?fedora:Fedora %{fedora}}%{?rhel:Enterprise Linux %
+  {rhel}}");
+  print_r($distro);
+<?>
+
+The above example will output:
+
+Fedora 41
+
+===============================================================================
+[ See Also ]
+
+ * |rpmexpandnumeric| - Retrieve numerical value of a RPM macro
+
+
+vim:ft=help:

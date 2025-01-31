@@ -1,0 +1,50 @@
+*socket_import_stream*
+
+(PHP 5 >= 5.4.0, PHP 7, PHP 8)
+
+socket_import_stream — Import a stream
+
+===============================================================================
+[ Description ]
+
+  socket_import_stream(resource $stream): Socket|false~
+
+Imports a stream that encapsulates a socket into a socket extension resource.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  The stream resource to import.
+
+===============================================================================
+[ Return Values ]
+
+Returns false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   On success, this function returns a Socket instance now; previously, a 
+        resource was returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 socket_import_stream() example
+
+<?php >
+  $stream = stream_socket_server("udp://0.0.0.0:58380", $errno, $errstr, 
+  STREAM_SERVER_BIND);
+  $sock = socket_import_stream($stream);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |stream_socket_server| - Create an Internet or Unix domain server socket
+
+
+vim:ft=help:

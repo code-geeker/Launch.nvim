@@ -1,0 +1,36 @@
+*CommonMark\Parse*
+
+(cmark >= 1.0.0)
+
+CommonMark\Parse — Parsing
+
+===============================================================================
+[ Description ]
+
+  CommonMark\Parse(string $content, int $options = ?): CommonMark\Node~
+
+Shall parse {content}
+
+===============================================================================
+[ Parameters ]
+
+{content}
+
+  markdown string
+
+{options}
+
+  A mask of:
+
+  CommonMark\Parser\Normal (int)
+  CommonMark\Parser\Normalize (int)
+  CommonMark\Parser\ValidateUTF8 (int)
+  CommonMark\Parser\Smart (int)
+ 
+===============================================================================
+[ Return Values ]
+
+Shall return root CommonMark\Node
+
+
+vim:ft=help:

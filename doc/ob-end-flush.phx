@@ -1,0 +1,62 @@
+*ob_end_flush*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ob_end_flush — Flush (send) the return value of the active output handler and
+turn the active output buffer off
+
+===============================================================================
+[ Description ]
+
+  ob_end_flush(): bool~
+
+This function calls the output handler (with the PHP_OUTPUT_HANDLER_FINAL
+flag), flushes (sends) it's return value, discards the contents of the active
+output buffer and turns off the active output buffer.
+
+ob_end_flush() will fail without an active output buffer started with the
+PHP_OUTPUT_HANDLER_REMOVABLE flag.
+
+ob_end_flush() will flush (send) the return value of the output handler even if
+the active output buffer was started without the PHP_OUTPUT_HANDLER_FLUSHABLE
+flag.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If the function fails it generates an E_NOTICE.
+
+===============================================================================
+[ Examples ]
+
+Example #1 ob_end_flush() example
+
+The following example shows an easy way to flush and end all output buffers:
+
+<?php >
+  while (@ob_end_flush());
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |ob_start| - Turn on output buffering
+ * |ob_get_contents| - Return the contents of the output buffer
+ * |ob_flush| - Flush (send) the return value of the active output handler
+ * |ob_get_flush| - Flush (send) the return value of the active output handler,
+  return the contents of the active output buffer and turn it off
+ * |ob_end_clean| - Clean (erase) the contents of the active output buffer and
+  turn it off
+
+
+vim:ft=help:

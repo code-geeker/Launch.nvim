@@ -1,0 +1,39 @@
+*ldap_exop_whoami*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+ldap_exop_whoami — WHOAMI extended operation helper
+
+===============================================================================
+[ Description ]
+
+  ldap_exop_whoami(LDAP\Connection $ldap): string|false~
+
+Performs a WHOAMI extended operation and returns the data.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+===============================================================================
+[ Return Values ]
+
+The data returned by the server, or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_exop| - Performs an extended operation
+
+
+vim:ft=help:

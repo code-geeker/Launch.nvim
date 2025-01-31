@@ -1,0 +1,121 @@
+*empty*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+empty — Determine whether a variable is empty
+
+===============================================================================
+[ Description ]
+
+  empty(mixed $var): bool~
+
+Determine whether a variable is considered to be empty. A variable is
+considered empty if it does not exist or if its value equals false. empty()
+does not generate a warning if the variable does not exist.
+
+===============================================================================
+[ Parameters ]
+
+{var}
+
+  Variable to be checked
+
+  No warning is generated if the variable does not exist. That means empty() is
+  essentially the concise equivalent to `!isset($var)` `||` `$var` `==` `false`
+  . This also applies to nested structures, such as a multidimensional array or
+  chained properties.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {var} does not exist or has a value that is empty or equal to
+zero, aka falsey, see conversion to boolean. Otherwise returns false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A simple empty() / |isset| comparison.
+
+<?php >
+  $var = 0;
+
+  // Evaluates to true because $var is empty
+  if (empty($var)) {
+  echo '$var is either 0, empty, or not set at all';
+  }
+
+  // Evaluates as true because $var is set
+  if (isset($var)) {
+  echo '$var is set even though it is empty';
+  }
+<?>
+
+Example #2 empty() on String Offsets
+
+<?php >
+  $expected_array_got_string = 'somestring';
+  var_dump(empty($expected_array_got_string['some_key']));
+  var_dump(empty($expected_array_got_string[0]));
+  var_dump(empty($expected_array_got_string['0']));
+  var_dump(empty($expected_array_got_string['0.5']));
+  var_dump(empty($expected_array_got_string['0 Mostel']));
+<?>
+
+The above example will output:
+
+bool(true)
+bool(false)
+bool(false)
+bool(true)
+bool(true)
+
+Example #3 empty() on multidimensional arrays
+
+<?php >
+  $multidimensional = [
+  'some' => [
+  'deep' => [
+  'nested' => 'value'
+  ]
+  ]
+  ];
+
+  if (!empty($multidimensional['some']['some']['nested'])) {
+  $someVariable = $multidimensional['some']['deep']['nested'];
+  }
+
+  var_dump(empty($multidimensional['some-undefined-key']));
+  var_dump(empty($multidimensional['some']['deep']['unknown']));
+  var_dump(empty($multidimensional['some']['deep']['nested']));
+<?>
+
+The above example will output:
+
+bool(true)
+bool(true)
+bool(false)
+
+===============================================================================
+[ Notes ]
+
+  Note: Because this is a language construct and not a function, it cannot be
+  called using variable functions, or named arguments.
+
+  Note:
+
+  When using empty() on inaccessible object properties, the __isset()
+  overloading method will be called, if declared.
+
+===============================================================================
+[ See Also ]
+
+ * |isset| - Determine if a variable is declared and is different than null
+ * __isset()
+ * |unset| - Unset a given variable
+ * |array_key_exists| - Checks if the given key or index exists in the array
+ * |count| - Counts all elements in an array or in a Countable object
+ * |strlen| - Get string length
+ * The type comparison tables
+
+
+vim:ft=help:

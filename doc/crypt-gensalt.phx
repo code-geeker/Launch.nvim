@@ -1,0 +1,60 @@
+*crypt_gensalt*
+
+(PECL xpass >= 1.1.0)
+
+crypt_gensalt — Compile a string for use as the salt argument to crypt
+
+===============================================================================
+[ Description ]
+
+  crypt_gensalt(string $prefix = null, int $count = 0): ?string~
+
+Compile a string for use as the salt argument to |crypt|.
+
+===============================================================================
+[ Parameters ]
+
+{prefix}
+  Hashing method. One of the CRYPT_PREFIX_* constant. If null, the best
+  available hashing method will be selected.
+{count}
+  Controls the processing cost of the hash; the valid range and exact meaning
+  of count depend on the hashing method, but larger numbers correspond to more
+  costly hashes in terms of CPU time and possibly memory usage. If count is 0,
+  a low default cost will be selected.
+
+===============================================================================
+[ Return Values ]
+
+Returns a string with the setting, or null in case of an error.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A crypt_gensalt() example
+
+<?php >
+  // Generate the salt
+  $salt = crypt_gensalt(CRYPT_PREFIX_BLOWFISH);
+  // Hash the password
+  $hash = crypt("secret", $salt);
+  // Check the hash
+  $test = hash_equals(crypt("secret", $hash), $hash);
+  var_dump($salt, $hash, $test);
+<?>
+
+The above example will output:
+
+string(29) "$2y$05$GcPykP.Am8C1.dGamdpwW."
+string(60) "$2y$05$GcPykP.Am8C1.dGamdpwW.1RR.7uicWvJPZfJfCEizZHqVWwuaJLm"
+bool(true)
+
+===============================================================================
+[ See Also ]
+
+ * |crypt_preferred_method| - Get the prefix of the preferred hash method
+ * |crypt| - One-way string hashing
+ * |hash_equals| - Timing attack safe string comparison
+
+
+vim:ft=help:

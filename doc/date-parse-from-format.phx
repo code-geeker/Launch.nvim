@@ -1,0 +1,151 @@
+*date_parse_from_format*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+date_parse_from_format — Get info about given date formatted according to the
+specified format
+
+===============================================================================
+[ Description ]
+
+  date_parse_from_format(string $format, string $datetime): array~
+
+Returns associative array with detailed info about given date/time.
+
+===============================================================================
+[ Parameters ]
+
+{format}
+
+  Documentation on how the {format} is used, please refer to the documentation
+  of DateTimeImmutable::createFromFormat(). The same rules apply.
+
+{datetime}
+
+  String representing the date/time.
+
+===============================================================================
+[ Return Values ]
+
+Returns associative array with detailed info about given date/time.
+
+The returned array has keys for year, month, day, hour, minute, second,
+fraction, and is_localtime.
+
+If is_localtime is present then zone_type indicates the type of timezone. For
+type 1 (UTC offset) the zone, is_dst fields are added; for type 2
+(abbreviation) the fields tz_abbr, is_dst are added; and for type 3 (timezone
+identifier) the tz_abbr, tz_id are added.
+
+The array includes warning_count and warnings fields. The first one indicate
+how many warnings there were. The keys of elements warnings array indicate the
+position in the given {datetime} where the warning occurred, with the string
+value describing the warning itself. An example below shows such a warning.
+
+The array also contains error_count and errors fields. The first one indicate
+how many errors were found. The keys of elements errors array indicate the
+position in the given {datetime} where the error occurred, with the string
+value describing the error itself. An example below shows such an error.
+
+Warning
+
+The number of array elements in the warnings and errors arrays might be less
+than warning_count or error_count if they occurred at the same position.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+This functions throws ValueError when the {datetime} contains NULL-bytes.
+
+===============================================================================
+[ Changelog ]
+
+  Version                               Description
+8.0.21,     Now throws ValueError when NULL-bytes are passed into {datetime},
+8.1.8,      which previously was silently ignored.
+8.2.0
+            The zone element of the returned array represents seconds instead
+7.2.0       of minutes now, and its sign is inverted. For instance -120 is now
+            7200.
+
+===============================================================================
+[ Examples ]
+
+Example #1 date_parse_from_format() example
+
+<?php >
+  $date = "6.1.2009 13:00+01:00";
+  print_r(date_parse_from_format("j.n.Y H:iP", $date));
+<?>
+
+The above example will output:
+
+Array
+(
+    [year] => 2009
+    [month] => 1
+    [day] => 6
+    [hour] => 13
+    [minute] => 0
+    [second] => 0
+    [fraction] =>
+    [warning_count] => 0
+    [warnings] => Array
+        (
+        )
+
+    [error_count] => 0
+    [errors] => Array
+        (
+        )
+
+    [is_localtime] => 1
+    [zone_type] => 1
+    [zone] => 3600
+    [is_dst] =>
+)
+
+Example #2 date_parse_from_format() with warnings example
+
+<?php >
+  $date = "26 August 2022 22:30 pm";
+  $parsed = date_parse_from_format("j F Y G:i a", $date);
+
+  echo "Warnings count: ", $parsed['warning_count'], "\n";
+  foreach ($parsed['warnings'] as $position => $message) {
+  echo "\tOn position {$position}: {$message}\n";
+  }
+<?>
+
+The above example will output:
+
+Warnings count: 1
+  On position 23: The parsed time was invalid
+
+Example #3 date_parse_from_format() with errors example
+
+<?php >
+  $date = "26 August 2022 CEST";
+  $parsed = date_parse_from_format("j F Y H:i", $date);
+
+  echo "Errors count: ", $parsed['error_count'], "\n";
+  foreach ($parsed['errors'] as $position => $message) {
+  echo "\tOn position {$position}: {$message}\n";
+  }
+<?>
+
+The above example will output:
+
+Errors count: 3
+  On position 15: A two digit hour could not be found
+  On position 19: Data missing
+
+===============================================================================
+[ See Also ]
+
+ * DateTimeImmutable::createFromFormat() - Parses a time string according to a
+  specified format
+ * |checkdate| - Validate a Gregorian date
+
+
+vim:ft=help:

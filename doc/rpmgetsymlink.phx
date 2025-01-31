@@ -1,0 +1,32 @@
+*rpmgetsymlink*
+
+(PECL rpminfo >= 1.1.0)
+
+rpmgetsymlink — Get target of a symlink
+
+===============================================================================
+[ Description ]
+
+  rpmgetsymlink(string $path, string $name): ?string~
+
+Get target of a symlink.
+
+===============================================================================
+[ Parameters ]
+
+{path}
+
+  Path of the RPM file.
+
+{name}
+
+  Name of the symlink file.
+
+===============================================================================
+[ Return Values ]
+
+A string with target of the symlink, NULL on error, or an empty string if not a
+symlink.
+
+
+vim:ft=help:

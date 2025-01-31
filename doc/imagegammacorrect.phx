@@ -1,0 +1,61 @@
+*imagegammacorrect*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagegammacorrect — Apply a gamma correction to a GD image
+
+===============================================================================
+[ Description ]
+
+  imagegammacorrect(GdImage $image, float $input_gamma, float $output_gamma):~
+  bool~
+
+Applies gamma correction to the given gd {image} given an input and an output
+gamma.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{input_gamma}
+
+  The input gamma.
+
+{output_gamma}
+
+  The output gamma.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagegammacorrect() usage
+
+<?php >
+  // Create image instance
+  $im = imagecreatefromgif('php.gif');
+
+  // Correct gamma, out = 1.537
+  imagegammacorrect($im, 1.0, 1.537);
+
+  // Save
+  imagegif($im, './php_gamma_corrected.gif');
+<?>
+
+
+vim:ft=help:

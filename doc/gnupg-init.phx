@@ -1,0 +1,70 @@
+*gnupg_init*
+
+(PECL gnupg >= 0.4)
+
+gnupg_init — Initialize a connection
+
+===============================================================================
+[ Description ]
+
+  gnupg_init(?array $options = null): resource~
+
+===============================================================================
+[ Parameters ]
+
+{options}
+
+  Must be an associative array. It is used to change the default configuration
+  of the crypto engine.
+
+                            Configuration overrides
+     key     type                          description
+  file_name string It is the file name of the executable program implementing
+                   this protocol which is usually path of the gpg executable.
+                   It is the directory name of the configuration directory. It
+  home_dir  string also overrides GNUPGHOME environment variable that is used
+                   for the same purpose.
+
+===============================================================================
+[ Return Values ]
+
+A GnuPG resource connection used by other GnuPG functions.
+
+===============================================================================
+[ Changelog ]
+
+    Version                 Description
+PECL gnupg 1.5.0 The {options} parameter was added.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Procedural gnupg_init() example with default setting
+
+<?php >
+  $res = gnupg_init();
+<?>
+
+Example #2 Procedural gnupg_init() example with overriden file name and home
+dir
+
+<?php >
+  $res = gnupg_init(["file_name" => "/usr/bin/gpg2", "home_dir" => "/var/www
+  /.gnupg"]);
+<?>
+
+Example #3 OO gnupg initializer example with default setting
+
+<?php >
+  $gpg = new gnupg();
+<?>
+
+Example #4 OO gnupg initializer example with overriden file name and home dir
+
+<?php >
+  $gpg = new gnupg(["file_name" => "/usr/bin/gpg2", "home_dir" => "/var/www
+  /.gnupg"]);
+<?>
+
+
+vim:ft=help:

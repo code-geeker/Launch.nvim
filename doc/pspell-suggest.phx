@@ -1,0 +1,55 @@
+*pspell_suggest*
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7, PHP 8)
+
+pspell_suggest — Suggest spellings of a word
+
+===============================================================================
+[ Description ]
+
+  pspell_suggest(PSpell\Dictionary $dictionary, string $word): array|false~
+
+pspell_suggest() returns an array of possible spellings for the given word.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An PSpell\Dictionary instance.
+
+{word}
+
+  The tested word.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of possible spellings.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {dictionary} parameter expects an PSpell\Dictionary instance now;
+        previously, a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pspell_suggest() example
+
+<?php >
+  $pspell = pspell_new("en");
+
+  if (!pspell_check($pspell, "testt")) {
+  $suggestions = pspell_suggest($pspell, "testt");
+
+  foreach ($suggestions as $suggestion) {
+  echo "Possible spelling: $suggestion<br />";
+  }
+  }
+<?>
+
+
+vim:ft=help:

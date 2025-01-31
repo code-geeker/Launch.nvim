@@ -1,0 +1,103 @@
+*finfo_open* *finfo::__construct*
+
+(PHP >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)
+
+finfo_open -- finfo::__construct — Create a new finfo instance
+
+===============================================================================
+[ Description ]
+
+Procedural style
+
+  finfo_open(int $flags = FILEINFO_NONE, ?string $magic_database = null):~
+  finfo|false~
+
+Object-oriented style (constructor):
+
+public finfo::__construct(int $flags = FILEINFO_NONE, ?string $magic_database =
+null)
+
+This function opens a magic database and returns its instance.
+
+===============================================================================
+[ Parameters ]
+
+{flags}
+
+  One or disjunction of more Fileinfo constants.
+
+{magic_database}
+
+  Name of a magic database file, usually something like /path/to/magic.mime. If
+  not specified, the MAGIC environment variable is used. If the environment
+  variable isn't set, then PHP's bundled magic database will be used.
+
+  Passing null or an empty string will be equivalent to the default value.
+
+===============================================================================
+[ Return Values ]
+
+(Procedural style only) Returns an finfo instance on success, or false on
+failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                             Description
+8.1.0   Returns an finfo instance now; previously, a resource was returned.
+8.0.3   {magic_database} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Object-oriented style
+
+<?php >
+  $finfo = new finfo(FILEINFO_MIME, "/usr/share/misc/magic"); // return mime type
+  ala mimetype extension
+
+  /* get mime-type for a specific file */
+  $filename = "/usr/local/something.txt";
+  echo $finfo->file($filename);
+
+<?>
+
+Example #2 Procedural style
+
+<?php >
+  $finfo = finfo_open(FILEINFO_MIME, "/usr/share/misc/magic"); // return mime
+  type ala mimetype extension
+
+  if (!$finfo) {
+  echo "Opening fileinfo database failed";
+  exit();
+  }
+
+  /* get mime-type for a specific file */
+  $filename = "/usr/local/something.txt";
+  echo finfo_file($finfo, $filename);
+
+  /* close connection */
+  finfo_close($finfo);
+<?>
+
+The above example will output:
+
+text/plain; charset=us-ascii
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  Generally, using the bundled magic database (by leaving {magic_database} and
+  the MAGIC environment variables unset) is the best course of action unless
+  you specifically need a custom magic database.
+
+===============================================================================
+[ See Also ]
+
+ * |finfo_close| - Close finfo instance
+
+
+vim:ft=help:

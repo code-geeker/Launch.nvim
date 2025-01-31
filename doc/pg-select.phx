@@ -1,0 +1,110 @@
+*pg_select*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+pg_select — Select records
+
+===============================================================================
+[ Description ]
+
+  pg_select(    PgSql\Connection~
+  $connection,    string~
+  $table_name,    array $conditions =~
+  [],    int $flags =~
+  PGSQL_DML_EXEC,    int $mode = PGSQL_ASSOC):~
+  array|string|false~
+
+pg_select() selects records specified by {conditions} which has field=>value.
+For a successful query, it returns an array containing all records and fields
+that match the condition specified by {conditions}.
+
+If {flags} is set, |pg_convert| is applied to {conditions} with the specified
+flags.
+
+If {mode} is set, the return value will be in the form of an array with
+PGSQL_NUM, an associative array with PGSQL_ASSOC (default) or both with
+PGSQL_BOTH.
+
+By default pg_select() passes raw values. Values must be escaped or
+PGSQL_DML_ESCAPE option must be specified. PGSQL_DML_ESCAPE quotes and escapes
+parameters/identifiers. Therefore, table/column names became case sensitive.
+
+Note that neither escape nor prepared query can protect LIKE query, JSON,
+Array, Regex, etc. These parameters should be handled according to their
+contexts. i.e. Escape/validate values.
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An PgSql\Connection instance.
+
+{table_name}
+
+  Name of the table from which to select rows.
+
+{conditions}
+
+  An array whose keys are field names in the table {table_name}, and whose
+  values are the conditions that a row must meet to be retrieved. As of PHP
+  8.4.0, when an empty array is provided, no conditions will apply. Previously,
+  the function failed with an empty {conditions} argument.
+
+{flags}
+
+  Any number of PGSQL_CONV_FORCE_NULL, PGSQL_DML_NO_CONV, PGSQL_DML_ESCAPE,
+  PGSQL_DML_EXEC, PGSQL_DML_ASYNC or PGSQL_DML_STRING combined. If
+  PGSQL_DML_STRING is part of the {flags} then the query string is returned.
+  When PGSQL_DML_NO_CONV or PGSQL_DML_ESCAPE is set, it does not call 
+  |pg_convert| internally.
+
+{mode}
+
+  Any number of PGSQL_ASSOC, PGSQL_NUM or PGSQL_BOTH If PGSQL_ASSOC is set the
+  return value will be an associative array, with PGSQL_NUM the return value
+  will be an array, and with PGSQL_BOTH the return value will be both an
+  associative and numerically indexed array.
+
+===============================================================================
+[ Return Values ]
+
+Returns string if PGSQL_DML_STRING is passed via {flags}, otherwise it returns
+an array on success, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {conditions} is now optional.
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+7.1.0   The {mode} parameter was added.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_select() example
+
+<?php >
+  $db = pg_connect('dbname=foo');
+  // This is safe somewhat, since all values are escaped.
+  // However PostgreSQL supports JSON/Array. These are not
+  // safe by neither escape nor prepared query.
+  $rec = pg_select($db, 'post_log', $_POST, PG_DML_ESCAPE);
+  if ($rec) {
+  echo "Records selected\n";
+  var_dump($rec);
+  } else {
+  echo "User must have sent wrong inputs\n";
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pg_convert| - Convert associative array values into forms suitable for SQL
+  statements
+
+
+vim:ft=help:

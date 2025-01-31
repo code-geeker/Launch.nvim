@@ -1,0 +1,75 @@
+*date_default_timezone_get*
+
+(PHP 5 >= 5.1.0, PHP 7, PHP 8)
+
+date_default_timezone_get — Gets the default timezone used by all date/time
+functions in a script
+
+===============================================================================
+[ Description ]
+
+  date_default_timezone_get(): string~
+
+In order of preference, this function returns the default timezone by:
+
+ * Reading the timezone set using the |date_default_timezone_set| function (if
+  any)
+
+ * Reading the value of the date.timezone ini option (if set)
+
+If none of the above succeed, date_default_timezone_get() will return a default
+timezone of UTC.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns a string.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Getting the default timezone
+
+<?php >
+  date_default_timezone_set('Europe/London');
+
+  if (date_default_timezone_get()) {
+  echo 'date_default_timezone_set: ' . date_default_timezone_get() . '<br />';
+  }
+
+  if (ini_get('date.timezone')) {
+  echo 'date.timezone: ' . ini_get('date.timezone');
+  }
+
+<?>
+
+The above example will output something similar to:
+
+date_default_timezone_set: Europe/London
+date.timezone: Europe/London
+
+Example #2 Getting the abbreviation of a timezone
+
+<?php >
+  date_default_timezone_set('America/Los_Angeles');
+  echo date_default_timezone_get() . ' => ' . date('e') . ' => ' . date('T');
+<?>
+
+The above example will output:
+
+America/Los_Angeles => America/Los_Angeles => PST
+
+===============================================================================
+[ See Also ]
+
+ * |date_default_timezone_set| - Sets the default timezone used by all date/
+  time functions in a script
+ * List of Supported Timezones
+
+
+vim:ft=help:

@@ -1,0 +1,38 @@
+*mb_decode_mimeheader*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+mb_decode_mimeheader — Decode string in MIME header field
+
+===============================================================================
+[ Description ]
+
+  mb_decode_mimeheader(string $string): string~
+
+Decodes encoded-word string {string} in MIME header.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The string being decoded.
+
+===============================================================================
+[ Return Values ]
+
+The decoded string in internal character encoding.
+
+===============================================================================
+[ Changelog ]
+
+Version                           Description
+8.3.0   Underscores are converted to spaces as specified by » RFC 2047.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_encode_mimeheader| - Encode string for MIME header
+
+
+vim:ft=help:

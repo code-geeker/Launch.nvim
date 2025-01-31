@@ -1,0 +1,36 @@
+*pg_consume_input*
+
+(PHP 5 >= 5.6.0, PHP 7, PHP 8)
+
+pg_consume_input — Reads input on the connection
+
+===============================================================================
+[ Description ]
+
+  pg_consume_input(PgSql\Connection $connection): bool~
+
+pg_consume_input() consumes any input waiting to be read from the database
+server.
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An PgSql\Connection instance.
+
+===============================================================================
+[ Return Values ]
+
+true if no error occurred, or false if there was an error. Note that true does
+not necessarily indicate that input was waiting to be read.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+
+
+vim:ft=help:

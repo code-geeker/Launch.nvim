@@ -1,0 +1,109 @@
+*output_add_rewrite_var*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+output_add_rewrite_var — Add URL rewriter values
+
+===============================================================================
+[ Description ]
+
+  output_add_rewrite_var(string $name, string $value): bool~
+
+This function starts the 'URL-Rewriter' output buffer handler if it is not
+active, stores the {name} and {value} parameters, and when the buffer is
+flushed rewrites the URLs and forms based on the applicable ini settings.
+Subsequent calls to this function will store all additional name/value pairs
+until the handler is turned off.
+
+When the output buffer is flushed (by calling |ob_flush|, |ob_end_flush|, 
+|ob_get_flush| or at the end of the script) the 'URL-Rewriter' handler adds the
+name/value pairs as query parameters to URLs in attributes of HTML tags and
+adds hidden fields to forms based on the values of the url_rewriter.tags and
+url_rewriter.hosts configuration directives.
+
+Each name/value pair added to the 'URL-Rewriter' handler is added to the URLs
+and/or forms even if this results in duplicate URL query parameters or elements
+with the same name attributes.
+
+  Note: Once the 'URL-Rewriter' handler has been turned off it cannot be
+  started again.
+
+Warning
+
+Prior to PHP 8.4.0, the hosts to be rewritten were set in
+session.trans_sid_hosts instead of url_rewriter.hosts.
+
+===============================================================================
+[ Parameters ]
+
+{name}
+
+  The variable name.
+
+{value}
+
+  The variable value.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        As of PHP 7.1.0, a dedicated output buffer is used, url_rewriter.tags
+        is used solely for output functions and url_rewriter.hosts is
+7.1.0   available. Prior to PHP 7.1.0, rewrite variables set by 
+        output_add_rewrite_var() shared an output buffer with transparent
+        session id support (see session.trans_sid_tags).
+
+===============================================================================
+[ Examples ]
+
+Example #1 output_add_rewrite_var() example
+
+<?php >
+  ini_set('url_rewriter.tags', 'a=href,form=');
+
+  output_add_rewrite_var('var', 'value');
+
+  // some links
+  echo '<a href="file.php">link</a>
+  <a href="http://example.com">link2</a>';
+
+  // a form
+  echo '<form action="script.php" method="post">
+  <input type="text" name="var2" />
+  </form>';
+
+  print_r(ob_list_handlers());
+<?>
+
+The above example will output:
+
+<a href="file.php?var=value">link</a>
+<a href="http://example.com">link2</a>
+
+<form action="script.php" method="post">
+<input type="hidden" name="var" value="value" />
+<input type="text" name="var2" />
+</form>
+
+Array
+(
+    [0] => URL-Rewriter
+)
+
+===============================================================================
+[ See Also ]
+
+ * |output_reset_rewrite_vars| - Reset URL rewriter values
+ * |ob_flush| - Flush (send) the return value of the active output handler
+ * |ob_list_handlers| - List all output handlers in use
+ * url_rewriter.tags
+ * url_rewriter.hosts
+
+
+vim:ft=help:

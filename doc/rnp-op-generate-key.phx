@@ -1,0 +1,76 @@
+*rnp_op_generate_key*
+
+(PECL rnp >= 0.1.1)
+
+rnp_op_generate_key — Generate key
+
+===============================================================================
+[ Description ]
+
+  rnp_op_generate_key(    RnpFFI~
+  $ffi,    string $userid,    string~
+  $key_alg,    string $sub_alg =~
+  ?,    array $options = ?): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{userid}
+
+  PGP User ID - text that is intended to represent the name and email address
+  of the key holder.
+
+{key_alg}
+
+  Primary key algorithm (i.e. 'RSA', 'DSA', etc).
+
+{sub_alg}
+
+  Subkey algorithm. If not set, subkey will not be generated.
+
+{options}
+
+  An associative array with options.
+
+         Key          Data                      Description
+                      type
+  "bits"             integer Primary key size in bits. Applicable only to RSA,
+                             DSA and El-Gamal keys.
+  "hash"             string  Hash algorithm used in self signature or subkey
+                             binding signature.
+                             Set size of a q parameter for DSA key. Note:
+  "dsa_qbits"        integer appropriate default value will be set, depending
+                             on key bits. However you may override it if
+                             needed.
+  "curve"            string  Set the curve used for ECC key. Note: this is only
+                             applicable for ECDSA, ECDH and SM2 keys.
+                             Enable requesting password via password provider.
+                             This password will be used for key encryption.
+  "request_password" boolean Password provider callback function should be set
+                             in advance by calling |rnp_ffi_set_pass_provider|.
+                             Note: this setting will be ignored if password was
+                             set via"password"
+  "password"         string  Set the password used to encrypt the secret key
+                             data.
+  "expiration"       integer Set the key and subkey expiration time in seconds.
+  "sub_bits"         integer Subkey size in bits. Applicable only to RSA, DSA
+                             and El-Gamal keys.
+  "sub_hash"         string  Hash algorithm used in subkey self signature or
+                             subkey binding signature.
+  "sub_curve"        string  Set the curve used for ECC subkey. Note: this is
+                             only applicable for ECDSA, ECDH and SM2 keys.
+
+===============================================================================
+[ Return Values ]
+
+Fingerprint of the generated primary key or false on failure. This fingerprint
+can be used later to reference the key in sign and encrypt operations. The key
+data is stored in FFI memory context and can be saved using |rnp_save_keys| or 
+|rnp_save_keys_to_path|.
+
+
+vim:ft=help:

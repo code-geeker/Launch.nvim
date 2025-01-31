@@ -1,0 +1,33 @@
+*rnp_decrypt*
+
+(PECL rnp >= 0.1.1)
+
+rnp_decrypt — Decrypt PGP message
+
+===============================================================================
+[ Description ]
+
+  rnp_decrypt(RnpFFI $ffi, string $input): string|false~
+
+Private keys used for decryption should be loaded into the FFI object before
+calling this function. If password encryption was used, then password provider
+should be set by calling |rnp_ffi_set_pass_provider|.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{input}
+
+  Encrypted message.
+
+===============================================================================
+[ Return Values ]
+
+Decrypted message on success or false on failure.
+
+
+vim:ft=help:

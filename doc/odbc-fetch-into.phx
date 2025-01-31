@@ -1,0 +1,60 @@
+*odbc_fetch_into*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_fetch_into — Fetch one result row into array
+
+===============================================================================
+[ Description ]
+
+  odbc_fetch_into(Odbc\Result $statement, array &$array, ?int $row = null):~
+  int|false~
+
+Fetch one result row into array.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  The ODBC result object.
+
+{array}
+
+  The result array that can be of any type since it will be converted to type
+  array. The array will contain the column values starting at array index 0.
+
+{row}
+
+  The row number.
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of columns in the result; false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {statement} expects an Odbc\Result instance now; previously, a resource
+        was expected.
+8.4.0   {row} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 odbc_fetch_into() examples
+
+<?php >
+  $rc = odbc_fetch_into($res_id, $my_array);
+<?>
+
+or
+
+<?php >
+  $rc = odbc_fetch_into($res_id, $my_array, 2);
+<?>
+
+
+vim:ft=help:

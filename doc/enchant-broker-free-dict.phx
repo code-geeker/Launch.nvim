@@ -1,0 +1,48 @@
+*enchant_broker_free_dict*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL enchant >= 0.1.0 )
+
+enchant_broker_free_dict — Free a dictionary resource
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.0.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] enchant_broker_free_dict(EnchantDictionary $dictionary): bool~
+
+Free a dictionary. As of PHP 8.0.0, it is recommended to unset the object
+instead of calling this function.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   This function has been deprecated in favor of unsetting the object.
+8.0.0   {dictionary} expects a EnchantDictionary now; previoulsy, a resource
+        was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |enchant_broker_request_dict| - Create a new dictionary using a tag
+ * |enchant_broker_request_pwl_dict| - Creates a dictionary using a PWL file
+
+
+vim:ft=help:

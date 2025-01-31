@@ -1,0 +1,37 @@
+*memcache_debug*
+
+(PECL memcache >= 0.2.0)
+
+memcache_debug — Turn debug output on/off
+
+===============================================================================
+[ Description ]
+
+  memcache_debug(bool $on_off): bool~
+
+memcache_debug() turns on debug output if parameter {on_off} is equal to true
+and turns off if it's false.
+
+
+  Note:
+
+  memcache_debug() is accessible only if PHP was built with --enable-debug
+  option and always returns true in this case. Otherwise, this function has no
+  effect and always returns false.
+
+===============================================================================
+[ Parameters ]
+
+{on_off}
+
+  Turns debug output on if equals to true. Turns debug output off if equals to
+  false.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if PHP was built with --enable-debug option, otherwise returns
+false.
+
+
+vim:ft=help:

@@ -1,0 +1,99 @@
+*imagecopymergegray*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+imagecopymergegray — Copy and merge part of an image with gray scale
+
+===============================================================================
+[ Description ]
+
+  imagecopymergegray(    GdImage~
+  $dst_image,    GdImage~
+  $src_image,    int $dst_x,    int~
+  $dst_y,    int $src_x,    int~
+  $src_y,    int $src_width,    int~
+  $src_height,    int $pct): bool~
+
+imagecopymergegray() copy a part of {src_image} onto {dst_image} starting at
+the x,y coordinates {src_x}, {src_y} with a width of {src_width} and a height
+of {src_height}. The portion defined will be copied onto the x,y coordinates,
+{dst_x} and {dst_y}.
+
+This function is identical to |imagecopymerge| except that when merging it
+preserves the hue of the source by converting the destination pixels to gray
+scale before the copy operation.
+
+===============================================================================
+[ Parameters ]
+
+{dst_image}
+
+  Destination image resource.
+
+{src_image}
+
+  Source image resource.
+
+{dst_x}
+
+  x-coordinate of destination point.
+
+{dst_y}
+
+  y-coordinate of destination point.
+
+{src_x}
+
+  x-coordinate of source point.
+
+{src_y}
+
+  y-coordinate of source point.
+
+{src_width}
+
+  Source width.
+
+{src_height}
+
+  Source height.
+
+{pct}
+
+  The {src_image} will be changed to grayscale according to {pct} where 0 is
+  fully grayscale and 100 is unchanged. When {pct} = 100 this function behaves
+  identically to |imagecopy| for pallete images, except for ignoring alpha
+  components, while it implements alpha transparency for true colour images.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dst_image} and {src_image} expect GdImage instances now; previously, 
+        resources were expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagecopymergegray() usage
+
+<?php >
+  // Create image instances
+  $dest = imagecreatefromgif('php.gif');
+  $src = imagecreatefromgif('php.gif');
+
+  // Copy and merge - Gray = 20%
+  imagecopymergegray($dest, $src, 10, 10, 0, 0, 100, 47, 20);
+
+  // Output
+  header('Content-Type: image/gif');
+  imagegif($dest);
+<?>
+
+
+vim:ft=help:

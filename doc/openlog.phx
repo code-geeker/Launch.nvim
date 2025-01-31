@@ -1,0 +1,74 @@
+*openlog*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+openlog — Open connection to system logger
+
+===============================================================================
+[ Description ]
+
+  openlog(string $prefix, int $flags, int $facility): true~
+
+openlog() opens a connection to the system logger for a program.
+
+The use of openlog() is optional. It will automatically be called by |syslog|
+if necessary, in which case {prefix} will default to the empty string.
+
+===============================================================================
+[ Parameters ]
+
+{prefix}
+
+  The string {prefix} is added to each message.
+
+{flags}
+
+  Bitmask of the following constants:
+   + LOG_CONS
+   + LOG_NDELAY
+   + LOG_ODELAY
+   + LOG_NOWAIT
+   + LOG_PERROR
+   + LOG_PID
+
+{facility}
+
+  The {facility} argument is used to specify what type of program is logging
+  the message. This lets the configuration file specify that messages from
+  different facilities will be handled differently. Must be one of the
+  following constants:
+   + LOG_AUTH
+   + LOG_AUTHPRIV
+   + LOG_CRON
+   + LOG_DAEMON
+   + LOG_KERN
+   + LOG_LOCAL[0-7]
+   + LOG_LPR
+   + LOG_MAIL
+   + LOG_NEWS
+   + LOG_SYSLOG
+   + LOG_USER
+   + LOG_UUCP
+
+    Note: This parameter is ignored on Windows.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.2.0   The function now always returns true. Previously it returned false on
+        failure.
+
+===============================================================================
+[ See Also ]
+
+ * |syslog| - Generate a system log message
+ * |closelog| - Close connection to system logger
+
+
+vim:ft=help:

@@ -1,0 +1,27 @@
+*sodium_crypto_aead_aes256gcm_is_available*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_aead_aes256gcm_is_available — Check if hardware supports
+AES256-GCM
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_aead_aes256gcm_is_available(): bool~
+
+The return value of this function depends on whether or not the hardware
+supports hardware-accelerated AES.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if it is safe to encrypt with AES-256-GCM, and false otherwise.
+
+
+vim:ft=help:

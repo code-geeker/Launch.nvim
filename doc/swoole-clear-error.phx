@@ -1,0 +1,25 @@
+*swoole_clear_error*
+
+(PECL swoole >= 4.6.0)
+
+swoole_clear_error — Clear errors in the socket or on the last error code
+
+===============================================================================
+[ Description ]
+
+  swoole_clear_error(): void~
+
+Clear errors in the socket or on the last error code.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+
+vim:ft=help:

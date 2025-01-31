@@ -1,0 +1,117 @@
+*array_fill*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+array_fill — Fill an array with values
+
+===============================================================================
+[ Description ]
+
+  array_fill(int $start_index, int $count, mixed $value): array~
+
+Fills an array with {count} entries of the value of the {value} parameter, keys
+starting at the {start_index} parameter.
+
+===============================================================================
+[ Parameters ]
+
+{start_index}
+
+  The first index of the returned array.
+
+  If {start_index} is negative, the first index of the returned array will be
+  {start_index} and the following indices will start from zero prior to PHP
+  8.0.0; as of PHP 8.0.0, negative keys are incremented normally (see example).
+
+{count}
+
+  Number of elements to insert. Must be greater than or equal to zero, and less
+  than or equal to 2147483647.
+
+{value}
+
+  Value to use for filling
+
+===============================================================================
+[ Return Values ]
+
+Returns the filled array
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {count} is out of range.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   array_fill() now throws a ValueError if {count} is out of range;
+        previously E_WARNING was raised, and the function returned false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 array_fill() example
+
+<?php >
+  $a = array_fill(5, 6, 'banana');
+  print_r($a);
+<?>
+
+The above example will output:
+
+Array
+(
+    [5]  => banana
+    [6]  => banana
+    [7]  => banana
+    [8]  => banana
+    [9]  => banana
+    [10] => banana
+)
+
+Example #2 array_fill() example with a negative start index
+
+<?php >
+  $a = array_fill(-2, 4, 'pear');
+  print_r($a);
+<?>
+
+Output of the above example in PHP 7:
+
+Array
+(
+    [-2] => pear
+    [0] => pear
+    [1] => pear
+    [2] => pear
+)
+
+Output of the above example in PHP 8:
+
+Array
+(
+    [-2] => pear
+    [-1] => pear
+    [0] => pear
+    [1] => pear
+)
+
+Note that index -1 is not present prior to PHP 8.0.0.
+
+===============================================================================
+[ Notes ]
+
+See also the Arrays section of manual for a detailed explanation of negative
+keys.
+
+===============================================================================
+[ See Also ]
+
+ * |array_fill_keys| - Fill an array with values, specifying keys
+ * |str_repeat| - Repeat a string
+ * |range| - Create an array containing a range of elements
+
+
+vim:ft=help:

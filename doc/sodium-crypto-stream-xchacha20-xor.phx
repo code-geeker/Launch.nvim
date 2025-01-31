@@ -1,0 +1,50 @@
+*sodium_crypto_stream_xchacha20_xor*
+
+(PHP 8 >= 8.1.0)
+
+sodium_crypto_stream_xchacha20_xor — Encrypts a message using a nonce and a
+secret key (no authentication)
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_stream_xchacha20_xor(#[\SensitiveParameter] string $message,~
+  string $nonce, #[\SensitiveParameter] string $key): string~
+
+Encrypts a {message} using a {nonce} and a secret {key} (no authentication).
+
+Caution
+
+This encryption is unauthenticated, and does not prevent chosen-ciphertext
+attacks. Make sure to combine the ciphertext with a Message Authentication
+Code, for example with |sodium_crypto_aead_xchacha20poly1305_ietf_encrypt|
+function, or |sodium_crypto_auth|.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  The message to encrypt.
+
+{nonce}
+
+  24-byte nonce.
+
+{key}
+
+  Key, possibly generated from |sodium_crypto_stream_xchacha20_keygen|.
+
+===============================================================================
+[ Return Values ]
+
+Encrypted message.
+
+===============================================================================
+[ See Also ]
+
+ * |sodium_crypto_stream_xchacha20_xor_ic| - Encrypts a message using a nonce
+  and a secret key (no authentication)
+
+
+vim:ft=help:

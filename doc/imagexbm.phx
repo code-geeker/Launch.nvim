@@ -1,0 +1,91 @@
+*imagexbm*
+
+(PHP 5, PHP 7, PHP 8)
+
+imagexbm — Output an XBM image to browser or file
+
+===============================================================================
+[ Description ]
+
+  imagexbm(GdImage $image, ?string $filename, ?int $foreground_color = null):~
+  bool~
+
+Outputs or save an XBM version of the given {image}.
+
+  Note: imagexbm() doesn't apply any padding, so the image width has to be a
+  multiple of 8. This restriction does no longer apply as of PHP 7.0.9.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{filename}
+
+  The path to save the file to, given as string. If null, the raw image stream
+  will be output directly.
+
+  The {filename} (without the .xbm extension) is also used for the C
+  identifiers of the XBM, whereby non alphanumeric characters of the current
+  locale are substituted by underscores. If {filename} is set to null, image is
+  used to build the C identifiers.
+
+{foreground_color}
+
+  You can set the foreground color with this parameter by setting an identifier
+  obtained from |imagecolorallocate|. The default foreground color is black.
+  All other colors are treated as background.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+Caution
+
+However, if libgd fails to output the image, this function returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+8.0.0   {foreground_color} is now nullable.
+8.0.0   The fourth parameter, which was unused, has been removed.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Saving an XBM file
+
+<?php >
+  // Create a blank image and add some text
+  $im = imagecreatetruecolor(120, 20);
+  $text_color = imagecolorallocate($im, 233, 14, 91);
+  imagestring($im, 1, 5, 5, 'A Simple Text String', $text_color);
+
+  // Save the image
+  imagexbm($im, 'simpletext.xbm');
+<?>
+
+Example #2 Saving an XBM file with a different foreground color
+
+<?php >
+  // Create a blank image and add some text
+  $im = imagecreatetruecolor(120, 20);
+  $text_color = imagecolorallocate($im, 233, 14, 91);
+  imagestring($im, 1, 5, 5, 'A Simple Text String', $text_color);
+
+  // Set a replacement foreground color
+  $foreground_color = imagecolorallocate($im, 255, 0, 0);
+
+  // Save the image
+  imagexbm($im, NULL, $foreground_color);
+<?>
+
+
+vim:ft=help:

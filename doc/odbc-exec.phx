@@ -1,0 +1,48 @@
+*odbc_exec*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_exec — Directly execute an SQL statement
+
+===============================================================================
+[ Description ]
+
+  odbc_exec(Odbc\Connection $odbc, string $query): Odbc\Result|false~
+
+Sends an SQL statement to the database server.
+
+===============================================================================
+[ Parameters ]
+
+{odbc}
+
+  The ODBC connection object, see |odbc_connect| for details.
+
+{query}
+
+  The SQL statement.
+
+===============================================================================
+[ Return Values ]
+
+Returns an ODBC result object if the SQL command was executed successfully, or
+false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {odbc} expects an Odbc\Connection instance now; previously, a resource
+        was expected.
+8.4.0   This function returns an Odbc\Result instance now; previously, a 
+        resource was returned.
+8.0.0   {flags} was removed.
+
+===============================================================================
+[ See Also ]
+
+ * |odbc_prepare| - Prepares a statement for execution
+ * |odbc_execute| - Execute a prepared statement
+
+
+vim:ft=help:

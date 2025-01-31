@@ -1,0 +1,23 @@
+*swoole_version*
+
+(PECL swoole >= 1.9.0)
+
+swoole_version — Get the version of Swoole
+
+===============================================================================
+[ Description ]
+
+  swoole_version(): string~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+The version of Swoole.
+
+
+vim:ft=help:

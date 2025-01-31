@@ -1,0 +1,65 @@
+*get_declared_classes*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+get_declared_classes — Returns an array with the name of the defined classes
+
+===============================================================================
+[ Description ]
+
+  get_declared_classes(): array~
+
+Gets the declared classes.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of the names of the declared classes in the current script.
+
+  Note:
+
+  Note that depending on what extensions you have compiled or loaded into PHP,
+  additional classes could be present. This means that you will not be able to
+  define your own classes using these names. There is a list of predefined
+  classes in the Predefined Classes section of the appendices.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        Previously get_declared_classes() always returned parent classes before
+7.4.0   child classes. This is no longer the case. No particular order is
+        guaranteed for the get_declared_classes() return value.
+
+===============================================================================
+[ Examples ]
+
+Example #1 get_declared_classes() example
+
+<?php >
+  print_r(get_declared_classes());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => stdClass
+    [1] => __PHP_Incomplete_Class
+    [2] => Directory
+)
+
+===============================================================================
+[ See Also ]
+
+ * |class_exists| - Checks if the class has been defined
+ * |get_declared_interfaces| - Returns an array of all declared interfaces
+ * |get_defined_functions| - Returns an array of all defined functions
+
+
+vim:ft=help:

@@ -1,0 +1,42 @@
+*rnp_load_keys*
+
+(PECL rnp >= 0.1.1)
+
+rnp_load_keys — Load keys from PHP string
+
+===============================================================================
+[ Description ]
+
+  rnp_load_keys(    RnpFFI~
+  $ffi,    string $format,    string~
+  $input,    int $flags): bool~
+
+Note that for G10, the input must be a directory (which must already exist).
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{format}
+
+  The key format of the data (GPG, KBX, G10).
+
+{input}
+
+  OpenPGP packets containing key(s) to be loaded. Can be either binary or ASCII
+  armored.
+
+{flags}
+
+  See RNP_LOAD_SAVE_* flags description.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

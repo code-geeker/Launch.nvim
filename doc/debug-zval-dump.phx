@@ -1,0 +1,109 @@
+*debug_zval_dump*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+debug_zval_dump — Dumps a string representation of an internal zval structure
+to output
+
+===============================================================================
+[ Description ]
+
+  debug_zval_dump(mixed $value, mixed ...$values): void~
+
+Dumps a string representation of an internal zval (Zend value) structure to
+output. This is mostly useful for understanding or debugging implementation
+details of the Zend Engine or PHP extensions.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The variable or value to dump.
+
+{values}
+
+  Further variables or values to dump.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 debug_zval_dump() example
+
+<?php >
+  $var1 = 'Hello';
+  $var1 .= ' World';
+  $var2 = $var1;
+
+  debug_zval_dump($var1);
+<?>
+
+The above example will output:
+
+string(11) "Hello World" refcount(3)
+
+  Note: Understanding the refcount
+
+  The refcount value shown by this function may be surprising without a
+  detailed understanding of the engine's implementation.
+
+  The Zend Engine uses reference counting for two different purposes:
+
+   + Optimizing memory usage using a technique called "copy on write", where
+    multiple variables holding the same value point to the same copy in memory.
+    When any of the variables is modified, it is pointed to a new copy in
+    memory, and the reference count on the original is decreased by 1.
+   + Tracking variables which have been assigned or passed by reference (see
+    References Explained). This refcount is stored on a separate reference
+    zval, pointing to the zval for the current value. This additional zval is
+    not currently shown by debug_zval_dump().
+
+  Because debug_zval_dump() takes its input as normal parameters, passed by
+  value, the copy on write technique will be used to pass them: rather than
+  copying the data, the refcount will be increased by one for the lifetime of
+  the function call. If the function modified the parameter after receiving it,
+  then a copy would be made; since it does not, it will show a refcount one
+  higher than in the calling scope.
+
+  The parameter passing also prevents debug_zval_dump() showing variables which
+  have been assigned by reference. To illustrate, consider a slightly modified
+  version of the above example:
+  <?php >
+  $var1 = 'Hello';
+  $var1 .= ' World';
+  // Point three variables as references to the same value
+  $var2 =& $var1;
+  $var3 =& $var1;
+
+  debug_zval_dump($var1);
+<  ?>
+
+  The above example will output:
+
+  string(11) "Hello World" refcount(2)
+
+  Although $var1, $var2, and $var3 are linked as references, only the value is
+  passed to debug_zval_dump(). That value is used once by the set of
+  references, and once inside the debug_zval_dump(), so shows a refcount of 2.
+
+  Further complications arise because of optimisations made in the engine for
+  different data types. Some types such as integers do not use "copy on write",
+  so do not show a refcount at all. In other cases, the refcount shows extra
+  copies used internally, such as when a literal string or array is stored as
+  part of a code instruction.
+
+===============================================================================
+[ See Also ]
+
+ * |var_dump| - Dumps information about a variable
+ * |debug_backtrace| - Generates a backtrace
+ * References Explained
+ * » References Explained (by Derick Rethans)
+
+
+vim:ft=help:

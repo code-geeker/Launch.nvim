@@ -1,0 +1,30 @@
+*sodium_bin2hex*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_bin2hex — Encode to hexadecimal
+
+===============================================================================
+[ Description ]
+
+  sodium_bin2hex(#[\SensitiveParameter] string $string): string~
+
+Converts a raw binary string into a hex-encoded string. Unlike the standard
+hex-encoding function, sodium_bin2hex() is constant-time (a property that is
+important for any code that touches cryptographic inputs, such as plaintexts or
+keys).
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  Raw binary string.
+
+===============================================================================
+[ Return Values ]
+
+Hex encoded string.
+
+
+vim:ft=help:

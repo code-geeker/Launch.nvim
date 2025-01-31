@@ -1,0 +1,370 @@
+*date_parse*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+date_parse — Returns associative array with detailed info about given date/time
+
+===============================================================================
+[ Description ]
+
+  date_parse(string $datetime): array~
+
+date_parse() parses the given {datetime} string according to the same rules as 
+|strtotime| and DateTimeImmutable::__construct(). Instead of returning a Unix
+timestamp (with |strtotime|) or a DateTimeImmutable object (with 
+DateTimeImmutable::__construct()), it returns an associative array with the
+information that it could detect in the given {datetime} string.
+
+If no information about a certain group of elements can be found, these array
+elements will be set to false or are missing. If needed for constructing a
+timestamp or DateTimeImmutable object from the same {datetime} string, more
+fields can be set to a non-false value. See the examples for cases where that
+happens.
+
+===============================================================================
+[ Parameters ]
+
+{datetime}
+
+  Date/time in format accepted by DateTimeImmutable::__construct().
+
+===============================================================================
+[ Return Values ]
+
+Returns array with information about the parsed date/time.
+
+The returned array has keys for year, month, day, hour, minute, second,
+fraction, and is_localtime.
+
+If is_localtime is present then zone_type indicates the type of timezone. For
+type 1 (UTC offset) the zone, is_dst fields are added; for type 2
+(abbreviation) the fields tz_abbr, is_dst are added; and for type 3 (timezone
+identifier) the tz_abbr, tz_id are added.
+
+If relative time elements are present in the {datetime} string such as +3 days,
+the then returned array includes a nested array with the key relative. This
+array then contains the keys year, month, day, hour, minute, second, and if
+necessary weekday, and weekdays, depending on the string that was passed in.
+
+The array includes warning_count and warnings fields. The first one indicate
+how many warnings there were. The keys of elements warnings array indicate the
+position in the given {datetime} where the warning occurred, with the string
+value describing the warning itself.
+
+The array also contains error_count and errors fields. The first one indicate
+how many errors were found. The keys of elements errors array indicate the
+position in the given {datetime} where the error occurred, with the string
+value describing the error itself.
+
+Warning
+
+The number of array elements in the warnings and errors arrays might be less
+than warning_count or error_count if they occurred at the same position.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+In case the date/time format has an error, the element 'errors' will contain
+the error messages.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+7.2.0   The zone element of the returned array represents seconds instead of
+        minutes now, and its sign is inverted. For instance -120 is now 7200.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A date_parse() example with a comprehensive {datetime} string
+
+<?php >
+  var_dump(date_parse("2006-12-12 10:00:00.5"));
+<?>
+
+The above example will output:
+
+array(12) {
+  ["year"]=>
+  int(2006)
+  ["month"]=>
+  int(12)
+  ["day"]=>
+  int(12)
+  ["hour"]=>
+  int(10)
+  ["minute"]=>
+  int(0)
+  ["second"]=>
+  int(0)
+  ["fraction"]=>
+  float(0.5)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(false)
+}
+
+The timezone elements only show up if they are included in the given {datetime}
+string. In that case there will always be a zone_type element and a few more
+depending on its value.
+
+Example #2 date_parse() with timezone abbreviation information
+
+<?php >
+  var_dump(date_parse("June 2nd, 2022, 10:28:17 BST"));
+<?>
+
+The above example will output:
+
+array(16) {
+  ["year"]=>
+  int(2022)
+  ["month"]=>
+  int(6)
+  ["day"]=>
+  int(2)
+  ["hour"]=>
+  int(10)
+  ["minute"]=>
+  int(28)
+  ["second"]=>
+  int(17)
+  ["fraction"]=>
+  float(0)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(true)
+  ["zone_type"]=>
+  int(2)
+  ["zone"]=>
+  int(0)
+  ["is_dst"]=>
+  bool(true)
+  ["tz_abbr"]=>
+  string(3) "BST"
+}
+
+Example #3 date_parse() with timezone identifier information
+
+<?php >
+  var_dump(date_parse("June 2nd, 2022, 10:28:17 Europe/London"));
+<?>
+
+The above example will output:
+
+array(14) {
+  ["year"]=>
+  int(2022)
+  ["month"]=>
+  int(6)
+  ["day"]=>
+  int(2)
+  ["hour"]=>
+  int(10)
+  ["minute"]=>
+  int(28)
+  ["second"]=>
+  int(17)
+  ["fraction"]=>
+  float(0)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(true)
+  ["zone_type"]=>
+  int(3)
+  ["tz_id"]=>
+  string(13) "Europe/London"
+}
+
+If a more minimal {datetime} string is parsed, less information is available.
+In this example, all the time parts are returned as false.
+
+Example #4 date_parse() with a minimal string
+
+<?php >
+  var_dump(date_parse("June 2nd, 2022"));
+<?>
+
+The above example will output:
+
+array(12) {
+  ["year"]=>
+  int(2022)
+  ["month"]=>
+  int(6)
+  ["day"]=>
+  int(2)
+  ["hour"]=>
+  bool(false)
+  ["minute"]=>
+  bool(false)
+  ["second"]=>
+  bool(false)
+  ["fraction"]=>
+  bool(false)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(false)
+}
+
+Relative formats do not influence the values parsed from absolute formats, but
+are parsed into the "relative" element.
+
+Example #5 date_parse() with relative formats
+
+<?php >
+  var_dump(date_parse("2006-12-12 10:00:00.5 +1 week +1 hour"));
+<?>
+
+The above example will output:
+
+array(13) {
+  ["year"]=>
+  int(2006)
+  ["month"]=>
+  int(12)
+  ["day"]=>
+  int(12)
+  ["hour"]=>
+  int(10)
+  ["minute"]=>
+  int(0)
+  ["second"]=>
+  int(0)
+  ["fraction"]=>
+  float(0.5)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(false)
+  ["relative"]=>
+  array(6) {
+    ["year"]=>
+    int(0)
+    ["month"]=>
+    int(0)
+    ["day"]=>
+    int(7)
+    ["hour"]=>
+    int(1)
+    ["minute"]=>
+    int(0)
+    ["second"]=>
+    int(0)
+  }
+}
+
+Some stanzas, such as Thursday will set the time portion of the string to 0. If
+Thursday is passed to DateTimeImmutable::__construct() it would also have
+resulted in the hour, minute, second, and fraction being set to 0. In the
+example below, the year element is however left as false.
+
+Example #6 date_parse() with side-effects
+
+<?php >
+  var_dump(date_parse("Thursday, June 2nd"));
+<?>
+
+The above example will output:
+
+array(13) {
+  ["year"]=>
+  bool(false)
+  ["month"]=>
+  int(6)
+  ["day"]=>
+  int(2)
+  ["hour"]=>
+  int(0)
+  ["minute"]=>
+  int(0)
+  ["second"]=>
+  int(0)
+  ["fraction"]=>
+  float(0)
+  ["warning_count"]=>
+  int(0)
+  ["warnings"]=>
+  array(0) {
+  }
+  ["error_count"]=>
+  int(0)
+  ["errors"]=>
+  array(0) {
+  }
+  ["is_localtime"]=>
+  bool(false)
+  ["relative"]=>
+  array(7) {
+    ["year"]=>
+    int(0)
+    ["month"]=>
+    int(0)
+    ["day"]=>
+    int(0)
+    ["hour"]=>
+    int(0)
+    ["minute"]=>
+    int(0)
+    ["second"]=>
+    int(0)
+    ["weekday"]=>
+    int(4)
+  }
+}
+
+===============================================================================
+[ See Also ]
+
+ * |date_parse_from_format| - Get info about given date formatted according to
+  the specified format for parsing a {datetime} with a specific given format
+ * |checkdate| - Validate a Gregorian date for Gregorian date validation
+ * |getdate| - Get date/time information
+
+
+vim:ft=help:

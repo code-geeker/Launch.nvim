@@ -1,0 +1,51 @@
+*dba_replace*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+dba_replace — Replace or insert entry
+
+===============================================================================
+[ Description ]
+
+  dba_replace(string|array $key, string $value, Dba\Connection $dba): bool~
+
+dba_replace() replaces or inserts the entry described with {key} and {value}
+into the database specified by {dba}.
+
+===============================================================================
+[ Parameters ]
+
+{key}
+
+  The key of the entry to be replaced.
+
+{value}
+
+  The value to be replaced.
+
+{dba}
+
+  A Dba\Connection instance, returned by |dba_open| or |dba_popen|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   The {dba} parameter expects a Dba\Connection instance now; previously,
+        a valid dba resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |dba_exists| - Check whether key exists
+ * |dba_delete| - Delete DBA entry specified by key
+ * |dba_fetch| - Fetch data specified by key
+ * |dba_insert| - Insert entry
+
+
+vim:ft=help:

@@ -1,0 +1,21 @@
+*swoole_errno*
+
+(PECL swoole >= 1.9.0)
+
+swoole_errno — Get the error code of the latest system call
+
+===============================================================================
+[ Description ]
+
+  swoole_errno(): int~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+
+vim:ft=help:

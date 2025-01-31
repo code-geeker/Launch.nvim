@@ -1,0 +1,87 @@
+*dba_popen*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+dba_popen — Open database persistently
+
+===============================================================================
+[ Description ]
+
+  dba_popen(    string~
+  $path,    string $mode,    ?string~
+  $handler = null,    int $permission =~
+  0644,    int $map_size = 0,    ?int~
+  $flags = null): Dba\Connection|false~
+
+dba_popen() establishes a persistent database instance for {path} with {mode}
+using {handler}.
+
+===============================================================================
+[ Parameters ]
+
+{path}
+
+  Commonly a regular path in your filesystem.
+
+{mode}
+
+  It is r for read access, w for read/write access to an already existing
+  database, c for read/write access and database creation if it doesn't
+  currently exist, and n for create, truncate and read/write access.
+
+{handler}
+
+  The name of the handler which shall be used for accessing {path}. It is
+  passed all optional parameters given to dba_popen() and can act on behalf of
+  them. If {handler} is null, then the default handler is invoked.
+
+{permission}
+
+  Optional int parameter which is passed to the driver. It has the same meaning
+  as the {permissions} parameter of |chmod|, and defaults to 0644.
+
+  The db1, db2, db3, db4, dbm, gdbm, ndbm, and lmdb drivers support the
+  {permission} parameter.
+
+{map_size}
+
+  Optional int parameter which is passed to the driver. Its value should be a
+  multiple of the page size of the OS, or zero, to use the default mapsize.
+
+  The lmdb driver accepts the {map_size} parameter.
+
+{flags}
+
+  Allows to pass flags to the DB drivers. Currently, only LMDB with
+  DBA_LMDB_USE_SUB_DIR and DBA_LMDB_NO_SUB_DIR are supported.
+
+===============================================================================
+[ Return Values ]
+
+Returns a Dba\Connection instance on success or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+false is returned and an E_WARNING level error is issued when {handler} is null
+, but there is no default handler.
+
+===============================================================================
+[ Changelog ]
+
+  Version                               Description
+8.4.0        Returns a Dba\Connection instance now; previously, a resource was
+             returned.
+8.2.0        {flags} is added.
+8.1.0        {handler} is now nullable.
+7.3.14,      The lmdb driver now supports an additional {map_size} parameter.
+7.4.2
+
+===============================================================================
+[ See Also ]
+
+ * |dba_open| - Open database
+ * |dba_close| - Close a DBA database
+
+
+vim:ft=help:

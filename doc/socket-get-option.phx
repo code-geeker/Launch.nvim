@@ -1,0 +1,316 @@
+*socket_get_option*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+socket_get_option — Gets socket options for the socket
+
+===============================================================================
+[ Description ]
+
+  socket_get_option(Socket $socket, int $level, int $option): array|int|false~
+
+The socket_get_option() function retrieves the value for the option specified
+by the {option} parameter for the specified {socket}.
+
+===============================================================================
+[ Parameters ]
+
+{socket}
+
+  A Socket instance created with |socket_create| or |socket_accept|.
+
+{level}
+
+  The {level} parameter specifies the protocol level at which the option
+  resides. For example, to retrieve options at the socket level, a {level}
+  parameter of SOL_SOCKET would be used. Other levels, such as TCP, can be used
+  by specifying the protocol number of that level. Protocol numbers can be
+  found by using the |getprotobyname| function.
+
+{option}
+
+                           Available Socket Options
+           Option                Description                   Type
+                           Reports whether
+  SO_DEBUG                 debugging information is int
+                           being recorded.
+                           Reports whether
+  SO_BROADCAST             transmission of          int
+                           broadcast messages is
+                           supported.
+  SO_REUSEADDR             Reports whether local    int
+                           addresses can be reused.
+  SO_REUSEPORT             Reports whether local    int
+                           ports can be reused.
+                           Reports whether
+                           connections are kept
+                           active with periodic
+                           transmission of
+                           messages. If the
+  SO_KEEPALIVE             connected socket fails   int
+                           to respond to these
+                           messages, the connection
+                           is broken and processes
+                           writing to that socket
+                           are notified with a
+                           SIGPIPE signal.
+                           Reports whether the
+                           {socket} lingers on 
+                           |socket_close| if data is
+                           present. By default,
+                           when the socket is
+                           closed, it attempts to
+                           send all unsent data. In
+                           the case of a
+                           connection-oriented
+                           socket, |socket_close|
+                           will wait for its peer
+                           to acknowledge the data.
+
+                           If l_onoff is non-zero
+                           and l_linger is zero,
+                           all the unsent data will array. The array will
+  SO_LINGER                be discarded and RST     contain two keys: l_onoff
+                           (reset) is sent to the   and l_linger.
+                           peer in the case of a
+                           connection-oriented
+                           socket.
+
+                           On the other hand, if
+                           l_onoff is non-zero and
+                           l_linger is non-zero, 
+                           |socket_close| will block
+                           until all the data is
+                           sent or the time
+                           specified in l_linger
+                           elapses. If the socket
+                           is non-blocking, 
+                           |socket_close| will fail
+                           and return an error.
+
+                           Reports whether the
+  SO_OOBINLINE             {socket} leaves          int
+                           out-of-band data inline.
+  SO_SNDBUF                Reports the size of the  int
+                           send buffer.
+  SO_RCVBUF                Reports the size of the  int
+                           receive buffer.
+                           Reports information      int (cannot be set by |
+  SO_ERROR                 about error status and   socket_set_option|)
+                           clears it.
+  SO_TYPE                  Reports the {socket}     int (cannot be set by |
+                           type (e.g. SOCK_STREAM). socket_set_option|)
+                           Reports whether outgoing
+  SO_DONTROUTE             messages bypass the      int
+                           standard routing
+                           facilities.
+                           Reports the minimum
+  SO_RCVLOWAT              number of bytes to       int
+                           process for {socket}
+                           input operations.
+                                                    array. The array will
+                           Reports the timeout      contain two keys: sec which
+  SO_RCVTIMEO              value for input          is the seconds part on the
+                           operations.              timeout value and usec
+                                                    which is the microsecond
+                                                    part of the timeout value.
+                           Reports the timeout      array. The array will
+                           value specifying the     contain two keys: sec which
+                           amount of time that an   is the seconds part on the
+  SO_SNDTIMEO              output function blocks   timeout value and usec
+                           because flow control     which is the microsecond
+                           prevents data from being part of the timeout value.
+                           sent.
+                           Reports the minimum
+  SO_SNDLOWAT              number of bytes to       int
+                           process for {socket}
+                           output operations.
+                           Reports whether the
+  TCP_NODELAY              Nagle TCP algorithm is   int
+                           disabled.
+                                                    array with keys "group",
+                                                    specifying a string with an
+                                                    IPv4 or IPv6 multicast
+                                                    address and "interface",
+                                                    specifying either an
+                                                    interface number (type int)
+  MCAST_JOIN_GROUP         Joins a multicast group. or a string with the
+                                                    interface name, like
+                                                    "eth0". 0 can be specified
+                                                    to indicate the interface
+                                                    should be selected using
+                                                    routing rules. (can only be
+                                                    used in |socket_set_option|
+                                                    )
+                                                    array. See MCAST_JOIN_GROUP
+  MCAST_LEAVE_GROUP        Leaves a multicast       for more information. (can
+                           group.                   only be used in 
+                                                    |socket_set_option|)
+                                                    array with the same keys as
+                           Blocks packets arriving  MCAST_JOIN_GROUP, plus one
+                           from a specific source   extra key, source, which
+  MCAST_BLOCK_SOURCE       to a specific multicast  maps to a string specifying
+                           group, which must have   an IPv4 or IPv6 address of
+                           been previously joined.  the source to be blocked.
+                                                    (can only be used in 
+                                                    |socket_set_option|)
+                           Unblocks (start
+                           receiving again) packets array with the same format
+                           arriving from a specific as MCAST_BLOCK_SOURCE. (can
+  MCAST_UNBLOCK_SOURCE     source address to a      only be used in |
+                           specific multicast       socket_set_option|)
+                           group, which must have
+                           been previously joined.
+                           Receive packets destined array with the same format
+                           to a specific multicast  as MCAST_BLOCK_SOURCE. (can
+  MCAST_JOIN_SOURCE_GROUP  group whose source       only be used in |
+                           address matches a        socket_set_option|)
+                           specific value.
+                           Stop receiving packets   array with the same format
+                           destined to a specific   as MCAST_BLOCK_SOURCE. (can
+  MCAST_LEAVE_SOURCE_GROUP multicast group whose    only be used in |
+                           source address matches a socket_set_option|)
+                           specific value.
+                                                    Either int specifying the
+                                                    interface number or a 
+                                                    string with an interface
+                                                    name, like eth0. The value 
+                                                    0 can be used to indicate
+                                                    the routing table is to
+                                                    used in the interface
+                           The outgoing interface   selection. The function 
+  IP_MULTICAST_IF          for IPv4 multicast       socket_get_option() returns
+                           packets.                 an interface index. Note
+                                                    that, unlike the C API,
+                                                    this option does NOT take
+                                                    an IP address. This
+                                                    eliminates the interface
+                                                    difference between
+                                                    IP_MULTICAST_IF and
+                                                    IPV6_MULTICAST_IF.
+                           The outgoing interface   The same as IP_MULTICAST_IF
+  IPV6_MULTICAST_IF        for IPv6 multicast       .
+                           packets.
+                           The multicast loopback
+                           policy for IPv4 packets
+                           enables or disables
+                           loopback of outgoing
+                           multicasts, which must   int (either 0 or 1). For |
+                           have been previously     socket_set_option| any
+  IP_MULTICAST_LOOP        joined. The effect       value will be accepted and
+                           differs, however,        will be converted to a
+                           whether it applies on    boolean following the usual
+                           unixes or Windows, the   PHP rules.
+                           former being on the
+                           receive path whereas the
+                           latter being on the send
+                           path.
+                           Analogous to
+  IPV6_MULTICAST_LOOP      IP_MULTICAST_LOOP, but   int. See IP_MULTICAST_LOOP.
+                           for IPv6.
+                           The time-to-live of
+                           outgoing IPv4 multicast
+                           packets. This should be
+  IP_MULTICAST_TTL         a value between 0 (don't int between 0 and 255.
+                           leave the interface) and
+                           255. The default value
+                           is 1 (only the local
+                           network is reached).
+                           Analogous to
+                           IP_MULTICAST_TTL, but
+                           for IPv6 packets. The
+  IPV6_MULTICAST_HOPS      value -1 is also         int between -1 and 255.
+                           accepted, meaning the
+                           route default should be
+                           used.
+                           Sets an identifier on
+  SO_MARK                  the socket for packet    int
+                           filtering purpose on
+                           Linux.
+                           Adds an accept filter on
+                           the listened socket
+                           (FreeBSD/NetBSD). An
+  SO_ACCEPTFILTER          accept filter kernel     string name of the filter
+                           module needs to be       (length 15 max).
+                           loaded beforehand on
+                           FreeBSD (e.g.
+                           accf_http).
+                           Sets an identifier on
+  SO_USER_COOKIE           the socket for packet    int
+                           filtering purpose on
+                           FreeBSD.
+                           Sets an identifier on
+  SO_RTABLE                the socket for packet    int
+                           filtering purpose on
+                           OpenBSD.
+  SO_DONTTRUNC             Retain unread data.      int
+  SO_WANTMORE              Give a hint when more    int
+                           data is ready.
+                           Don't notify a listening
+  TCP_DEFER_ACCEPT         socket until data is     int
+                           ready.
+  SO_INCOMING_CPU          Gets/Sets the cpu        int
+                           affinity of a socket.
+  SO_MEMINFO               Gets all the meminfo of  int
+                           a socket.
+                           Gets the supported BPF
+  SO_BPF_EXTENSIONS        extensions by the kernel int
+                           to attach to a socket.
+                           Sets the route table
+  SO_SETFIB                (FIB) of a socket.       int
+                           (FreeBSD only)
+                           Filters attributed to a
+  SOL_FILTER               socket. (Solaris/Illumos int
+                           only)
+                           Sets the maximum number
+  TCP_KEEPCNT              of keepalive probes TCP  int
+                           should send before
+                           dropping the connection.
+                           Sets the time the
+  TCP_KEEPIDLE             connection needs to      int
+                           remain idle.
+                           Sets the time between
+  TCP_KEEPINTVL            individual keepalive     int
+                           probes.
+                           Sets the time the
+  TCP_KEEPALIVE            connection needs to      int
+                           remain idle. (macOS
+                           only)
+                           Sets the limit number of
+  TCP_NOTSENT_LOWAT        unsent data in write     int
+                           queue by the socket
+                           stream. (Linux only)
+
+===============================================================================
+[ Return Values ]
+
+Returns the value of the given option, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                            Description
+8.0.0   {socket} is a Socket instance now; previously, it was a resource.
+
+===============================================================================
+[ Examples ]
+
+Example #1 socket_get_option() example
+
+<?php >
+  $socket = socket_create_listen(1223);
+
+  $linger = array('l_linger' => 1, 'l_onoff' => 1);
+  socket_set_option($socket, SOL_SOCKET, SO_LINGER, $linger);
+
+  var_dump(socket_get_option($socket, SOL_SOCKET, SO_REUSEADDR));
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |socket_create_listen| - Opens a socket on port to accept connections
+ * |socket_set_option| - Sets socket options for the socket
+
+
+vim:ft=help:

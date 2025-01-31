@@ -1,0 +1,68 @@
+*oci_field_is_null*
+
+(PHP 5, PHP 7, PHP 8, PECL OCI8 >= 1.1.0)
+
+oci_field_is_null — Checks if a field in the currently fetched row is null
+
+===============================================================================
+[ Description ]
+
+  oci_field_is_null(resource $statement, string|int $column): bool~
+
+Checks if the given {column} from the current row of {statement} is null.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  A valid OCI statement identifier.
+
+{column}
+
+  Can be the field's index (1-based) or name.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {column} is null, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 |oci_field_name| example
+
+<?php >
+
+  // Create the table with:
+  // CREATE TABLE mytab (c1 NUMBER);
+  // INSERT INTO mytab VALUES (1);
+  // INSERT INTO mytab VALUES (NULL);
+
+  $conn = oci_connect("hr", "hrpwd", "localhost/XE");
+  if (!$conn) {
+  $m = oci_error();
+  trigger_error(htmlentities($m['message']), E_USER_ERROR);
+  }
+
+  $stid = oci_parse($conn, "SELECT * FROM mytab");
+  oci_execute($stid);
+
+  while (($row = oci_fetch_array($stid, OCI_RETURN_NULLS)) != false) {
+  $ncols = oci_num_fields($stid);
+  for ($col = 1; $col <= $ncols; $col++) {
+  var_dump(oci_field_is_null($stid, $col));
+  }
+  }
+
+  // Outputs:
+  // bool(false)
+  // bool(true)
+
+  oci_free_statement($stid);
+  oci_close($conn);
+
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,26 @@
+*sodium_crypto_kdf_keygen*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_kdf_keygen — Generate a random root key for the KDF interface
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_kdf_keygen(): string~
+
+Generates a random key suitable for serving as the root key for 
+|sodium_crypto_kdf_derive_from_key|.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+A random 256-bit key.
+
+
+vim:ft=help:

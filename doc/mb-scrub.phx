@@ -1,0 +1,41 @@
+*mb_scrub*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+mb_scrub — Replace ill-formed byte sequences with the substitute character
+
+===============================================================================
+[ Description ]
+
+  mb_scrub(string $string, ?string $encoding = null): string~
+
+Perform a character set conversion from the specified encoding, or the default
+encoding if no encoding was specified, to the same encoding. This has the
+effect of replacing any invalid byte sequences with the substitute character.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The input string.
+
+{encoding}
+
+  The encoding used to interpret {string}. If it is omitted or null, the
+  mbstring.internal_encoding setting will be used if set, otherwise the
+  default_charset setting will be used.
+
+===============================================================================
+[ Return Values ]
+
+The string result with invalid byte sequences replaced.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {encoding} is nullable now.
+
+
+vim:ft=help:

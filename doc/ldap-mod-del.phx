@@ -1,0 +1,57 @@
+*ldap_mod_del*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_mod_del — Delete attribute values from current attributes
+
+===============================================================================
+[ Description ]
+
+  ldap_mod_del(    LDAP\Connection~
+  $ldap,    string $dn,    array~
+  $entry,    ?array $controls = null): bool~
+
+Removes one or more attribute values from the specified {dn}. Object deletions
+are done by the |ldap_delete| function.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{dn}
+
+  The distinguished name of an LDAP entity.
+
+{entry}
+
+{controls}
+
+  Array of LDAP Controls to send with the request.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_mod_del_ext| - Delete attribute values from current attributes
+ * |ldap_mod_add| - Add attribute values to current attributes
+ * |ldap_mod_replace| - Replace attribute values with new ones
+ * |ldap_modify_batch| - Batch and execute modifications on an LDAP entry
+
+
+vim:ft=help:

@@ -1,0 +1,58 @@
+*rpmdefine*
+
+(PECL rpminfo >= 1.2.0)
+
+rpmdefine — Define or change a RPM macro value
+
+===============================================================================
+[ Description ]
+
+  rpmdefine(string $text): bool~
+
+Define or change a RPM macro value.
+
+This can be used to select the database path and backend to use instead of
+system default one.
+
+===============================================================================
+[ Parameters ]
+
+{text}
+
+  Macro name, options, body.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A rpmdefine() example
+
+<?php >
+  // use an old database (bdb) from an EL-8 chroot
+  rpmdefine("_dbpath /var/lib/mock/almalinux-8-x86_64/root/var/lib/rpm");
+  rpmdefine("_db_backend bdb_ro");
+  print_r(rpmdbinfo("almalinux-release")[0]["Summary"]);
+
+  // use a new database (sqlite) from a Fedora-41 chroot
+  rpmdefine("_dbpath /var/lib/mock/fedora-41-x86_64/root/usr/lib/sysimage/rpm");
+  rpmdefine("_db_backend sqlite");
+  print_r(rpmdbinfo("fedora-release")[0]["Summary"]);
+<?>
+
+The above example will output:
+
+AlmaLinux release file
+Fedora release files
+
+===============================================================================
+[ See Also ]
+
+ * |rpmexpand| - Retrieve expanded value of a RPM macro
+ * |rpmdbinfo| - Get information from installed RPM
+
+
+vim:ft=help:

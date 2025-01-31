@@ -1,0 +1,49 @@
+*odbc_result_all*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_result_all — Print result as HTML table
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.1.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] odbc_result_all(Odbc\Result $statement, string $format =~
+  ""): int|false~
+
+Prints all rows from a result object produced by |odbc_exec|. The result is
+printed in HTML table format. The data is not escaped.
+
+This function is not supposed to be used in production environments; it is
+merely meant for development purposes, to get a result set quickly rendered.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  The ODBC result object.
+
+{format}
+
+  Additional overall table formatting.
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of rows in the result or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {statement} expects an Odbc\Result instance now; previously, a resource
+        was expected.
+8.1.0   This function has been deprecated.
+
+
+vim:ft=help:

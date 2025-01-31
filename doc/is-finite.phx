@@ -1,0 +1,60 @@
+*is_finite*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+is_finite — Checks whether a float is finite
+
+===============================================================================
+[ Description ]
+
+  is_finite(float $num): bool~
+
+Returns whether the given {num} is a finite float.
+
+A finite float is neither NAN (|is_nan|), nor infinite (|is_infinite|).
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The float to check
+
+===============================================================================
+[ Return Values ]
+
+true if {num} is none of NAN, INF, -INF, else false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 is_finite() example
+
+<?php >
+  $float = 1.2345;
+  var_dump($float, is_finite($float));
+
+  $nan = sqrt(-1);
+  var_dump($nan, is_finite($nan));
+
+  $inf = 1e308 * 2;
+  var_dump($inf, is_finite($inf));
+<?>
+
+The above example will output:
+
+float(1.2345)
+bool(true)
+float(NAN)
+bool(false)
+float(INF)
+bool(false)
+
+===============================================================================
+[ See Also ]
+
+ * |is_infinite| - Checks whether a float is infinite
+ * |is_nan| - Checks whether a float is NAN
+
+
+vim:ft=help:

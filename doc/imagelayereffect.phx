@@ -1,0 +1,88 @@
+*imagelayereffect*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+imagelayereffect — Set the alpha blending flag to use layering effects
+
+===============================================================================
+[ Description ]
+
+  imagelayereffect(GdImage $image, int $effect): bool~
+
+Set the alpha blending flag to use layering effects.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{effect}
+
+  One of the following constants:
+
+  IMG_EFFECT_REPLACE
+    Use pixel replacement (equivalent of passing true to |imagealphablending|)
+  IMG_EFFECT_ALPHABLEND
+    Use normal pixel blending (equivalent of passing false to 
+    |imagealphablending|)
+  IMG_EFFECT_NORMAL
+    Same as IMG_EFFECT_ALPHABLEND.
+  IMG_EFFECT_OVERLAY
+    Overlay has the effect that black background pixels will remain black,
+    white background pixels will remain white, but grey background pixels will
+    take the colour of the foreground pixel.
+  IMG_EFFECT_MULTIPLY
+    Overlays with a multiply effect.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+7.2.0   Added IMG_EFFECT_MULTIPLY (requires system libgd >= 2.1.1 or the
+        bundled libgd).
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagelayereffect() example
+
+<?php >
+  // Setup an image
+  $im = imagecreatetruecolor(100, 100);
+
+  // Set a background
+  imagefilledrectangle($im, 0, 0, 100, 100, imagecolorallocate($im, 220, 220, 220
+  ));
+
+  // Apply the overlay alpha blending flag
+  imagelayereffect($im, IMG_EFFECT_OVERLAY);
+
+  // Draw two grey ellipses
+  imagefilledellipse($im, 50, 50, 40, 40, imagecolorallocate($im, 100, 255, 100
+  ));
+  imagefilledellipse($im, 50, 50, 50, 80, imagecolorallocate($im, 100, 100, 255
+  ));
+  imagefilledellipse($im, 50, 50, 80, 50, imagecolorallocate($im, 255, 100, 100
+  ));
+
+  // Output
+  header('Content-type: image/png');
+
+  imagepng($im);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagelayereffect()
+
+vim:ft=help:

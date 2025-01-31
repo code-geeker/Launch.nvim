@@ -1,0 +1,38 @@
+*sodium_crypto_stream_xor*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_stream_xor — Encrypt a message without authentication
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_stream_xor(#[\SensitiveParameter] string $message, string~
+  $nonce, #[\SensitiveParameter] string $key): string~
+
+This function encrypts a message with XSalsa20, but does not provide any
+ciphertext guarantees about the plaintext.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  The message to encrypt
+
+{nonce}
+
+  A number that must be only used once, per message. 24 bytes long. This is a
+  large enough bound to generate randomly (i.e. |random_bytes|).
+
+{key}
+
+  Encryption key (256-bit).
+
+===============================================================================
+[ Return Values ]
+
+Encrypted message.
+
+
+vim:ft=help:

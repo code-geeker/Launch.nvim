@@ -1,0 +1,48 @@
+*rpmvercmp*
+
+(PECL rpminfo >= 0.1.0)
+
+rpmvercmp — RPM version comparison
+
+===============================================================================
+[ Description ]
+
+  rpmvercmp(string $evr1, string $evr2, ?string $operator = null): int|bool~
+
+Compare two RPM package versions.
+
+===============================================================================
+[ Parameters ]
+
+{evr1}
+
+  First epoch:version-release string.
+
+{evr2}
+
+  Second epoch:version-release string.
+
+{operator}
+
+  An optional operator. The possible operators are: < or lt; <= or le; > or gt;
+  >= or ge; ==, = or eq; !=, <> or ne.
+
+  This parameter is case-sensitive, values should be lowercase.
+
+===============================================================================
+[ Return Values ]
+
+Returns -1 if {evr1} is less than {evr2}, 1 if {evr1} is greater than {evr2},
+and 0 if they are equal.
+
+When using the optional {operator} argument, the function will return true if
+the relationship is the one specified by the operator, false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+     Version                Description
+PECL rpminfo 0.7.0 Optional {operator} was added.
+
+
+vim:ft=help:

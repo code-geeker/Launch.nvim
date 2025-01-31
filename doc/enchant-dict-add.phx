@@ -1,0 +1,64 @@
+*enchant_dict_add*
+
+(PHP 8)
+
+enchant_dict_add — Add a word to personal word list
+
+===============================================================================
+[ Description ]
+
+  enchant_dict_add(EnchantDictionary $dictionary, string $word): void~
+
+Add a word to personal word list of the given dictionary.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+{word}
+
+  The word to add
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dictionary} expects an EnchantDictionary instance now; previoulsy, a 
+        resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Adding a word to a PWL
+
+<?php >
+
+  $filename = './my_word_list.pwl';
+  $word = 'Supercalifragilisticexpialidocious';
+
+  $broker = enchant_broker_init();
+  $dict = enchant_broker_request_pwl_dict($broker, $filename);
+
+  enchant_dict_add($dict, $word);
+
+  enchant_broker_free($broker);
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |enchant_broker_request_pwl_dict| - Creates a dictionary using a PWL file
+ * |enchant_broker_request_dict| - Create a new dictionary using a tag
+
+
+vim:ft=help:

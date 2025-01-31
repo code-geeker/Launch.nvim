@@ -1,0 +1,39 @@
+*odbc_field_name*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_field_name — Get the columnname
+
+===============================================================================
+[ Description ]
+
+  odbc_field_name(Odbc\Result $statement, int $field): string|false~
+
+Gets the name of the field occupying the given column number in the given
+result object.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  The ODBC result object.
+
+{field}
+
+  The field number. Field numbering starts at 1.
+
+===============================================================================
+[ Return Values ]
+
+Returns the field name as a string, or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {statement} expects an Odbc\Result instance now; previously, a resource
+        was expected.
+
+
+vim:ft=help:

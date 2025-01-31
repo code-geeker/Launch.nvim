@@ -1,0 +1,30 @@
+*http_clear_last_response_headers*
+
+(PHP 8 >= 8.4.0)
+
+http_clear_last_response_headers — Clears the stored HTTP response headers
+
+===============================================================================
+[ Description ]
+
+  http_clear_last_response_headers(): void~
+
+Clears the HTTP response headers that were received using the HTTP wrapper.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ See Also ]
+
+ * |http_get_last_response_headers| - Retrieve last HTTP response headers
+
+
+vim:ft=help:

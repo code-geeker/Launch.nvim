@@ -1,0 +1,25 @@
+*readline_clear_history*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+readline_clear_history — Clears the history
+
+===============================================================================
+[ Description ]
+
+  readline_clear_history(): true~
+
+This function clears the entire command line history.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+
+vim:ft=help:

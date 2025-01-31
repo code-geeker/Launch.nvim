@@ -1,0 +1,143 @@
+*exit*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+exit — Terminate the current script with a status code or message
+
+===============================================================================
+[ Description ]
+
+  exit(string|int $status = 0): never~
+
+Terminates execution of the script. |Shutdown functions| and object destructors
+will always be executed even if exit() is called. However, finally blocks are
+never executed.
+
+An exit code of 0 is used to indicate that the program succeeded in its tasks.
+Any other value indicates some sort of error occurred during execution.
+
+exit() is a special function, because it has a dedicated token in the parser,
+as such it can be used like a statement (i.e. without parentheses) to terminate
+the script with the default status code.
+
+Caution
+
+It is not possible to disable, or create a namespaced function shadowing the
+global exit() function.
+
+===============================================================================
+[ Parameters ]
+
+{status}
+  If {status} is a string, this function prints the {status} just before
+  exiting. The exit code returned by PHP is 0.
+
+  If {status} is an int, the exit code returned by PHP will be {status}.
+
+
+    Note: Exit codes should be in the range 0 to 254, the exit code 255 is
+    reserved by PHP and should not be used.
+
+  Warning
+
+  Prior to PHP 8.4.0, exit() did not follow PHP's standard type juggling
+  semantics, nor respect the strict_types declare.
+
+  Any value not of type int was cast to string including resource and array
+  values. As of PHP 8.4.0, it follows the usual type juggling semantics and
+  throws a TypeError on invalid values.
+
+===============================================================================
+[ Return Values ]
+
+As this terminates the PHP script, no value is returned.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        exit() is now a proper function, therefore it follows the usual type
+8.4.0   juggling semantics is affected by the strict_types declare, can be
+        called with named arguments, and be a variable functions.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Basic exit() example
+
+<?php >
+
+  // exit program normally
+  exit();
+  exit(0);
+
+  // exit with an error code
+  exit(1);
+
+<?>
+
+Example #2 exit() example with a string
+
+<?php >
+
+  $filename = '/path/to/data-file';
+  $file = fopen($filename, 'r')
+  or exit("unable to open file ($filename)");
+
+<?>
+
+Example #3 Shutdown functions and destructors run regardless
+
+<?php >
+  class Foo
+  {
+  public function __destruct()
+  {
+  echo 'Destruct: ' . __METHOD__ . '()' . PHP_EOL;
+  }
+  }
+
+  function shutdown()
+  {
+  echo 'Shutdown: ' . __FUNCTION__ . '()' . PHP_EOL;
+  }
+
+  $foo = new Foo();
+  register_shutdown_function('shutdown');
+
+  exit();
+  echo 'This will not be output.';
+<?>
+
+The above example will output:
+
+Shutdown: shutdown()
+Destruct: Foo::__destruct()
+
+Example #4 exit() as a statement
+
+<?php >
+
+  // exit program normally with exit code 0
+  exit;
+
+<?>
+
+===============================================================================
+[ Notes ]
+
+Warning
+
+Prior to PHP 8.4.0, exit() was a language construct and not a function,
+therefore it was not possible to call it using variable functions, or named
+arguments.
+
+===============================================================================
+[ See Also ]
+
+ * |register_shutdown_function| - Register a function for execution on shutdown
+ * |Shutdown functions|
+ * object destructors
+
+
+vim:ft=help:

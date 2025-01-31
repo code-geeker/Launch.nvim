@@ -1,0 +1,100 @@
+*pg_fetch_all*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+pg_fetch_all — Fetches all rows from a result as an array
+
+===============================================================================
+[ Description ]
+
+  pg_fetch_all(PgSql\Result $result, int $mode = PGSQL_ASSOC): array~
+
+pg_fetch_all() returns an array that contains all rows (records) in the PgSql\
+Result instance.
+
+  Note: This function sets NULL fields to the PHP null value.
+
+===============================================================================
+[ Parameters ]
+
+{result}
+
+  An PgSql\Result instance, returned by |pg_query|, |pg_query_params| or 
+  |pg_execute|(among others).
+
+{mode}
+
+  An optional parameter that controls how the returned array is indexed. {mode}
+  is a constant and can take the following values: PGSQL_ASSOC, PGSQL_NUM and
+  PGSQL_BOTH. Using PGSQL_NUM, the function will return an array with numerical
+  indices, using PGSQL_ASSOC it will return only associative indices while
+  PGSQL_BOTH will return both numerical and associative indices.
+
+===============================================================================
+[ Return Values ]
+
+An array with all rows in the result. Each row is an array of field values
+indexed by field name.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {result} parameter expects an PgSql\Result instance now;
+        previously, a resource was expected.
+8.0.0   pg_fetch_all() will now return an empty array instead of false for
+        result sets with zero rows.
+7.1.0   The {mode} parameter was added.
+
+===============================================================================
+[ Examples ]
+
+Example #1 PostgreSQL fetch all
+
+<?php >
+  $conn = pg_pconnect("dbname=publisher");
+  if (!$conn) {
+  echo "An error occurred.\n";
+  exit;
+  }
+
+  $result = pg_query($conn, "SELECT * FROM authors");
+  if (!$result) {
+  echo "An error occurred.\n";
+  exit;
+  }
+
+  $arr = pg_fetch_all($result);
+
+  print_r($arr);
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [name] => Fred
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [name] => Bob
+        )
+
+)
+
+===============================================================================
+[ See Also ]
+
+ * |pg_fetch_row| - Get a row as an enumerated array
+ * |pg_fetch_array| - Fetch a row as an array
+ * |pg_fetch_object| - Fetch a row as an object
+ * |pg_fetch_result| - Returns values from a result instance
+
+
+vim:ft=help:

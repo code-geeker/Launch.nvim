@@ -1,0 +1,51 @@
+*xml_parser_create_ns*
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
+
+xml_parser_create_ns — Create an XML parser with namespace support
+
+===============================================================================
+[ Description ]
+
+  xml_parser_create_ns(?string $encoding = null, string $separator =~
+  ":"): XMLParser~
+
+xml_parser_create_ns() creates a new XML parser with XML namespace support and
+returns a XMLParser instance to be used by the other XML functions.
+
+===============================================================================
+[ Parameters ]
+
+{encoding}
+
+  The input encoding is automatically detected, so that the {encoding}
+  parameter specifies only the output encoding. The default output charset is
+  UTF-8. The supported encodings are ISO-8859-1, UTF-8 and US-ASCII.
+
+{separator}
+
+  With a namespace aware parser tag parameters passed to the various handler
+  functions will consist of namespace and tag name separated by the string
+  specified in {separator}.
+
+===============================================================================
+[ Return Values ]
+
+Returns a new XMLParser instance.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   This function returns an XMLParser instance now; previously, a resource
+        was returned, or false on failure.
+8.0.0   {encoding} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |xml_parser_create| - Create an XML parser
+ * |xml_parser_free| - Free an XML parser
+
+
+vim:ft=help:

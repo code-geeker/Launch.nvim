@@ -1,0 +1,39 @@
+*shm_remove*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+shm_remove — Removes shared memory from Unix systems
+
+===============================================================================
+[ Description ]
+
+  shm_remove(SysvSharedMemory $shm): bool~
+
+shm_remove() removes the shared memory {shm}. All data will be destroyed.
+
+===============================================================================
+[ Parameters ]
+
+{shm}
+
+  A shared memory segment obtained from |shm_attach|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {shm} expects a SysvSharedMemory instance now; previously, a resource
+        was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |shm_remove_var| - Removes a variable from shared memory
+
+
+vim:ft=help:

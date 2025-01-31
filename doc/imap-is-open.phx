@@ -1,0 +1,39 @@
+*imap_is_open*
+
+(PHP 8 >= 8.2.1)
+
+imap_is_open — Check if the IMAP stream is still valid
+
+===============================================================================
+[ Description ]
+
+  imap_is_open(IMAP\Connection $imap): bool~
+
+Check if the IMAP stream is still valid.
+
+===============================================================================
+[ Parameters ]
+
+{imap}
+
+  An IMAP\Connection instance.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the stream is still valid, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imap_is_open() example
+
+<?php >
+  $mbox = imap_open("{imap.example.org:143}INBOX", "username", "password") or die
+  (implode(", ", imap_errors()));
+  imap_is_open($mbox);
+  // ...
+<?>
+
+
+vim:ft=help:

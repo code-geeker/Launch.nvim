@@ -1,0 +1,76 @@
+*ldap_rename*
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
+
+ldap_rename — Modify the name of an entry
+
+===============================================================================
+[ Description ]
+
+  ldap_rename(    LDAP\Connection~
+  $ldap,    string $dn,    string~
+  $new_rdn,    string~
+  $new_parent,    bool~
+  $delete_old_rdn,    ?array $controls = null): bool~
+
+The entry specified by {dn} is renamed/moved.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{dn}
+
+  The distinguished name of an LDAP entity.
+
+{new_rdn}
+
+  The new RDN.
+
+{new_parent}
+
+  The new parent/superior entry.
+
+{delete_old_rdn}
+
+  If true the old RDN value(s) is removed, else the old RDN value(s) is
+  retained as non-distinguished values of the entry.
+
+{controls}
+
+  Array of LDAP Controls to send with the request.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function currently only works with LDAPv3. You may have to use 
+  |ldap_set_option| prior to binding to use LDAPv3. This function is only
+  available when using OpenLDAP 2.x.x OR Netscape Directory SDK x.x.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_rename_ext| - Modify the name of an entry
+ * |ldap_modify| - Alias of ldap_mod_replace
+
+
+vim:ft=help:

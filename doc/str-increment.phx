@@ -1,0 +1,68 @@
+*str_increment*
+
+(PHP 8 >= 8.3.0)
+
+str_increment — Increment an alphanumeric string
+
+===============================================================================
+[ Description ]
+
+  str_increment(string $string): string~
+
+Returns the incremented alphanumeric ASCII {string}.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The input string.
+
+===============================================================================
+[ Return Values ]
+
+Returns the incremented alphanumeric ASCII string.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if {string} is empty.
+
+A ValueError is thrown if {string} is not an alphanumeric ASCII string.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Basic str_increment() example
+
+<?php >
+  $str = 'ABC';
+  var_dump(str_increment($str));
+<?>
+
+The above example will output:
+
+string(3) "ABD"
+
+Example #2 str_increment() example with a carry
+
+<?php >
+  $str = 'DZ';
+  var_dump(str_increment($str));
+
+  $str = 'ZZ';
+  var_dump(str_increment($str));
+<?>
+
+The above example will output:
+
+string(2) "EA"
+string(3) "AAA"
+
+===============================================================================
+[ See Also ]
+
+ * |str_decrement| - Decrement an alphanumeric string
+
+
+vim:ft=help:

@@ -1,0 +1,41 @@
+*gzdecode*
+
+(PHP 5 >= 5.4.0, PHP 7, PHP 8)
+
+gzdecode — Decodes a gzip compressed string
+
+===============================================================================
+[ Description ]
+
+  gzdecode(string $data, int $max_length = 0): string|false~
+
+This function returns a decoded version of the input {data}.
+
+===============================================================================
+[ Parameters ]
+
+{data}
+
+  The data to decode, encoded by |gzencode|.
+
+{max_length}
+
+  The maximum length of data to decode.
+
+===============================================================================
+[ Return Values ]
+
+The decoded string, or or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+In case of failure, an E_WARNING level error is issued.
+
+===============================================================================
+[ See Also ]
+
+ * |gzencode| - Create a gzip compressed string
+
+
+vim:ft=help:

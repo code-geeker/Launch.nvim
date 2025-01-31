@@ -1,0 +1,77 @@
+*gmp_random_seed*
+
+(PHP 7, PHP 8)
+
+gmp_random_seed — Sets the RNG seed
+
+===============================================================================
+[ Description ]
+
+  gmp_random_seed(GMP|int|string $seed): void~
+
+===============================================================================
+[ Parameters ]
+
+{seed}
+
+  The seed to be set for the |gmp_random|, |gmp_random_bits|, and 
+  |gmp_random_range| functions.
+
+  A GMP object, an int, or a string that can be interpreted as a number
+  following the same logic as if the string was used in |gmp_init| with
+  automatic base detection (i.e. when {base} is equal to 0).
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {seed} is invalid.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   If {seed} is invalid, gmp_random_seed() now throws a ValueError.
+        Previously it emitted an E_WARNING and returned false.
+
+===============================================================================
+[ Examples ]
+
+Example #1 gmp_random_seed() example
+
+<?php >
+// set the seed
+gmp_random_seed(100);
+
+var_dump(gmp_strval(gmp_random(1)));
+
+// set the seed to something else
+gmp_random_seed(gmp_init(-100));
+
+var_dump(gmp_strval(gmp_random_bits(10)));
+
+// set the seed to something invalid
+var_dump(gmp_random_seed('not a number'));
+
+The above example will output:
+
+string(20) "15370156633245019617"
+string(3) "683"
+
+Warning: gmp_random_seed(): Unable to convert variable to GMP - string is not an integer in %s on line %d
+bool(false)
+
+===============================================================================
+[ See Also ]
+
+ * |gmp_init| - Create GMP number
+ * |gmp_random| - Random number
+ * |gmp_random_bits| - Random number
+ * |gmp_random_range| - Get a uniformly selected integer
+
+
+vim:ft=help:

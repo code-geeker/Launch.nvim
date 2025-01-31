@@ -1,0 +1,140 @@
+*strrpos*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+strrpos — Find the position of the last occurrence of a substring in a string
+
+===============================================================================
+[ Description ]
+
+  strrpos(string $haystack, string $needle, int $offset = 0): int|false~
+
+Find the numeric position of the last occurrence of {needle} in the {haystack}
+string.
+
+===============================================================================
+[ Parameters ]
+
+{haystack}
+
+  The string to search in.
+
+{needle}
+
+  The string to search for.
+
+  Prior to PHP 8.0.0, if {needle} is not a string, it is converted to an
+  integer and applied as the ordinal value of a character. This behavior is
+  deprecated as of PHP 7.3.0, and relying on it is highly discouraged.
+  Depending on the intended behavior, the {needle} should either be explicitly
+  cast to string, or an explicit call to |chr| should be performed.
+
+{offset}
+
+  If zero or positive, the search is performed left to right skipping the first
+  {offset} bytes of the {haystack}.
+
+  If negative, the search starts {offset} bytes from the right instead of from
+  the beginning of {haystack}. The search is performed right to left, searching
+  for the first occurrence of {needle} from the selected byte.
+
+
+    Note:
+
+    This is effectively looking for the last occurrence of {needle} at or
+    before the last {offset} bytes.
+
+===============================================================================
+[ Return Values ]
+
+Returns the position where the needle exists relative to the beginning of the
+{haystack} string (independent of search direction or offset).
+
+
+  Note: String positions start at 0, and not 1.
+
+Returns false if the needle was not found.
+
+Warning
+
+This function may return Boolean false, but may also return a non-Boolean value
+which evaluates to false. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+===============================================================================
+[ Changelog ]
+
+Version                    Description
+8.0.0   {needle} now accepts an empty string.
+8.0.0   Passing an int as {needle} is no longer supported.
+7.3.0   Passing an int as {needle} has been deprecated.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Checking if a needle is in the haystack
+
+It is easy to mistake the return values for "character found at position 0" and
+"character not found". Here's how to detect the difference:
+
+<?php >
+
+  $pos = strrpos($mystring, "b");
+  if ($pos === false) { // note: three equal signs
+  // not found...
+  }
+
+<?>
+
+Example #2 Searching with offsets
+
+<?php >
+  $foo = "0123456789a123456789b123456789c";
+
+  // Looking for '0' from the 0th byte (from the beginning)
+  var_dump(strrpos($foo, '0', 0));
+
+  // Looking for '0' from the 1st byte (after byte "0")
+  var_dump(strrpos($foo, '0', 1));
+
+  // Looking for '7' from the 21th byte (after byte 20)
+  var_dump(strrpos($foo, '7', 20));
+
+  // Looking for '7' from the 29th byte (after byte 28)
+  var_dump(strrpos($foo, '7', 28));
+
+  // Looking for '7' right to left from the 5th byte from the end
+  var_dump(strrpos($foo, '7', -5));
+
+  // Looking for 'c' right to left from the 2nd byte from the end
+  var_dump(strrpos($foo, 'c', -2));
+
+  // Looking for '9c' right to left from the 2nd byte from the end
+  var_dump(strrpos($foo, '9c', -2));
+<?>
+
+The above example will output:
+
+int(0)
+bool(false)
+int(27)
+bool(false)
+int(17)
+bool(false)
+int(29)
+
+===============================================================================
+[ See Also ]
+
+ * |strpos| - Find the position of the first occurrence of a substring in a
+  string
+ * |stripos| - Find the position of the first occurrence of a case-insensitive
+  substring in a string
+ * |strripos| - Find the position of the last occurrence of a case-insensitive
+  substring in a string
+ * |strrchr| - Find the last occurrence of a character in a string
+ * |substr| - Return part of a string
+
+
+vim:ft=help:

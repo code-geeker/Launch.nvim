@@ -1,0 +1,103 @@
+*MongoDB\BSON\toPHP*
+
+(mongodb >=1.0.0)
+
+MongoDB\BSON\toPHP — Returns the PHP representation of a BSON value
+
+Warning
+
+This function has been DEPRECATED as of extension version 1.20.0 and will be
+removed in 2.0. Applications should use MongoDB\BSON\Document::toPHP() instead.
+
+===============================================================================
+[ Description ]
+
+  MongoDB\BSON\toPHP(string $bson, array $typeMap = array()): array|object~
+
+Unserializes a BSON document (i.e. binary string) to its PHP representation.
+The {typeMap} paramater may be used to control the PHP types used for
+converting BSON arrays and documents (both root and embedded).
+
+Warning
+
+BSON documents can technically contain duplicate keys because documents are
+stored as a list of key-value pairs; however, applications should refrain from
+generating documents with duplicate keys as server and driver behavior may be
+undefined. Since PHP objects and arrays cannot have duplicate keys, data could
+also be lost when decoding a BSON document with duplicate keys.
+
+===============================================================================
+[ Parameters ]
+
+{bson} (string)
+
+  BSON value to be unserialized.
+
+{typeMap} (array)
+
+  Type map configuration.
+
+===============================================================================
+[ Return Values ]
+
+The unserialized PHP value.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+ * Throws MongoDB\Driver\Exception\InvalidArgumentException if a class in the
+  type map cannot be instantiated or does not implement MongoDB\BSON\
+  Unserializable.
+ * Throws MongoDB\Driver\Exception\UnexpectedValueException if the input did
+  not contain exactly one BSON document. Possible reasons include, but are not
+  limited to, invalid BSON, extra data (after reading one BSON document), or an
+  unexpected » libbson error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+PECL    If the input contains an unsupported, deprecated BSON type, the
+mongodb extension will now no longer log a warning to the debug log, but
+1.4.0   instead will create an object representing this type.
+
+        MongoDB\Driver\Exception\UnexpectedValueException is no longer thrown
+PECL    if the input contains an unsupported, deprecated BSON type. Such types
+mongodb will be ignored (as they were in versions before 1.3.0), although the
+1.3.2   extension will now log a warning to the debug log (see: mongodb.debug).
+
+PECL    MongoDB\Driver\Exception\UnexpectedValueException is thrown if the
+mongodb input contains an unsupported, deprecated BSON type. Previously, such
+1.3.0   types were ignored.
+
+===============================================================================
+[ Examples ]
+
+Example #1 MongoDB\BSON\toPHP() example
+
+<?php >
+
+  $bson = hex2bin('0e00000010666f6f000100000000');
+  $value = MongoDB\BSON\toPHP($bson);
+  var_dump($value);
+
+<?>
+
+The above example will output:
+
+object(stdClass)#1 (1) {
+  ["foo"]=>
+  int(1)
+}
+
+===============================================================================
+[ See Also ]
+
+ * MongoDB\BSON\Document::toPHP() - Returns the PHP representation of the BSON
+  document
+ * MongoDB\BSON\fromPHP() - Returns the BSON representation of a PHP value
+ * » MongoDB BSON
+ * Persisting Data
+
+
+vim:ft=help:

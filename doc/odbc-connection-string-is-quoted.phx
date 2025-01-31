@@ -1,0 +1,38 @@
+*odbc_connection_string_is_quoted*
+
+(PHP 8 >= 8.2.0)
+
+odbc_connection_string_is_quoted — Determines if an ODBC connection string
+value is quoted
+
+===============================================================================
+[ Description ]
+
+  odbc_connection_string_is_quoted(string $str): bool~
+
+Determines if a string is properly quoted for an ODBC connection string value.
+ODBC connection string quoting is performed using curly braces, and ending
+braces within a string must be escaped through repeating them twice, similar to
+SQL quoting.
+
+===============================================================================
+[ Parameters ]
+
+{str}
+
+  The string to check for quoting.
+
+===============================================================================
+[ Return Values ]
+
+true if quoted properly, false if not.
+
+===============================================================================
+[ See Also ]
+
+ * |odbc_connection_string_quote| - Quotes an ODBC connection string value
+ * |odbc_connection_string_should_quote| - Determines if an ODBC connection
+  string value should be quoted
+
+
+vim:ft=help:

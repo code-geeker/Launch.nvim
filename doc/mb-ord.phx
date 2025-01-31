@@ -1,0 +1,68 @@
+*mb_ord*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+mb_ord — Get Unicode code point of character
+
+===============================================================================
+[ Description ]
+
+  mb_ord(string $string, ?string $encoding = null): int|false~
+
+Returns the Unicode code point value of the given character.
+
+This function complements |mb_chr|.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  A string
+
+{encoding}
+
+  The {encoding} parameter is the character encoding. If it is omitted or null,
+  the internal character encoding value will be used.
+
+===============================================================================
+[ Return Values ]
+
+The Unicode code point for the first character of string or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {encoding} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A basic mb_ord() example
+
+<?php >
+  var_dump(mb_ord("A", "UTF-8"));
+  var_dump(mb_ord("🐘", "UTF-8"));
+  var_dump(mb_ord("\x80", "ISO-8859-1"));
+  var_dump(mb_ord("\x80", "Windows-1252"));
+<?>
+
+The above example will output:
+
+
+int(65)
+int(128024)
+int(128)
+int(8364)
+
+===============================================================================
+[ See Also ]
+
+ * |mb_internal_encoding| - Set/Get internal character encoding
+ * |mb_chr| - Return character by Unicode code point value
+ * IntlChar::ord() - Return Unicode code point value of character
+ * |ord| - Convert the first byte of a string to a value between 0 and 255
+
+
+vim:ft=help:

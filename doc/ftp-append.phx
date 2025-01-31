@@ -1,0 +1,45 @@
+*ftp_append*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+ftp_append — Append the contents of a file to another file on the FTP server
+
+===============================================================================
+[ Description ]
+
+  ftp_append(    FTP\Connection~
+  $ftp,    string~
+  $remote_filename,    string~
+  $local_filename,    int $mode = FTP_BINARY): bool~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{ftp}
+
+  An FTP\Connection instance.
+
+{remote_filename}
+
+{local_filename}
+
+{mode}
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ftp} parameter expects an FTP\Connection instance now; previously,
+        a resource was expected.
+
+
+vim:ft=help:

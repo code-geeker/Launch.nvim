@@ -1,0 +1,48 @@
+*sqrt*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+sqrt — Square root
+
+===============================================================================
+[ Description ]
+
+  sqrt(float $num): float~
+
+Returns the square root of {num}.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The argument to process
+
+===============================================================================
+[ Return Values ]
+
+The square root of {num} or the special value NAN for negative numbers.
+
+===============================================================================
+[ Examples ]
+
+Example #1 sqrt() example
+
+<?php >
+  // Precision depends on your precision directive
+  echo sqrt(9); // 3
+  echo sqrt(10); // 3.16227766 ...
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pow| - Exponential expression
+ * M_SQRTPI - sqrt(pi)
+ * M_2_SQRTPI - 2/sqrt(pi)
+ * M_SQRT2 - sqrt(2)
+ * M_SQRT3 - sqrt(3)
+ * M_SQRT1_2 - 1/sqrt(2)
+
+
+vim:ft=help:

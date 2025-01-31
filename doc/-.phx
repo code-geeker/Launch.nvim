@@ -1,0 +1,13 @@
+*_*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+_ — Alias of |gettext|
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: |gettext|.
+
+
+vim:ft=help:

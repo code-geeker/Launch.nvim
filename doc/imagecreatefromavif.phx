@@ -1,0 +1,28 @@
+*imagecreatefromavif*
+
+(PHP 8 >= 8.1.0)
+
+imagecreatefromavif — Create a new image from file or URL
+
+===============================================================================
+[ Description ]
+
+  imagecreatefromavif(string $filename): GdImage|false~
+
+imagecreatefromavif() returns an image object representing the image obtained
+from the given filename.
+
+===============================================================================
+[ Parameters ]
+
+{filename}
+
+  Path to the AVIF raster image.
+
+===============================================================================
+[ Return Values ]
+
+Returns an image object on success, false on errors.
+
+
+vim:ft=help:

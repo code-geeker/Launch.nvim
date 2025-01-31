@@ -1,0 +1,41 @@
+*rnp_load_keys_from_path*
+
+(PECL rnp >= 0.1.1)
+
+rnp_load_keys_from_path — Load keys from specified path
+
+===============================================================================
+[ Description ]
+
+  rnp_load_keys_from_path(    RnpFFI~
+  $ffi,    string $format,    string~
+  $input_path,    int $flags): bool~
+
+Note that for G10, the input must be a directory (which must already exist).
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{format}
+
+  The key format of the data (GPG, KBX, G10).
+
+{input_path}
+
+  file or directory containing the keys.
+
+{flags}
+
+  See RNP_LOAD_SAVE_* flags description.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

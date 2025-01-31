@@ -1,0 +1,32 @@
+*inflate_get_status*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+inflate_get_status — Get decompression status
+
+===============================================================================
+[ Description ]
+
+  inflate_get_status(InflateContext $context): int~
+
+Usually returns either ZLIB_OK or ZLIB_STREAM_END.
+
+===============================================================================
+[ Parameters ]
+
+{context}
+
+===============================================================================
+[ Return Values ]
+
+Returns decompression status.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {context} expects an InflateContext instance now; previously, a 
+        resource was expected.
+
+
+vim:ft=help:

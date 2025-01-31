@@ -1,0 +1,32 @@
+*eio_set_min_parallel*
+
+(PECL eio >= 0.0.1dev)
+
+eio_set_min_parallel — Set minimum parallel thread number
+
+===============================================================================
+[ Description ]
+
+  eio_set_min_parallel(string $nthreads): void~
+
+===============================================================================
+[ Parameters ]
+
+{nthreads}
+
+  Number of parallel threads.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ See Also ]
+
+ * |eio_nthreads| - Returns number of threads currently in use
+ * |eio_set_max_idle| - Set maximum number of idle threads
+ * |eio_set_max_parallel| - Set maximum parallel threads
+
+
+vim:ft=help:

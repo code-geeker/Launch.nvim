@@ -1,0 +1,89 @@
+*defined*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+defined — Checks whether a constant with the given name exists
+
+===============================================================================
+[ Description ]
+
+  defined(string $constant_name): bool~
+
+Checks whether a constant with the given {constant_name} is defined.
+
+This function works also with class constants and enum cases.
+
+  Note:
+
+  If you want to see if a variable exists, use |isset| as defined() only
+  applies to constants. If you want to see if a function exists, use 
+  |function_exists|.
+
+===============================================================================
+[ Parameters ]
+
+{constant_name}
+
+  The constant name.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the named constant given by {constant_name} has been defined,
+false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Checking Constants
+
+<?php >
+
+  /* Note the use of quotes, this is important. This example is checking
+  * if the string 'TEST' is the name of a constant named TEST */
+  if (defined('TEST')) {
+  echo TEST;
+  }
+
+
+  interface bar {
+  const test = 'foobar!';
+  }
+
+  class foo {
+  const test = 'foobar!';
+  }
+
+  var_dump(defined('bar::test')); // bool(true)
+  var_dump(defined('foo::test')); // bool(true)
+
+<?>
+
+Example #2 Checking Enum Cases (as of PHP 8.1.0)
+
+<?php >
+
+  enum Suit
+  {
+  case Hearts;
+  case Diamonds;
+  case Clubs;
+  case Spades;
+  }
+
+  var_dump(defined('Suit::Hearts')); // bool(true)
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |define| - Defines a named constant
+ * |constant| - Returns the value of a constant
+ * |get_defined_constants| - Returns an associative array with the names of all
+  the constants and their values
+ * |function_exists| - Return true if the given function has been defined
+ * The section on Constants
+
+
+vim:ft=help:

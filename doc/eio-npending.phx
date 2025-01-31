@@ -1,0 +1,32 @@
+*eio_npending*
+
+(PECL eio >= 0.0.1dev)
+
+eio_npending — Returns number of finished, but unhandled requests
+
+===============================================================================
+[ Description ]
+
+  eio_npending(): int~
+
+eio_npending() returns number of finished, but unhandled requests
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+eio_npending() returns number of finished, but unhandled requests.
+
+===============================================================================
+[ See Also ]
+
+ * |eio_nreqs| - Returns number of requests to be processed
+ * |eio_nready| - Returns number of not-yet handled requests
+ * |eio_nthreads| - Returns number of threads currently in use
+
+
+vim:ft=help:

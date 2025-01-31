@@ -1,0 +1,31 @@
+*openssl_cms_read*
+
+(PHP 8)
+
+openssl_cms_read — Export the CMS file to an array of PEM certificates
+
+===============================================================================
+[ Description ]
+
+  openssl_cms_read(string $input_filename, array &$certificates): bool~
+
+Performs the exact analog to |openssl_pkcs7_read|.
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{input_filename}
+
+{certificates}
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

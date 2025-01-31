@@ -1,0 +1,46 @@
+*xml_parser_free*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+xml_parser_free — Free an XML parser
+
+===============================================================================
+[ Description ]
+
+  xml_parser_free(XMLParser $parser): bool~
+
+
+  Note:
+
+  This function has no effect. Prior to PHP 8.0.0, this function was used to
+  close the resource.
+
+Frees the given XML {parser}.
+
+Caution
+
+In addition to calling xml_parser_free() when the parsing is finished, prior to
+PHP 8.0.0, it was necessary to also explicitly unset the reference to {parser}
+to avoid memory leaks, if the parser resource is referenced from an object, and
+this object references that parser resource.
+
+===============================================================================
+[ Parameters ]
+
+{parser}
+  A reference to the XML parser to free.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {parser} expects an XMLParser instance now; previously, a valid xml 
+        resource was expected.
+
+
+vim:ft=help:

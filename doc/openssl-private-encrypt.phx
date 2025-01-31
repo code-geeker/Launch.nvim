@@ -1,0 +1,60 @@
+*openssl_private_encrypt*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+openssl_private_encrypt — Encrypts data with private key
+
+===============================================================================
+[ Description ]
+
+  openssl_private_encrypt(    #[\SensitiveParameter]~
+  string $data,    string~
+  &$encrypted_data,    #[\SensitiveParameter]~
+  OpenSSLAsymmetricKey|OpenSSLCertificate|array|string~
+  $private_key,    int $padding = OPENSSL_PKCS1_PADDING):~
+  bool~
+
+openssl_private_encrypt() encrypts {data} with private {private_key} and stores
+the result into {encrypted_data}. Encrypted data can be decrypted via 
+|openssl_public_decrypt|.
+
+This function can be used e.g. to sign data (or its hash) to prove that it is
+not written by someone else.
+
+===============================================================================
+[ Parameters ]
+
+{data}
+
+{encrypted_data}
+
+{private_key}
+
+  {private_key} must be the private key that corresponds to the public key that
+  will be used to decrypt the data.
+
+{padding}
+
+  {padding} can be one of OPENSSL_PKCS1_PADDING, OPENSSL_NO_PADDING.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        {private_key} accepts an OpenSSLAsymmetricKey or OpenSSLCertificate
+8.0.0   instance now; previously, a resource of type OpenSSL key or OpenSSL
+        X.509 was accepted.
+
+===============================================================================
+[ See Also ]
+
+ * |openssl_public_encrypt| - Encrypts data with public key
+ * |openssl_public_decrypt| - Decrypts data with public key
+
+
+vim:ft=help:

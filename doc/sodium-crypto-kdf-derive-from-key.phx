@@ -1,0 +1,44 @@
+*sodium_crypto_kdf_derive_from_key*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_kdf_derive_from_key — Derive a subkey
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_kdf_derive_from_key(    int~
+  $subkey_length,    int~
+  $subkey_id,    string~
+  $context,    #[\SensitiveParameter] string $key): string~
+
+Derive a subkey from a root key and additional context.
+
+Similar to |hash_hkdf|.
+
+===============================================================================
+[ Parameters ]
+
+{subkey_length}
+
+  Length of the key to return (in bytes)
+
+{subkey_id}
+
+  Return the Nth subkey from a given root key. Useful for seeking.
+
+{context}
+
+  Application-specific context.
+
+{key}
+
+  The root key from which the subkey is derived.
+
+===============================================================================
+[ Return Values ]
+
+A string of pseudorandom (raw binary) bytes.
+
+
+vim:ft=help:

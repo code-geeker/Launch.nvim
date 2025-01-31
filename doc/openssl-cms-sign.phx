@@ -1,0 +1,77 @@
+*openssl_cms_sign*
+
+(PHP 8)
+
+openssl_cms_sign — Sign a file
+
+===============================================================================
+[ Description ]
+
+  openssl_cms_sign(    string~
+  $input_filename,    string~
+  $output_filename,    OpenSSLCertificate|string~
+  $certificate,    #[\SensitiveParameter]~
+  OpenSSLAsymmetricKey|OpenSSLCertificate|array|string~
+  $private_key,    ?array~
+  $headers,    int $flags = 0,    int~
+  $encoding = OPENSSL_ENCODING_SMIME,    ?string~
+  $untrusted_certificates_filename = null): bool~
+
+This function signs a file with an X.509 certificate and key.
+
+===============================================================================
+[ Parameters ]
+
+{input_filename}
+
+  The name of the file to be signed.
+
+{output_filename}
+
+  The name of the file to deposit the results.
+
+{certificate}
+
+  The signing certificate. See Key/Certificate parameters for a list of valid
+  values.
+
+{private_key}
+
+  The key associated with {certificate}. See Key/Certificate parameters for a
+  list of valid values.
+
+{headers}
+
+  An array of headers to be included in S/MIME output.
+
+{flags}
+
+  Flags to be passed to cms_sign().
+
+{encoding}
+
+  The encoding of the output file. One of OPENSSL_ENCODING_SMIME,
+  OPENSSL_ENCODING_DER or OPENSSL_ENCODING_PEM.
+
+{untrusted_certificates_filename}
+
+  Intermediate certificates to be included in the signature.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 openssl_cms_sign() example
+
+<?php >
+
+  openssl_cms_sign('input.txt', 'output.txt', 'file://cert.pem', 'file://
+  privkey.pem', null, OPENSSL_CMS_BINARY, OPENSSL_ENCODING_DER, 'chain.pem');
+<?>
+
+
+vim:ft=help:

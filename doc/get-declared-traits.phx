@@ -1,0 +1,29 @@
+*get_declared_traits*
+
+(PHP 5 >= 5.4.0, PHP 7, PHP 8)
+
+get_declared_traits — Returns an array of all declared traits
+
+===============================================================================
+[ Description ]
+
+  get_declared_traits(): array~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array with names of all declared traits in values.
+
+===============================================================================
+[ See Also ]
+
+ * |class_uses| - Return the traits used by the given class
+ * |trait_exists| - Checks if the trait exists
+
+
+vim:ft=help:

@@ -1,0 +1,40 @@
+*sodium_bin2base64*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_bin2base64 — Encodes a raw binary string with base64.
+
+===============================================================================
+[ Description ]
+
+  sodium_bin2base64(#[\SensitiveParameter] string $string, int $id): string~
+
+Converts a raw binary string into a base64-encoded string. Unlike 
+|base64_encode|, sodium_bin2base64() is constant-time (a property that is
+important for any code that touches cryptographic inputs, such as plaintexts or
+keys) and supports multiple character sets.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  Raw binary string.
+
+{id}
+
+   + SODIUM_BASE64_VARIANT_ORIGINAL for standard (A-Za-z0-9/\+) Base64
+    encoding.
+   + SODIUM_BASE64_VARIANT_ORIGINAL_NO_PADDING for standard (A-Za-z0-9/\+)
+    Base64 encoding, without = padding characters.
+   + SODIUM_BASE64_VARIANT_URLSAFE for URL-safe (A-Za-z0-9\-_) Base64 encoding.
+   + SODIUM_BASE64_VARIANT_URLSAFE_NO_PADDING for URL-safe (A-Za-z0-9\-_)
+    Base64 encoding, without = padding characters.
+
+===============================================================================
+[ Return Values ]
+
+Base64-encoded string.
+
+
+vim:ft=help:

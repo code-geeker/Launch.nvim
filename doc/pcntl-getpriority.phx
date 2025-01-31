@@ -1,0 +1,54 @@
+*pcntl_getpriority*
+
+(PHP 5, PHP 7, PHP 8)
+
+pcntl_getpriority — Get the priority of any process
+
+===============================================================================
+[ Description ]
+
+  pcntl_getpriority(?int $process_id = null, int $mode = PRIO_PROCESS):~
+  int|false~
+
+pcntl_getpriority() gets the priority of {process_id}. Because priority levels
+can differ between system types and kernel versions, please see your system's
+getpriority(2) man page for specific details.
+
+===============================================================================
+[ Parameters ]
+
+{process_id}
+
+  If null, the process id of the current process is used.
+
+{mode}
+
+  One of PRIO_PGRP, PRIO_USER, PRIO_PROCESS, PRIO_DARWIN_BG or
+  PRIO_DARWIN_THREAD.
+
+===============================================================================
+[ Return Values ]
+
+pcntl_getpriority() returns the priority of the process or false on error. A
+lower numerical value causes more favorable scheduling.
+
+Warning
+
+This function may return Boolean false, but may also return a non-Boolean value
+which evaluates to false. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+===============================================================================
+[ Changelog ]
+
+Version          Description
+8.0.0   {process_id} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |pcntl_setpriority| - Change the priority of any process
+
+
+vim:ft=help:

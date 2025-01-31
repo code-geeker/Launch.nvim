@@ -1,0 +1,95 @@
+*snmp3_get*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+snmp3_get — Fetch an SNMP object
+
+===============================================================================
+[ Description ]
+
+  snmp3_get(    string~
+  $hostname,    string~
+  $security_name,    string~
+  $security_level,    string~
+  $auth_protocol,    string~
+  $auth_passphrase,    string~
+  $privacy_protocol,    string~
+  $privacy_passphrase,    array|string~
+  $object_id,    int $timeout =~
+  -1,    int $retries = -1): mixed~
+
+The snmp3_get() function is used to read the value of an SNMP object specified
+by the {object_id}.
+
+===============================================================================
+[ Parameters ]
+
+{hostname}
+
+  The hostname of the SNMP agent (server).
+
+{security_name}
+
+  the security name, usually some kind of username
+
+{security_level}
+
+  the security level (noAuthNoPriv|authNoPriv|authPriv)
+
+{auth_protocol}
+
+  the authentication protocol ("MD5", "SHA", "SHA256", or "SHA512")
+
+{auth_passphrase}
+
+  the authentication pass phrase
+
+{privacy_protocol}
+
+  the privacy protocol (DES or AES)
+
+{privacy_passphrase}
+
+  the privacy pass phrase
+
+{object_id}
+
+  The SNMP object id.
+
+{timeout}
+
+  The number of microseconds until the first timeout.
+
+{retries}
+
+  The number of times to retry if timeouts occur.
+
+===============================================================================
+[ Return Values ]
+
+Returns SNMP object value on success or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {auth_protocol} now accepts "SHA256" and "SHA512" when supported by
+        libnetsnmp.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Using snmp3_get()
+
+<?php >
+  $nameOfSecondInterface = snmp3_get('localhost', 'james', 'authPriv', 'SHA', 
+  'secret007', 'AES', 'secret007', 'IF-MIB::ifName.2');
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |snmp3_set| - Set the value of an SNMP object
+
+
+vim:ft=help:

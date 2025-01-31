@@ -1,0 +1,39 @@
+*oci_free_descriptor*
+
+(PHP 5, PHP 7, PHP 8, PECL OCI8 >= 1.1.0)
+
+oci_free_descriptor — Frees a descriptor
+
+===============================================================================
+[ Description ]
+
+  oci_free_descriptor(OCILob $lob): bool~
+
+Frees a descriptor allocated by |oci_new_descriptor|.
+
+===============================================================================
+[ Parameters ]
+
+{descriptor}
+
+  Descriptor allocated by |oci_new_descriptor|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function is commonly used as a method OCILOB::free.
+
+===============================================================================
+[ See Also ]
+
+ * OCILOB::free
+
+
+vim:ft=help:

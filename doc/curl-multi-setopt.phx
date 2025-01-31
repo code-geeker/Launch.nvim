@@ -1,0 +1,49 @@
+*curl_multi_setopt*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8)
+
+curl_multi_setopt — Set a cURL multi option
+
+===============================================================================
+[ Description ]
+
+  curl_multi_setopt(CurlMultiHandle $multi_handle, int $option, mixed $value):~
+  bool~
+
+Sets an option on the given cURL multi handle.
+
+===============================================================================
+[ Parameters ]
+
+{multi_handle}
+
+  A cURL multi handle returned by |curl_multi_init|.
+
+{option}
+
+  One of the CURLMOPT_* constants.
+
+{value}
+
+  The value to be set on {option}. See the description of the CURLMOPT_*
+  constants for details on the type of values each constant expects.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.2.0   Introduced CURLMOPT_MAX_CONCURRENT_STREAMS.
+8.0.0   {multi_handle} expects a CurlMultiHandle instance now; previously, a 
+        resource was expected.
+7.1.0   Introduced CURLMOPT_PUSHFUNCTION.
+        Introduced CURLMOPT_CHUNK_LENGTH_PENALTY_SIZE,
+7.0.7   CURLMOPT_CONTENT_LENGTH_PENALTY_SIZE, CURLMOPT_MAX_HOST_CONNECTIONS,
+        CURLMOPT_MAX_PIPELINE_LENGTH and CURLMOPT_MAX_TOTAL_CONNECTIONS.
+
+
+vim:ft=help:

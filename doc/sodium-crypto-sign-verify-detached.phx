@@ -1,0 +1,36 @@
+*sodium_crypto_sign_verify_detached*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_sign_verify_detached — Verify signature for the message
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_sign_verify_detached(string $signature, string $message,~
+  string $public_key): bool~
+
+Verify signature for the message
+
+===============================================================================
+[ Parameters ]
+
+{signature}
+
+  The cryptographic signature obtained from |sodium_crypto_sign_detached|
+
+{message}
+
+  The message being verified
+
+{public_key}
+
+  Ed25519 public key
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

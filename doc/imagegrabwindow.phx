@@ -1,0 +1,88 @@
+*imagegrabwindow*
+
+(PHP 5 >= 5.2.2, PHP 7, PHP 8)
+
+imagegrabwindow — Captures a window
+
+===============================================================================
+[ Description ]
+
+  imagegrabwindow(int $handle, bool $client_area = false): GdImage|false~
+
+Grabs a window or its client area using a windows handle (HWND property in COM
+instance)
+
+  Note:
+
+  This function is only available on Windows.
+
+===============================================================================
+[ Parameters ]
+
+{handle}
+
+  The HWND window ID.
+
+{client_area}
+
+  Include the client area of the application window.
+
+===============================================================================
+[ Return Values ]
+
+Returns an image object on success, false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+E_NOTICE is issued if {handle} is invalid window handle. E_WARNING is issued if
+the Windows API is too old.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   On success, this function returns a GDImage instance now; previously, a
+        resource was returned.
+8.0.0   {client_area} expects a bool now; previously it expected an int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagegrabwindow() example
+
+Capture a window (IE for example)
+
+<?php >
+  $browser = new COM("InternetExplorer.Application");
+  $handle = $browser->HWND;
+  $browser->Visible = true;
+  $im = imagegrabwindow($handle);
+  $browser->Quit();
+  imagepng($im, "iesnap.png");
+<?>
+
+Capture a window (IE for example) but with its content
+
+<?php >
+  $browser = new COM("InternetExplorer.Application");
+  $handle = $browser->HWND;
+  $browser->Visible = true;
+  $browser->Navigate("http://www.libgd.org");
+
+  /* Still working? */
+  while ($browser->Busy) {
+  com_message_pump(4000);
+  }
+  $im = imagegrabwindow($handle, 0);
+  $browser->Quit();
+  imagepng($im, "iesnap.png");
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |imagegrabscreen| - Captures the whole screen
+
+
+vim:ft=help:

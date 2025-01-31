@@ -1,0 +1,31 @@
+*rnp_dump_packets_to_json*
+
+(PECL rnp >= 0.1.1)
+
+rnp_dump_packets_to_json — Dump OpenPGP packets stream information to the JSON
+string
+
+===============================================================================
+[ Description ]
+
+  rnp_dump_packets_to_json(string $input, int $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{input}
+
+  Input string containing OpenPGP data, either in binary or ASCII-armored
+  format.
+
+{flags}
+
+  See RNP_JSON_DUMP_* predefined constants.
+
+===============================================================================
+[ Return Values ]
+
+JSON string with dump or false on failure.
+
+
+vim:ft=help:

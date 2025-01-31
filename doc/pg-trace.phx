@@ -1,0 +1,90 @@
+*pg_trace*
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7, PHP 8)
+
+pg_trace — Enable tracing a PostgreSQL connection
+
+===============================================================================
+[ Description ]
+
+  pg_trace(    string~
+  $filename,    string $mode =~
+  "w",    ?PgSql\Connection $connection =~
+  null,    int $trace_mode = 0): bool~
+
+pg_trace() enables tracing of the PostgreSQL frontend/backend communication to
+a file. To fully understand the results, one needs to be familiar with the
+internals of PostgreSQL communication protocol.
+
+For those who are not, it can still be useful for tracing errors in queries
+sent to the server, you could do for example grep '^To backend' trace.log and
+see what queries actually were sent to the PostgreSQL server. For more
+information, refer to the » PostgreSQL Documentation.
+
+===============================================================================
+[ Parameters ]
+
+{filename}
+
+  The full path and file name of the file in which to write the trace log. Same
+  as in |fopen|.
+
+{mode}
+
+  An optional file access mode, same as for |fopen|.
+
+{connection}
+
+  An PgSql\Connection instance. When {connection} is null, the default
+  connection is used. The default connection is the last connection made by 
+  |pg_connect| or |pg_pconnect|.
+  Warning
+
+  As of PHP 8.1.0, using the default connection is deprecated.
+
+{trace_mode}
+
+  An optional trace mode with the following constants
+  PGSQL_TRACE_SUPPRESS_TIMESTAMPS and PGSQL_TRACE_REGRESS_MODE
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.3.0   {trace_mode} has been added.
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+8.0.0   {connection} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_trace() example
+
+<?php >
+  $pgsql_conn = pg_connect("dbname=mark host=localhost");
+
+  if ($pgsql_conn) {
+  pg_trace('/tmp/trace.log', 'w', $pgsql_conn);
+  pg_query("SELECT 1");
+  pg_untrace($pgsql_conn);
+  // Now /tmp/trace.log will contain backend communication
+  } else {
+  print pg_last_error($pgsql_conn);
+  exit;
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |fopen| - Opens file or URL
+ * |pg_untrace| - Disable tracing of a PostgreSQL connection
+
+
+vim:ft=help:

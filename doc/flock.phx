@@ -1,0 +1,132 @@
+*flock*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+flock — Portable advisory file locking
+
+===============================================================================
+[ Description ]
+
+  flock(resource $stream, int $operation, int &$would_block = null): bool~
+
+flock() allows you to perform a simple reader/writer model which can be used on
+virtually every platform (including most Unix derivatives and even Windows).
+
+The lock is released also by |fclose|, or when {stream} is garbage collected.
+
+PHP supports a portable way of locking complete files in an advisory way (which
+means all accessing programs have to use the same way of locking or it will not
+work). By default, this function will block until the requested lock is
+acquired; this may be controlled with the LOCK_NB option documented below.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  A file system pointer resource that is typically created using |fopen|.
+
+{operation}
+
+  {operation} is one of the following:
+   + LOCK_SH to acquire a shared lock (reader).
+   + LOCK_EX to acquire an exclusive lock (writer).
+   + LOCK_UN to release a lock (shared or exclusive).
+
+  It is also possible to add LOCK_NB as a bitmask to one of the above
+  operations, if flock() should not block during the locking attempt.
+
+{would_block}
+
+  The optional third argument is set to 1 if the lock would block (EWOULDBLOCK
+  errno condition).
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 flock() example
+
+<?php >
+
+  $fp = fopen("/tmp/lock.txt", "r+");
+
+  if (flock($fp, LOCK_EX)) { // acquire an exclusive lock
+  ftruncate($fp, 0); // truncate file
+  fwrite($fp, "Write something here\n");
+  fflush($fp); // flush output before releasing the lock
+  flock($fp, LOCK_UN); // release the lock
+  } else {
+  echo "Couldn't get the lock!";
+  }
+
+  fclose($fp);
+
+<?>
+
+Example #2 flock() using the LOCK_NB option
+
+<?php >
+  $fp = fopen('/tmp/lock.txt', 'r+');
+
+  /* Activate the LOCK_NB option on an LOCK_EX operation */
+  if(!flock($fp, LOCK_EX | LOCK_NB)) {
+  echo 'Unable to obtain lock';
+  exit(-1);
+  }
+
+  /* ... */
+
+  fclose($fp);
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  flock() uses mandatory locking instead of advisory locking on Windows.
+  Mandatory locking is also supported on Linux and System V based operating
+  systems via the usual mechanism supported by the fcntl() system call: that
+  is, if the file in question has the setgid permission bit set and the group
+  execution bit cleared. On Linux, the file system will also need to be mounted
+  with the mand option for this to work.
+
+  Note:
+
+  Because flock() requires a file pointer, you may have to use a special lock
+  file to protect access to a file that you intend to truncate by opening it in
+  write mode (with a "w" or "w+" argument to |fopen|).
+
+  Note:
+
+  May only be used on file pointers returned by |fopen| for local files, or
+  file pointers pointing to userspace streams that implement the 
+  streamWrapper::stream_lock() method.
+
+Warning
+
+Assigning another value to {stream} argument in subsequent code will release
+the lock.
+
+Warning
+
+On some operating systems flock() is implemented at the process level. When
+using a multithreaded server API you may not be able to rely on flock() to
+protect files against other PHP scripts running in parallel threads of the same
+server instance!
+
+flock() is not supported on antiquated filesystems like FAT and its derivates
+and will therefore always return false under these environments.
+
+  Note:
+
+  On Windows, if the locking process opens the file a second time, it cannot
+  access the file through this second handle until it unlocks the file.
+
+
+vim:ft=help:

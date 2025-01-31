@@ -1,0 +1,93 @@
+*pg_delete*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+pg_delete — Deletes records
+
+===============================================================================
+[ Description ]
+
+  pg_delete(    PgSql\Connection~
+  $connection,    string~
+  $table_name,    array~
+  $conditions,    int $flags = PGSQL_DML_EXEC):~
+  string|bool~
+
+pg_delete() deletes records from a table specified by the keys and values in
+{conditions}.
+
+If {flags} is specified, |pg_convert| is applied to {conditions} with the
+specified flags.
+
+By default pg_delete() passes raw values. Values must be escaped or the
+PGSQL_DML_ESCAPE flag must be specified in {flags}. PGSQL_DML_ESCAPE quotes and
+escapes parameters/identifiers. Therefore, table/column names become case
+sensitive.
+
+Note that neither escape nor prepared query can protect LIKE query, JSON,
+Array, Regex, etc. These parameters should be handled according to their
+contexts. i.e. Escape/validate values.
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An PgSql\Connection instance.
+
+{table_name}
+
+  Name of the table from which to delete rows.
+
+{conditions}
+
+  An array whose keys are field names in the table {table_name}, and whose
+  values are the values of those fields that are to be deleted.
+
+{flags}
+
+  Any number of PGSQL_CONV_FORCE_NULL, PGSQL_DML_NO_CONV, PGSQL_DML_ESCAPE,
+  PGSQL_DML_EXEC, PGSQL_DML_ASYNC or PGSQL_DML_STRING combined. If
+  PGSQL_DML_STRING is part of the {flags} then query string is returned. When
+  PGSQL_DML_NO_CONV or PGSQL_DML_ESCAPE is set, it does not call |pg_convert|
+  internally.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure. Returns string if PGSQL_DML_STRING
+is passed via {flags}.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_delete() example
+
+<?php >
+  $db = pg_connect('dbname=foo');
+  // This is safe somewhat, since all values are escaped.
+  // However PostgreSQL supports JSON/Array. These are not
+  // safe by neither escape nor prepared query.
+  $res = pg_delete($db, 'post_log', $_POST, PG_DML_ESCAPE);
+  if ($res) {
+  echo "POST data is deleted: $res\n";
+  } else {
+  echo "User must have sent wrong inputs\n";
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |pg_convert| - Convert associative array values into forms suitable for SQL
+  statements
+
+
+vim:ft=help:

@@ -1,0 +1,38 @@
+*rnp_locate_key*
+
+(PECL rnp >= 0.1.1)
+
+rnp_locate_key — Search for the key
+
+===============================================================================
+[ Description ]
+
+  rnp_locate_key(RnpFFI $ffi, string $identifier_type, string $identifier):~
+  string|false~
+
+Note: only valid userids are checked while searching by userid.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{identifier_type}
+
+  Identifier type string: "userid", "keyid", "fingerprint", "grip".
+
+{identifier}
+
+  PGP User ID (name and email) for "userid" type, hexadecimal string that
+  represents key id, fingerprint or key grip correspondingly.
+
+===============================================================================
+[ Return Values ]
+
+Returns hexadecimal fingerprint of the key found on success or false on
+failure.
+
+
+vim:ft=help:

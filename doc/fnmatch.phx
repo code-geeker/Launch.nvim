@@ -1,0 +1,98 @@
+*fnmatch*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+fnmatch — Match filename against a pattern
+
+===============================================================================
+[ Description ]
+
+  fnmatch(string $pattern, string $filename, int $flags = 0): bool~
+
+fnmatch() checks if the passed {filename} would match the given shell wildcard
+{pattern}.
+
+===============================================================================
+[ Parameters ]
+
+{pattern}
+
+  The {pattern} to match against. Usually, the {pattern} will contain wildcards
+  like '?' and '*'.
+
+                  Wildcards to be used in {pattern} parameter
+  Wildcard                             Description
+           Question mark will match any single character. For example, pattern
+  ?        "file?.txt" will match "file1.txt" and "fileA.txt", but will not
+           match "file10.txt".
+  *        Asterisk will match zero or more characters. For example, pattern
+           "foo*.xml" will match "foo.xml" and "foobar.xml".
+           Square brackets are used to create ranges of ASCII codepoints or
+           sets of characters. For example, pattern "index.php[45]" will match
+  [ ]      "index.php4" and "index.php5", but will not match "index.phpt". Well
+           known ranges are [0-9], [a-z], and [A-Z]. Multiple sets and ranges
+           can be used at the same time, for example [0-9a-zABC].
+           Exclamation mark is used to negate characters within square
+  !        brackets. For example, "[!A-Z]*.html" will match "demo.html", but
+           will not match "Demo.html".
+  \        Backslash is used to escape special characters. For example, "Name\?
+           " will match "Name?", but will not match "Names".
+
+{filename}
+
+  The tested string. This function is especially useful for filenames, but may
+  also be used on regular strings.
+
+  The average user may be used to shell patterns or at least in their simplest
+  form to '?' and '*' wildcards so using fnmatch() instead of |preg_match| for
+  frontend search expression input may be way more convenient for
+  non-programming users.
+
+{flags}
+
+  The value of {flags} can be any combination of the following flags, joined
+  with the binary OR (|) operator.
+
+                    A list of possible flags for fnmatch()
+     {Flag}                              Description
+  FNM_NOESCAPE Disable backslash escaping.
+  FNM_PATHNAME Slash in string only matches slash in the given pattern.
+  FNM_PERIOD   Leading period in string must be exactly matched by period in
+               the given pattern.
+  FNM_CASEFOLD Caseless match. Part of the GNU extension.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if there is a match, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Checking a color name against a shell wildcard pattern
+
+<?php >
+  if (fnmatch("*gr[ae]y", $color)) {
+  echo "some form of gray ...";
+  }
+<?>
+
+===============================================================================
+[ Notes ]
+
+Warning
+
+For now, this function is not available on non-POSIX compliant systems except
+Windows.
+
+===============================================================================
+[ See Also ]
+
+ * |glob| - Find pathnames matching a pattern
+ * |preg_match| - Perform a regular expression match
+ * |sscanf| - Parses input from a string according to a format
+ * |printf| - Output a formatted string
+ * |sprintf| - Return a formatted string
+
+
+vim:ft=help:

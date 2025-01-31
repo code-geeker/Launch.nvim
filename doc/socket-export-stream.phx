@@ -1,0 +1,33 @@
+*socket_export_stream*
+
+(PHP 7 >= 7.0.7, PHP 8)
+
+socket_export_stream — Export a socket into a stream that encapsulates a socket
+
+===============================================================================
+[ Description ]
+
+  socket_export_stream(Socket $socket): resource|false~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{socket}
+
+===============================================================================
+[ Return Values ]
+
+Return resource or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                            Description
+8.0.0   {socket} is a Socket instance now; previously, it was a resource.
+
+
+vim:ft=help:

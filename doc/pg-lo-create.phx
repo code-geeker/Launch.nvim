@@ -1,0 +1,77 @@
+*pg_lo_create*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+pg_lo_create — Create a large object
+
+===============================================================================
+[ Description ]
+
+  pg_lo_create(PgSql\Connection $connection = ?, mixed $object_id = ?): int~
+  pg_lo_create(mixed $object_id): int~
+
+pg_lo_create() creates a large object and returns the OID of the large object.
+PostgreSQL access modes INV_READ, INV_WRITE, and INV_ARCHIVE are not supported,
+the object is created always with both read and write access. INV_ARCHIVE has
+been removed from PostgreSQL itself (version 6.3 and above).
+
+To use the large object interface, it is necessary to enclose it within a
+transaction block.
+
+Instead of using the large object interface (which has no access controls and
+is cumbersome to use), try PostgreSQL's bytea column type and |pg_escape_bytea|
+.
+
+  Note:
+
+  This function used to be called pg_locreate().
+
+===============================================================================
+[ Parameters ]
+
+{connection}
+
+  An PgSql\Connection instance. When {connection} is unspecified, the default
+  connection is used. The default connection is the last connection made by 
+  |pg_connect| or |pg_pconnect|.
+  Warning
+
+  As of PHP 8.1.0, using the default connection is deprecated.
+
+{object_id}
+
+  If an {object_id} is given the function will try to create a large object
+  with this id, else a free object id is assigned by the server. The parameter
+  relies on functionality that first appeared in PostgreSQL 8.1.
+
+===============================================================================
+[ Return Values ]
+
+A large object OID, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {connection} parameter expects an PgSql\Connection instance now;
+        previously, a resource was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pg_lo_create() example
+
+<?php >
+  $database = pg_connect("dbname=jacarta");
+  pg_query($database, "begin");
+  $oid = pg_lo_create($database);
+  echo "$oid\n";
+  $handle = pg_lo_open($database, $oid, "w");
+  echo "$handle\n";
+  pg_lo_write($handle, "large object data");
+  pg_lo_close($handle);
+  pg_query($database, "commit");
+<?>
+
+
+vim:ft=help:

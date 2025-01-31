@@ -1,0 +1,33 @@
+*readline_write_history*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+readline_write_history — Writes the history
+
+===============================================================================
+[ Description ]
+
+  readline_write_history(?string $filename = null): bool~
+
+This function writes the command history to a file.
+
+===============================================================================
+[ Parameters ]
+
+{filename}
+
+  Path to the saved file.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {filename} is nullable now.
+
+
+vim:ft=help:

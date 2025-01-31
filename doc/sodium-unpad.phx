@@ -1,0 +1,31 @@
+*sodium_unpad*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_unpad — Remove padding data
+
+===============================================================================
+[ Description ]
+
+  sodium_unpad(#[\SensitiveParameter] string $string, int $block_size): string~
+
+Unpad a padded string. Timing-safe.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  Padded string.
+
+{block_size}
+
+  The block size for padding.
+
+===============================================================================
+[ Return Values ]
+
+Unpadded string.
+
+
+vim:ft=help:

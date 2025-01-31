@@ -1,0 +1,55 @@
+*mb_language*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+mb_language — Set/Get current language
+
+===============================================================================
+[ Description ]
+
+  mb_language(?string $language = null): string|bool~
+
+Set/Get the current language.
+
+===============================================================================
+[ Parameters ]
+
+{language}
+
+  Used for encoding e-mail messages. The valid languages are listed in the
+  following table. |mb_send_mail| uses this setting to encode e-mail.
+
+          Language            Charset       Encoding       Alias
+  German/de                 ISO-8859-15 Quoted-Printable Deutsch
+  English/en                ISO-8859-1  Quoted-Printable  
+  Armenian/hy               ArmSCII-8   Quoted-Printable  
+  Japanese/ja               ISO-2022-JP BASE64            
+  Korean/ko                 ISO-2022-KR BASE64            
+  neutral                   UTF-8       BASE64            
+  Russian/ru                KOI8-R      Quoted-Printable  
+  Turkish/tr                ISO-8859-9  Quoted-Printable  
+  Ukrainian/ua              KOI8-U      Quoted-Printable  
+  uni                       UTF-8       BASE64           universal
+  Simplified Chinese/zh-cn  HZ          BASE64            
+  Traditional Chinese/zh-tw BIG-5       BASE64            
+
+===============================================================================
+[ Return Values ]
+
+If {language} is set and {language} is valid, it returns true. Otherwise, it
+returns false. When {language} is omitted or null, it returns the language name
+as a string.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {language} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_send_mail| - Send encoded mail
+
+
+vim:ft=help:

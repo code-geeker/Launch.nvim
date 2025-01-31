@@ -1,0 +1,45 @@
+*fann_set_sarprop_temperature*
+
+(PECL fann >= 1.0.0)
+
+fann_set_sarprop_temperature — Sets the sarprop temperature
+
+===============================================================================
+[ Description ]
+
+  fann_set_sarprop_temperature(resource $ann, float $sarprop_temperature):~
+  bool~
+
+Sets the sarprop temperature.
+
+===============================================================================
+[ Parameters ]
+
+{ann}
+
+  Neural network resource.
+
+{sarprop_temperature}
+
+  The sarprop temperature.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success, or false otherwise.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function is only available if the fann extension has been build against
+  libfann >= 2.2.
+
+===============================================================================
+[ See Also ]
+
+ * |fann_get_sarprop_temperature| - Returns the sarprop temperature
+
+
+vim:ft=help:

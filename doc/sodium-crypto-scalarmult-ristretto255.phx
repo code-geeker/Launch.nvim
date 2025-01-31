@@ -1,0 +1,41 @@
+*sodium_crypto_scalarmult_ristretto255*
+
+(PHP 8 >= 8.1.1)
+
+sodium_crypto_scalarmult_ristretto255 — Computes a shared secret
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_scalarmult_ristretto255(string $n, string $p): string~
+
+Calculates scalar {n} times point {p}. Available as of libsodium 1.0.18.
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{n}
+
+  A scalar, which is typically a secret key.
+
+{p}
+
+  A point (x-coordinate), which is typically a public key.
+
+===============================================================================
+[ Return Values ]
+
+Returns a 32-byte random string.
+
+===============================================================================
+[ See Also ]
+
+ * |sodium_crypto_scalarmult_ristretto255_base| - Calculates the public key
+  from a secret key
+
+
+vim:ft=help:

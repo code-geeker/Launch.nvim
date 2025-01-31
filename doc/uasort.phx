@@ -1,0 +1,120 @@
+*uasort*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+uasort — Sort an array with a user-defined comparison function and maintain
+index association
+
+===============================================================================
+[ Description ]
+
+  uasort(array &$array, callable $callback): true~
+
+Sorts {array} in place such that its keys maintain their correlation with the
+values they are associated with, using a user-defined comparison function.
+
+This is used mainly when sorting associative arrays where the actual element
+order is significant.
+
+  Note:
+
+  If two members compare as equal, they retain their original order. Prior to
+  PHP 8.0.0, their relative order in the sorted array was undefined.
+
+  Note:
+
+  Resets array's internal pointer to the first element.
+
+===============================================================================
+[ Parameters ]
+
+{array}
+
+  The input array.
+
+{callback}
+
+  The comparison function must return an integer less than, equal to, or
+  greater than zero if the first argument is considered to be respectively less
+  than, equal to, or greater than the second.
+
+
+  callback(mixed $a, mixed $b): int~
+  Caution
+
+  Returning non-integer values from the comparison function, such as float,
+  will result in an internal cast to int of the callback's return value. So
+  values such as 0.99 and 0.1 will both be cast to an integer value of 0, which
+  will compare such values as equal.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.2.0   The return type is true now; previously, it was bool.
+8.0.0   If {callback} expects a parameter to be passed by reference, this
+        function will now emit an E_WARNING.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Basic uasort() example
+
+<?php >
+  // Comparison function
+  function cmp($a, $b) {
+  if ($a == $b) {
+  return 0;
+  }
+  return ($a < $b) ? -1 : 1;
+  }
+
+  // Array to be sorted
+  $array = array('a' => 4, 'b' => 8, 'c' => -1, 'd' => -9, 'e' => 2, 'f' => 5, 
+  'g' => 3, 'h' => -4);
+  print_r($array);
+
+  // Sort and print the resulting array
+  uasort($array, 'cmp');
+  print_r($array);
+<?>
+
+The above example will output:
+
+Array
+(
+    [a] => 4
+    [b] => 8
+    [c] => -1
+    [d] => -9
+    [e] => 2
+    [f] => 5
+    [g] => 3
+    [h] => -4
+)
+Array
+(
+    [d] => -9
+    [h] => -4
+    [c] => -1
+    [e] => 2
+    [g] => 3
+    [a] => 4
+    [f] => 5
+    [b] => 8
+)
+
+===============================================================================
+[ See Also ]
+
+ * |usort| - Sort an array by values using a user-defined comparison function
+ * |uksort| - Sort an array by keys using a user-defined comparison function
+ * The comparison of array sorting functions
+
+
+vim:ft=help:

@@ -1,0 +1,138 @@
+*crypt*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+crypt — One-way string hashing
+
+Warning
+
+This function is not (yet) binary safe!
+
+===============================================================================
+[ Description ]
+
+  crypt(#[\SensitiveParameter] string $string, string $salt): string~
+
+crypt() will return a hashed string using the standard Unix DES-based algorithm
+or alternative algorithms. |password_verify| is compatible with crypt().
+Therefore, password hashes created by crypt() can be used with |password_verify
+|.
+
+Prior to PHP 8.0.0, the {salt} parameter was optional. However, crypt() creates
+a weak hash without the {salt}, and raises an E_NOTICE error without it. Make
+sure to specify a strong enough salt for better security.
+
+|password_hash| uses a strong hash, generates a strong salt, and applies proper
+rounds automatically. |password_hash| is a simple crypt() wrapper and
+compatible with existing password hashes. Use of |password_hash| is encouraged.
+
+The hash type is triggered by the salt argument. If no salt is provided, PHP
+will auto-generate either a standard two character (DES) salt, or a twelve
+character (MD5), depending on the availability of MD5 crypt(). PHP sets a
+constant named CRYPT_SALT_LENGTH which indicates the longest valid salt allowed
+by the available hashes.
+
+The standard DES-based crypt() returns the salt as the first two characters of
+the output. It also only uses the first eight characters of {string}, so longer
+strings that start with the same eight characters will generate the same result
+(when the same salt is used).
+
+The following hash types are supported:
+
+ * CRYPT_STD_DES - Standard DES-based hash with a two character salt from the
+  alphabet "./0-9A-Za-z". Using invalid characters in the salt will cause crypt
+  () to fail.
+ * CRYPT_EXT_DES - Extended DES-based hash. The "salt" is a 9-character string
+  consisting of an underscore followed by 4 characters of iteration count and 4
+  characters of salt. Each of these 4-character strings encode 24 bits, least
+  significant character first. The values 0 to 63 are encoded as ./0-9A-Za-z.
+  Using invalid characters in the salt will cause crypt() to fail.
+ * CRYPT_MD5 - MD5 hashing with a twelve character salt starting with $1$
+ * CRYPT_BLOWFISH - Blowfish hashing with a salt as follows: "$2a$", "$2x$" or
+  "$2y$", a two digit cost parameter, "$", and 22 characters from the alphabet
+  "./0-9A-Za-z". Using characters outside of this range in the salt will cause
+  crypt() to return a zero-length string. The two digit cost parameter is the
+  base-2 logarithm of the iteration count for the underlying Blowfish-based
+  hashing algorithm and must be in range 04-31, values outside this range will
+  cause crypt() to fail. "$2x$" hashes are potentially weak; "$2a$" hashes are
+  compatible and mitigate this weakness. For new hashes, "$2y$" should be used.
+ * CRYPT_SHA256 - SHA-256 hash with a sixteen character salt prefixed with $5$.
+  If the salt string starts with 'rounds=<N>$', the numeric value of N is used
+  to indicate how many times the hashing loop should be executed, much like the
+  cost parameter on Blowfish. The default number of rounds is 5000, there is a
+  minimum of 1000 and a maximum of 999,999,999. Any selection of N outside this
+  range will be truncated to the nearest limit.
+ * CRYPT_SHA512 - SHA-512 hash with a sixteen character salt prefixed with $6$.
+  If the salt string starts with 'rounds=<N>$', the numeric value of N is used
+  to indicate how many times the hashing loop should be executed, much like the
+  cost parameter on Blowfish. The default number of rounds is 5000, there is a
+  minimum of 1000 and a maximum of 999,999,999. Any selection of N outside this
+  range will be truncated to the nearest limit.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The string to be hashed.
+
+  Caution
+
+  Using the CRYPT_BLOWFISH algorithm, will result in the {string} parameter
+  being truncated to a maximum length of 72 bytes.
+
+{salt}
+
+  A salt string to base the hashing on. If not provided, the behaviour is
+  defined by the algorithm implementation and can lead to unexpected results.
+
+===============================================================================
+[ Return Values ]
+
+Returns the hashed string or a string that is shorter than 13 characters and is
+guaranteed to differ from the salt on failure.
+
+Warning
+
+When validating passwords, a string comparison function that isn't vulnerable
+to timing attacks should be used to compare the output of crypt() to the
+previously known hash. PHP provides |hash_equals| for this purpose.
+
+===============================================================================
+[ Changelog ]
+
+Version            Description
+8.0.0   The {salt} is no longer optional.
+
+===============================================================================
+[ Examples ]
+
+Example #1 crypt() examples
+
+<?php >
+  $user_input = 'rasmuslerdorf';
+  $hashed_password = '$6$rounds=1000000$NJy4rIPjpOaU$0ACEYGg/
+  aKCY3v8O8AfyiO7CTfZQ8/W231Qfh2tRLmfdvFD6XfHk12u6hMr9cYIA4hnpjLNSTRtUwYr9km9Ij/'
+  ;
+
+  // Validate an existing crypt() hash in a way that is compatible with non-PHP
+  software.
+  if (hash_equals($hashed_password, crypt($user_input, $hashed_password))) {
+  echo "Password verified!";
+  }
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note: There is no decrypt function, since crypt() uses a one-way algorithm.
+
+===============================================================================
+[ See Also ]
+
+ * |hash_equals| - Timing attack safe string comparison
+ * |password_hash| - Creates a password hash
+ * The Unix man page for your crypt function for more information
+
+
+vim:ft=help:

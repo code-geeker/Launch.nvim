@@ -1,0 +1,177 @@
+*call_user_func_array*
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7, PHP 8)
+
+call_user_func_array — Call a callback with an array of parameters
+
+===============================================================================
+[ Description ]
+
+  call_user_func_array(callable $callback, array $args): mixed~
+
+Calls the {callback} given by the first parameter with the parameters in
+{args}.
+
+===============================================================================
+[ Parameters ]
+
+{callback}
+
+  The callable to be called.
+
+{args}
+
+  The parameters to be passed to the callback, as an array.
+
+  If the keys of {args} are all numeric, the keys are ignored and each element
+  will be passed to {callback} as a positional argument, in order.
+
+  If any keys of {args} are strings, those elements will be passed to
+  {callback} as named arguments, with the name given by the key.
+
+  It is a fatal error to have a numeric key in {args} appear after a string
+  key, or to have a string key that does not match the name of any parameter of
+  {callback}.
+
+===============================================================================
+[ Return Values ]
+
+Returns the return value of the callback, or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {args} keys will now be interpreted as parameter names, instead of
+        being silently ignored.
+
+===============================================================================
+[ Examples ]
+
+Example #1 call_user_func_array() example
+
+<?php >
+  function foobar($arg, $arg2) {
+  echo __FUNCTION__, " got $arg and $arg2\n";
+  }
+  class foo {
+  function bar($arg, $arg2) {
+  echo __METHOD__, " got $arg and $arg2\n";
+  }
+  }
+
+
+  // Call the foobar() function with 2 arguments
+  call_user_func_array("foobar", array("one", "two"));
+
+  // Call the $foo->bar() method with 2 arguments
+  $foo = new foo;
+  call_user_func_array(array($foo, "bar"), array("three", "four"));
+<?>
+
+The above example will output something similar to:
+
+foobar got one and two
+foo::bar got three and four
+
+Example #2 call_user_func_array() using namespace name
+
+<?php >
+
+  namespace Foobar;
+
+  class Foo {
+  static public function test($name) {
+  print "Hello {$name}!\n";
+  }
+  }
+
+  call_user_func_array(__NAMESPACE__ .'\Foo::test', array('Hannes'));
+
+  call_user_func_array(array(__NAMESPACE__ .'\Foo', 'test'), array('Philip'));
+
+<?>
+
+The above example will output something similar to:
+
+Hello Hannes!
+Hello Philip!
+
+Example #3 Using lambda function
+
+<?php >
+
+  $func = function($arg1, $arg2) {
+  return $arg1 * $arg2;
+  };
+
+  var_dump(call_user_func_array($func, array(2, 4)));
+
+<?>
+
+The above example will output:
+
+int(8)
+
+Example #4 Passing values by reference
+
+<?php >
+
+  function mega(&$a){
+  $a = 55;
+  echo "function mega \$a=$a\n";
+  }
+  $bar = 77;
+  call_user_func_array('mega',array(&$bar));
+  echo "global \$bar=$bar\n";
+
+<?>
+
+The above example will output:
+
+function mega $a=55
+global $bar=55
+
+Example #5 call_user_func_array() using named arguments
+
+<?php >
+  function foobar($first, $second) {
+  echo __FUNCTION__, " got $first and $second\n";
+  }
+
+  // Call the foobar() function with named arguments in non-positional order
+  call_user_func_array("foobar", array("second" => "two", "first" => "one"));
+
+  // Call the foobar() function with one named argument
+  call_user_func_array("foobar", array("foo", "second" => "bar"));
+
+  // Fatal error: Cannot use positional argument after named argument
+  call_user_func_array("foobar", array("first" => "one", "bar"));
+
+<?>
+
+The above example will output something similar to:
+
+foobar got one and two
+foobar got foo and bar
+
+Fatal error: Uncaught Error: Cannot use positional argument after named argument
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  Callbacks registered with functions such as |call_user_func| and 
+  call_user_func_array() will not be called if there is an uncaught exception
+  thrown in a previous callback.
+
+===============================================================================
+[ See Also ]
+
+ * |call_user_func| - Call the callback given by the first parameter
+ * ReflectionFunction::invokeArgs() - Invokes function args
+ * ReflectionMethod::invokeArgs() - Invoke args
+
+
+vim:ft=help:

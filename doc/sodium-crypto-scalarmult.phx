@@ -1,0 +1,33 @@
+*sodium_crypto_scalarmult*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_scalarmult — Compute a shared secret given a user's secret key
+and another user's public key
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_scalarmult(string $n, string $p): string~
+
+Elliptic Curve Diffie-Hellman. Calculates scalar n times point p, on an
+elliptic curve.
+
+===============================================================================
+[ Parameters ]
+
+{n}
+
+  scalar, which is typically a secret key
+
+{p}
+
+  point (x-coordinate), which is typically a public key
+
+===============================================================================
+[ Return Values ]
+
+A 32-byte random string.
+
+
+vim:ft=help:

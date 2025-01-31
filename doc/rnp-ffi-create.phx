@@ -1,0 +1,32 @@
+*rnp_ffi_create*
+
+(PECL rnp >= 0.1.1)
+
+rnp_ffi_create — Create the top-level object used for interacting with the
+library
+
+===============================================================================
+[ Description ]
+
+  rnp_ffi_create(string $pub_format, string $sec_format): RnpFFI|false~
+
+===============================================================================
+[ Parameters ]
+
+{pub_format}
+
+  the format of the public keyring, RNP_KEYSTORE_GPG or other RNP_KEYSTORE_*
+  constant.
+
+{sec_format}
+
+  the format of the secret keyring, RNP_KEYSTORE_GPG or other RNP_KEYSTORE_*
+  constant
+
+===============================================================================
+[ Return Values ]
+
+Returns RnpFFI object on success or false on failure.
+
+
+vim:ft=help:

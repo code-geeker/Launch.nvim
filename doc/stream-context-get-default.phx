@@ -1,0 +1,84 @@
+*stream_context_get_default*
+
+(PHP 5 >= 5.1.0, PHP 7, PHP 8)
+
+stream_context_get_default — Retrieve the default stream context
+
+===============================================================================
+[ Description ]
+
+  stream_context_get_default(?array $options = null): resource~
+
+Returns the default stream context which is used whenever file operations (
+|fopen|, |file_get_contents|, etc...) are called without a context parameter.
+Options for the default context can optionally be specified with this function
+using the same syntax as |stream_context_create|.
+
+===============================================================================
+[ Parameters ]
+
+{options}
+  {options} must be an associative array of associative arrays in the format
+  $arr['wrapper']['option'] = $value, or null.
+
+===============================================================================
+[ Return Values ]
+
+A stream context resource.
+
+===============================================================================
+[ Changelog ]
+
+Version        Description
+8.0.0   {options} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Using stream_context_get_default()
+
+<?php >
+  $default_opts = array(
+  'http'=>array(
+  'method'=>"GET",
+  'header'=>"Accept-language: en\r\n" .
+  "Cookie: foo=bar",
+  'proxy'=>"tcp://10.54.1.39:8000"
+  )
+  );
+
+
+  $alternate_opts = array(
+  'http'=>array(
+  'method'=>"POST",
+  'header'=>"Content-type: application/x-www-form-urlencoded\r\n" .
+  "Content-length: " . strlen("baz=bomb"),
+  'content'=>"baz=bomb"
+  )
+  );
+
+  $default = stream_context_get_default($default_opts);
+  $alternate = stream_context_create($alternate_opts);
+
+  /* Sends a regular GET request to proxy server at 10.54.1.39
+  * For www.example.com using context options specified in $default_opts
+  */
+  readfile('http://www.example.com');
+
+  /* Sends a POST request directly to www.example.com
+  * Using context options specified in $alternate_opts
+  */
+  readfile('http://www.example.com', false, $alternate);
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |stream_context_create| - Creates a stream context
+ * |stream_context_set_default| - Set the default stream context
+ * Listing of supported wrappers with context options (Supported Protocols and
+  Wrappers).
+
+
+vim:ft=help:

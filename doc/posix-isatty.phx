@@ -1,0 +1,46 @@
+*posix_isatty*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+posix_isatty — Determine if a file descriptor is an interactive terminal
+
+===============================================================================
+[ Description ]
+
+  posix_isatty(resource|int $file_descriptor): bool~
+
+Determines if the file descriptor {file_descriptor} refers to a valid terminal
+type device.
+
+===============================================================================
+[ Parameters ]
+
+{file_descriptor}
+
+  The file descriptor, which is expected to be either a file resource or an int
+  . An int will be assumed to be a file descriptor that can be passed directly
+  to the underlying system call.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {file_descriptor} is an open descriptor connected to a terminal
+and false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Set errno (error number) to EBADF when the file descriptor/stream
+        passed is invalid.
+8.3.0   Type error E_WARNINGs are now raised for integer coercions following
+        the usual PHP type coercion semantics.
+
+===============================================================================
+[ See Also ]
+
+ * |posix_ttyname| - Determine terminal device name
+ * |stream_isatty| - Check if a stream is a TTY
+
+
+vim:ft=help:

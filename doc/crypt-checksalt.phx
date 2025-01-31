@@ -1,0 +1,58 @@
+*crypt_checksalt*
+
+(PECL xpass >= 1.1.0)
+
+crypt_checksalt — Validate a crypt setting string
+
+===============================================================================
+[ Description ]
+
+  crypt_checksalt(string $salt): ?string~
+
+Checks the salt string against the system configuration and reports whether the
+hashing method and parameters it specifies are acceptable. It is intended to be
+used to determine whether the user's passphrase should be re-hashed using the
+currently preferred hashing method.
+
+===============================================================================
+[ Parameters ]
+
+{salt}
+  Salt string to check.
+
+===============================================================================
+[ Return Values ]
+
+Returns one of the CRYPT_SALT_* as an int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A crypt_checksalt() example
+
+<?php >
+  // Generate a salt for a legacy method
+  $salt = crypt_gensalt(CRYPT_PREFIX_STD_DES);
+  // Check the salt
+  $test = crypt_checksalt($salt);
+  var_dump($test === CRYPT_SALT_METHOD_LEGACY);
+
+  // Generate a salt for default method
+  $salt = crypt_gensalt();
+  // Check the salt
+  $test = crypt_checksalt($salt);
+  var_dump($test === CRYPT_SALT_OK);
+<?>
+
+The above example will output:
+
+bool(true)
+bool(true)
+
+===============================================================================
+[ See Also ]
+
+ * |crypt_gensalt| - Compile a string for use as the salt argument to crypt
+
+
+vim:ft=help:

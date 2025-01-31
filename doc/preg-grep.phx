@@ -1,0 +1,64 @@
+*preg_grep*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+preg_grep — Return array entries that match the pattern
+
+===============================================================================
+[ Description ]
+
+  preg_grep(string $pattern, array $array, int $flags = 0): array|false~
+
+Returns the array consisting of the elements of the {array} array that match
+the given {pattern}.
+
+===============================================================================
+[ Parameters ]
+
+{pattern}
+
+  The pattern to search for, as a string.
+
+{array}
+
+  The input array.
+
+{flags}
+
+  If set to PREG_GREP_INVERT, this function returns the elements of the input
+  array that do not match the given {pattern}.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array indexed using the keys from the {array} array, or false on
+failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If the regex pattern passed does not compile to a valid regex, an E_WARNING is
+emitted.
+
+===============================================================================
+[ Examples ]
+
+Example #1 preg_grep() example
+
+<?php >
+  // return all array elements
+  // containing floating point numbers
+  $fl_array = preg_grep("/^(\d+)?\.\d+$/", $array);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * PCRE Patterns
+ * |preg_quote| - Quote regular expression characters
+ * |preg_match_all| - Perform a global regular expression match
+ * |preg_filter| - Perform a regular expression search and replace
+ * |preg_last_error| - Returns the error code of the last PCRE regex execution
+
+
+vim:ft=help:

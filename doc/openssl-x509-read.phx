@@ -1,0 +1,38 @@
+*openssl_x509_read*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+openssl_x509_read — Parse an X.509 certificate and return an object for it
+
+===============================================================================
+[ Description ]
+
+  openssl_x509_read(OpenSSLCertificate|string $certificate):~
+  OpenSSLCertificate|false~
+
+openssl_x509_read() parses the certificate supplied by {certificate} and
+returns an OpenSSLCertificate object for it.
+
+===============================================================================
+[ Parameters ]
+
+{certificate}
+
+  X509 certificate. See Key/Certificate parameters for a list of valid values.
+
+===============================================================================
+[ Return Values ]
+
+Returns an OpenSSLCertificate on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   On success, this function returns an OpenSSLCertificate instance now;
+        previously, a resource of type OpenSSL X.509 was returned.
+8.0.0   {certificate} accepts an OpenSSLCertificate instance now; previously, a
+        resource of type OpenSSL X.509 was accepted.
+
+
+vim:ft=help:

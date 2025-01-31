@@ -1,0 +1,50 @@
+*gnupg_deletekey*
+
+(PECL gnupg >= 0.5)
+
+gnupg_deletekey — Delete a key from the keyring
+
+===============================================================================
+[ Description ]
+
+  gnupg_deletekey(resource $identifier, string $key, bool $allow_secret): bool~
+
+===============================================================================
+[ Parameters ]
+
+{identifier}
+
+  The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{key}
+
+  The key to delete.
+
+{allow_secret}
+
+  It specifies whether to delete secret keys as well.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Procedural gnupg_deletekey() example
+
+<?php >
+  $res = gnupg_init();
+  gnupg_deletekey($res, "8660281B6051D071D94B5B230549F9DC851566DC");
+<?>
+
+Example #2 OO gnupg_deletekey() example
+
+<?php >
+  $gpg = new gnupg();
+  $gpg->deletekey("8660281B6051D071D94B5B230549F9DC851566DC");
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,89 @@
+*imagestringup*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagestringup — Draw a string vertically
+
+===============================================================================
+[ Description ]
+
+  imagestringup(    GdImage~
+  $image,    GdFont|int $font,    int~
+  $x,    int $y,    string~
+  $string,    int $color): bool~
+
+Draws a {string} vertically at the given coordinates.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{font}
+
+  Can be 1, 2, 3, 4, 5 for built-in fonts in latin2 encoding (where higher
+  numbers corresponding to larger fonts) or GdFont instance, returned by 
+  |imageloadfont|.
+
+{x}
+
+  x-coordinate of the bottom left corner.
+
+{y}
+
+  y-coordinate of the bottom left corner.
+
+{string}
+
+  The string to be written.
+
+{color}
+
+  A color identifier created with |imagecolorallocate|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {font} parameter now accepts both an GdFont instance and an int;
+        previously only int was accepted.
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagestringup() example
+
+<?php >
+  // create a 100*100 image
+  $im = imagecreatetruecolor(100, 100);
+
+  // Write the text
+  $textcolor = imagecolorallocate($im, 0xFF, 0xFF, 0xFF);
+  imagestringup($im, 3, 40, 80, 'gd library', $textcolor);
+
+  // Save the image
+  imagepng($im, './stringup.png');
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagestringup()
+
+===============================================================================
+[ See Also ]
+
+ * |imagestring| - Draw a string horizontally
+ * |imageloadfont| - Load a new font
+
+
+vim:ft=help:

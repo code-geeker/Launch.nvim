@@ -1,0 +1,31 @@
+*rnp_dump_packets*
+
+(PECL rnp >= 0.1.1)
+
+rnp_dump_packets — Dump OpenPGP packets stream information in humand-readable
+format
+
+===============================================================================
+[ Description ]
+
+  rnp_dump_packets(string $input, int $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{input}
+
+  Input string containing OpenPGP data, either in binary or ASCII-armored
+  format.
+
+{flags}
+
+  See RNP_DUMP_* predefined constants.
+
+===============================================================================
+[ Return Values ]
+
+Text describing packet sequence or false on failure.
+
+
+vim:ft=help:

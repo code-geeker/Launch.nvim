@@ -1,0 +1,209 @@
+*stream_get_meta_data*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+stream_get_meta_data — Retrieves header/meta data from streams/file pointers
+
+===============================================================================
+[ Description ]
+
+  stream_get_meta_data(resource $stream): array~
+
+Returns information about an existing {stream}.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  The stream can be any stream created by |fopen|, |fsockopen| |pfsockopen| and
+  |stream_socket_client|.
+
+===============================================================================
+[ Return Values ]
+
+The result array contains the following items:
+
+ * timed_out (bool) - true if the stream timed out while waiting for data on
+  the last call to |fread| or |fgets|.
+
+ * blocked (bool) - true if the stream is in blocking IO mode. See 
+  |stream_set_blocking|.
+
+ * eof (bool) - true if the stream has reached end-of-file. Note that for
+  socket streams this member can be true even when unread_bytes is non-zero. To
+  determine if there is more data to be read, use |feof| instead of reading
+  this item.
+
+ * unread_bytes (int) - the number of bytes currently contained in the PHP's
+  own internal buffer.
+
+    Note: You shouldn't use this value in a script.
+
+ * stream_type (string) - a label describing the underlying implementation of
+  the stream.
+
+ * wrapper_type (string) - a label describing the protocol wrapper
+  implementation layered over the stream. See Supported Protocols and Wrappers
+  for more information about wrappers.
+
+ * wrapper_data (mixed) - wrapper specific data attached to this stream. See
+  Supported Protocols and Wrappers for more information about wrappers and
+  their wrapper data.
+
+ * mode (string) - the type of access required for this stream (see Table 1 of
+  the |fopen| reference)
+
+ * seekable (bool) - whether the current stream can be seeked.
+
+ * uri (string) - the URI/filename associated with this stream.
+
+ * crypto (array) - the TLS connection metadata for this stream. (Note: Only
+  provided when the resource's stream uses TLS.)
+
+===============================================================================
+[ Examples ]
+
+Example #1 stream_get_meta_data() example using |fopen| with http
+
+<?php >
+  $url = 'http://www.example.com/';
+
+  if (!$fp = fopen($url, 'r')) {
+  trigger_error("Unable to open URL ($url)", E_USER_ERROR);
+  }
+
+  $meta = stream_get_meta_data($fp);
+
+  var_dump($meta);
+
+  fclose($fp);
+<?>
+
+The above example will output something similar to:
+
+array(10) {
+  'timed_out' =>
+  bool(false)
+  'blocked' =>
+  bool(true)
+  'eof' =>
+  bool(false)
+  'wrapper_data' =>
+  array(13) {
+    [0] =>
+    string(15) "HTTP/1.1 200 OK"
+    [1] =>
+    string(11) "Age: 244629"
+    [2] =>
+    string(29) "Cache-Control: max-age=604800"
+    [3] =>
+    string(38) "Content-Type: text/html; charset=UTF-8"
+    [4] =>
+    string(35) "Date: Sat, 20 Nov 2021 18:17:57 GMT"
+    [5] =>
+    string(24) "Etag: "3147526947+ident""
+    [6] =>
+    string(38) "Expires: Sat, 27 Nov 2021 18:17:57 GMT"
+    [7] =>
+    string(44) "Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT"
+    [8] =>
+    string(22) "Server: ECS (chb/0286)"
+    [9] =>
+    string(21) "Vary: Accept-Encoding"
+    [10] =>
+    string(12) "X-Cache: HIT"
+    [11] =>
+    string(20) "Content-Length: 1256"
+    [12] =>
+    string(17) "Connection: close"
+  }
+  'wrapper_type' =>
+  string(4) "http"
+  'stream_type' =>
+  string(14) "tcp_socket/ssl"
+  'mode' =>
+  string(1) "r"
+  'unread_bytes' =>
+  int(1256)
+  'seekable' =>
+  bool(false)
+  'uri' =>
+  string(23) "http://www.example.com/"
+}
+
+Example #2 stream_get_meta_data() example using |stream_socket_client| with
+https
+
+<?php >
+  $streamContext = stream_context_create(
+  [
+  'ssl' => [
+  'capture_peer_cert' => true,
+  'capture_peer_cert_chain' => true,
+  'disable_compression' => true,
+  ],
+  ]
+  );
+
+  $client = stream_socket_client(
+  'ssl://www.example.com:443',
+  $errorNumber,
+  $errorDescription,
+  40,
+  STREAM_CLIENT_CONNECT,
+  $streamContext
+  );
+
+
+  $meta = stream_get_meta_data($client);
+
+  var_dump($meta);
+<?>
+
+The above example will output something similar to:
+
+array(8) {
+  'crypto' =>
+  array(4) {
+    'protocol' =>
+    string(7) "TLSv1.3"
+    'cipher_name' =>
+    string(22) "TLS_AES_256_GCM_SHA384"
+    'cipher_bits' =>
+    int(256)
+    'cipher_version' =>
+    string(7) "TLSv1.3"
+  }
+  'timed_out' =>
+  bool(false)
+  'blocked' =>
+  bool(true)
+  'eof' =>
+  bool(false)
+  'stream_type' =>
+  string(14) "tcp_socket/ssl"
+  'mode' =>
+  string(2) "r+"
+  'unread_bytes' =>
+  int(0)
+  'seekable' =>
+  bool(false)
+}
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This function does NOT work on sockets created by the Socket extension.
+
+===============================================================================
+[ See Also ]
+
+ * |get_headers| - Fetches all the headers sent by the server in response to an
+  HTTP request
+ * $http_response_header
+
+
+vim:ft=help:

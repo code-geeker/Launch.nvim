@@ -1,0 +1,127 @@
+*strtok*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+strtok — Tokenize string
+
+===============================================================================
+[ Description ]
+
+  strtok(string $string, string $token): string|false~
+
+Alternative signature (not supported with named arguments):
+
+  strtok(string $token): string|false~
+
+strtok() splits a string ({string}) into smaller strings (tokens), with each
+token being delimited by any character from {token}. That is, if you have a
+string like "This is an example string" you could tokenize this string into its
+individual words by using the space character as the {token}.
+
+Note that only the first call to strtok uses the {string} argument. Every
+subsequent call to strtok only needs the {token} to use, as it keeps track of
+where it is in the current string. To start over, or to tokenize a new string
+you simply call strtok with the {string} argument again to initialize it. Note
+that you may put multiple tokens in the {token} parameter. The string will be
+tokenized when any one of the characters in the {token} argument is found.
+
+  Note:
+
+  This function behaves slightly different from what one may expect being
+  familiar with |explode|. First, a sequence of two or more contiguous {token}
+  characters in the parsed string is considered to be a single delimiter. Also,
+  a {token} situated at the start or end of the string is ignored. For example,
+  if a string ";aaa;;bbb;" is used, successive calls to strtok() with ";" as a
+  {token} would return strings "aaa" and "bbb", and then false. As a result,
+  the string will be split into only two elements, while explode(";", $string)
+  would return an array of 5 elements.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The string being split up into smaller strings (tokens).
+
+{token}
+
+  The delimiter used when splitting up {string}.
+
+===============================================================================
+[ Return Values ]
+
+A string token, or false if no more tokens are available.
+
+===============================================================================
+[ Changelog ]
+
+Version                    Description
+8.3.0   Now emits E_WARNING when {token} is not provided.
+
+===============================================================================
+[ Examples ]
+
+Example #1 strtok() example
+
+<?php >
+  $string = "This is\tan example\nstring";
+  /* Use tab and newline as tokenizing characters as well */
+  $tok = strtok($string, " \n\t");
+
+  while ($tok !== false) {
+  echo "Word=$tok<br />";
+  $tok = strtok(" \n\t");
+  }
+<?>
+
+Example #2 strtok() behavior on empty part found
+
+<?php >
+  $first_token = strtok('/something', '/');
+  $second_token = strtok('/');
+  var_dump($first_token, $second_token);
+<?>
+
+The above example will output:
+
+string(9) "something"
+    bool(false)
+
+Example #3 The difference between strtok() and |explode|
+
+<?php >
+$string = ";aaa;;bbb;";
+
+$parts = [];
+$tok = strtok($string, ";");
+while ($tok !== false) {
+$parts[] = $tok;
+$tok = strtok(";");
+}
+echo json_encode($parts),"\n";
+
+$parts = explode(";", $string);
+echo json_encode($parts),"\n";
+
+The above example will output:
+
+["aaa","bbb"]
+["","aaa","","bbb",""]
+
+===============================================================================
+[ Notes ]
+
+Warning
+
+This function may return Boolean false, but may also return a non-Boolean value
+which evaluates to false. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+===============================================================================
+[ See Also ]
+
+ * |explode| - Split a string by a string
+
+
+vim:ft=help:

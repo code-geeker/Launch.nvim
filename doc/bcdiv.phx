@@ -1,0 +1,73 @@
+*bcdiv*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+bcdiv — Divide two arbitrary precision numbers
+
+===============================================================================
+[ Description ]
+
+  bcdiv(string $num1, string $num2, ?int $scale = null): string~
+
+Divides {num1} by {num2}.
+
+===============================================================================
+[ Parameters ]
+
+{num1}
+
+  The dividend, as a string.
+
+{num2}
+
+  The divisor, as a string.
+
+{scale}
+  This parameter is used to set the number of digits after the decimal place in
+  the result. If null, it will default to the default scale set with |bcscale|,
+  or fallback to the value of the bcmath.scale INI directive.
+
+===============================================================================
+[ Return Values ]
+
+Returns the result of the division as a string.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+This function throws a ValueError in the following cases:
+
+ * {num1} or {num2} is not a well-formed BCMath numeric string.
+ * {scale} is outside the valid range.
+
+This function throws a DivisionByZeroError exception if {num2} is 0.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {scale} is now nullable.
+8.0.0   Dividing by 0 now throws a DivisionByZeroError exception instead of
+        returning null.
+
+===============================================================================
+[ Examples ]
+
+Example #1 bcdiv() example
+
+<?php >
+
+  echo bcdiv('105', '6.55957', 3); // 16.007
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |bcdivmod| - Get the quotient and modulus of an arbitrary precision number
+ * |bcmod| - Get modulus of an arbitrary precision number
+ * |bcmul| - Multiply two arbitrary precision numbers
+ * BcMath\Number::div() - Divides by an arbitrary precision number
+
+
+vim:ft=help:

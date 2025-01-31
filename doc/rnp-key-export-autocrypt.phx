@@ -1,0 +1,46 @@
+*rnp_key_export_autocrypt*
+
+(PECL rnp >= 0.1.1)
+
+rnp_key_export_autocrypt — Export minimal key for autocrypt feature (just 5
+packets: key, uid, signature, encryption subkey, signature)
+
+===============================================================================
+[ Description ]
+
+  rnp_key_export_autocrypt(    RnpFFI~
+  $ffi,    string $key_fp,    string~
+  $subkey_fp,    string $uid,    int~
+  $flags): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{key_fp}
+
+  Primary key fingerprint.
+
+{subkey_fp}
+
+  Subkey to export. Can be an empty string to pick the first suitable subkey.
+
+{uid}
+
+  User ID to export. Can be an empty string if exported key has only one uid.
+
+{flags}
+
+  Only RNP_KEY_EXPORT_BASE64 is currently supported. Enabling it would export
+  base64-encoded key data instead of binary.
+
+===============================================================================
+[ Return Values ]
+
+OpenPGP packets of exported key on success or false on failure.
+
+
+vim:ft=help:

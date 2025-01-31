@@ -1,0 +1,71 @@
+*imagebmp*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+imagebmp — Output a BMP image to browser or file
+
+===============================================================================
+[ Description ]
+
+  imagebmp(GdImage $image, resource|string|null $file = null, bool $compressed~
+  = true): bool~
+
+Outputs or saves a BMP version of the given {image}.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{file}
+
+  The path or an open stream resource (which is automatically closed after this
+  function returns) to save the file to. If not set or null, the raw image
+  stream will be output directly.
+
+    Note:
+
+    null is invalid if the {compressed} arguments is not used.
+
+{compressed}
+
+  Whether the BMP should be compressed with run-length encoding (RLE), or not.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+Caution
+
+However, if libgd fails to output the image, this function returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+8.0.0   The type of {compressed} is bool now; formerly it was int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Saving a BMP file
+
+<?php >
+  // Create a blank image and add some text
+  $im = imagecreatetruecolor(120, 20);
+  $text_color = imagecolorallocate($im, 233, 14, 91);
+
+  imagestring($im, 1, 5, 5, 'BMP with PHP', $text_color);
+
+  // Save the image
+  imagebmp($im, 'php.bmp');
+<?>
+
+
+vim:ft=help:

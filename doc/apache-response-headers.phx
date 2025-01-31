@@ -1,0 +1,50 @@
+*apache_response_headers*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+apache_response_headers — Fetch all HTTP response headers
+
+===============================================================================
+[ Description ]
+
+  apache_response_headers(): array~
+
+Fetch all HTTP response headers. Works in the Apache, FastCGI, CLI, and FPM
+webservers.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+An array of all Apache response headers on success.
+
+===============================================================================
+[ Examples ]
+
+Example #1 apache_response_headers() example
+
+<?php >
+  print_r(apache_response_headers());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [Accept-Ranges] => bytes
+    [X-Powered-By] => PHP/4.3.8
+)
+
+===============================================================================
+[ See Also ]
+
+ * |apache_request_headers| - Fetch all HTTP request headers
+ * |headers_sent| - Checks if or where headers have been sent
+ * |headers_list| - Returns a list of response headers sent (or ready to send)
+
+
+vim:ft=help:

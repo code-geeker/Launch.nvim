@@ -1,0 +1,36 @@
+*zlib_decode*
+
+(PHP 5 >= 5.4.0, PHP 7, PHP 8)
+
+zlib_decode — Uncompress any raw/gzip/zlib encoded data
+
+===============================================================================
+[ Description ]
+
+  zlib_decode(string $data, int $max_length = 0): string|false~
+
+Uncompress any raw/gzip/zlib encoded data.
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{data}
+
+{max_length}
+
+===============================================================================
+[ Return Values ]
+
+Returns the uncompressed data, or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * |zlib_encode| - Compress data with the specified encoding
+
+
+vim:ft=help:

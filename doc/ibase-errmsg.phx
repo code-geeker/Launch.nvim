@@ -1,0 +1,31 @@
+*ibase_errmsg*
+
+(PHP 5, PHP 7 < 7.4.0)
+
+ibase_errmsg — Return error messages
+
+===============================================================================
+[ Description ]
+
+  ibase_errmsg(): string~
+
+Returns the error message that resulted from the most recent InterBase function
+call.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the error message as a string, or false if no error occurred.
+
+===============================================================================
+[ See Also ]
+
+ * |ibase_errcode| - Return an error code
+
+
+vim:ft=help:

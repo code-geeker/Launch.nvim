@@ -1,0 +1,71 @@
+*dbase_numrecords*
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_numrecords — Gets the number of records in a database
+
+===============================================================================
+[ Description ]
+
+  dbase_numrecords(resource $database): int~
+
+Gets the number of records (rows) in the specified database.
+
+  Note:
+
+  Records which are marked as deleted are counted as well.
+
+  Note:
+
+  Record numbers are between 1 and dbase_numrecords($db), while field numbers
+  are between 0 and dbase_numfields($db)-1.
+
+===============================================================================
+[ Parameters ]
+
+{database}
+
+  The database resource, returned by |dbase_open| or |dbase_create|.
+
+===============================================================================
+[ Return Values ]
+
+The number of records in the database, or false if an error occurs.
+
+===============================================================================
+[ Changelog ]
+
+    Version                        Description
+PECL dbase 7.0.0 {database} is now a resource instead of an int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Looping over all the records of the database
+
+<?php >
+
+  // open in read-only mode
+  $db = dbase_open('/tmp/test.dbf', 0);
+
+  if ($db) {
+  $record_numbers = dbase_numrecords($db);
+  for ($i = 1; $i <= $record_numbers; $i++) {
+  $record = dbase_get_record($db, $i);
+  if (!$record['deleted']) {
+  // do something with the $record
+  } else {
+  // do something with the deleted $record or ignore it
+  }
+  }
+  }
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |dbase_numfields| - Gets the number of fields of a database
+
+
+vim:ft=help:

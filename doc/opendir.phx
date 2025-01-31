@@ -1,0 +1,81 @@
+*opendir*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+opendir — Open directory handle
+
+===============================================================================
+[ Description ]
+
+  opendir(string $directory, ?resource $context = null): resource|false~
+
+Opens up a directory handle to be used in subsequent |closedir|, |readdir|, and
+|rewinddir| calls.
+
+===============================================================================
+[ Parameters ]
+
+{directory}
+
+  The directory path that is to be opened
+
+{context}
+
+  For a description of the {context} parameter, refer to the streams section of
+  the manual.
+
+===============================================================================
+[ Return Values ]
+
+Returns a directory handle resource on success, or false on failure
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Upon failure, an E_WARNING is emitted.
+
+This may happen if {directory} is not a valid directory, the directory can not
+be opened due to permission restrictions, or due to filesystem errors.
+
+===============================================================================
+[ Changelog ]
+
+Version        Description
+8.0.0   {context} is now nullable.
+
+===============================================================================
+[ Examples ]
+
+Example #1 opendir() example
+
+<?php >
+  $dir = "/etc/php5/";
+
+  // Open a known directory, and proceed to read its contents
+  if (is_dir($dir)) {
+  if ($dh = opendir($dir)) {
+  while (($file = readdir($dh)) !== false) {
+  echo "filename: $file : filetype: " . filetype($dir . $file) . "\n";
+  }
+  closedir($dh);
+  }
+  }
+<?>
+
+The above example will output something similar to:
+
+filename: . : filetype: dir
+filename: .. : filetype: dir
+filename: apache : filetype: dir
+filename: cgi : filetype: dir
+filename: cli : filetype: dir
+
+===============================================================================
+[ See Also ]
+
+ * |is_dir| - Tells whether the filename is a directory
+ * |readdir| - Read entry from directory handle
+ * |dir| - Return an instance of the Directory class
+
+
+vim:ft=help:

@@ -1,0 +1,56 @@
+*ldap_parse_exop*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+ldap_parse_exop — Parse result object from an LDAP extended operation
+
+===============================================================================
+[ Description ]
+
+  ldap_parse_exop(    LDAP\Connection~
+  $ldap,    LDAP\Result~
+  $result,    string &$response_data =~
+  null,    string &$response_oid = null): bool~
+
+Parse LDAP extended operation data from result object {result}
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{result}
+
+  An LDAP\Result instance, returned by |ldap_list| or |ldap_search|.
+
+{response_data}
+
+  Will be filled by the response data.
+
+{response_oid}
+
+  Will be filled by the response OID.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   The {result} parameter expects an LDAP\Result instance now; previously,
+        a valid ldap result resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_exop| - Performs an extended operation
+
+
+vim:ft=help:

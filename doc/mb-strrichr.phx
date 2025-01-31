@@ -1,0 +1,64 @@
+*mb_strrichr*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+mb_strrichr — Finds the last occurrence of a character in a string within
+another, case insensitive
+
+===============================================================================
+[ Description ]
+
+  mb_strrichr(    string~
+  $haystack,    string~
+  $needle,    bool $before_needle =~
+  false,    ?string $encoding = null): string|false~
+
+mb_strrichr() finds the last occurrence of {needle} in {haystack} and returns
+the portion of {haystack}. Unlike |mb_strrchr|, mb_strrichr() is
+case-insensitive. If {needle} is not found, it returns false.
+
+===============================================================================
+[ Parameters ]
+
+{haystack}
+
+  The string from which to get the last occurrence of {needle}
+
+{needle}
+
+  The string to find in {haystack}
+
+{before_needle}
+
+  Determines which portion of {haystack} this function returns. If set to true,
+  it returns all of {haystack} from the beginning to the last occurrence of
+  {needle}. If set to false, it returns all of {haystack} from the last
+  occurrence of {needle} to the end,
+
+{encoding}
+
+  Character encoding name to use. If it is omitted, internal character encoding
+  is used.
+
+===============================================================================
+[ Return Values ]
+
+Returns the portion of {haystack}. or false if {needle} is not found.
+
+===============================================================================
+[ Changelog ]
+
+Version              Description
+8.0.0   {needle} now accepts an empty string.
+8.0.0   {encoding} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_stristr| - Finds first occurrence of a string within another, case
+  insensitive
+ * |mb_strrchr| - Finds the last occurrence of a character in a string within
+  another
+
+
+vim:ft=help:

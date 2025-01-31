@@ -1,0 +1,38 @@
+*sodium_crypto_stream*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_stream — Generate a deterministic sequence of bytes from a seed
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_stream(int $length, string $nonce, #[\SensitiveParameter]~
+  string $key): string~
+
+Generate a deterministic sequence of bytes from a seed, using the XSalsa20
+stream cipher.
+
+===============================================================================
+[ Parameters ]
+
+{length}
+
+  The number of bytes to return.
+
+{nonce}
+
+  A number that must be only used once, per message. 24 bytes long. This is a
+  large enough bound to generate randomly (i.e. |random_bytes|).
+
+{key}
+
+  Encryption key (256-bit).
+
+===============================================================================
+[ Return Values ]
+
+String of pseudorandom bytes.
+
+
+vim:ft=help:

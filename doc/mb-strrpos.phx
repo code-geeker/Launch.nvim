@@ -1,0 +1,62 @@
+*mb_strrpos*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+mb_strrpos — Find position of last occurrence of a string in a string
+
+===============================================================================
+[ Description ]
+
+  mb_strrpos(    string~
+  $haystack,    string $needle,    int~
+  $offset = 0,    ?string $encoding = null): int|false~
+
+Performs a multibyte safe |strrpos| operation based on the number of
+characters. {needle} position is counted from the beginning of {haystack}.
+First character's position is 0. Second character position is 1.
+
+===============================================================================
+[ Parameters ]
+
+{haystack}
+
+  The string being checked, for the last occurrence of {needle}
+
+{needle}
+
+  The string to find in {haystack}.
+
+{offset}
+  May be specified to begin searching an arbitrary number of characters into
+  the string. Negative values will stop searching at an arbitrary point prior
+  to the end of the string.
+{encoding}
+
+  The {encoding} parameter is the character encoding. If it is omitted or null,
+  the internal character encoding value will be used.
+
+===============================================================================
+[ Return Values ]
+
+Returns the numeric position of the last occurrence of {needle} in the
+{haystack} string. If {needle} is not found, it returns false.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {needle} now accepts an empty string.
+8.0.0   Passing the {encoding} as the third argument instead of an offset has
+        been removed.
+8.0.0   {encoding} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |mb_strpos| - Find position of first occurrence of string in a string
+ * |mb_internal_encoding| - Set/Get internal character encoding
+ * |strrpos| - Find the position of the last occurrence of a substring in a
+  string
+
+
+vim:ft=help:

@@ -1,0 +1,147 @@
+*openssl_encrypt*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+openssl_encrypt — Encrypts data
+
+===============================================================================
+[ Description ]
+
+  openssl_encrypt(    #[\SensitiveParameter] string~
+  $data,    string~
+  $cipher_algo,    #[\SensitiveParameter] string~
+  $passphrase,    int $options =~
+  0,    string $iv =~
+  "",    string &$tag =~
+  null,    string $aad =~
+  "",    int $tag_length = 16): string|false~
+
+Encrypts given data with given method and passphrase, returns a raw or base64
+encoded string
+
+===============================================================================
+[ Parameters ]
+
+{data}
+
+  The plaintext message data to be encrypted.
+
+{cipher_algo}
+
+  The cipher method. For a list of available cipher methods, use 
+  |openssl_get_cipher_methods|.
+
+{passphrase}
+
+  The passphrase. If the passphrase is shorter than expected, it is silently
+  padded with NUL characters; if the passphrase is longer than expected, it is
+  silently truncated.
+
+  Caution
+
+  There is no key derivation function used for {passphrase} as its name might
+  suggest. The only operation used is padding with NUL characters or truncation
+  if the length is different than expected.
+
+{options}
+
+  {options} is a bitwise disjunction of the flags OPENSSL_RAW_DATA, and
+  OPENSSL_ZERO_PADDING or OPENSSL_DONT_ZERO_PAD_KEY.
+
+{iv}
+
+  A non-null Initialization Vector. If the IV is shorter than expected, it is
+  padded with NUL characters and warning is emitted; if the passphrase is
+  longer than expected, it is truncated and warning is emitted.
+
+{tag}
+
+  The authentication tag passed by reference when using AEAD cipher mode (GCM
+  or CCM).
+
+{aad}
+
+  Additional authenticated data.
+
+{tag_length}
+
+  The length of the authentication {tag}. Its value can be between 4 and 16 for
+  GCM mode.
+
+===============================================================================
+[ Return Values ]
+
+Returns the encrypted string on success or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Emits an E_WARNING level error if an unknown cipher algorithm is passed in via
+the {cipher_algo} parameter.
+
+Emits an E_WARNING level error if an empty value is passed in via the {iv}
+parameter.
+
+===============================================================================
+[ Changelog ]
+
+Version                       Description
+7.1.0   The {tag}, {aad} and {tag_length} parameters were added.
+
+===============================================================================
+[ Examples ]
+
+Example #1 AES Authenticated Encryption in GCM mode example for PHP 7.1+
+
+<?php >
+  //$key should have been previously generated in a cryptographically safe way,
+  like openssl_random_pseudo_bytes
+  $plaintext = "message to be encrypted";
+  $cipher = "aes-128-gcm";
+  if (in_array($cipher, openssl_get_cipher_methods()))
+  {
+  $ivlen = openssl_cipher_iv_length($cipher);
+  $iv = openssl_random_pseudo_bytes($ivlen);
+  $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv, $tag
+  );
+  //store $cipher, $iv, and $tag for decryption later
+  $original_plaintext = openssl_decrypt($ciphertext, $cipher, $key, $options=0, 
+  $iv, $tag);
+  echo $original_plaintext."\n";
+  }
+<?>
+
+Example #2 AES Authenticated Encryption example prior to PHP 7.1
+
+<?php >
+  //$key previously generated safely, ie: openssl_random_pseudo_bytes
+  $plaintext = "message to be encrypted";
+  $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
+  $iv = openssl_random_pseudo_bytes($ivlen);
+  $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options=
+  OPENSSL_RAW_DATA, $iv);
+  $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+  $ciphertext = base64_encode( $iv.$hmac.$ciphertext_raw );
+
+  //decrypt later....
+  $c = base64_decode($ciphertext);
+  $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
+  $iv = substr($c, 0, $ivlen);
+  $hmac = substr($c, $ivlen, $sha2len=32);
+  $ciphertext_raw = substr($c, $ivlen+$sha2len);
+  $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options=
+  OPENSSL_RAW_DATA, $iv);
+  $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+  if (hash_equals($hmac, $calcmac))// timing attack safe comparison
+  {
+  echo $original_plaintext."\n";
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |openssl_decrypt| - Decrypts data
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+*filter_has_var*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+filter_has_var — Checks if variable of specified type exists
+
+===============================================================================
+[ Description ]
+
+  filter_has_var(int $input_type, string $var_name): bool~
+
+===============================================================================
+[ Parameters ]
+
+{input_type}
+
+  One of INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER, or INPUT_ENV.
+
+{var_name}
+
+  Name of a variable to check.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

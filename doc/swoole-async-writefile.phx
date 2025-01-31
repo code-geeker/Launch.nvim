@@ -1,0 +1,36 @@
+*swoole_async_writefile*
+
+(PECL swoole >= 1.9.0)
+
+swoole_async_writefile — Write data to a file asynchronously
+
+===============================================================================
+[ Description ]
+
+  swoole_async_writefile(    string~
+  $filename,    string~
+  $content,    callable $callback =~
+  ?,    int $flags = 0): bool~
+
+===============================================================================
+[ Parameters ]
+
+{filename}
+
+  The filename being written.
+
+{content}
+
+  The content writing to the file.
+
+{callback}
+
+{flags}
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

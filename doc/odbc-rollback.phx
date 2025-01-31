@@ -1,0 +1,34 @@
+*odbc_rollback*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_rollback — Rollback a transaction
+
+===============================================================================
+[ Description ]
+
+  odbc_rollback(Odbc\Connection $odbc): bool~
+
+Rolls back all pending statements on the connection.
+
+===============================================================================
+[ Parameters ]
+
+{odbc}
+
+  The ODBC connection object, see |odbc_connect| for details.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {odbc} expects an Odbc\Connection instance now; previously, a resource
+        was expected.
+
+
+vim:ft=help:

@@ -1,0 +1,125 @@
+*debug_backtrace*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+debug_backtrace — Generates a backtrace
+
+===============================================================================
+[ Description ]
+
+  debug_backtrace(int $options = DEBUG_BACKTRACE_PROVIDE_OBJECT, int $limit =~
+  0): array~
+
+debug_backtrace() generates a PHP backtrace.
+
+===============================================================================
+[ Parameters ]
+
+{options}
+
+  This parameter is a bitmask for the following options:
+
+                           debug_backtrace() options
+  DEBUG_BACKTRACE_PROVIDE_OBJECT Whether or not to populate the "object" index.
+                                 Whether or not to omit the "args" index, and
+  DEBUG_BACKTRACE_IGNORE_ARGS    thus all the function/method arguments, to
+                                 save memory.
+
+    Note:
+
+    There are four possible combinations:
+
+                           debug_backtrace() options
+    debug_backtrace()
+    debug_backtrace                               Populates both indexes
+    (DEBUG_BACKTRACE_PROVIDE_OBJECT)
+    debug_backtrace(1)
+    debug_backtrace(0)                            Omits index "object" and
+                                                  populates index "args".
+    debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)  Omits index "object" and
+    debug_backtrace(2)                            index "args".
+    debug_backtrace
+    (DEBUG_BACKTRACE_PROVIDE_OBJECT|              Populate index "object" and
+    DEBUG_BACKTRACE_IGNORE_ARGS)                  omit index "args".
+    debug_backtrace(3)
+
+{limit}
+
+  This parameter can be used to limit the number of stack frames returned. By
+  default ({limit}=0) it returns all stack frames.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of associative arrays. The possible returned elements are as
+follows:
+
+               Possible returned elements from debug_backtrace()
+  Name    Type                            Description
+function string The current function name. See also __FUNCTION__.
+line     int    The current line number. See also __LINE__.
+file     string The current file name. See also __FILE__.
+class    string The current class name. See also __CLASS__
+object   object The current object.
+                The current call type. If a method call, "->" is returned. If a
+type     string static method call, "::" is returned. If a function call,
+                nothing is returned.
+args     array  If inside a function, this lists the functions arguments. If
+                inside an included file, this lists the included file name(s).
+
+===============================================================================
+[ Examples ]
+
+Example #1 debug_backtrace() example
+
+<?php >
+  // filename: /tmp/a.php
+
+  function a_test($str)
+  {
+  echo "\nHi: $str";
+  var_dump(debug_backtrace());
+  }
+
+  a_test('friend');
+<?>
+
+<?php >
+  // filename: /tmp/b.php
+  include_once '/tmp/a.php';
+<?>
+
+Results similar to the following when executing /tmp/b.php:
+
+Hi: friend
+array(2) {
+[0]=>
+array(4) {
+    ["file"] => string(10) "/tmp/a.php"
+    ["line"] => int(10)
+    ["function"] => string(6) "a_test"
+    ["args"]=>
+    array(1) {
+      [0] => &string(6) "friend"
+    }
+}
+[1]=>
+array(4) {
+    ["file"] => string(10) "/tmp/b.php"
+    ["line"] => int(2)
+    ["args"] =>
+    array(1) {
+      [0] => string(10) "/tmp/a.php"
+    }
+    ["function"] => string(12) "include_once"
+  }
+}
+
+===============================================================================
+[ See Also ]
+
+ * |trigger_error| - Generates a user-level error/warning/notice message
+ * |debug_print_backtrace| - Prints a backtrace
+
+
+vim:ft=help:

@@ -1,0 +1,40 @@
+*ldap_free_result*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_free_result — Free result memory
+
+===============================================================================
+[ Description ]
+
+  ldap_free_result(LDAP\Result $result): bool~
+
+Frees up the memory allocated internally to store the result. All result memory
+will be automatically freed when the script terminates.
+
+Typically all the memory allocated for the LDAP result gets freed at the end of
+the script. In case the script is making successive searches which return large
+result sets, ldap_free_result() could be called to keep the runtime memory
+usage by the script low.
+
+===============================================================================
+[ Parameters ]
+
+{result}
+
+  An LDAP\Result instance, returned by |ldap_list| or |ldap_search|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {result} parameter expects an LDAP\Result instance now; previously,
+        a valid ldap result resource was expected.
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+*rnp_supported_features*
+
+(PECL rnp >= 0.1.1)
+
+rnp_supported_features — Get supported features in JSON format
+
+===============================================================================
+[ Description ]
+
+  rnp_supported_features(string $type): string|false~
+
+Get the JSON formatted string containing array of supported rnp feature values
+(algorithms, curves, etc) by type.
+
+===============================================================================
+[ Parameters ]
+
+{type}
+
+  See RNP_FEATURE_* constants for supported values.
+
+===============================================================================
+[ Return Values ]
+
+String containing JSON formatted array of supported algorithms, curves, etc or
+false on failure.
+
+
+vim:ft=help:

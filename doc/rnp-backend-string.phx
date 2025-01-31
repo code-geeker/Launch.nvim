@@ -1,0 +1,23 @@
+*rnp_backend_string*
+
+(PECL rnp >= 0.1.1)
+
+rnp_backend_string — Return cryptographic backend library name
+
+===============================================================================
+[ Description ]
+
+  rnp_backend_string(): string~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Backend name string. Currently supported backends are "Botan" and "OpenSSL".
+
+
+vim:ft=help:

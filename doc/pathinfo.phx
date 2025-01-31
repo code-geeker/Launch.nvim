@@ -1,0 +1,156 @@
+*pathinfo*
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7, PHP 8)
+
+pathinfo — Returns information about a file path
+
+===============================================================================
+[ Description ]
+
+  pathinfo(string $path, int $flags = PATHINFO_ALL): array|string~
+
+pathinfo() returns information about {path}: either an associative array or a
+string, depending on {flags}.
+
+  Note:
+
+  For information on retrieving the current path info, read the section on
+  predefined reserved variables.
+
+  Note:
+
+  pathinfo() operates naively on the input string, and is not aware of the
+  actual filesystem, or path components such as "..".
+
+  Note:
+
+  On Windows systems only, the \ character will be interpreted as a directory
+  separator. On other systems it will be treated like any other character.
+
+Caution
+
+pathinfo() is locale aware, so for it to parse a path containing multibyte
+characters correctly, the matching locale must be set using the |setlocale|
+function.
+
+===============================================================================
+[ Parameters ]
+
+{path}
+
+  The path to be parsed.
+
+{flags}
+
+  If present, specifies a specific element to be returned; one of
+  PATHINFO_DIRNAME, PATHINFO_BASENAME, PATHINFO_EXTENSION or PATHINFO_FILENAME.
+
+  If {flags} is not specified, returns all available elements.
+
+===============================================================================
+[ Return Values ]
+
+If the {flags} parameter is not passed, an associative array containing the
+following elements is returned: dirname, basename, extension (if any), and
+filename.
+
+  Note:
+
+  If the {path} has more than one extension, PATHINFO_EXTENSION returns only
+  the last one and PATHINFO_FILENAME only strips the last one. (see first
+  example below).
+
+  Note:
+
+  If the {path} does not have an extension, no extension element will be
+  returned (see second example below).
+
+  Note:
+
+  If the basename of the {path} starts with a dot, the following characters are
+  interpreted as extension, and the filename is empty (see third example
+  below).
+
+If {flags} is present, returns a string containing the requested element.
+
+===============================================================================
+[ Examples ]
+
+Example #1 pathinfo() Example
+
+<?php >
+  $path_parts = pathinfo('/www/htdocs/inc/lib.inc.php');
+
+  echo $path_parts['dirname'], "\n";
+  echo $path_parts['basename'], "\n";
+  echo $path_parts['extension'], "\n";
+  echo $path_parts['filename'], "\n";
+<?>
+
+The above example will output:
+
+/www/htdocs/inc
+lib.inc.php
+php
+lib.inc
+
+Example #2 pathinfo() example showing difference between null and no extension
+
+<?php >
+  $path_parts = pathinfo('/path/emptyextension.');
+  var_dump($path_parts['extension']);
+
+  $path_parts = pathinfo('/path/noextension');
+  var_dump($path_parts['extension']);
+<?>
+
+The above example will output something similar to:
+
+string(0) ""
+
+Notice: Undefined index: extension in test.php on line 6
+NULL
+
+Example #3 pathinfo() example for a dot-file
+
+<?php >
+  print_r(pathinfo('/some/path/.test'));
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [dirname] => /some/path
+    [basename] => .test
+    [extension] => test
+    [filename] =>
+)
+
+Example #4 pathinfo() example with array dereferencing
+
+The {flags} parameter is not a bitmask. Only a single value may be provided. To
+select only a limited set of parsed values, use array destructuring like so:
+
+<?php >
+  ['basename' => $basename, 'dirname' => $dirname] = pathinfo('/www/htdocs/inc/
+  lib.inc.php');
+
+  var_dump($basename, $dirname);
+<?>
+
+The above example will output something similar to:
+
+string(11) "lib.inc.php"
+string(15) "/www/htdocs/inc"
+
+===============================================================================
+[ See Also ]
+
+ * |dirname| - Returns a parent directory's path
+ * |basename| - Returns trailing name component of path
+ * |parse_url| - Parse a URL and return its components
+ * |realpath| - Returns canonicalized absolute pathname
+
+
+vim:ft=help:

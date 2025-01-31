@@ -1,0 +1,47 @@
+*ldap_exop_sync*
+
+(PHP 8 >= 8.3.0)
+
+ldap_exop_sync — Performs an extended operation
+
+===============================================================================
+[ Description ]
+
+  ldap_exop_sync(    LDAP\Connection~
+  $ldap,    string~
+  $request_oid,    ?string $request_data =~
+  null,    ?array $controls =~
+  null,    string &$response_data =~
+  null,    string &$response_oid = null): LDAP\Result|bool~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{request_oid}
+
+{request_data}
+
+{controls}
+
+{response_data}
+
+{response_oid}
+
+===============================================================================
+[ Return Values ]
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_exop| - Performs an extended operation
+
+
+vim:ft=help:

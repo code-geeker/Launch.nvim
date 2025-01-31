@@ -1,0 +1,27 @@
+*readline_add_history*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+readline_add_history — Adds a line to the history
+
+===============================================================================
+[ Description ]
+
+  readline_add_history(string $prompt): true~
+
+This function adds a line to the command line history.
+
+===============================================================================
+[ Parameters ]
+
+{prompt}
+
+  The line to be added in the history.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+*pspell_config_data_dir*
+
+(PHP 5, PHP 7, PHP 8)
+
+pspell_config_data_dir — Location of language data files
+
+===============================================================================
+[ Description ]
+
+  pspell_config_data_dir(PSpell\Config $config, string $directory): bool~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {config} parameter expects an PSpell\Config instance now;
+        previously, a resource was expected.
+
+
+vim:ft=help:

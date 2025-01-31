@@ -1,0 +1,64 @@
+*win32_add_right_access_service*
+
+(PECL win32service >=1.1.0)
+
+win32_add_right_access_service — Add rights access for an username to the
+service
+
+===============================================================================
+[ Description ]
+
+  win32_add_right_access_service(    string~
+  $servicename,    string~
+  $username,    int $right,    string~
+  $machine = null): void~
+
+Add the rights access for {username} on {servicename} service. Administrative
+privileges are required for this to succeed.
+
+===============================================================================
+[ Parameters ]
+
+{servicename}
+
+  The service name to add rights access.
+
+{username}
+
+  Read the rights access for {username}.
+
+{right}
+
+  The rights allowed for {username}. The service rights constants can be used
+  to define this value.
+
+{machine}
+
+  The optional machine name on which you want to create a service. If omitted,
+  it will use the local machine.
+
+===============================================================================
+[ Return Values ]
+
+Return a Win32Service\RightInfo object.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if the value of {service} parameter is empty.
+
+A ValueError is thrown if the value of {username} parameter is empty.
+
+A Win32ServiceException is thrown on error.
+
+===============================================================================
+[ See Also ]
+
+ * |win32_read_all_rights_access_service| - Read all service rights access
+ * win32_read_rights_access_service()
+ * |win32_remove_right_access_service| - Remove the service rights access for
+  an username
+ * Win32 Rights constants
+
+
+vim:ft=help:

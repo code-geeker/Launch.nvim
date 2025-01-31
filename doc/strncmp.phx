@@ -1,0 +1,77 @@
+*strncmp*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+strncmp — Binary safe string comparison of the first n characters
+
+===============================================================================
+[ Description ]
+
+  strncmp(string $string1, string $string2, int $length): int~
+
+This function is similar to |strcmp|, with the difference that you can specify
+the (upper limit of the) number of characters from each string to be used in
+the comparison.
+
+Note that this comparison is case sensitive.
+
+===============================================================================
+[ Parameters ]
+
+{string1}
+
+  The first string.
+
+{string2}
+
+  The second string.
+
+{length}
+
+  Number of characters to use in the comparison.
+
+===============================================================================
+[ Return Values ]
+
+Returns a value less than 0 if {string1} is less than {string2}; a value
+greater than 0 if {string1} is greater than {string2}, and 0 if they are equal.
+No particular meaning can be reliably inferred from the value aside from its
+sign.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        This function is no longer guaranteed to return strlen($string1) -
+8.2.0   strlen($string2) when string lengths are not equal, but may now return
+        -1 or 1 instead.
+
+===============================================================================
+[ Examples ]
+
+Example #1 strncmp() example
+
+<?php >
+
+  $var1 = 'Hello John';
+  $var2 = 'Hello Doe';
+  if (strncmp($var1, $var2, 5) === 0) {
+  echo 'First 5 characters of $var1 and $var2 are equal in a case-sensitive
+  string comparison';
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |strncasecmp| - Binary safe case-insensitive string comparison of the first
+  n characters
+ * |preg_match| - Perform a regular expression match
+ * |substr_compare| - Binary safe comparison of two strings from an offset, up
+  to length characters
+ * |strcmp| - Binary safe string comparison
+ * |strstr| - Find the first occurrence of a string
+ * |substr| - Return part of a string
+
+
+vim:ft=help:

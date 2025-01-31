@@ -1,0 +1,49 @@
+*mhash_get_hash_name*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+mhash_get_hash_name — Gets the name of the specified hash
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.1.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] mhash_get_hash_name(int $algo): string|false~
+
+Gets the name of the specified {algo}.
+
+===============================================================================
+[ Parameters ]
+
+{algo}
+
+  The hash ID. One of the MHASH_hashname constants.
+
+===============================================================================
+[ Return Values ]
+
+Returns the name of the hash or false, if the hash does not exist.
+
+===============================================================================
+[ Changelog ]
+
+Version                              Description
+8.1.0   This function has been deprecated. Use the hash_*() functions instead.
+
+===============================================================================
+[ Examples ]
+
+Example #1 mhash_get_hash_name() Example
+
+<?php >
+
+  echo mhash_get_hash_name(MHASH_MD5); // MD5
+
+<?>
+
+
+vim:ft=help:

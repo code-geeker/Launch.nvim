@@ -1,0 +1,129 @@
+*levenshtein*
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7, PHP 8)
+
+levenshtein — Calculate Levenshtein distance between two strings
+
+===============================================================================
+[ Description ]
+
+  levenshtein(    string~
+  $string1,    string $string2,    int~
+  $insertion_cost = 1,    int $replacement_cost =~
+  1,    int $deletion_cost = 1): int~
+
+The Levenshtein distance is defined as the minimal number of characters you
+have to replace, insert or delete to transform {string1} into {string2}. The
+complexity of the algorithm is O(m*n), where n and m are the length of
+{string1} and {string2} (rather good when compared to |similar_text|, which is
+O(max(n,m)**3), but still expensive).
+
+If {insertion_cost}, {replacement_cost} and/or {deletion_cost} are unequal to
+1, the algorithm adapts to choose the cheapest transforms. E.g. if
+$insertion_cost + $deletion_cost < $replacement_cost, no replacements will be
+done, but rather inserts and deletions instead.
+
+===============================================================================
+[ Parameters ]
+
+{string1}
+
+  One of the strings being evaluated for Levenshtein distance.
+
+{string2}
+
+  One of the strings being evaluated for Levenshtein distance.
+
+{insertion_cost}
+
+  Defines the cost of insertion.
+
+{replacement_cost}
+
+  Defines the cost of replacement.
+
+{deletion_cost}
+
+  Defines the cost of deletion.
+
+===============================================================================
+[ Return Values ]
+
+This function returns the Levenshtein-Distance between the two argument
+strings.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   Prior to this version, levenshtein() had to be called with either two
+        or five arguments.
+8.0.0   Prior to this version, levenshtein() would return -1 if one of the
+        argument strings is longer than 255 characters.
+
+===============================================================================
+[ Examples ]
+
+Example #1 levenshtein() example
+
+<?php >
+  // input misspelled word
+  $input = 'carrrot';
+
+  // array of words to check against
+  $words = array('apple','pineapple','banana','orange',
+  'radish','carrot','pea','bean','potato');
+
+  // no shortest distance found, yet
+  $shortest = -1;
+
+  // loop through words to find the closest
+  foreach ($words as $word) {
+
+  // calculate the distance between the input word,
+  // and the current word
+  $lev = levenshtein($input, $word);
+
+  // check for an exact match
+  if ($lev == 0) {
+
+  // closest word is this one (exact match)
+  $closest = $word;
+  $shortest = 0;
+
+  // break out of the loop; we've found an exact match
+  break;
+  }
+
+  // if this distance is less than the next found shortest
+  // distance, OR if a next shortest word has not yet been found
+  if ($lev <= $shortest || $shortest < 0) {
+  // set the closest match, and shortest distance
+  $closest = $word;
+  $shortest = $lev;
+  }
+  }
+
+  echo "Input word: $input\n";
+  if ($shortest == 0) {
+  echo "Exact match found: $closest\n";
+  } else {
+  echo "Did you mean: $closest?\n";
+  }
+
+<?>
+
+The above example will output:
+
+Input word: carrrot
+Did you mean: carrot?
+
+===============================================================================
+[ See Also ]
+
+ * |soundex| - Calculate the soundex key of a string
+ * |similar_text| - Calculate the similarity between two strings
+ * |metaphone| - Calculate the metaphone key of a string
+
+
+vim:ft=help:

@@ -1,0 +1,68 @@
+*lcg_value*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+lcg_value — Combined linear congruential generator
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.4.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] lcg_value(): float~
+
+lcg_value() returns a pseudo random number in the range of (0, 1). The function
+combines two CGs with periods of 2^31 - 85 and 2^31 - 249. The period of this
+function is equal to the product of both primes.
+
+Caution
+
+This function does not generate cryptographically secure values, and must not
+be used for cryptographic purposes, or purposes that require returned values to
+be unguessable.
+
+If cryptographically secure randomness is required, the Random\Randomizer may
+be used with the Random\Engine\Secure engine. For simple use cases, the 
+|random_int| and |random_bytes| functions provide a convenient and secure API
+that is backed by the operating system’s CSPRNG.
+
+Caution
+
+Scaling the return value to a different interval using multiplication or
+addition (a so-called affine transformation) might result in a bias in the
+resulting value as floats are not equally dense across the number line. As not
+all values can be exactly represented by a float, the result of the affine
+transformation might also result in values outside of the requested interval.
+
+Use Random\Randomizer::getFloat() to generate a random float within an
+arbitrary interval. Use Random\Randomizer::getInt() to generate a random
+integer within an arbitrary interval.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+A pseudo random float value between 0.0 and 1.0, inclusive.
+
+===============================================================================
+[ Changelog ]
+
+Version            Description
+8.4.0   This function has been deprecated.
+
+===============================================================================
+[ See Also ]
+
+ * Random\Randomizer::getFloat() - Get a uniformly selected float
+ * Random\Randomizer::getInt() - Get a uniformly selected integer
+ * |random_int| - Get a cryptographically secure, uniformly selected integer
+
+
+vim:ft=help:

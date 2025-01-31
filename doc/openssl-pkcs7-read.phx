@@ -1,0 +1,62 @@
+*openssl_pkcs7_read*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+openssl_pkcs7_read — Export the PKCS7 file to an array of PEM certificates
+
+===============================================================================
+[ Description ]
+
+  openssl_pkcs7_read(string $data, array &$certificates): bool~
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{data}
+
+  The string of data you wish to parse (p7b format).
+
+{certificates}
+
+  The array of PEM certificates from the p7b input data.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Get a PEM array from a P7B file
+
+<?php >
+
+  $file = 'certs.p7b';
+
+  $f = file_get_contents($file);
+  $p7 = array();
+  $r = openssl_pkcs7_read($f, $p7);
+
+  if ($r === false) {
+  printf("ERROR: %s is not a proper p7b file".PHP_EOL, $file);
+  for($e = openssl_error_string(), $i = 0; $e; $e = openssl_error_string(), $i++)
+  printf("SSL l%d: %s".PHP_EOL, $i, $e);
+  exit(1);
+  }
+
+  print_r($p7);
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |openssl_csr_sign| - Sign a CSR with another certificate (or itself) and
+  generate a certificate
+
+
+vim:ft=help:

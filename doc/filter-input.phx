@@ -1,0 +1,79 @@
+*filter_input*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+filter_input — Gets a specific external variable by name and optionally filters
+it
+
+===============================================================================
+[ Description ]
+
+  filter_input(    int~
+  $type,    string $var_name,    int~
+  $filter = FILTER_DEFAULT,    array|int $options = 0):~
+  mixed~
+
+===============================================================================
+[ Parameters ]
+
+{type}
+  One of the INPUT_* constants.
+  Warning
+
+  The content of the superglobal that is being filtered is the original "raw"
+  content provided by the SAPI, prior to any user modification to the
+  superglobal. To filter a modified superglobal use |filter_var| instead.
+
+{var_name}
+  Name of a variable to filter inside the corresponding {type} superglobal.
+{filter}
+  The filter to apply. Can be a validation filter by using one of the
+  FILTER_VALIDATE_* constants, a sanitization filter by using one of the
+  FILTER_SANITIZE_* or FILTER_UNSAFE_RAW, or a custom filter by using
+  FILTER_CALLBACK.
+
+
+    Note: The default is FILTER_DEFAULT, which is an alias of FILTER_UNSAFE_RAW
+    . This will result in no filtering taking place by default.
+
+{options}
+  Either an associative array of options, or a bitmask of filter flag constants
+  FILTER_FLAG_*. If the {filter} accepts options, flags can be provided by
+  using the "flags" field of array.
+
+===============================================================================
+[ Return Values ]
+
+On success returns the filtered variable. If the variable is not set false is
+returned. On failure false is returned, unless the FILTER_NULL_ON_FAILURE flag
+is used, in which case null is returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A filter_input() example
+
+<?php >
+  $search_html = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS
+  );
+  $search_url = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_ENCODED);
+  echo "You have searched for $search_html.\n";
+  echo "<a href='?search=$search_url'>Search again.</a>";
+<?>
+
+The above example will output something similar to:
+
+You have searched for Me &#38; son.
+<a href='?search=Me%20%26%20son'>Search again.</a>
+
+===============================================================================
+[ See Also ]
+
+ * |filter_input_array| - Gets external variables and optionally filters them
+ * |filter_var| - Filters a variable with a specified filter
+ * |filter_var_array| - Gets multiple variables and optionally filters them
+ * Validation filters FILTER_VALIDATE_*
+ * Sanitization filters FILTER_SANITIZE_*
+
+
+vim:ft=help:

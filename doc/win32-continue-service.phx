@@ -1,0 +1,68 @@
+*win32_continue_service*
+
+(PECL win32service >=0.1.0)
+
+win32_continue_service — Resumes a paused service
+
+===============================================================================
+[ Description ]
+
+  win32_continue_service(string $servicename, string $machine = null): void~
+
+Resumes a paused, named service. Requires administrative privileges or an
+account with appropriate rights set in the service's ACL.
+
+===============================================================================
+[ Parameters ]
+
+{servicename}
+
+  The short name of the service.
+
+{machine}
+
+  Optional machine name. If omitted, the local machine is used.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+Prior to version 1.0.0, returned WIN32_NO_ERROR on success, false if there is a
+problem with the parameters or a Win32 Error Code on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if the value of {servicename} parameter is empty.
+
+A Win32ServiceException is thrown on error.
+
+===============================================================================
+[ Changelog ]
+
+    Version                               Description
+PECL            Throws a ValueError on invalid data in parameters, previously
+win32service    false was returned.
+1.0.0
+PECL            Throws a Win32ServiceException on error, previously a Win32
+win32service    Error Code was returned.
+1.0.0
+PECL
+win32service    The return type is now void, previously it was mixed.
+1.0.0
+PECL            This function does not longer require an administrator account
+win32service    if ACL is set for another account.
+0.3.0
+
+===============================================================================
+[ See Also ]
+
+ * |win32_start_service| - Starts a service
+ * |win32_stop_service| - Stops a service
+ * |win32_pause_service| - Pauses a service
+ * |win32_send_custom_control| - Send a custom control to the service
+ * Win32 Error Codes
+
+
+vim:ft=help:

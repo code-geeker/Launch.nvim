@@ -1,0 +1,35 @@
+*enchant_dict_get_error*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8, PECL enchant >= 0.1.0 )
+
+enchant_dict_get_error — Returns the last error of the current spelling-session
+
+===============================================================================
+[ Description ]
+
+  enchant_dict_get_error(EnchantDictionary $dictionary): string|false~
+
+Returns the last error of the current spelling-session
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+===============================================================================
+[ Return Values ]
+
+Returns the error message as string or false if no error occurred.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dictionary} expects an EnchantDictionary instance now; previoulsy, a 
+        resource was expected.
+
+
+vim:ft=help:

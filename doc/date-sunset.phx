@@ -1,0 +1,131 @@
+*date_sunset*
+
+(PHP 5, PHP 7, PHP 8)
+
+date_sunset — Returns time of sunset for a given day and location
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.1.0. Relying on this function is
+highly discouraged. Use |date_sun_info| instead.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] date_sunset(    int~
+  $timestamp,    int $returnFormat =~
+  SUNFUNCS_RET_STRING,    ?float $latitude =~
+  null,    ?float $longitude =~
+  null,    ?float $zenith =~
+  null,    ?float $utcOffset = null):~
+  string|int|float|false~
+
+date_sunset() returns the sunset time for a given day (specified as a
+{timestamp}) and location.
+
+===============================================================================
+[ Parameters ]
+
+{timestamp}
+
+  The {timestamp} of the day from which the sunset time is taken.
+
+{returnFormat}
+
+                         {returnFormat} constants
+         constant                     description                example
+  SUNFUNCS_RET_STRING    returns the result as string          16:46
+  SUNFUNCS_RET_DOUBLE    returns the result as float           16.78243132
+  SUNFUNCS_RET_TIMESTAMP returns the result as int (timestamp) 1095034606
+
+{latitude}
+
+  Defaults to North, pass in a negative value for South. See also:
+  date.default_latitude
+
+{longitude}
+
+  Defaults to East, pass in a negative value for West. See also:
+  date.default_longitude
+
+{zenith}
+
+  {zenith} is the angle between the center of the sun and a line perpendicular
+  to earth's surface. It defaults to date.sunset_zenith
+
+                            Common {zenith} angles
+  Angle                               Description
+  90°50' Sunset: the point where the sun becomes invisible.
+  96°    Civil twilight: conventionally used to signify the end of dusk.
+  102°   Nautical twilight: the point at which the horizon ends being visible
+         at sea.
+  108°   Astronomical twilight: the point at which the sun ends being the
+         source of any illumination.
+
+{utcOffset}
+
+  Specified in hours. The {utcOffset} is ignored, if {returnFormat} is
+  SUNFUNCS_RET_TIMESTAMP.
+
+===============================================================================
+[ Return Values ]
+
+Returns the sunset time in a specified {returnFormat} on success or false on
+failure. One potential reason for failure is that the sun does not set at all,
+which happens inside the polar circles for part of the year.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Every call to a date/time function will generate a E_WARNING if the time zone
+is not valid. See also |date_default_timezone_set|
+
+===============================================================================
+[ Changelog ]
+
+Version                             Description
+8.1.0   This function has been deprecated in favor of |date_sun_info|.
+8.0.0   {latitude}, {longitude}, {zenith} and {utcOffset} are nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 date_sunset() example
+
+<?php >
+
+  /* calculate the sunset time for Lisbon, Portugal
+  Latitude: 38.4 North
+  Longitude: 9 West
+  Zenith ~= 90
+  offset: +1 GMT
+  */
+
+  echo date("D M d Y"). ', sunset time : ' .date_sunset(time(), 
+  SUNFUNCS_RET_STRING, 38.4, -9, 90, 1);
+
+<?>
+
+The above example will output something similar to:
+
+Mon Dec 20 2004, sunset time : 18:13
+
+Example #2 No sunset
+
+<?php >
+  $solstice = strtotime('2017-12-21');
+  var_dump(date_sunset($solstice, SUNFUNCS_RET_STRING, 69.245833, -53.537222));
+<?>
+
+The above example will output:
+
+bool(false)
+
+===============================================================================
+[ See Also ]
+
+ * |date_sun_info| - Returns an array with information about sunset/sunrise and
+  twilight begin/end
+
+
+vim:ft=help:

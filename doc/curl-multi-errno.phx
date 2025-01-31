@@ -1,0 +1,40 @@
+*curl_multi_errno*
+
+(PHP 7 >= 7.1.0, PHP 8)
+
+curl_multi_errno — Return the last multi curl error number
+
+===============================================================================
+[ Description ]
+
+  curl_multi_errno(CurlMultiHandle $multi_handle): int~
+
+Return an integer containing the last multi curl error number.
+
+===============================================================================
+[ Parameters ]
+
+{multi_handle}
+
+  A cURL multi handle returned by |curl_multi_init|.
+
+===============================================================================
+[ Return Values ]
+
+Return an integer containing the last multi curl error number.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   The function no longer returns false on failure.
+8.0.0   {multi_handle} expects a CurlMultiHandle instance now; previously, a 
+        resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |curl_errno| - Return the last error number
+
+
+vim:ft=help:

@@ -1,0 +1,92 @@
+*xml_set_notation_decl_handler*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+xml_set_notation_decl_handler — Set up notation declaration handler
+
+===============================================================================
+[ Description ]
+
+  xml_set_notation_decl_handler(XMLParser $parser, callable|string|null~
+  $handler): true~
+
+Sets the notation declaration handler function for the XML parser {parser}.
+
+A notation declaration is part of the document's DTD and has the following
+format:
+
+<!NOTATION <parameter>name</parameter>
+{ <parameter>systemId</parameter> | <parameter>publicId</parameter>?>
+
+See » section 4.7 of the XML 1.0 spec for the definition of notation
+declarations.
+
+===============================================================================
+[ Parameters ]
+
+{parser}
+
+  The XML parser.
+
+{handler}
+
+  If null is passed, the handler is reset to its default state.
+  Warning
+
+  An empty string will also reset the handler, however this is deprecated as of
+  PHP 8.4.0.
+
+  If {handler} is a callable, the callable is set as the handler.
+
+  If {handler} is a string, it can be the name of a method of an object set
+  with |xml_set_object|.
+  Warning
+
+  This is deprecated as of PHP 8.4.0.
+
+  Warning
+
+  As of PHP 8.4.0, the callable is checked to be valid while setting the
+  handler, not when it is called. This means that |xml_set_object| must be
+  called prior to setting a method string as the callback. However, as this
+  behaviour is also deprecated as of PHP 8.4.0, using a proper callable for the
+  method is recommended instead.
+
+  The signature of the handler must be:
+
+  handler(    XMLParser~
+  $parser,    string~
+  $notation_name,    string|false~
+  $base,    string~
+  $system_id,    string|false $public_id): void~
+
+  {parser}
+    The XML parser calling the handler.
+  {notation_name}
+    This is the notation's name, as per the notation format described above.
+  {base}
+    This is the base for resolving the system identifier (system_id) of the
+    notation declaration.
+  {system_id}
+    System identifier of the external notation declaration.
+  {public_id}
+    Public identifier of the external notation declaration.
+
+===============================================================================
+[ Return Values ]
+
+Always returns true.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Passing a non-callable string to {handler} is now deprecated, use a
+        proper callable for methods, or null to reset the handler.
+8.4.0   The validity of {handler} as a callable is now checked when setting the
+        handler instead of checking when calling it.
+8.0.0   {parser} expects an XMLParser instance now; previously, a valid xml 
+        resource was expected.
+
+
+vim:ft=help:

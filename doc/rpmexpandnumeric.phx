@@ -1,0 +1,47 @@
+*rpmexpandnumeric*
+
+(PECL rpminfo >= 1.2.0)
+
+rpmexpandnumeric — Retrieve numerical value of a RPM macro
+
+===============================================================================
+[ Description ]
+
+  rpmexpandnumeric(string $text): int~
+
+Retrieve numerical value of a RPM macro.
+
+===============================================================================
+[ Parameters ]
+
+{text}
+
+  Text with RPM macros to expand.
+
+===============================================================================
+[ Return Values ]
+
+Macro expansion as a int. Boolean values (Y or y returns 1, N or n returns 0)
+are permitted as well. An undefined macro returns 0.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A rpmexpandnumeric() example
+
+<?php >
+  $bits = rpmexpandnumeric("%__isa_bits");
+  print_r($bits);
+<?>
+
+The above example will output:
+
+64
+
+===============================================================================
+[ See Also ]
+
+ * |rpmexpand| - Retrieve expanded value of a RPM macro
+
+
+vim:ft=help:

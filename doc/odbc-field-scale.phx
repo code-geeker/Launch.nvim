@@ -1,0 +1,39 @@
+*odbc_field_scale*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+odbc_field_scale — Get the scale of a field
+
+===============================================================================
+[ Description ]
+
+  odbc_field_scale(Odbc\Result $statement, int $field): int|false~
+
+Gets the scale of the field referenced by number in the given result
+identifier.
+
+===============================================================================
+[ Parameters ]
+
+{statement}
+
+  The ODBC result object.
+
+{field}
+
+  The field number. Field numbering starts at 1.
+
+===============================================================================
+[ Return Values ]
+
+Returns the field scale as a integer, or false on error.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   {statement} expects an Odbc\Result instance now; previously, a resource
+        was expected.
+
+
+vim:ft=help:

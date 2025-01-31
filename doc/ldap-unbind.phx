@@ -1,0 +1,39 @@
+*ldap_unbind*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_unbind — Unbind from LDAP directory
+
+===============================================================================
+[ Description ]
+
+  ldap_unbind(LDAP\Connection $ldap): bool~
+
+Unbinds from the LDAP directory.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_bind| - Bind to LDAP directory
+
+
+vim:ft=help:

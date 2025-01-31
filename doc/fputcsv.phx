@@ -1,0 +1,139 @@
+*fputcsv*
+
+(PHP 5 >= 5.1.0, PHP 7, PHP 8)
+
+fputcsv — Format line as CSV and write to file pointer
+
+===============================================================================
+[ Description ]
+
+  fputcsv(    resource~
+  $stream,    array $fields,    string~
+  $separator = ",",    string $enclosure =~
+  "\"",    string $escape =~
+  "\\",    string $eol = "\n"):~
+  int|false~
+
+fputcsv() formats a line (passed as a {fields} array) as CSV and writes it
+(terminated by a {eol}) to the specified {stream}.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  The file pointer must be valid, and must point to a file successfully opened
+  by |fopen| or |fsockopen| (and not yet closed by |fclose|).
+
+{fields}
+
+  An array of strings.
+
+{separator}
+
+  The {separator} parameter sets the field separator. It must be a single byte
+  character.
+
+{enclosure}
+
+  The {enclosure} parameter sets the field enclosure character. It must be a
+  single byte character.
+
+{escape}
+
+  The {escape} parameter sets the escape character. It must be a single byte
+  character or the empty string. The empty string ("") disables the proprietary
+  escape mechanism.
+
+    Note: Usually an {enclosure} character is escaped inside a field by
+    doubling it; however, the {escape} character can be used as an alternative.
+    So for the default parameter values "" and \" have the same meaning. Other
+    than allowing to escape the {enclosure} character the {escape} character
+    has no special meaning; it isn't even meant to escape itself.
+
+  Warning
+
+  As of PHP 8.4.0, depending on the default value of {escape} is deprecated. It
+  needs to be provided explicitly either positionally or by the use of named
+  arguments.
+
+{eol}
+
+  The optional {eol} parameter sets a custom End of Line sequence.
+
+Warning
+
+When {escape} is set to anything other than an empty string ("") it can result
+in CSV that is not compliant with » RFC 4180 or unable to survive a roundtrip
+through the PHP CSV functions. The default for {escape} is "\\" so it is
+recommended to set it to the empty string explicitly. The default value will
+change in a future version of PHP, no earlier than PHP 9.0.
+
+  Note:
+
+  If an {enclosure} character is contained in a field, it will be escaped by
+  doubling it, unless it is immediately preceded by an {escape}.
+
+===============================================================================
+[ Return Values ]
+
+Returns the length of the written string or false on failure.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {separator} or {enclosure} is not one byte long.
+
+Throws a ValueError if {escape} is not one byte long or the empty string.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Relying on the default value of {escape} is now deprecated.
+8.1.0   The optional {eol} parameter has been added.
+7.4.0   The {escape} parameter now also accepts an empty string to disable the
+        proprietary escape mechanism.
+
+===============================================================================
+[ Examples ]
+
+Example #1 fputcsv() example
+
+<?php >
+
+  $list = [
+  ['aaa', 'bbb', 'ccc', 'dddd'],
+  ['123', '456', '789'],
+  ['"aaa"', '"bbb"']
+  ];
+
+  $fp = fopen('file.csv', 'w');
+
+  foreach ($list as $fields) {
+  fputcsv($fp, $fields, ',', '"', '');
+  }
+
+  fclose($fp);
+<?>
+
+The above example will write the following to file.csv:
+
+aaa,bbb,ccc,dddd
+123,456,789
+"""aaa""","""bbb"""
+
+===============================================================================
+[ See Also ]
+
+ * |fgetcsv| - Gets line from file pointer and parse for CSV fields
+ * |str_getcsv| - Parse a CSV string into an array
+ * SplFileObject::fgetcsv() - Gets line from file and parse as CSV fields
+ * SplFileObject::fputcsv() - Write a field array as a CSV line
+ * SplFileObject::setCsvControl() - Set the delimiter, enclosure and escape
+  character for CSV
+ * SplFileObject::getCsvControl() - Get the delimiter, enclosure and escape
+  character for CSV
+
+
+vim:ft=help:

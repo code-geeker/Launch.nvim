@@ -1,0 +1,53 @@
+*rmdir*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+rmdir — Removes directory
+
+===============================================================================
+[ Description ]
+
+  rmdir(string $directory, ?resource $context = null): bool~
+
+Attempts to remove the directory named by {directory}. The directory must be
+empty, and the relevant permissions must permit this. A E_WARNING level error
+will be generated on failure.
+
+===============================================================================
+[ Parameters ]
+
+{directory}
+
+  Path to the directory.
+
+{context}
+
+  A context stream resource.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 rmdir() example
+
+<?php >
+  if (!is_dir('examples')) {
+  mkdir('examples');
+  }
+
+  rmdir('examples');
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |is_dir| - Tells whether the filename is a directory
+ * |mkdir| - Makes directory
+ * |unlink| - Deletes a file
+
+
+vim:ft=help:

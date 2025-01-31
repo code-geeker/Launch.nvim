@@ -1,0 +1,139 @@
+*is_callable*
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7, PHP 8)
+
+is_callable — Verify that a value can be called as a function from the current
+scope
+
+===============================================================================
+[ Description ]
+
+  is_callable(mixed $value, bool $syntax_only = false, string &$callable_name~
+  = null): bool~
+
+Verifies that {value} is a callable, or that it can be called using the 
+|call_user_func| function.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The value to be checked.
+
+{syntax_only}
+
+  If set to true the function only verifies that {value} might be a function or
+  method. It will reject any values that are not invokable objects, Closure, 
+  strings, or arrays that do not have a valid structure to be used as a
+  callback. A valid callable array has 2 entries, the first of which is an
+  object or a string, and the second a string.
+
+{callable_name}
+
+  Receives the "callable name", e.g. "SomeClass::someMethod". Note, however,
+  that despite the implication that SomeClass::someMethod() is a callable
+  static method, this is not the case.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {value} is callable, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Checking whether a string can be called as a function
+
+<?php >
+
+  function someFunction() {}
+
+  $functionVariable = 'someFunction';
+
+  var_dump(is_callable($functionVariable, false, $callable_name));
+
+  var_dump($callable_name);
+
+<?>
+
+The above example will output:
+
+bool(true)
+string(12) "someFunction"
+
+Example #2 Checking whether an array can be called as a function
+
+<?php >
+
+  class SomeClass
+  {
+  public function someMethod() {}
+  }
+
+  $anObject = new SomeClass();
+
+  $methodVariable = [$anObject, 'someMethod'];
+
+  var_dump(is_callable($methodVariable, true, $callable_name));
+
+  var_dump($callable_name);
+
+<?>
+
+The above example will output:
+
+bool(true)
+string(21) "SomeClass::someMethod"
+
+Example #3 is_callable() and constructors
+
+Despite the fact that constructors are the methods that are called when an
+object is created, they are not static methods and is_callable() will return
+false for them. It's not possible to use is_callable() to check if a class can
+be instantiated from the current scope.
+
+<?php >
+
+  class Foo
+  {
+  public function __construct() {}
+
+  public function foo() {}
+  }
+
+  var_dump(
+  is_callable(['Foo', '__construct']),
+  is_callable(['Foo', 'foo'])
+  );
+
+  $foo = new Foo();
+  var_dump(is_callable([$foo, '__construct']));
+
+<?>
+
+The above example will output:
+
+bool(false)
+bool(false)
+bool(true)
+
+===============================================================================
+[ Notes ]
+
+ * An object is always callable if it implements __invoke(), and that method is
+  visible in the current scope.
+ * A class name is callable if it implements __callStatic().
+ * If an object implements __call(), then this function will return true for
+  any method on that object, even if the method is not defined.
+ * This function may trigger autoloading if called with the name of a class.
+
+===============================================================================
+[ See Also ]
+
+ * |call_user_func| - Call the callback given by the first parameter
+ * |function_exists| - Return true if the given function has been defined
+ * |method_exists| - Checks if the class method exists
+
+
+vim:ft=help:

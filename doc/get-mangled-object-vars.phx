@@ -1,0 +1,98 @@
+*get_mangled_object_vars*
+
+(PHP 7 >= 7.4.0, PHP 8)
+
+get_mangled_object_vars — Returns an array of mangled object properties
+
+===============================================================================
+[ Description ]
+
+  get_mangled_object_vars(object $object): array~
+
+Returns an array whose elements are the {object}'s properties. The keys are the
+member variable names, with a few notable exceptions: private variables have
+the class name prepended to the variable name, and protected variables have a *
+prepended to the variable name. These prepended values have NUL bytes on either
+side. Uninitialized typed properties are silently discarded.
+
+===============================================================================
+[ Parameters ]
+
+{object}
+
+  An object instance.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array containing all properties, regardless of visibility, of
+{object}.
+
+===============================================================================
+[ Examples ]
+
+Example #1 get_mangled_object_vars() example
+
+<?php >
+
+class A
+{
+public $public = 1;
+
+protected $protected = 2;
+
+private $private = 3;
+}
+
+class B extends A
+{
+private $private = 4;
+}
+
+$object = new B;
+$object->dynamic = 5;
+$object->{'6'} = 6;
+
+var_dump(get_mangled_object_vars($object));
+
+class AO extends ArrayObject
+{
+private $private = 1;
+}
+
+$arrayObject = new AO(['x' => 'y']);
+$arrayObject->dynamic = 2;
+
+var_dump(get_mangled_object_vars($arrayObject));
+
+The above example will output:
+
+array(6) {
+  ["Bprivate"]=>
+  int(4)
+  ["public"]=>
+  int(1)
+  ["*protected"]=>
+  int(2)
+  ["Aprivate"]=>
+  int(3)
+  ["dynamic"]=>
+  int(5)
+  [6]=>
+  int(6)
+}
+array(2) {
+  ["AOprivate"]=>
+  int(1)
+  ["dynamic"]=>
+  int(2)
+}
+
+===============================================================================
+[ See Also ]
+
+ * |get_class_vars| - Get the default properties of the class
+ * |get_object_vars| - Gets the properties of the given object
+
+
+vim:ft=help:

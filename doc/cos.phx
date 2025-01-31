@@ -1,0 +1,47 @@
+*cos*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+cos — Cosine
+
+===============================================================================
+[ Description ]
+
+  cos(float $num): float~
+
+cos() returns the cosine of the {num} parameter. The {num} parameter is in
+radians.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  An angle in radians
+
+===============================================================================
+[ Return Values ]
+
+The cosine of {num}
+
+===============================================================================
+[ Examples ]
+
+Example #1 cos() example
+
+<?php >
+
+  echo cos(M_PI); // -1
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |acos| - Arc cosine
+ * |sin| - Sine
+ * |tan| - Tangent
+ * |deg2rad| - Converts the number in degrees to the radian equivalent
+
+
+vim:ft=help:

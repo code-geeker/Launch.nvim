@@ -1,0 +1,23 @@
+*rnp_backend_version*
+
+(PECL rnp >= 0.1.1)
+
+rnp_backend_version — Return cryptographic backend library version
+
+===============================================================================
+[ Description ]
+
+  rnp_backend_version(): string~
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Version string.
+
+
+vim:ft=help:

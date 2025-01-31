@@ -1,0 +1,25 @@
+*untaint*
+
+(PECL taint >=0.1.0)
+
+untaint — Untaint strings
+
+===============================================================================
+[ Description ]
+
+  untaint(string &$string, string ...$strings): bool~
+
+Untaint strings
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+{strings}
+
+===============================================================================
+[ Return Values ]
+
+
+vim:ft=help:

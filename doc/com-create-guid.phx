@@ -1,0 +1,33 @@
+*com_create_guid*
+
+(PHP 5, PHP 7, PHP 8)
+
+com_create_guid — Generate a globally unique identifier (GUID)
+
+===============================================================================
+[ Description ]
+
+  com_create_guid(): string|false~
+
+Generates a Globally Unique Identifier (GUID).
+
+A GUID is generated in the same way as DCE UUID's, except that the Microsoft
+convention is to enclose a GUID in curly braces.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the GUID as a string, or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * uuid_create() in the PECL uuid extension
+
+
+vim:ft=help:

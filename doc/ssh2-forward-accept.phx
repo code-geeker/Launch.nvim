@@ -1,0 +1,31 @@
+*ssh2_forward_accept*
+
+(PECL ssh2 >= 0.9.0)
+
+ssh2_forward_accept — Accept a connection created by a listener
+
+===============================================================================
+[ Description ]
+
+  ssh2_forward_accept(resource $listener): resource|false~
+
+Accepts a connection created by a listener.
+
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Parameters ]
+
+{desc}
+
+  An SSH2 Listener resource, obtained from a call to |ssh2_forward_listen|.
+
+===============================================================================
+[ Return Values ]
+
+Returns a stream resource, or false on failure.
+
+
+vim:ft=help:

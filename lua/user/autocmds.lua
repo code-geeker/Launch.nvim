@@ -120,3 +120,19 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+
+function PhpHelp()
+  local word = vim.fn.expand("<cword>")
+  local ok, _ = pcall(vim.cmd, "help " .. word)
+  if not ok then
+    vim.notify("No help available for: " .. word, vim.log.levels.WARN)
+  end
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "php",
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, "n", "K", ":lua PhpHelp()<CR>", { noremap = true, silent = true })
+  end,
+})

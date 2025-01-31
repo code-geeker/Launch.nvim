@@ -1,0 +1,163 @@
+*ob_list_handlers*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+ob_list_handlers — List all output handlers in use
+
+===============================================================================
+[ Description ]
+
+  ob_list_handlers(): array~
+
+Lists all output handlers in use.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+This will return an array with the output handlers in use (if any).
+
+If output_buffering is enabled and no output_handler is set, or no callback or
+null was passed to |ob_start|, "default output handler" is returned. Enabling
+output_buffering and setting an output_handler is equivalent to passing an
+internal (built-in) function to |ob_start|.
+
+If a callable was passed to |ob_start|, the fully qualified name of the 
+callable is returned. If the callable is an object implementing __invoke(), the
+fully qualified name of the object's __invoke() method is returned. If the 
+callable is a Closure, "Closure::__invoke" is returned.
+
+===============================================================================
+[ Examples ]
+
+Example #1 ob_list_handlers() example
+
+<?php >
+  // using output_buffering=On, no output_handler set
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // no callback or null
+  ob_start();
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // anonymous function
+  ob_start(function($string) { return $string; });
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // arrow function
+  ob_start(fn($string) => $string);
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // first class callable
+  $firstClassCallable = userDefinedFunction(...);
+
+  ob_start([$firstClassCallable, '__invoke']);
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // internal (built-in) function
+  ob_start('print_r');
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // user-defined function
+  function userDefinedFunction($string, $flags) { return $string; };
+
+  ob_start('userDefinedFunction');
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  class MyClass {
+  public static function staticHandle($string) {
+  return $string;
+  }
+
+  public static function handle($string) {
+  return $string;
+  }
+
+  public function __invoke($string) {
+  return $string;
+  }
+  }
+
+  // class and static method
+  ob_start(['MyClass','staticHandle']);
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // object and non-static method
+  ob_start([new MyClass,'handle']);
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+
+  // invokable object
+  ob_start(new MyClass);
+  var_dump(ob_list_handlers());
+  ob_end_flush();
+<?>
+
+The above example will output:
+
+array(1) {
+  [0]=>
+  string(22) "default output handler"
+}
+array(1) {
+  [0]=>
+  string(22) "default output handler"
+}
+array(1) {
+  [0]=>
+  string(7) "print_r"
+}
+array(1) {
+  [0]=>
+  string(19) "userDefinedFunction"
+}
+array(1) {
+  [0]=>
+  string(17) "Closure::__invoke"
+}
+array(1) {
+  [0]=>
+  string(17) "Closure::__invoke"
+}
+array(1) {
+  [0]=>
+  string(17) "Closure::__invoke"
+}
+array(1) {
+  [0]=>
+  string(21) "MyClass::staticHandle"
+}
+array(1) {
+  [0]=>
+  string(15) "MyClass::handle"
+}
+array(1) {
+  [0]=>
+  string(17) "MyClass::__invoke"
+}
+
+===============================================================================
+[ See Also ]
+
+ * |ob_end_clean| - Clean (erase) the contents of the active output buffer and
+  turn it off
+ * |ob_end_flush| - Flush (send) the return value of the active output handler
+  and turn the active output buffer off
+ * |ob_get_flush| - Flush (send) the return value of the active output handler,
+  return the contents of the active output buffer and turn it off
+ * |ob_start| - Turn on output buffering
+
+
+vim:ft=help:

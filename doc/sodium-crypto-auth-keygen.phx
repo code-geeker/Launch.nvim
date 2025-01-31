@@ -1,0 +1,26 @@
+*sodium_crypto_auth_keygen*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_auth_keygen — Generate a random key for sodium_crypto_auth
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_auth_keygen(): string~
+
+Generate a key for use with |sodium_crypto_auth| and |sodium_crypto_auth_verify
+|.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns a 256-bit random key.
+
+
+vim:ft=help:

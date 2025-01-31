@@ -1,0 +1,35 @@
+*cosh*
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7, PHP 8)
+
+cosh — Hyperbolic cosine
+
+===============================================================================
+[ Description ]
+
+  cosh(float $num): float~
+
+Returns the hyperbolic cosine of {num}, defined as (exp($num) + exp(-$num))/2.
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The argument to process
+
+===============================================================================
+[ Return Values ]
+
+The hyperbolic cosine of {num}
+
+===============================================================================
+[ See Also ]
+
+ * |cos| - Cosine
+ * |acosh| - Inverse hyperbolic cosine
+ * |sinh| - Hyperbolic sine
+ * |tanh| - Hyperbolic tangent
+
+
+vim:ft=help:

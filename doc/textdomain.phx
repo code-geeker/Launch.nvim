@@ -1,0 +1,50 @@
+*textdomain*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+textdomain — Sets the default domain
+
+===============================================================================
+[ Description ]
+
+  textdomain(?string $domain = null): string~
+
+This function sets the domain to search within when calls are made to |gettext|
+, usually the named after an application.
+
+===============================================================================
+[ Parameters ]
+
+{domain}
+
+  The new message domain, or null to get the current setting without changing
+  it
+
+===============================================================================
+[ Return Values ]
+
+If successful, this function returns the current message domain, after possibly
+changing it.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a ValueError if {domain} is the empty string.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   Now throws a ValueError if {domain} is the empty string.
+8.4.0   {domain} is optional now. Previously, the parameter always had to be
+        specified.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  The textdomain() information is maintained per process, not per thread.
+
+
+vim:ft=help:

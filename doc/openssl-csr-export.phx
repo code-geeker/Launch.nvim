@@ -1,0 +1,75 @@
+*openssl_csr_export*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+openssl_csr_export — Exports a CSR as a string
+
+===============================================================================
+[ Description ]
+
+  openssl_csr_export(OpenSSLCertificateSigningRequest|string $csr, string~
+  &$output, bool $no_text = true): bool~
+
+openssl_csr_export() takes the Certificate Signing Request represented by {csr}
+and stores it in PEM format in {output}, which is passed by reference.
+
+===============================================================================
+[ Parameters ]
+
+{csr}
+
+  See CSR parameters for a list of valid values.
+
+{output}
+
+  on success, this string will contain the PEM encoded CSR
+
+{no_text}
+
+  The optional parameter {notext} affects the verbosity of the output; if it is
+  false, then additional human-readable information is included in the output.
+  The default value of {notext} is true.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {csr} accepts an OpenSSLCertificateSigningRequest instance now;
+        previously, a resource of type OpenSSL X.509 CSR was accepted.
+
+===============================================================================
+[ Examples ]
+
+Example #1 openssl_csr_export() example
+
+<?php >
+  $subject = array(
+  "commonName" => "example.com",
+  );
+  $private_key = openssl_pkey_new(array(
+  "private_key_bits" => 2048,
+  "private_key_type" => OPENSSL_KEYTYPE_RSA,
+  ));
+  $configargs = array(
+  'digest_alg' => 'sha256WithRSAEncryption'
+  );
+  $csr = openssl_csr_new($subject, $private_key, $configargs);
+  openssl_csr_export($csr, $csr_string);
+  echo $csr_string;
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |openssl_csr_export_to_file| - Exports a CSR to a file
+ * |openssl_csr_new| - Generates a CSR
+ * |openssl_csr_sign| - Sign a CSR with another certificate (or itself) and
+  generate a certificate
+
+
+vim:ft=help:

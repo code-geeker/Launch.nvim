@@ -1,0 +1,83 @@
+*finfo_file* *finfo::file*
+
+(PHP >= 5.3.0, PHP 7, PHP 8, PECL fileinfo >= 0.1.0)
+
+finfo_file -- finfo::file — Return information about a file
+
+===============================================================================
+[ Description ]
+
+Procedural style
+
+  finfo_file(    finfo~
+  $finfo,    string $filename,    int~
+  $flags = FILEINFO_NONE,    ?resource $context = null):~
+  string|false~
+
+Object-oriented style
+
+  public finfo::file(string $filename, int $flags = FILEINFO_NONE, ?resource~
+  $context = null): string|false~
+
+This function is used to get information about a file.
+
+===============================================================================
+[ Parameters ]
+
+{finfo}
+
+  An finfo instance, returned by |finfo_open|.
+
+{filename}
+
+  Name of a file to be checked.
+
+{flags}
+
+  One or disjunction of more Fileinfo constants.
+
+{context}
+
+  For a description of contexts, refer to Stream Functions.
+
+===============================================================================
+[ Return Values ]
+
+Returns a textual description of the contents of the {filename} argument, or
+false if an error occurred.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {finfo} parameter expects an finfo instance now; previously, a 
+        resource was expected.
+8.0.0   {context} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A finfo_file() example
+
+<?php >
+  $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type aka mimetype
+  extension
+  foreach (glob("*") as $filename) {
+  echo finfo_file($finfo, $filename) . "\n";
+  }
+  finfo_close($finfo);
+<?>
+
+The above example will output something similar to:
+
+text/html
+image/gif
+application/vnd.ms-excel
+
+===============================================================================
+[ See Also ]
+
+ * |finfo_buffer| - Return information about a string buffer
+
+
+vim:ft=help:

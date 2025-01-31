@@ -1,0 +1,104 @@
+*mkdir*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+mkdir — Makes directory
+
+===============================================================================
+[ Description ]
+
+  mkdir(    string $directory,    int~
+  $permissions = 0777,    bool $recursive =~
+  false,    ?resource $context = null): bool~
+
+Attempts to create the directory specified by {directory}.
+
+===============================================================================
+[ Parameters ]
+
+{directory}
+
+  The directory path.
+  Tip
+
+  A URL can be used as a filename with this function if the fopen wrappers have
+  been enabled. See |fopen| for more details on how to specify the filename.
+  See the Supported Protocols and Wrappers for links to information about what
+  abilities the various wrappers have, notes on their usage, and information on
+  any predefined variables they may provide.
+
+{permissions}
+
+  The permissions are 0777 by default, which means the widest possible access.
+  For more information on permissions, read the details on the |chmod| page.
+
+    Note:
+
+    {permissions} is ignored on Windows.
+
+  Note that you probably want to specify the {permissions} as an octal number,
+  which means it should have a leading zero. The {permissions} is also modified
+  by the current umask, which you can change using |umask|.
+
+{recursive}
+
+  If true, then any parent directories to the {directory} specified will also
+  be created, with the same permissions.
+
+{context}
+
+  A context stream resource.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+  Note:
+
+  If the directory to be created already exists, that is considered an error
+  and false will still be returned. Use |is_dir| or |file_exists| to check if
+  the directory already exists before trying to create it.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Emits an E_WARNING level error if the directory already exists.
+
+Emits an E_WARNING level error if the relevant permissions prevent creating the
+directory.
+
+===============================================================================
+[ Examples ]
+
+Example #1 mkdir() example
+
+<?php >
+  mkdir("/path/to/my/dir", 0700);
+<?>
+
+Example #2 mkdir() using the {recursive} parameter
+
+<?php >
+  // Desired directory structure
+  $structure = './depth1/depth2/depth3/';
+
+  // To create the nested structure, the $recursive parameter
+  // to mkdir() must be specified.
+
+  if (!mkdir($structure, 0777, true)) {
+  die('Failed to create directories...');
+  }
+
+  // ...
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |is_dir| - Tells whether the filename is a directory
+ * |rmdir| - Removes directory
+ * |umask| - Changes the current umask
+
+
+vim:ft=help:

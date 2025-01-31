@@ -1,0 +1,32 @@
+*sodium_crypto_sign_open*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_sign_open — Check that the signed message has a valid signature
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_sign_open(string $signed_message, string $public_key):~
+  string|false~
+
+Verify the signature attached to a message and return the message
+
+===============================================================================
+[ Parameters ]
+
+{signed_message}
+
+  A message signed with |sodium_crypto_sign|
+
+{public_key}
+
+  An Ed25519 public key
+
+===============================================================================
+[ Return Values ]
+
+Returns the original signed message on success, or false on failure.
+
+
+vim:ft=help:

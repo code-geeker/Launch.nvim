@@ -1,0 +1,44 @@
+*stream_set_chunk_size*
+
+(PHP 5 >= 5.4.0, PHP 7, PHP 8)
+
+stream_set_chunk_size — Set the stream chunk size
+
+===============================================================================
+[ Description ]
+
+  stream_set_chunk_size(resource $stream, int $size): int~
+
+Set the stream chunk size.
+
+===============================================================================
+[ Parameters ]
+
+{stream}
+
+  The target stream.
+
+{size}
+
+  The desired new chunk size.
+
+===============================================================================
+[ Return Values ]
+
+Returns the previous chunk size on success.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+A ValueError is thrown if {size} is less than 1 or greater than PHP_INT_MAX.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        A ValueError is now thrown if {size} is less than 1 or greater than
+8.0.0   PHP_INT_MAX. Previously, an E_WARNING level error was emitted and false
+        was returned.
+
+
+vim:ft=help:

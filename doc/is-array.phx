@@ -1,0 +1,57 @@
+*is_array*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+is_array — Finds whether a variable is an array
+
+===============================================================================
+[ Description ]
+
+  is_array(mixed $value): bool~
+
+Finds whether the given variable is an array.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The variable being evaluated.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {value} is an array, false otherwise.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Check that variable is an array
+
+<?php >
+  $yes = array('this', 'is', 'an array');
+
+  echo is_array($yes) ? 'Array' : 'not an Array';
+  echo "\n";
+
+  $no = 'this is a string';
+
+  echo is_array($no) ? 'Array' : 'not an Array';
+<?>
+
+The above example will output:
+
+Array
+not an Array
+
+===============================================================================
+[ See Also ]
+
+ * |array_is_list| - Checks whether a given array is a list
+ * |is_float| - Finds whether the type of a variable is float
+ * |is_int| - Find whether the type of a variable is integer
+ * |is_string| - Find whether the type of a variable is string
+ * |is_object| - Finds whether a variable is an object
+
+
+vim:ft=help:

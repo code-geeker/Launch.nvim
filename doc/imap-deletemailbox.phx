@@ -1,0 +1,50 @@
+*imap_deletemailbox*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imap_deletemailbox — Delete a mailbox
+
+===============================================================================
+[ Description ]
+
+  imap_deletemailbox(IMAP\Connection $imap, string $mailbox): bool~
+
+Deletes the specified {mailbox}.
+
+===============================================================================
+[ Parameters ]
+
+{imap}
+
+  An IMAP\Connection instance.
+
+{mailbox}
+
+  The mailbox name, see |imap_open| for more information
+
+  Warning
+
+  Passing untrusted data to this parameter is insecure, unless
+  imap.enable_insecure_rsh is disabled.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {imap} parameter expects an IMAP\Connection instance now;
+        previously, a valid imap resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |imap_createmailbox| - Create a new mailbox
+ * |imap_renamemailbox| - Rename an old mailbox to new mailbox
+ * |imap_open| - Open an IMAP stream to a mailbox for the format of {mbox}
+
+
+vim:ft=help:

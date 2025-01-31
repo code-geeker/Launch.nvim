@@ -1,0 +1,37 @@
+*cubrid_set_query_timeout*
+
+(PECL CUBRID >= 8.4.1)
+
+cubrid_set_query_timeout — Set the timeout time of query execution
+
+===============================================================================
+[ Description ]
+
+  cubrid_set_query_timeout(resource $req_identifier, int $timeout): bool~
+
+The cubrid_set_query_timeout() function is used to set the timeout time of
+query execution.
+
+===============================================================================
+[ Parameters ]
+
+{req_identifier}
+
+  Request identifier.
+
+{timeout}
+
+  Timeout time in milliseconds.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ See Also ]
+
+ * |cubrid_get_query_timeout| - Get the query timeout value of the request
+
+
+vim:ft=help:

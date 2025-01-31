@@ -1,0 +1,68 @@
+*rnp_key_get_info*
+
+(PECL rnp >= 0.1.1)
+
+rnp_key_get_info — Get information about the key
+
+===============================================================================
+[ Description ]
+
+  rnp_key_get_info(RnpFFI $ffi, string $key_fp): array|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{key_fp}
+
+  Key fingerprint.
+
+===============================================================================
+[ Return Values ]
+
+An associative array with information about the key or false on failure.
+
+      Key         Data                        Description
+                  type
+"is_primary"     boolean true if this key is the primary key.
+"is_sub"         boolean true if this key is a subkey.
+                         true if public key is valid. This includes checks of
+"is_valid"       boolean the self-signatures, expiration times, revocations and
+                         so on.
+"is_revoked"     boolean true if this key is revoked.
+"is_superseded"  boolean true if this key is superseded. Present only if the
+                         key is revoked.
+"is_compromised" boolean true if this key is compromised. Present only if the
+                         key is revoked.
+"is_retired"     boolean true if this key is retired. Present only if the key
+                         is revoked.
+"is_expired"     boolean true if this key is expired.
+"have_secret"    boolean true if this key has secret part.
+"is_locked"      boolean true if this key is currently locked. Only present for
+                         secret keys.
+                         true if this key is protected. Only present for secret
+"is_protected"   boolean keys. A protected key is one that is encrypted and can
+                         be safely held in memory and locked/unlocked as
+                         needed.
+"have_public"    boolean true if this key has public part. Generally all keys
+                         would have public part.
+                         The timestamp till which key can be considered as
+                         valid. Note: this will take into account not only
+"valid_till"     integer key's expiration, but revocations as well. For the
+                         subkey primary key's validity time will be also
+                         checked.
+"bits"           integer Number of bits in the key. For EC-based keys it will
+                         contain size of the curve.
+"alg"            string  Key algorithm name.
+                         An indexed array containing fingerprint strings of
+"subkeys"        array   subkeys. Only present for primary keys. Could be empty
+                         if primary key has no subkeys.
+                         An indexed array containing user ID strings. Only
+"uids"           array   present for primary keys. Could be empty if primary
+                         key has no user ID-s.
+
+
+vim:ft=help:

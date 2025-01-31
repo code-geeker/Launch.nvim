@@ -1,0 +1,76 @@
+*ob_get_clean*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+ob_get_clean — Get the contents of the active output buffer and turn it off
+
+===============================================================================
+[ Description ]
+
+  ob_get_clean(): string|false~
+
+This function calls the output handler (with the PHP_OUTPUT_HANDLER_CLEAN and
+PHP_OUTPUT_HANDLER_FINAL flags), discards it's return value, returns the
+contents of the active output buffer and turns off the active output buffer.
+
+ob_get_clean() will fail without an active output buffer started with the
+PHP_OUTPUT_HANDLER_REMOVABLE flag.
+
+ob_get_clean() will discard the contents of the active output buffer even if it
+was started without the PHP_OUTPUT_HANDLER_CLEANABLE flag.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the contents of the active output buffer on success or false on
+failure.
+
+Caution
+
+ob_get_clean() will return false but will not generate an E_NOTICE if there is
+no active output buffer.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+If the function fails it generates an E_NOTICE.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A simple ob_get_clean() example
+
+<?php >
+
+  ob_start();
+
+  echo "Hello World";
+
+  $out = ob_get_clean();
+  $out = strtolower($out);
+
+  var_dump($out);
+<?>
+
+The above example will output:
+
+string(11) "hello world"
+
+===============================================================================
+[ See Also ]
+
+ * |ob_start| - Turn on output buffering
+ * |ob_get_contents| - Return the contents of the output buffer
+ * |ob_clean| - Clean (erase) the contents of the active output buffer
+ * |ob_end_clean| - Clean (erase) the contents of the active output buffer and
+  turn it off
+ * |ob_get_flush| - Flush (send) the return value of the active output handler,
+  return the contents of the active output buffer and turn it off
+
+
+vim:ft=help:

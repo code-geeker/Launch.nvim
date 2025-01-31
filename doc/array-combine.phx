@@ -1,0 +1,77 @@
+*array_combine*
+
+(PHP 5, PHP 7, PHP 8)
+
+array_combine — Creates an array by using one array for keys and another for
+its values
+
+===============================================================================
+[ Description ]
+
+  array_combine(array $keys, array $values): array~
+
+Creates an array by using the values from the {keys} array as keys and the
+values from the {values} array as the corresponding values.
+
+===============================================================================
+[ Parameters ]
+
+{keys}
+
+  Array of keys to be used. Illegal values for key will be converted to string.
+
+{values}
+
+  Array of values to be used
+
+===============================================================================
+[ Return Values ]
+
+Returns the combined array.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+As of PHP 8.0.0, a ValueError is thrown if the number of elements in {keys} and
+{values} does not match. Prior to PHP 8.0.0, a E_WARNING was emitted instead.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        array_combine() will now throw a ValueError if the number of elements
+8.0.0   for each array is not equal; previously this function returned false
+        instead.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A simple array_combine() example
+
+<?php >
+  $a = array('green', 'red', 'yellow');
+  $b = array('avocado', 'apple', 'banana');
+  $c = array_combine($a, $b);
+
+  print_r($c);
+<?>
+
+The above example will output:
+
+Array
+(
+    [green]  => avocado
+    [red]    => apple
+    [yellow] => banana
+)
+
+===============================================================================
+[ See Also ]
+
+ * |array_merge| - Merge one or more arrays
+ * |array_walk| - Apply a user supplied function to every member of an array
+ * |array_values| - Return all the values of an array
+ * |array_map| - Applies the callback to the elements of the given arrays
+
+
+vim:ft=help:

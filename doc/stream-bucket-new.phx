@@ -1,0 +1,23 @@
+*stream_bucket_new*
+
+(PHP 5, PHP 7, PHP 8)
+
+stream_bucket_new — Create a new bucket for use on the current stream
+
+===============================================================================
+[ Description ]
+
+  stream_bucket_new(resource $stream, string $buffer): StreamBucket~
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.4.0   This function returns a StreamBucket instance now; previously, an 
+        stdClass was returned.
+
+
+vim:ft=help:

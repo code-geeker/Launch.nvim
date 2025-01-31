@@ -1,0 +1,44 @@
+*enchant_dict_is_added*
+
+(PHP 8)
+
+enchant_dict_is_added — Whether or not 'word' exists in this spelling-session
+
+===============================================================================
+[ Description ]
+
+  enchant_dict_is_added(EnchantDictionary $dictionary, string $word): bool~
+
+Tells whether or not a word already exists in the current session.
+
+===============================================================================
+[ Parameters ]
+
+{dictionary}
+
+  An Enchant dictionary returned by |enchant_broker_request_dict| or 
+  |enchant_broker_request_pwl_dict|.
+
+{word}
+
+  The word to lookup
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the word exists or false
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {dictionary} expects an EnchantDictionary instance now; previoulsy, a 
+        resource was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |enchant_dict_add_to_session| - Add 'word' to this spell-checking session
+
+
+vim:ft=help:

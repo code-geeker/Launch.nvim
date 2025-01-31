@@ -1,0 +1,18 @@
+*snmp_set_oid_numeric_print*
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7, PHP 8)
+
+snmp_set_oid_numeric_print — Alias of |snmp_set_oid_output_format|
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: |snmp_set_oid_output_format|.
+
+===============================================================================
+[ See Also ]
+
+ * |snmp_set_oid_output_format| - Set the OID output format
+
+
+vim:ft=help:

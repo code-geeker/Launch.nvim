@@ -1,0 +1,43 @@
+*pfsockopen*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+pfsockopen — Open persistent Internet or Unix domain socket connection
+
+===============================================================================
+[ Description ]
+
+  pfsockopen(    string~
+  $hostname,    int $port = -1,    int~
+  &$error_code = null,    string &$error_message =~
+  null,    ?float $timeout = null): resource|false~
+
+This function behaves exactly as |fsockopen| with the difference that the
+connection is not closed after the script finishes. It is the persistent
+version of |fsockopen|.
+
+===============================================================================
+[ Parameters ]
+
+For parameter information, see the |fsockopen| documentation.
+
+===============================================================================
+[ Return Values ]
+
+pfsockopen() returns a file pointer which may be used together with the other
+file functions (such as |fgets|, |fgetss|, |fwrite|, |fclose|, and |feof|), or
+false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version        Description
+8.0.0   {timeout} is nullable now.
+
+===============================================================================
+[ See Also ]
+
+ * |fsockopen| - Open Internet or Unix domain socket connection
+
+
+vim:ft=help:

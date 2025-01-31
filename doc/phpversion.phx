@@ -1,0 +1,104 @@
+*phpversion*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+phpversion — Gets the current PHP version
+
+===============================================================================
+[ Description ]
+
+  phpversion(?string $extension = null): string|false~
+
+Returns a string containing the version of the currently running PHP parser or
+extension.
+
+===============================================================================
+[ Parameters ]
+
+{extension}
+
+  An optional extension name.
+
+===============================================================================
+[ Return Values ]
+
+Returns the current PHP version as a string. If a string argument is provided
+for {extension} parameter, phpversion() returns the version of that extension,
+or false if there is no version information associated or the extension isn't
+enabled.
+
+===============================================================================
+[ Changelog ]
+
+Version         Description
+8.0.0   {extension} is nullable now.
+
+===============================================================================
+[ Examples ]
+
+Example #1 phpversion() example
+
+<?php >
+
+  // Prints e.g. 'Current PHP version: 8.3.12'
+  echo 'Current PHP version: ' . phpversion();
+
+  // Prints e.g. '1.22.3' or nothing if the extension isn't enabled
+  echo phpversion('zip');
+
+<?>
+
+Example #2 PHP_VERSION_ID example and usage
+
+<?php >
+
+  /**
+  * PHP_VERSION_ID is defined as a number, where the higher the number
+  * is, the newer a PHP version is used. It's defined as used in the above
+  * expression:
+  *
+  * $version_id = $major_version * 10000 + $minor_version * 100 +
+  $release_version;
+  *
+  * Now with PHP_VERSION_ID we can check for features this PHP version
+  * may have, this doesn't require to use version_compare() everytime
+  * you check if the current PHP version may not support a feature.
+  *
+  * For example, we may here define the PHP_*_VERSION constants thats
+  * not available in versions prior to 5.2.7
+  */
+
+  if (PHP_VERSION_ID < 50207) {
+  define('PHP_MAJOR_VERSION', $version[0]);
+  define('PHP_MINOR_VERSION', $version[1]);
+  define('PHP_RELEASE_VERSION', $version[2]);
+
+  // and so on, ...
+  }
+
+<?>
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  This information is also available in the predefined constant PHP_VERSION.
+  More versioning information is available using the PHP_*_VERSION constants.
+
+  Note:
+
+  Some extensions may define their own version number. However, most bundled
+  extension will use the PHP version as their version number.
+
+===============================================================================
+[ See Also ]
+
+ * PHP_VERSION constants
+ * |version_compare| - Compares two "PHP-standardized" version number strings
+ * |phpinfo| - Outputs information about PHP's configuration
+ * |phpcredits| - Prints out the credits for PHP
+ * |zend_version| - Gets the version of the current Zend engine
+
+
+vim:ft=help:

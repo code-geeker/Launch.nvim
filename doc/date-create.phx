@@ -1,0 +1,37 @@
+*date_create*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+date_create — create a new DateTime object
+
+===============================================================================
+[ Description ]
+
+  date_create(string $datetime = "now", ?DateTimeZone $timezone =~
+  null): DateTime|false~
+
+This is the procedural version of DateTime::__construct().
+
+Unlike the DateTime constructor, it will return false instead of an exception
+if the passed in {datetime} string is invalid.
+
+===============================================================================
+[ Parameters ]
+
+See DateTimeImmutable::__construct.
+
+===============================================================================
+[ Return Values ]
+
+Returns a new DateTime instance or false on failure
+
+===============================================================================
+[ See Also ]
+
+ * DateTimeImmutable::__construct() - Returns new DateTimeImmutable object
+ * DateTimeImmutable::createFromFormat() - Parses a time string according to a
+  specified format
+ * DateTime::__construct() - Returns new DateTime object
+
+
+vim:ft=help:

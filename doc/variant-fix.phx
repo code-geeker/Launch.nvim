@@ -1,0 +1,58 @@
+*variant_fix*
+
+(PHP 5, PHP 7, PHP 8)
+
+variant_fix — Returns the integer portion of a variant
+
+===============================================================================
+[ Description ]
+
+  variant_fix(mixed $value): variant~
+
+Gets the integer portion of a variant.
+
+===============================================================================
+[ Parameters ]
+
+{value}
+
+  The variant.
+
+  Note:
+
+  As with all the variant arithmetic functions, the parameters for this
+  function can be either a PHP native type (integer, string, floating point,
+  boolean or null), or an instance of a COM, VARIANT or DOTNET class. PHP
+  native types will be converted to variants using the same rules as found in
+  the constructor for the variant class. COM and DOTNET objects will have the
+  value of their default property taken and used as the variant value.
+
+  The variant arithmetic functions are wrappers around the similarly named
+  functions in the COM library; for more information on these functions,
+  consult the MSDN library. The PHP functions are named slightly differently;
+  for example |variant_add| in PHP corresponds to VarAdd() in the MSDN
+  documentation.
+
+===============================================================================
+[ Return Values ]
+
+If {value} is negative, then the first negative integer greater than or equal
+to the variant is returned, otherwise returns the integer portion of the value
+of {value}.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a com_exception on failure.
+
+===============================================================================
+[ See Also ]
+
+ * |variant_int| - Returns the integer portion of a variant
+ * |variant_round| - Rounds a variant to the specified number of decimal places
+ * |floor| - Round fractions down
+ * |ceil| - Round fractions up
+ * |round| - Rounds a float
+
+
+vim:ft=help:

@@ -1,0 +1,66 @@
+*ldap_mod_replace*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_mod_replace — Replace attribute values with new ones
+
+===============================================================================
+[ Description ]
+
+  ldap_mod_replace(    LDAP\Connection~
+  $ldap,    string $dn,    array~
+  $entry,    ?array $controls = null): bool~
+
+Replaces one or more attributes from the specified {dn}. It may also add or
+remove attributes.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{dn}
+
+  The distinguished name of an LDAP entity.
+
+{entry}
+
+  An associative array listing the attributes to replace. Sending an empty
+  array as value will remove the attribute, while sending an attribute not
+  existing yet on this entry will add it.
+
+{controls}
+
+  Array of LDAP Controls to send with the request.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+===============================================================================
+[ Notes ]
+
+  Note: This function is binary-safe.
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_mod_replace_ext| - Replace attribute values with new ones
+ * |ldap_mod_del| - Delete attribute values from current attributes
+ * |ldap_mod_add| - Add attribute values to current attributes
+ * |ldap_modify_batch| - Batch and execute modifications on an LDAP entry
+
+
+vim:ft=help:

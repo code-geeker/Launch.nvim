@@ -1,0 +1,96 @@
+*imagechar*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imagechar — Draw a character horizontally
+
+===============================================================================
+[ Description ]
+
+  imagechar(    GdImage~
+  $image,    GdFont|int $font,    int~
+  $x,    int $y,    string~
+  $char,    int $color): bool~
+
+imagechar() draws the first character of {char} in the image identified by
+{image} with its upper-left at {x},{y} (top left is 0, 0) with the color
+{color}.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{font}
+
+  Can be 1, 2, 3, 4, 5 for built-in fonts in latin2 encoding (where higher
+  numbers corresponding to larger fonts) or GdFont instance, returned by 
+  |imageloadfont|.
+
+{x}
+
+  x-coordinate of the start.
+
+{y}
+
+  y-coordinate of the start.
+
+{char}
+
+  The character to draw.
+
+{color}
+
+  A color identifier created with |imagecolorallocate|.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {font} parameter now accepts both an GdFont instance and an int;
+        previously only int was accepted.
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+
+===============================================================================
+[ Examples ]
+
+Example #1 imagechar() example
+
+<?php >
+
+  $im = imagecreate(100, 100);
+
+  $string = 'PHP';
+
+  $bg = imagecolorallocate($im, 255, 255, 255);
+  $black = imagecolorallocate($im, 0, 0, 0);
+
+  // prints a black "P" in the top left corner
+  imagechar($im, 1, 0, 0, $string, $black);
+
+  header('Content-type: image/png');
+  imagepng($im);
+
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagechar()
+
+===============================================================================
+[ See Also ]
+
+ * |imagecharup| - Draw a character vertically
+ * |imageloadfont| - Load a new font
+
+
+vim:ft=help:

@@ -1,0 +1,28 @@
+*sodium_increment*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_increment — Increment large number
+
+===============================================================================
+[ Description ]
+
+  sodium_increment(string &$string): void~
+
+Treat the string as a little-endian unsigned integer, then increase it by 1.
+Constant-time.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  String to increment.
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+
+vim:ft=help:

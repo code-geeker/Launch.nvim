@@ -1,0 +1,46 @@
+*openssl_x509_export*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+openssl_x509_export — Exports a certificate as a string
+
+===============================================================================
+[ Description ]
+
+  openssl_x509_export(OpenSSLCertificate|string $certificate, string &$output,~
+  bool $no_text = true): bool~
+
+openssl_x509_export() stores {certificate} into a string named by {output} in a
+PEM encoded format.
+
+===============================================================================
+[ Parameters ]
+
+{x509}
+
+  See Key/Certificate parameters for a list of valid values.
+
+{output}
+
+  On success, this will hold the PEM.
+
+{no_text}
+
+  The optional parameter {notext} affects the verbosity of the output; if it is
+  false, then additional human-readable information is included in the output.
+  The default value of {notext} is true.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {certificate} accepts an OpenSSLCertificate instance now; previously, a
+        resource of type OpenSSL X.509 was accepted.
+
+
+vim:ft=help:

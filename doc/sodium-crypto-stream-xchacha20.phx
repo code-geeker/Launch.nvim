@@ -1,0 +1,38 @@
+*sodium_crypto_stream_xchacha20*
+
+(PHP 8 >= 8.1.0)
+
+sodium_crypto_stream_xchacha20 — Expands the key and nonce into a keystream of
+pseudorandom bytes
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_stream_xchacha20(int $length, string $nonce,~
+  #[\SensitiveParameter] string $key): string~
+
+Expands the {key} and {nonce} into a keystream of pseudorandom bytes.
+
+===============================================================================
+[ Parameters ]
+
+{length}
+
+  Number of bytes desired.
+
+{nonce}
+
+  24-byte nonce.
+
+{key}
+
+  Key, possibly generated from |sodium_crypto_stream_xchacha20_keygen|.
+
+===============================================================================
+[ Return Values ]
+
+Returns a pseudorandom stream that can be used with 
+|sodium_crypto_stream_xchacha20_xor|.
+
+
+vim:ft=help:

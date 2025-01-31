@@ -1,0 +1,70 @@
+*sodium_crypto_box_seal*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_box_seal — Anonymous public-key encryption
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_box_seal(#[\SensitiveParameter] string $message, string~
+  $public_key): string~
+
+Encrypt a message such that only the recipient can decrypt it.
+
+Unlike with |sodium_crypto_box|, you only need to know the recipient's public
+key to use sodium_crypto_box_seal(). One consequence of this convenience,
+however, is that the ciphertext isn't bound to a static public key, and is
+therefore not authenticated. Hence, anonymous public-key encryption.
+
+sodium_crypto_box_seal() still provides ciphertext integrity. Just not sender
+identity authentication.
+
+If you also need sender authentication, the |sodium_crypto_sign| functions are
+likely the best place to start.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  The message to encrypt.
+
+{public_key}
+
+  The public key that corresponds to the only key that can decrypt the message.
+
+===============================================================================
+[ Return Values ]
+
+A ciphertext string in the format of (one-time public key, encrypted message,
+authentication tag).
+
+===============================================================================
+[ Examples ]
+
+Example #1 sodium_crypto_box_seal() example
+
+<?php >
+  $keypair = sodium_crypto_box_keypair();
+  $public_key = sodium_crypto_box_publickey($keypair);
+
+  // Obfuscated plaintext to make the example more fun
+  $plaintext_b64 = "V3JpdGluZyBzb2Z0d2FyZSBpbiBQSFAgY2FuIGJlIGEgZGVsaWdodCE=";
+  $decoded_plaintext = sodium_base642bin($plaintext_b64, 
+  SODIUM_BASE64_VARIANT_ORIGINAL);
+
+  $sealed = sodium_crypto_box_seal($decoded_plaintext, $public_key);
+  var_dump(base64_encode($sealed));
+
+  $opened = sodium_crypto_box_seal_open($sealed, $keypair);
+  var_dump($opened);
+<?>
+
+The above example will output something similar to:
+
+string(120) "oRBXXAV4iQBrxlV4A21Bord8Yo/D8ZlrIIGNyaRCcGBfpz0map52I3xq6l+CST+1NSgQkbV+HiYyFjXWiWiaCGupGf+zl4bgWj/A9Adtem7Jt3h3emrMsLw="
+string(41) "Writing software in PHP can be a delight!"
+
+
+vim:ft=help:

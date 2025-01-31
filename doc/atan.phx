@@ -1,0 +1,37 @@
+*atan*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+atan — Arc tangent
+
+===============================================================================
+[ Description ]
+
+  atan(float $num): float~
+
+Returns the arc tangent of {num} in radians. atan() is the inverse function of 
+|tan|, which means that $num == tan(atan($num)) for every value of {num} that
+is in the domain of atan().
+
+===============================================================================
+[ Parameters ]
+
+{num}
+
+  The argument to process
+
+===============================================================================
+[ Return Values ]
+
+The arc tangent of {num} in radians.
+
+===============================================================================
+[ See Also ]
+
+ * |tan| - Tangent
+ * |atanh| - Inverse hyperbolic tangent
+ * |asin| - Arc sine
+ * |acos| - Arc cosine
+
+
+vim:ft=help:

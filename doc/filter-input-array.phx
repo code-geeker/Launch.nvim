@@ -1,0 +1,80 @@
+*filter_input_array*
+
+(PHP 5 >= 5.2.0, PHP 7, PHP 8)
+
+filter_input_array — Gets external variables and optionally filters them
+
+===============================================================================
+[ Description ]
+
+  filter_input_array(int $type, array|int $options = FILTER_DEFAULT, bool~
+  $add_empty = true): array|false|null~
+
+This function is useful for retrieving many values without repetitively calling
+|filter_input|.
+
+===============================================================================
+[ Parameters ]
+
+{type}
+  One of the INPUT_* constants.
+  Warning
+
+  The content of the superglobal that is being filtered is the original "raw"
+  content provided by the SAPI, prior to any user modification to the
+  superglobal. To filter a modified superglobal use |filter_var_array| instead.
+
+{options}
+  Either an associative array of options, or the filter to apply to each entry,
+  which can either be a validation filter by using one of the FILTER_VALIDATE_*
+  constants, or a sanitization filter by using one of the FILTER_SANITIZE_*
+  constants. The option array is an associative array where the key corresponds
+  to a key in the data {array} and the associated value is either the filter to
+  apply to this entry, or an associative array describing how and which filter
+  should be applied to this entry. The associative array describing how a
+  filter should be applied must contain the 'filter' key whose associated value
+  is the filter to apply, which can be one of the FILTER_VALIDATE_*,
+  FILTER_SANITIZE_*, FILTER_UNSAFE_RAW, or FILTER_CALLBACK constants. It can
+  optionally contain the 'flags' key which specifies and flags that apply to
+  the filter, and the 'options' key which specifies any options that apply to
+  the filter.
+{add_empty}
+
+  Add missing keys as null to the return value.
+
+===============================================================================
+[ Return Values ]
+
+On success, an array containing the values of the requested variables.
+
+On failure, false is returned. Except if the failure is that the input array
+designated by {type} is not populated where null is returned if the
+FILTER_NULL_ON_FAILURE flag is used.
+
+Missing entries from the input array will be populated into the returned array
+if {add_empty} is true. In which case, missing entries will be set to null,
+unless the FILTER_NULL_ON_FAILURE flag is used, in which case it will be false.
+
+An entry of the returned array will be false if the filter fails, unless the
+FILTER_NULL_ON_FAILURE flag is used, in which case it will be null.
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  There is no REQUEST_TIME key in INPUT_SERVER array because it is inserted
+  into the $_SERVER later.
+
+===============================================================================
+[ See Also ]
+
+ * |filter_input| - Gets a specific external variable by name and optionally
+  filters it
+ * |filter_var| - Filters a variable with a specified filter
+ * |filter_var_array| - Gets multiple variables and optionally filters them
+ * Validation filters FILTER_VALIDATE_*
+ * Sanitization filters FILTER_SANITIZE_*
+
+
+vim:ft=help:

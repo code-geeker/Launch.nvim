@@ -1,0 +1,62 @@
+*imageinterlace*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+imageinterlace — Enable or disable interlace
+
+===============================================================================
+[ Description ]
+
+  imageinterlace(GdImage $image, ?bool $enable = null): bool~
+
+imageinterlace() turns the interlace bit on or off.
+
+If the interlace bit is set and the image is used as a JPEG image, the image is
+created as a progressive JPEG.
+
+===============================================================================
+[ Parameters ]
+
+{image}
+
+  A GdImage object, returned by one of the image creation functions, such as 
+  |imagecreatetruecolor|.
+
+{interlace}
+
+  If true, the image will be interlaced, if false the interlace bit is turned
+  off. Passing null will result in the interlacing behavior not being changed.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the interlace bit is set for the image, false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.5   imageinterlace() returns a bool now; previously it returned an int
+        (non-zero for interlaced images, zero otherwise).
+8.0.0   {image} expects a GdImage instance now; previously, a valid gd resource
+        was expected.
+8.0.0   {enable} expects a bool now; previously it expected an int.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Turn on interlacing using imageinterlace()
+
+<?php >
+  // Create an image instance
+  $im = imagecreatefromgif('php.gif');
+
+  // Enable interlancing
+  imageinterlace($im, true);
+
+  // Save the interlaced image
+  imagegif($im, './php_interlaced.gif');
+<?>
+
+
+vim:ft=help:

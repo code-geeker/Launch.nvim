@@ -1,0 +1,45 @@
+*ldap_mod_del_ext*
+
+(PHP 7 >= 7.3.0, PHP 8)
+
+ldap_mod_del_ext — Delete attribute values from current attributes
+
+===============================================================================
+[ Description ]
+
+  ldap_mod_del_ext(    LDAP\Connection~
+  $ldap,    string $dn,    array~
+  $entry,    ?array $controls = null): LDAP\Result|false~
+
+Does the same thing as |ldap_mod_del| but returns an LDAP\Result instance to be
+parsed with |ldap_parse_result|.
+
+===============================================================================
+[ Parameters ]
+
+See |ldap_mod_del|
+
+===============================================================================
+[ Return Values ]
+
+Returns an LDAP\Result instance, or false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   Returns an LDAP\Result instance now; previously, a resource was
+        returned.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_mod_del| - Delete attribute values from current attributes
+ * |ldap_parse_result| - Extract information from result
+
+
+vim:ft=help:

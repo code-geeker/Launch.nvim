@@ -1,0 +1,67 @@
+*libxml_set_streams_context*
+
+(PHP 5, PHP 7, PHP 8)
+
+libxml_set_streams_context — Set the streams context for the next libxml
+document load or write
+
+===============================================================================
+[ Description ]
+
+  libxml_set_streams_context(resource $context): void~
+
+Sets the streams context for the next libxml document load or write.
+
+===============================================================================
+[ Parameters ]
+
+{context}
+
+  The stream context resource (created with |stream_context_create|)
+
+===============================================================================
+[ Return Values ]
+
+No value is returned.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Throws a TypeError when a non-stream resource is passed to {context}.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+        libxml_set_streams_context() now throws a TypeError when a non-stream
+8.4.0   resource is passed to {context}, instead of throwing later when the
+        context is used.
+
+===============================================================================
+[ Examples ]
+
+Example #1 A libxml_set_streams_context() example
+
+<?php >
+
+  $opts = array(
+  'http' => array(
+  'user_agent' => 'PHP libxml agent',
+  )
+  );
+
+  $context = stream_context_create($opts);
+  libxml_set_streams_context($context);
+
+  // request a file through HTTP
+  $doc = DOMDocument::load('http://www.example.com/file.xml');
+
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |stream_context_create| - Creates a stream context
+
+
+vim:ft=help:

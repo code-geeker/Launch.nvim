@@ -1,0 +1,17 @@
+*ldap_first_reference*
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PHP 8)
+
+ldap_first_reference — Return first reference
+
+===============================================================================
+[ Description ]
+
+  ldap_first_reference(LDAP\Connection $ldap, LDAP\Result $result):~
+  LDAP\ResultEntry|false~
+Warning
+
+This function is currently not documented; only its argument list is available.
+
+
+vim:ft=help:

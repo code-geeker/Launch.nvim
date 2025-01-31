@@ -1,0 +1,45 @@
+*sodium_crypto_aead_aegis128l_encrypt*
+
+(PHP 8 >= 8.4.0)
+
+sodium_crypto_aead_aegis128l_encrypt — Encrypt then authenticate a message with
+AEGIS-128L
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_aead_aegis128l_encrypt(    #[\SensitiveParameter]~
+  string $message,    string~
+  $additional_data,    string~
+  $nonce,    #[\SensitiveParameter] string $key): string~
+
+Encrypt then authenticate a message with AEGIS-128L.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+  The plaintext message to encrypt.
+{additional_data}
+  Additional, authenticated data. This is used in the verification of the
+  authentication tag appended to the ciphertext, but it is not encrypted or
+  stored in the ciphertext.
+{nonce}
+  A number that must be only used once, per message.
+{key}
+  Encryption key (128-bit).
+
+===============================================================================
+[ Return Values ]
+
+Returns the ciphertext and authentication tag as a string of raw binary bytes.
+
+===============================================================================
+[ See Also ]
+
+ * |sodium_crypto_aead_aegis128l_decrypt| - Verify then decrypt a message with
+  AEGIS-128L
+ * |sodium_crypto_aead_aegis128l_keygen| - Generate a random AEGIS-128L key
+
+
+vim:ft=help:

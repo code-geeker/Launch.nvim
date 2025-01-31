@@ -1,0 +1,56 @@
+*strpbrk*
+
+(PHP 5, PHP 7, PHP 8)
+
+strpbrk — Search a string for any of a set of characters
+
+===============================================================================
+[ Description ]
+
+  strpbrk(string $string, string $characters): string|false~
+
+strpbrk() searches the {string} string for a {characters}.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  The string where {characters} is looked for.
+
+{characters}
+
+  This parameter is case sensitive.
+
+===============================================================================
+[ Return Values ]
+
+Returns a string starting from the character found, or false if it is not
+found.
+
+===============================================================================
+[ Examples ]
+
+Example #1 strpbrk() example
+
+<?php >
+
+  $text = 'This is a Simple text.';
+
+  // this echoes "is is a Simple text." because 'i' is matched first
+  echo strpbrk($text, 'mi');
+
+  // this echoes "Simple text." because chars are case sensitive
+  echo strpbrk($text, 'S');
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |strpos| - Find the position of the first occurrence of a substring in a
+  string
+ * |strstr| - Find the first occurrence of a string
+ * |preg_match| - Perform a regular expression match
+
+
+vim:ft=help:

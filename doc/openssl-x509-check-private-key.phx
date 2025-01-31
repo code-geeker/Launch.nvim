@@ -1,0 +1,55 @@
+*openssl_x509_check_private_key*
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7, PHP 8)
+
+openssl_x509_check_private_key — Checks if a private key corresponds to a
+certificate
+
+===============================================================================
+[ Description ]
+
+  openssl_x509_check_private_key(OpenSSLCertificate|string $certificate,~
+  #[\SensitiveParameter] OpenSSLAsymmetricKey|OpenSSLCertificate|array|string~
+  $private_key): bool~
+
+Checks whether the given {private_key} is the private key that corresponds to
+{certificate}.
+
+Warning
+
+The function does not check if {private_key} is indeed a private key or not. It
+merely compares the public materials (e.g. exponent and modulus of an RSA key)
+and/or key parameters (e.g. EC params of an EC key) of a key pair.
+
+This means, for example, that a public key could be given for {private_key} and
+the function may return true.
+
+===============================================================================
+[ Parameters ]
+
+{certificate}
+
+  The certificate.
+
+{private_key}
+
+  The private key.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if {private_key} is the private key that corresponds to
+{certificate}, or false otherwise.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {certificate} accepts an OpenSSLCertificate instance now; previously, a
+        resource of type OpenSSL X.509 was accepted.
+        {private_key} accepts an OpenSSLAsymmetricKey or OpenSSLCertificate
+8.0.0   instance now; previously, a resource of type OpenSSL key or OpenSSL
+        X.509 was accepted.
+
+
+vim:ft=help:

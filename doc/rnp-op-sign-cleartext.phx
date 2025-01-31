@@ -1,0 +1,53 @@
+*rnp_op_sign_cleartext*
+
+(PECL rnp >= 0.1.1)
+
+rnp_op_sign_cleartext — Perform signing operation on a textual data, return
+cleartext signed message
+
+===============================================================================
+[ Description ]
+
+  rnp_op_sign_cleartext(    RnpFFI~
+  $ffi,    string $data,    array~
+  $keys_fp,    array $options = ?): string|false~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{data}
+
+  Data to be signed.
+
+{keys_fp}
+
+  Array with key fingerprints. At least one key must be provided. Keys should
+  be present in {ffi}.
+
+{options}
+
+  An associative array with options.
+
+         Key         Data                       Description
+                     type
+  "armor"           boolean Enable ASCII-armored output. Disabled by default.
+  "hash"            string  Set hash algorithm used during signature
+                            calculation.
+  "creation_time"   integer Set signature creation time in seconds since Jan, 1
+                            1970 UTC. By default current time is used.
+                            Set signature expiration time in seconds since the
+  "expiration_time" integer creation time. 0 value is used to mark signature as
+                            non-expiring (default value).
+
+===============================================================================
+[ Return Values ]
+
+Cleartext signed message containing source data with additional headers and
+ASCII-armored signature on success or false on failure.
+
+
+vim:ft=help:

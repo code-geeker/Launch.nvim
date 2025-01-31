@@ -1,0 +1,35 @@
+*date_create_immutable*
+
+(PHP 5 >= 5.5.0, PHP 7, PHP 8)
+
+date_create_immutable — create a new DateTimeImmutable object
+
+===============================================================================
+[ Description ]
+
+  date_create_immutable(string $datetime = "now", ?DateTimeZone~
+  $timezone = null): DateTimeImmutable|false~
+
+This is the procedural version of DateTimeImmutable::__construct().
+
+Unlike the DateTimeImmutable constructor, it will return false instead of an
+exception if the passed in {datetime} string is invalid.
+
+===============================================================================
+[ Parameters ]
+
+See DateTimeImmutable::__construct.
+
+===============================================================================
+[ Return Values ]
+
+Returns a new DateTimeImmutable instance or false on failure
+
+===============================================================================
+[ See Also ]
+
+ * DateTimeImmutable::createFromFormat() - Parses a time string according to a
+  specified format
+
+
+vim:ft=help:

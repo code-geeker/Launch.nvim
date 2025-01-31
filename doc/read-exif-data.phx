@@ -1,0 +1,23 @@
+*read_exif_data*
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+read_exif_data — Alias of |exif_read_data|
+
+Warning
+
+This alias was DEPRECATED in PHP 7.2.0, and REMOVED as of PHP 8.0.0.
+
+===============================================================================
+[ Description ]
+
+This function is an alias of: |exif_read_data|.
+
+===============================================================================
+[ Changelog ]
+
+Version             Description
+7.2.0   This function alias was deprecated.
+
+
+vim:ft=help:

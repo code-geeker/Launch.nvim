@@ -1,0 +1,45 @@
+*sodium_crypto_aead_chacha20poly1305_encrypt*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+sodium_crypto_aead_chacha20poly1305_encrypt — Encrypt then authenticate with
+ChaCha20-Poly1305
+
+===============================================================================
+[ Description ]
+
+  sodium_crypto_aead_chacha20poly1305_encrypt(    #[\SensitiveParameter]~
+  string $message,    string~
+  $additional_data,    string~
+  $nonce,    #[\SensitiveParameter] string $key): string~
+
+Encrypt then authenticate with ChaCha20-Poly1305.
+
+===============================================================================
+[ Parameters ]
+
+{message}
+
+  The plaintext message to encrypt.
+
+{additional_data}
+
+  Additional, authenticated data. This is used in the verification of the
+  authentication tag appended to the ciphertext, but it is not encrypted or
+  stored in the ciphertext.
+
+{nonce}
+
+  A number that must be only used once, per message. 8 bytes long.
+
+{key}
+
+  Encryption key (256-bit).
+
+===============================================================================
+[ Return Values ]
+
+Returns the ciphertext and tag on success, or false on failure.
+
+
+vim:ft=help:

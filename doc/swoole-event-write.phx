@@ -1,0 +1,25 @@
+*swoole_event_write*
+
+(PECL swoole >= 1.9.0)
+
+swoole_event_write — Write data to a socket
+
+===============================================================================
+[ Description ]
+
+  swoole_event_write(int $fd, string $data): bool~
+
+===============================================================================
+[ Parameters ]
+
+{fd}
+
+{data}
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

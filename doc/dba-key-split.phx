@@ -1,0 +1,42 @@
+*dba_key_split*
+
+(PHP 5, PHP 7, PHP 8)
+
+dba_key_split — Splits a key in string representation into array representation
+
+===============================================================================
+[ Description ]
+
+  dba_key_split(string|false|null $key): array|false~
+
+dba_key_split() splits a key (string representation) into an array
+representation.
+
+===============================================================================
+[ Parameters ]
+
+{key}
+
+  The key in string representation.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of the form array(0 => group, 1 => value_name). This function
+will return false if {key} is null or false.
+
+===============================================================================
+[ Changelog ]
+
+Version                    Description
+8.4.0   Passing null or false to {key} is now deprecated.
+
+===============================================================================
+[ See Also ]
+
+ * |dba_firstkey| - Fetch first key
+ * |dba_nextkey| - Fetch next key
+ * |dba_fetch| - Fetch data specified by key
+
+
+vim:ft=help:

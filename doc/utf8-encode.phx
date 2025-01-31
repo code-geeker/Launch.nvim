@@ -1,0 +1,147 @@
+*utf8_encode*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+utf8_encode — Converts a string from ISO-8859-1 to UTF-8
+
+Warning
+
+This function has been DEPRECATED as of PHP 8.2.0. Relying on this function is
+highly discouraged.
+
+===============================================================================
+[ Description ]
+
+  #[\Deprecated] utf8_encode(string $string): string~
+
+This function converts the string {string} from the ISO-8859-1 encoding to
+UTF-8.
+
+  Note:
+
+  This function does not attempt to guess the current encoding of the provided
+  string, it assumes it is encoded as ISO-8859-1 (also known as "Latin 1") and
+  converts to UTF-8. Since every sequence of bytes is a valid ISO-8859-1
+  string, this never results in an error, but will not result in a useful
+  string if a different encoding was intended.
+
+  Many web pages marked as using the ISO-8859-1 character encoding actually use
+  the similar Windows-1252 encoding, and web browsers will interpret ISO-8859-1
+  web pages as Windows-1252. Windows-1252 features additional printable
+  characters, such as the Euro sign (€) and curly quotes (“ ”), instead of
+  certain ISO-8859-1 control characters. This function will not convert such
+  Windows-1252 characters correctly. Use a different function if Windows-1252
+  conversion is required.
+
+===============================================================================
+[ Parameters ]
+
+{string}
+
+  An ISO-8859-1 string.
+
+===============================================================================
+[ Return Values ]
+
+Returns the UTF-8 translation of {string}.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.2.0   This function has been deprecated.
+        This function has been moved from the XML extension to the core of PHP.
+7.2.0   In previous versions, it was only available if the XML extension was
+        installed.
+
+===============================================================================
+[ Examples ]
+
+Example #1 Basic example
+
+<?php >
+  // Convert the string 'Zoë' from ISO 8859-1 to UTF-8
+  $iso8859_1_string = "\x5A\x6F\xEB";
+  $utf8_string = utf8_encode($iso8859_1_string);
+  echo bin2hex($utf8_string), "\n";
+<?>
+
+The above example will output:
+
+5a6fc3ab
+
+===============================================================================
+[ Notes ]
+
+  Note: Deprecation and alternatives
+
+  This function is deprecated as of PHP 8.2.0, and will be removed in a future
+  version. Existing uses should be checked and replaced with appropriate
+  alternatives.
+
+  Similar functionality can be achieved with |mb_convert_encoding|, which
+  supports ISO-8859-1 and many other character encodings.
+  <?php >
+  $iso8859_1_string = "\xEB"; // 'ë' (e with diaeresis) in ISO-8859-1
+  $utf8_string = mb_convert_encoding($iso8859_1_string, 'UTF-8', 'ISO-8859-1');
+  echo bin2hex($utf8_string), "\n";
+
+  $iso8859_7_string = "\xEB"; // the same string in ISO-8859-7 represents 'λ'
+  (Greek lower-case lambda)
+  $utf8_string = mb_convert_encoding($iso8859_7_string, 'UTF-8', 'ISO-8859-7');
+  echo bin2hex($utf8_string), "\n";
+
+  $windows_1252_string = "\x80"; // '€' (Euro sign) in Windows-1252, but not in
+  ISO-8859-1
+  $utf8_string = mb_convert_encoding($windows_1252_string, 'UTF-8', 
+  'Windows-1252');
+  echo bin2hex($utf8_string), "\n";
+<  ?>
+
+  The above example will output:
+
+  c3ab
+  cebb
+  e282ac
+
+  Other options which may be available depending on the extensions installed
+  are UConverter::transcode() and |iconv|.
+
+  The following all give the same result:
+  <?php >
+  $iso8859_1_string = "\x5A\x6F\xEB"; // 'Zoë' in ISO-8859-1
+
+  $utf8_string = utf8_encode($iso8859_1_string);
+  echo bin2hex($utf8_string), "\n";
+
+  $utf8_string = mb_convert_encoding($iso8859_1_string, 'UTF-8', 'ISO-8859-1');
+  echo bin2hex($utf8_string), "\n";
+
+  $utf8_string = UConverter::transcode($iso8859_1_string, 'UTF8', 'ISO-8859-1'
+  );
+  echo bin2hex($utf8_string), "\n";
+
+  $utf8_string = iconv('ISO-8859-1', 'UTF-8', $iso8859_1_string);
+  echo bin2hex($utf8_string), "\n";
+<  ?>
+
+  The above example will output:
+
+  5a6fc3ab
+  5a6fc3ab
+  5a6fc3ab
+  5a6fc3ab
+
+===============================================================================
+[ See Also ]
+
+ * |utf8_decode| - Converts a string from UTF-8 to ISO-8859-1, replacing
+  invalid or unrepresentable characters
+ * |mb_convert_encoding| - Convert a string from one character encoding to
+  another
+ * UConverter::transcode() - Convert a string from one character encoding to
+  another
+ * |iconv| - Convert a string from one character encoding to another
+
+
+vim:ft=help:

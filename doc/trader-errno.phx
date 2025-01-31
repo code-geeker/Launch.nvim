@@ -1,0 +1,25 @@
+*trader_errno*
+
+(PECL trader >= 0.3.0)
+
+trader_errno — Get error code
+
+===============================================================================
+[ Description ]
+
+  trader_errno(): int~
+
+Get error code of the last operation.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the error code identified by one of the TRADER_ERR_* constants.
+
+
+vim:ft=help:

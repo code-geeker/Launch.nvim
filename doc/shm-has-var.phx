@@ -1,0 +1,44 @@
+*shm_has_var*
+
+(PHP 5 >= 5.3.0, PHP 7, PHP 8)
+
+shm_has_var — Check whether a specific entry exists
+
+===============================================================================
+[ Description ]
+
+  shm_has_var(SysvSharedMemory $shm, int $key): bool~
+
+Checks whether a specific key exists inside a shared memory segment.
+
+===============================================================================
+[ Parameters ]
+
+{shm}
+
+  A shared memory segment obtained from |shm_attach|.
+
+{key}
+
+  The variable key.
+
+===============================================================================
+[ Return Values ]
+
+Returns true if the entry exists, otherwise false
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.0.0   {shm} expects a SysvSharedMemory instance now; previously, a resource
+        was expected.
+
+===============================================================================
+[ See Also ]
+
+ * |shm_get_var| - Returns a variable from shared memory
+ * |shm_put_var| - Inserts or updates a variable in shared memory
+
+
+vim:ft=help:

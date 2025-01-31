@@ -1,0 +1,125 @@
+*ldap_read*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+ldap_read — Read an entry
+
+===============================================================================
+[ Description ]
+
+  ldap_read(    LDAP\Connection|array~
+  $ldap,    array|string~
+  $base,    array|string~
+  $filter,    array $attributes =~
+  [],    int $attributes_only =~
+  0,    int $sizelimit = -1,    int~
+  $timelimit = -1,    int $deref =~
+  LDAP_DEREF_NEVER,    ?array $controls = null):~
+  LDAP\Result|array|false~
+
+Performs the search for a specified {filter} on the directory with the scope
+LDAP_SCOPE_BASE. So it is equivalent to reading an entry from the directory.
+
+It is also possible to perform parallel searches. In this case, the first
+argument should be an array of LDAP\Connection instances, rather than a single
+one. If the searches should not all use the same base DN and filter, an array
+of base DNs and/or an array of filters can be passed as arguments instead.
+These arrays must be of the same size as the LDAP\Connection instances array,
+since the first entries of the arrays are used for one search, the second
+entries are used for another, and so on. When doing parallel searches an array
+of LDAP\Result instances is returned, except in case of error, when the return
+value will be false.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{base}
+
+  The base DN for the directory.
+
+{filter}
+
+  An empty filter is not allowed. If you want to retrieve absolutely all
+  information for this entry, use a filter of objectClass=*. If you know which
+  entry types are used on the directory server, you might use an appropriate
+  filter such as objectClass=inetOrgPerson.
+
+{attributes}
+
+  An array of the required attributes, e.g. array("mail", "sn", "cn"). Note
+  that the "dn" is always returned irrespective of which attributes types are
+  requested.
+
+  Using this parameter is much more efficient than the default action (which is
+  to return all attributes and their associated values). The use of this
+  parameter should therefore be considered good practice.
+
+{attributes_only}
+
+  Should be set to 1 if only attribute types are wanted. If set to 0 both
+  attributes types and attribute values are fetched which is the default
+  behaviour.
+
+{sizelimit}
+
+  Enables you to limit the count of entries fetched. Setting this to 0 means no
+  limit.
+
+    Note:
+
+    This parameter can NOT override server-side preset sizelimit. You can set
+    it lower though.
+
+    Some directory server hosts will be configured to return no more than a
+    preset number of entries. If this occurs, the server will indicate that it
+    has only returned a partial results set. This also occurs if you use this
+    parameter to limit the count of fetched entries.
+
+{timelimit}
+
+  Sets the number of seconds how long is spend on the search. Setting this to 0
+  means no limit.
+
+    Note:
+
+    This parameter can NOT override server-side preset timelimit. You can set
+    it lower though.
+
+{deref}
+
+  Specifies how aliases should be handled during the search. It can be one of
+  the following:
+   + LDAP_DEREF_NEVER - (default) aliases are never dereferenced.
+   + LDAP_DEREF_SEARCHING - aliases should be dereferenced during the search
+    but not when locating the base object of the search.
+   + LDAP_DEREF_FINDING - aliases should be dereferenced when locating the base
+    object but not during the search.
+   + LDAP_DEREF_ALWAYS - aliases should be dereferenced always.
+
+{controls}
+
+  Array of LDAP Controls to send with the request.
+
+===============================================================================
+[ Return Values ]
+
+Returns an LDAP\Result instance, an array of LDAP\Result instances, or false on
+failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.1.0   Returns an LDAP\Result instance now; previously, a resource was
+        returned.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+
+vim:ft=help:

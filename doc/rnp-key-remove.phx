@@ -1,0 +1,36 @@
+*rnp_key_remove*
+
+(PECL rnp >= 0.1.1)
+
+rnp_key_remove — Remove a key from keyring(s)
+
+===============================================================================
+[ Description ]
+
+  rnp_key_remove(RnpFFI $ffi, string $key_fp, int $flags): bool~
+
+Note: you need to call |rnp_save_keys| to write updated keyring(s) out.
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+{key_fp}
+
+  Key fingerprint.
+
+{flags}
+
+  See RNP_KEY_REMOVE_* constants. Flag RNP_KEY_REMOVE_SUBKEYS will work only
+  for the primary key and will remove all of its subkeys as well.
+
+===============================================================================
+[ Return Values ]
+
+Returns true on success or false on failure.
+
+
+vim:ft=help:

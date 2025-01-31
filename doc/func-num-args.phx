@@ -1,0 +1,72 @@
+*func_num_args*
+
+(PHP 4, PHP 5, PHP 7, PHP 8)
+
+func_num_args — Returns the number of arguments passed to the function
+
+===============================================================================
+[ Description ]
+
+  func_num_args(): int~
+
+Gets the number of arguments passed to the function.
+
+This function may be used in conjunction with |func_get_arg| and |func_get_args
+| to allow user-defined functions to accept variable-length argument lists.
+
+===============================================================================
+[ Parameters ]
+
+This function has no parameters.
+
+===============================================================================
+[ Return Values ]
+
+Returns the number of arguments passed into the current user-defined function.
+
+===============================================================================
+[ Errors/Exceptions ]
+
+Generates a warning if called from outside of a user-defined function.
+
+===============================================================================
+[ Examples ]
+
+Example #1 func_num_args() example
+
+<?php >
+  function foo()
+  {
+  echo "Number of arguments: ", func_num_args(), PHP_EOL;
+  }
+
+  foo(1, 2, 3);
+<?>
+
+The above example will output:
+
+Number of arguments: 3
+
+===============================================================================
+[ Notes ]
+
+  Note:
+
+  As of PHP 8.0.0, the func_*() family of functions is intended to be mostly
+  transparent with regard to named arguments, by treating the arguments as if
+  they were all passed positionally, and missing arguments are replaced with
+  their defaults. This function ignores the collection of unknown named
+  variadic arguments. Unknown named arguments which are collected can only be
+  accessed through the variadic parameter.
+
+===============================================================================
+[ See Also ]
+
+ * ... syntax
+ * |func_get_arg| - Return an item from the argument list
+ * |func_get_args| - Returns an array comprising a function's argument list
+ * ReflectionFunctionAbstract::getNumberOfParameters() - Gets number of
+  parameters
+
+
+vim:ft=help:

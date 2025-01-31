@@ -1,0 +1,99 @@
+*ldap_exop_passwd*
+
+(PHP 7 >= 7.2.0, PHP 8)
+
+ldap_exop_passwd — PASSWD extended operation helper
+
+===============================================================================
+[ Description ]
+
+  ldap_exop_passwd(    LDAP\Connection~
+  $ldap,    string $user =~
+  "",    #[\SensitiveParameter] string~
+  $old_password = "",    #[\SensitiveParameter]~
+  string $new_password = "",    array &$controls~
+  = null): string|bool~
+
+Performs a PASSWD extended operation.
+
+===============================================================================
+[ Parameters ]
+
+{ldap}
+
+  An LDAP\Connection instance, returned by |ldap_connect|.
+
+{user}
+
+  dn of the user to change the password of.
+
+{old_password}
+
+  The old password of this user. May be ommited depending of server
+  configuration.
+
+{new_password}
+
+  The new password for this user. May be omitted or empty to have a generated
+  password.
+
+{controls}
+
+  If provided, a password policy request control is send with the request and
+  this is filled with an array of LDAP Controls returned with the request.
+
+===============================================================================
+[ Return Values ]
+
+Returns the generated password if {new_password} is empty or omitted. Otherwise
+returns true on success and false on failure.
+
+===============================================================================
+[ Changelog ]
+
+Version                               Description
+8.1.0   The {ldap} parameter expects an LDAP\Connection instance now;
+        previously, a valid ldap link resource was expected.
+8.0.0   {controls} is nullable now; previously, it defaulted to [].
+7.3.0   Support for {controls} added
+
+===============================================================================
+[ Examples ]
+
+Example #1 PASSWD extended operation
+
+<?php >
+  $ds = ldap_connect("localhost"); // assuming the LDAP server is on this host
+
+  if ($ds) {
+  // bind with appropriate dn to give update access
+  $bind = ldap_bind($ds, "cn=root, o=My Company, c=US", "secret");
+  if (!$bind) {
+  echo "Unable to bind to LDAP server";
+  exit;
+  }
+
+  // use PASSWD EXOP to change the user password for a generated one
+  $genpw = ldap_exop_passwd($ds, "cn=root, o=My Company, c=US", "secret");
+  if ($genpw) {
+  // use the generated password to bind
+  $bind = ldap_bind($ds, "cn=root, o=My Company, c=US", $genpw);
+  }
+
+  // set the password back to "secret"
+  ldap_exop_passwd($ds, "cn=root, o=My Company, c=US", $genpw, "secret");
+
+  ldap_close($ds);
+  } else {
+  echo "Unable to connect to LDAP server";
+  }
+<?>
+
+===============================================================================
+[ See Also ]
+
+ * |ldap_exop| - Performs an extended operation
+ * |ldap_parse_exop| - Parse result object from an LDAP extended operation
+
+
+vim:ft=help:

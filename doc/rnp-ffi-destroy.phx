@@ -1,0 +1,24 @@
+*rnp_ffi_destroy*
+
+(PECL rnp >= 0.1.1)
+
+rnp_ffi_destroy — Destroy the top-level object used for interacting with the
+library
+
+===============================================================================
+[ Description ]
+
+  rnp_ffi_destroy(RnpFFI $ffi): void~
+
+===============================================================================
+[ Parameters ]
+
+{ffi}
+
+  The FFI object returned by rnp_ffi_create.
+
+===============================================================================
+[ Return Values ]
+
+
+vim:ft=help:

@@ -1,0 +1,55 @@
+*hrtime*
+
+(PHP 7 >= 7.3.0, PHP 8)
+
+hrtime — Get the system's high resolution time
+
+===============================================================================
+[ Description ]
+
+  hrtime(bool $as_number = false): array|int|float|false~
+
+Returns the system's high resolution time, counted from an arbitrary point in
+time. The delivered timestamp is monotonic and can not be adjusted.
+
+===============================================================================
+[ Parameters ]
+
+{as_number}
+
+  Whether the high resolution time should be returned as array or number.
+
+===============================================================================
+[ Return Values ]
+
+Returns an array of integers in the form [seconds, nanoseconds], if the
+parameter {as_number} is false. Otherwise the nanoseconds are returned as int
+(64bit platforms) or float (32bit platforms). Returns false on failure.
+
+===============================================================================
+[ Examples ]
+
+Example #1 hrtime() usage
+
+<?php >
+  echo hrtime(true), PHP_EOL;
+  print_r(hrtime());
+<?>
+
+The above example will output something similar to:
+
+10444739687370679
+Array
+(
+    [0] => 10444739
+    [1] => 687464812
+)
+
+===============================================================================
+[ See Also ]
+
+ * The High resolution timing extension
+ * |microtime| - Return current Unix timestamp with microseconds
+
+
+vim:ft=help:
