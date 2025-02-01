@@ -16,6 +16,15 @@ function M.config()
     filetype = "blade"
   }
 
+  --[[ parser_config.cf = {
+    install_info = {
+      url = "~/www/tree-sitter-cfml",
+      files = {"cfml/src/parser.c"},
+      branch = "master",
+    },
+    filetype = "cf"
+  } ]]
+
 
   --[[ vim.filetype.add({
     pattern = {

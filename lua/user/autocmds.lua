@@ -136,3 +136,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_buf_set_keymap(0, "n", "K", ":lua PhpHelp()<CR>", { noremap = true, silent = true })
   end,
 })
+
+
+vim.api.nvim_create_user_command('TSNodeInfo', function()
+    local ts_utils = require('nvim-treesitter.ts_utils')
+    local node = ts_utils.get_node_at_cursor()
+    if node then
+        print("Node type:", node:type())
+        print("Node text:", vim.treesitter.get_node_text(node, 0))
+    else
+        print("No node found under cursor")
+    end
+end, {})
