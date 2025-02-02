@@ -42,7 +42,7 @@ function M.config()
       { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Prev", mode = "n", icon = { icon = "", color = "blue" } },
       { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Next", mode = "n", icon = { icon = "", color = "blue" } },
       { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
-      { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
+      -- { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
       { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
 
       -- { "<leader>w", "<cmd>w<cr>", desc = "Save", mode = "n" },
