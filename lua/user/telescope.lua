@@ -27,6 +27,12 @@ function M.config()
       { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
   }
 
+  --[[ require("telescope").extensions.frecency.frecency {
+	workspace = "CWD",
+	path_display = { "shorten" },
+	theme = "ivy",
+      } ]]
+
   local icons = require "user.icons"
   local actions = require "telescope.actions"
 
@@ -38,10 +44,13 @@ function M.config()
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      path_display = {
+      --[[ path_display = {
         filename_first = {
           reverse_directories = true,
         },
+      }, ]]
+      path_display = {
+        "filename_first"
       },
       color_devicons = true,
       vimgrep_arguments = {
