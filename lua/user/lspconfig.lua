@@ -134,7 +134,7 @@ function M.config()
     --"bashls",
     --"lemminx",
     -- "tsserver",
-    "ts_ls",
+    -- "ts_ls",
     "jsonls",
     "yamlls",
     "intelephense",
