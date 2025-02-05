@@ -72,6 +72,5 @@ spec "user.extras.nvim_gentags"
 spec "user.noice"
 spec "user.extras.dressing"
 
-spec "user.extras.mini_ai"
 
 require "user.lazy"

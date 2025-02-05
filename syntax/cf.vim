@@ -56,7 +56,8 @@ syntax keyword cfmlTag
     \ cfspreadsheet cfstore cfswitch cftable
     \ cftextarea cfthread cfthrow cftimer
     \ cftrace cftransaction cftree cftreeitem
-    \ cfupdate cfwddx cfzip cfzipparam
+    \ cfupdate cfwddx cfzip cfzipparam fuseaction set
+    \ include circuit
 
 " HTML Attributes
 syntax keyword htmlArg
@@ -394,7 +395,7 @@ syntax region cfmlScriptBlock
   \ keepend
   \ transparent
   \ start="<cfscript>" end="</cfscript>"
-  \ contains=cfmlTag,cfmlEqualSign,cfmlScriptKeywords,cfmlFunctions,cfmlString,cfmlNumber,@cfmlComment
+  " \ contains=cfmlTag,cfmlEqualSign,cfmlScriptKeywords,cfmlFunctions,cfmlString,cfmlNumber,@cfmlComment
 
 
 " syntax keyword jsScriptKeywords

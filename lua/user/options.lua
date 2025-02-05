@@ -37,7 +37,6 @@ vim.opt.scrolloff = 3
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.title = false
--- colorcolumn = "80",
 -- colorcolumn = "120",
 vim.wo.colorcolumn = "160"
 
