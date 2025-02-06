@@ -228,7 +228,7 @@ syntax keyword cfmlFunctions
 
 
 syntax keyword luceeFunctions
-      \ expandPath fileWrite fileRead fileAppend serializeJSON FileUpload FileUploadAll
+      \ expandPath fileWrite fileRead fileAppend serializeJSON FileUpload FileUploadAll structKeyArray queryExecute
 
 
 syntax keyword cfmlScope
@@ -265,12 +265,14 @@ syntax region cfmlCommentBlock
     \ start="/\*"
     \ end="\*/"
 
-syntax match cfmlCommentLine "//.*$"  "\/\/.*"
+syntax match cfmlCommentLine "\/\/.*$"
+
 
 syntax region cfmlTagComment
-    \ keepend
+    \ keepend extend
     \ start="<!---"
     \ end="--->"
+    \ skip="<!---" contains=cfmlTagComment
 
 syntax match cfmlScriptComment "/\*\_.\{-}\*/"
 
