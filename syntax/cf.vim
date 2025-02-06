@@ -226,6 +226,11 @@ syntax keyword cfmlFunctions
     \ xmltransform xmlupdate xmlvalidate year
     \ yesnoformat
 
+
+syntax keyword luceeFunctions
+      \ expandPath fileWrite fileRead fileAppend serializeJSON FileUpload FileUploadAll
+
+
 syntax keyword cfmlScope
     \ application arguments cgi cffile
     \ client cookie form local
@@ -350,6 +355,7 @@ syntax cluster cfmlScript contains=
     \ cfmlOperator,
     \ cfmlTag,
     \ @cfmlComment,
+    \ luceeFunctions
 
 " ======================
 "  Highlight Links
@@ -361,6 +367,7 @@ highlight link cfmlScriptKeywords Keyword
 highlight link cfmlSqlKeywords Keyword
 highlight link cfmlFunctions Function
 highlight link cfmlSqlFunctions Function
+highlight link luceeFunctions Function
 highlight link cfmlScope Type
 highlight link cfmlString String
 highlight link cfmlNumber Number
