@@ -239,8 +239,8 @@ syntax keyword cfmlScope
 " ======================
 "  Basic Syntax Elements
 " ======================
-syntax region cfmlString start=+"+ end=+"+ contains=cfmlHashSurround
-syntax region cfmlString start=+'+ end=+'+ contains=cfmlHashSurround
+syntax region cfmlString start=+"+ end=+"+ contains=cfmlHashSurround,cfmlTag
+syntax region cfmlString start=+'+ end=+'+ contains=cfmlHashSurround,cfmlTag
 
 syntax match cfmlNumber "\<\d\+\>"
 syntax match cfmlNumber "\<\d\+\.\d\+\>"
@@ -292,11 +292,12 @@ syntax region cfmlJavascriptBlock
     \ fold
     \ keepend
     \ transparent
-    \ start="<script\(\s\+type\s*=\s*['\"]text/javascript['\"]\)\?\(\s*>\)"
+    \ start="<script\s*\_[^>]*>"
     \ end="</script>"
     \ contains=@jsSyntax
 
 syntax cluster jsSyntax contains=
+    \ htmlTagName,
     \ cfmlTag,
     \ cfmlScriptKeywords,
     \ cfmlFunctions,
@@ -304,8 +305,8 @@ syntax cluster jsSyntax contains=
     \ cfmlString,
     \ cfmlNumber,
     \ cfmlHashSurround,
-    " \ @cfmlComment,
-    " \ cfmlOperator,
+    \ @cfmlComment,
+    \ cfmlOperator,
 
 
 " SQL Support
