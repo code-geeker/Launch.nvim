@@ -268,6 +268,9 @@ syntax region cfmlCommentBlock
 syntax match cfmlCommentLine "\/\/.*$"
 
 
+syntax match cfmlSqlCommentLine /--.*$/ contained
+
+
 syntax region cfmlTagComment
     \ keepend extend
     \ start="<!---"
@@ -339,6 +342,8 @@ syntax region cfmlQueryTagRegion
     \ cfmlOperator,
     \ cfmlTag,
     \ @cfmlComment,
+    \ cfmlSqlCommentLine,
+
 
 " CFScript Support
 syntax region cfmlScriptBlock
@@ -379,6 +384,7 @@ highlight link cfmlCommentBlock Comment
 highlight link cfmlCommentLine Comment
 highlight link cfmlTagComment Comment
 highlight link cfmlScriptComment Comment
+highlight link cfmlSqlCommentLine Comment
 
 highlight link cfmlHashSurround PreProc
 highlight link cfmlOperator Operator
