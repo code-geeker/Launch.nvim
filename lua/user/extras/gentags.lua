@@ -106,6 +106,7 @@ args = {
       ["JavaScript"] = { "javascript" },
       ["Go"] = { "go" },
       ["PHP"] = { "php" },
+      ["CF"] = { "cf" },
     }
 
   }
@@ -113,5 +114,3 @@ args = {
 end
 
 return M
-
-
