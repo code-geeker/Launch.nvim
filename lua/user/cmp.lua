@@ -137,32 +137,6 @@ function M.config()
         "s",
       }),
     },
-    --[[ formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        vim_item.kind = icons.kind[vim_item.kind]
-        vim_item.menu = ({
-          nvim_lsp = "",
-          nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
-          emoji = "",
-        })[entry.source.name]
-
-        if entry.source.name == "emoji" then
-          vim_item.kind = icons.misc.Smiley
-          vim_item.kind_hl_group = "CmpItemKindEmoji"
-        end
-
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
-
-        return vim_item
-      end,
-    }, ]]
 
 
     formatting = {
@@ -170,7 +144,6 @@ function M.config()
         -- if you have lspkind installed, you can use it like
         -- in the following line:
         vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol_text"})
-
 
         vim_item.menu = ({
           buffer = "[Buffer]",
@@ -183,52 +156,83 @@ function M.config()
           tags = "[TAGS]",
         })[entry.source.name]
 
-
         if entry.source.name == "cmp_tabnine" then
-          local detail = (entry.completion_item.labelDetails or {}).detail
-          vim_item.kind = ""
-          if detail and detail:find('.*%%.*') then
-            vim_item.kind = vim_item.kind .. ' ' .. detail
-          end
-
-          if (entry.completion_item.data or {}).multiline then
-            vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
-          end
+          vim_item.kind = " TabNine"
         end
+
+        -- if entry.source.name == "cmp_tabnine" then
+        --   local detail = (entry.completion_item.labelDetails or {}).detail
+        --   vim_item.kind = ""
+        --   if detail and detail:find('.*%%.*') then
+        --     vim_item.kind = vim_item.kind .. ' ' .. detail
+        --   end
+        --
+        --   if (entry.completion_item.data or {}).multiline then
+        --     vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+        --   end
+        -- end
         local maxwidth = 80
         vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
         return vim_item
       end,
     },
 
-    sources = {
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "cmp_tabnine" },
-      { name = "nvim_lua",
-        option = {
-          php = {
-            keyword_pattern = [=[[\%(\$\k*\)\|\k\+]]=],
-          }
-        } },
-      { name = "buffer" },
-      { name = "path" },
-      { name = 'rg', option = { additional_arguments = "--smart-case" } },
+    -- sources = {
+    --   { name = "nvim_lsp" },
+    --   { name = "luasnip" },
+    --   { name = "cmp_tabnine" },
+    --   { name = "nvim_lua",
+    --     option = {
+    --       php = {
+    --         keyword_pattern = [=[[\%(\$\k*\)\|\k\+]]=],
+    --       }
+    --     } },
+    --   { name = "buffer" },
+    --   { name = "path" },
+    --   { name = 'rg', option = { additional_arguments = "--smart-case" } },
+    --   {
+    --     name = "tags",
+    --     option = {
+    --       -- Delayed time after user input, in milliseconds.
+    --       complete_defer = 100,
+    --       -- Max items when searching `taglist`.
+    --       max_items = 10,
+    --       -- Use exact word match when searching `taglist`, for better searching
+    --       -- performance.
+    --       exact_match = false,
+    --       -- Prioritize searching result for current buffer.
+    --       current_buffer_only = false,
+    --     },
+    --   },
+    -- },
+			sources = {
+				{ name = "nvim_lsp_signature_help", group_index = 1 },
+        { name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
+				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
+				{ name = "nvim_lsp",                max_item_count = 10, group_index = 1 },
+				{ name = "nvim_lua",                group_index = 1 },
+				{ name = "cmp_tabnine",             max_item_count = 5, group_index = 1 },
+				{ name = "vim-dadbod-completion",   group_index = 1 },
+				{ name = "path",                    group_index = 2 },
+				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 1 },
+      { name = 'rg', option = { additional_arguments = "--smart-case"},  max_item_count = 5, group_index = 1  },
       {
         name = "tags",
         option = {
           -- Delayed time after user input, in milliseconds.
           complete_defer = 100,
           -- Max items when searching `taglist`.
-          max_items = 10,
+          max_items = 5,
           -- Use exact word match when searching `taglist`, for better searching
           -- performance.
           exact_match = false,
           -- Prioritize searching result for current buffer.
           current_buffer_only = false,
         },
+          max_item_count = 5,
+          group_index = 1
       },
-    },
+			},
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,

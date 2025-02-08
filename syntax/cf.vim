@@ -242,8 +242,10 @@ syntax keyword cfmlScope
 syntax region cfmlString start=+"+ end=+"+ contains=cfmlHashSurround,cfmlTag
 syntax region cfmlString start=+'+ end=+'+ contains=cfmlHashSurround,cfmlTag
 
-syntax match cfmlNumber "\<\d\+\>"
-syntax match cfmlNumber "\<\d\+\.\d\+\>"
+" syntax match cfmlNumber "\<\d\+\>"
+" syntax match cfmlNumber "\<\d\+\.\d\+\>"
+
+syntax match cfmlNumber "\<\d\+\(\.\d\+\)\?\>"
 
 syntax match cfmlOperator   "\v\=|\+|\-|\&|\."
 
