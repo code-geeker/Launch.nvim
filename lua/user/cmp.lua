@@ -97,8 +97,8 @@ function M.config()
     mapping = cmp.mapping.preset.insert {
       ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-      ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+      -- ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+      -- ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -140,11 +140,21 @@ function M.config()
       --   "s",
       -- }),
 
-      ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
 
-      ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
-
-
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
     },
 
 
@@ -242,23 +252,27 @@ function M.config()
           group_index = 1
       },
 			},
-    confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    },
-    window = {
-      completion = {
-        border = "rounded",
-        scrollbar = false,
-      },
-      documentation = {
-        border = "rounded",
-      },
-    },
-    experimental = {
-      ghost_text = false,
-    },
+
   }
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    }),
+    matching = { disallow_symbol_nonprefix_matching = false }
+  })
 end
 
 return M

@@ -12,8 +12,8 @@ spec "user.mason"
 -- spec "user.schemastore"
 
 spec "user.lspconfig"
--- spec "user.cmp"
 spec "user.cmp"
+-- spec "user.cmp_init"
 -- spec "user.extras.bqf"
 
 -- spec "user.floating-help"
