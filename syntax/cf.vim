@@ -279,6 +279,14 @@ syntax region cfmlTagComment
     \ end="--->"
     \ skip="<!---" contains=cfmlTagComment
 
+
+syntax region cfmlTagShortComment
+    \ keepend extend
+    \ start="<!--"
+    \ end="-->"
+    \ skip="<!--" contains=cfmlTagShortComment
+
+
 syntax match cfmlScriptComment "/\*\_.\{-}\*/"
 
 
@@ -287,6 +295,7 @@ sy cluster cfmlComment
     \cfmlCommentBlock,
     \cfmlCommentLine,
     \cfmlTagComment,
+    \cfmlTagShortComment,
     \cfmlScriptComment
 
 
@@ -385,6 +394,7 @@ highlight link cfmlNumber Number
 highlight link cfmlCommentBlock Comment
 highlight link cfmlCommentLine Comment
 highlight link cfmlTagComment Comment
+highlight link cfmlTagShortComment Comment
 highlight link cfmlScriptComment Comment
 highlight link cfmlSqlCommentLine Comment
 
