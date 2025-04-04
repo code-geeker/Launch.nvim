@@ -54,7 +54,7 @@ vim.opt.shortmess:append "c"
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
-vim.g.python3_host_prog="/usr/local/bin/python3.9"
+-- vim.g.python3_host_prog="/usr/local/bin/python3.9"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd "set noerrorbells"
