@@ -15,6 +15,17 @@ return {
       files = {
         maxSize = 90000000,
       },
+      diagnostics = {
+        undefinedTypes = false,
+        undefinedFunctions = false,
+        undefinedConstants = false,
+        undefinedClassConstants = false,
+        undefinedMethods = false,
+        undefinedProperties = false,
+        undefinedVariables = true,
+        typeErrors = false,
+        unusedSymbols = false,
+      }
     },
   },
 }

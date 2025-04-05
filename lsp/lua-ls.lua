@@ -2,26 +2,37 @@
 return {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
-	root_markers = {
-		".luarc.json",
-		".luarc.jsonc",
-		".luacheckrc",
-		".stylua.toml",
-		"stylua.toml",
-		"selene.toml",
-		"selene.yml",
-		".git",
-	},
-  telemetry = { enabled = false },
-  formatters = {
-    ignoreComments = false,
+  root_markers = {
+    ".luarc.json",
+    ".luarc.jsonc",
+    ".luacheckrc",
+    ".stylua.toml",
+    "stylua.toml",
+    "selene.toml",
+    "selene.yml",
+    ".git",
   },
   settings = {
     Lua = {
       runtime = {
-        version = "LuaJIT",
+        version = 'LuaJIT',
+        -- path = vim.split(package.path, ";"),
       },
-      signatureHelp = { enabled = true },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        checkThirdParty = false,
+        -- library = vim.api.nvim_get_runtime_file("", true),
+        library = {
+          -- Make the server aware of Neovim runtime files
+          vim.env.VIMRUNTIME,
+          vim.fn.stdpath('config'),
+        },
+      },
+      telemetry = {
+        enable = false,
+      },
     },
   },
 }

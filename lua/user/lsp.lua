@@ -7,6 +7,27 @@ local bufname_valid = function (bufname)
   return false
 end
 
+local function configure_diagnostics()
+  vim.diagnostic.config({
+    virtual_text = { current_line = true },
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '󰌵',
+      },
+    },
+    float = {
+      border = "rounded",
+      source = "if_many",
+    },
+  })
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -21,17 +42,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- Here the rest of LSP config
+    configure_diagnostics()
 
   end,
 })
 
-
-
+-- vim.lsp.config('*', {
+--  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+-- })
 
 
   vim.lsp.enable({
     "lua-ls",
-    -- "pylsp",
+    "pylsp",
     "ts_ls",
     "gopls",
     "html",

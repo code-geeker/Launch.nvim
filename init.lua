@@ -16,7 +16,7 @@ spec "user.mason"
 spec "user.cmp"
 -- spec "user.cmp_init"
 -- spec "user.extras.bqf"
-spec "user.diagnostic"
+-- spec "user.diagnostic"
 
 -- spec "user.floating-help"
 spec "user.extras.oil"
