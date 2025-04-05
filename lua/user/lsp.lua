@@ -1,89 +1,39 @@
-return {
-    {
-        'folke/neodev.nvim',
-        event = { 'BufReadPre', 'BufNewFile' },
-        config = function()
-            local neodev_status_ok, neodev = pcall(require, 'neodev')
+-- u/see https://github.com/neovim/nvim-lspconfig/blob/ff6471d4f837354d8257dfa326b031dd8858b16e/lua/lspconfig/util.lua#L23-L28
+local bufname_valid = function (bufname)
+  if bufname:match '^/' or bufname:match '^[a-zA-Z]:' or bufname:match '^zipfile://' or bufname:match '^tarfile:' then
+    return true
+  end
 
-            if not neodev_status_ok then
-                return
-            end
+  return false
+end
 
-            neodev.setup()
-        end
-    },
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        event = { 'BufReadPre', 'BufNewFile' },
-        cmd = 'Mason',
-        branch = 'v2.x',
-        dependencies = {
-            { 'neovim/nvim-lspconfig' },
-            {
-                'williamboman/mason.nvim',
-                build = function()
-                    pcall(vim.cmd, 'MasonUpdate')
-                end
-            },
-            { 'williamboman/mason-lspconfig.nvim', },
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
 
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'L3MON4D3/LuaSnip' },
-            { 'SmiteshP/nvim-navic' }
-        },
-        config = function()
+    -- Stop the LSP client on invalid buffers
+    -- u/see https://github.com/neovim/nvim-lspconfig/blob/ff6471d4f837354d8257dfa326b031dd8858b16e/lua/lspconfig/configs.lua#L97-L99
+    if (#bufname ~= 0 and not bufname_valid(bufname)) then
+      client.stop()
+      return;
+    end
 
-            local lsp = require('lsp-zero').preset({})
+    -- Here the rest of LSP config
 
-            local navic = require('nvim-navic')
+  end,
+})
 
-            lsp.on_attach(function(client, bufnr)
-                lsp.default_keymaps({buffer = bufnr})
-                if client.server_capabilities.documentSymbolProvider then
-                    navic.attach(client, bufnr)
-                end
-            end)
 
-            require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-            lsp.ensure_installed({
-                'pyright',
-                'lua_ls',
-                'gopls',
-                'clangd',
-                'intelephense',
-            })
 
-            lsp.setup()
 
-            local cmp = require('cmp')
-            -- local cmp_action = require('lsp-zero').cmp_action()
-
-            require('luasnip.loaders.from_vscode').lazy_load()
-
-            cmp.setup({
-                preselect = cmp.PreselectMode.None,
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip' },
-                },
-                mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                snippet = {
-                    expand = function(args)
-                        require('luasnip').lsp_expand(args.body)
-                    end
-                }
-            })
-
-        end
-    },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'rafamadriz/friendly-snippets' },
-}
+  vim.lsp.enable({
+    "lua-ls",
+    -- "pylsp",
+    "ts_ls",
+    "gopls",
+    "html",
+    "intelephense"
+  })

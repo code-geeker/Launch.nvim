@@ -3,6 +3,7 @@ require "user.options"
 require "user.utils"
 require "user.keymaps"
 require "user.autocmds"
+require "user.lsp"
 spec "user.colorscheme"
 -- spec "user.onedark"
 
@@ -11,10 +12,11 @@ spec "user.treesitter"
 spec "user.mason"
 -- spec "user.schemastore"
 
-spec "user.lspconfig"
+-- spec "user.lspconfig"
 spec "user.cmp"
 -- spec "user.cmp_init"
 -- spec "user.extras.bqf"
+spec "user.diagnostic"
 
 -- spec "user.floating-help"
 spec "user.extras.oil"
@@ -25,6 +27,8 @@ spec "user.whichkey"
 -- spec "user.nvimtree"
 spec "user.neo-tree"
 spec "user.comment"
+
+spec "user.go"
 
 spec "user.extras.mini_align"
 
@@ -73,6 +77,5 @@ spec "user.extras.recorder"
 spec "user.extras.nvim_gentags"
 spec "user.noice"
 spec "user.extras.dressing"
-
 
 require "user.lazy"

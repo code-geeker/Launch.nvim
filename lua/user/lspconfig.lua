@@ -39,6 +39,7 @@ local allowed_filetypes = {
   "javascript",
   "php",
   "html",
+  "go",
 }
 function contains(list, x)
   for _, v in ipairs(list) do
@@ -138,6 +139,7 @@ function M.config()
     "jsonls",
     "yamlls",
     "intelephense",
+    "gopls",
   }
 
   local default_diagnostic_config = {
