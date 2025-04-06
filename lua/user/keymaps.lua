@@ -81,7 +81,9 @@ keymap("n", "cc", ":bp|bd #<CR><ESC>", opts)
 -- keymap({ "n", "o", "x" }, "<esc>", ":noh<CR>", opts)
 
 
-keymap("n", "ww", "<cmd>w<CR>",opts)
+-- keymap("n", "ww", "<cmd>w<CR>",opts)
+
+keymap("n", "<CR>", ":write!<CR>", opts)
 
 -- keymap("n", "yr", '<cmd>let @*=expand("%")<CR>:echo expand("%") "is yanked to clipboard"<CR>', opts)
 
@@ -141,3 +143,5 @@ local dd = function()
 		end
 	end
 keymap("n", "dd", dd, { noremap = true, expr = true })
+
+keymap('n', ';', ':')

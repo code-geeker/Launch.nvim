@@ -44,6 +44,7 @@ function M.config()
       { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
       -- { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
       { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
+      { "<leader>a", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Formating", mode = "n" },
 
       -- { "<leader>w", "<cmd>w<cr>", desc = "Save", mode = "n" },
 
