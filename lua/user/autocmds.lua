@@ -90,16 +90,19 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  desc = "Automatically remove trailing whitespaces",
-  command = [[%s/\s\+$//e]],
-})
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  desc = "Automatically remove trailing blank lines",
-  command = [[%s/\(\n\s*\)\+\%$//e]],
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--   pattern = { "*" },
+--   desc = "Automatically remove trailing blank lines",
+--   command = [[%s/\(\n\s*\)\+\%$//e]],
+-- })
+
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.php", "*.go" },
+  callback = function()
+    vim.lsp.buf.format({ async = false })
+  end,
 })
 
 
