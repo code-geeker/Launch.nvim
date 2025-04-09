@@ -34,6 +34,11 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
+    -- {
+    --     'tzachar/cmp-tabnine',
+    --     build = './install.sh',
+    --     event = "InsertEnter",
+    -- },
     {
       "hrsh7th/cmp-nvim-lua",
     },
