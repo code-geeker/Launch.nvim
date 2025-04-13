@@ -25,7 +25,14 @@ function M.config()
         },
       },
 
-      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      -- lualine_x = {  'encoding', 'fileformat', 'filetype'},
+
+      lualine_x = {
+        function()
+          return require("codeium.virtual_text").status_string()
+        end,
+        'encoding', 'fileformat', 'filetype'
+      },
       lualine_y = { require("recorder").displaySlots,require("recorder").recordingStatus },
       lualine_z = {"progress",'location'}
 

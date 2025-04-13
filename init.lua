@@ -71,7 +71,8 @@ spec "user.extras.outline"    -- 查看tag
 -- spec "user.extras.nvim-spectre"  --批量替换
 
 
-spec "user.extras.codeium"
+spec "user.extras.windsurf"
+-- spec "user.extras.copilot"
 
 spec "user.extras.undotree"
 spec "user.extras.recorder"

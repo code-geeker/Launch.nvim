@@ -178,6 +178,7 @@ function M.config()
           luasnip = "[SNIP]",
           rg = "[RG]",
           tags = "[TAGS]",
+          -- codeium = "[Codeium]"
         })[entry.source.name]
 
         if entry.source.name == "cmp_tabnine" then
@@ -230,6 +231,7 @@ function M.config()
     --   },
     -- },
 			sources = {
+				-- { name = "codeium", group_index = 1 },
 				{ name = "nvim_lsp_signature_help", group_index = 1 },
         { name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
 				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
