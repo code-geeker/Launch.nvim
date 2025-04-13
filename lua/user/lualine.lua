@@ -8,10 +8,12 @@ local M = {
 function M.config()
   require("lualine").setup {
     options = {
-      -- component_separators = { left = "", right = "" },
-      -- section_separators = { left = " ", right = "" },
-      -- section_separators = { left = "", right = "" },
-      ignore_focus = { "NvimTree" },
+      icons_enabled = true,
+
+      -- component_separators = { left = '', right = ''},
+      component_separators = { left = '', right = '|'},
+      section_separators = { left = '', right = ''},
+      ignore_focus = { "neo-tree" },
     },
     sections = {
       lualine_a = {'mode'},

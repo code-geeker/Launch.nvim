@@ -9,7 +9,8 @@ end
 
 local function configure_diagnostics()
   vim.diagnostic.config({
-    virtual_text = { current_line = true },
+    virtual_text = false,
+    virtual_lines = { current_line = true },
     underline = true,
     update_in_insert = true,
     severity_sort = true,
