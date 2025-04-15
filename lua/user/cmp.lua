@@ -15,6 +15,10 @@ local M = {
       event = "InsertEnter",
     },
     {
+      "uga-rosa/cmp-dictionary",
+      event = "InsertEnter",
+    },
+    {
       "hrsh7th/cmp-path",
       event = "InsertEnter",
     },
@@ -34,11 +38,6 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
-    -- {
-    --     'tzachar/cmp-tabnine',
-    --     build = './install.sh',
-    --     event = "InsertEnter",
-    -- },
     {
       "hrsh7th/cmp-nvim-lua",
     },
@@ -59,6 +58,7 @@ local M = {
 }
 
 function M.config()
+
   local cmp = require "cmp"
   local luasnip = require "luasnip"
   require("luasnip/loaders/from_vscode").lazy_load()
@@ -88,7 +88,12 @@ function M.config()
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
   end
 
-  local icons = require "user.icons"
+  -- local icons = require "user.icons"
+
+  require("cmp_dictionary").setup({
+    paths = { "/usr/share/dict/words" },
+    exact_length = 2,
+  })
 
   cmp.setup {
     snippet = {
@@ -106,7 +111,7 @@ function M.config()
       -- ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -173,29 +178,15 @@ function M.config()
           buffer = "[Buffer]",
           nvim_lsp = "[LSP]",
           nvim_lua = "[Lua]",
-          cmp_tabnine = "[TN]",
           path = "[Path]",
           luasnip = "[SNIP]",
           rg = "[RG]",
           tags = "[TAGS]",
+          dictionary = "[DICT]",
           -- codeium = "[Codeium]"
         })[entry.source.name]
 
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = " TabNine"
-        end
 
-        -- if entry.source.name == "cmp_tabnine" then
-        --   local detail = (entry.completion_item.labelDetails or {}).detail
-        --   vim_item.kind = ""
-        --   if detail and detail:find('.*%%.*') then
-        --     vim_item.kind = vim_item.kind .. ' ' .. detail
-        --   end
-        --
-        --   if (entry.completion_item.data or {}).multiline then
-        --     vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
-        --   end
-        -- end
         local maxwidth = 80
         vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
         return vim_item
@@ -233,13 +224,17 @@ function M.config()
 			sources = {
 				-- { name = "codeium", group_index = 1 },
 				{ name = "nvim_lsp_signature_help", group_index = 1 },
-        { name = "cmp_tabnine",             max_item_count = 5,  group_index = 1 },
 				{ name = "luasnip",                 max_item_count = 5,  group_index = 1 },
 				{ name = "nvim_lsp",                max_item_count = 10, group_index = 1 },
 				{ name = "nvim_lua",                group_index = 1 },
-				{ name = "cmp_tabnine",             max_item_count = 5, group_index = 1 },
 				{ name = "vim-dadbod-completion",   group_index = 1 },
-				{ name = "path",                    group_index = 2 },
+        {
+          name = "dictionary",
+          keyword_length = 2,
+          max_item_count = 5,
+          group_index = 1,
+        },
+				{ name = "path",                    group_index = 1 },
 				{ name = "buffer",                  keyword_length = 2,  max_item_count = 5, group_index = 1 },
       { name = 'rg', option = { additional_arguments = "--smart-case"},  max_item_count = 5, group_index = 1  },
       {
