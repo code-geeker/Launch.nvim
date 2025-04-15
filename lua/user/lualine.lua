@@ -29,9 +29,10 @@ function M.config()
 
       lualine_x = {
         function()
-          return require("codeium.virtual_text").status_string()
+          return vim.api.nvim_call_function("codeium#GetStatusString", {})
         end,
-        'encoding', 'fileformat', 'filetype'
+        -- 'encoding', 'fileformat', 'filetype'
+        'filetype'
       },
       lualine_y = { require("recorder").displaySlots,require("recorder").recordingStatus },
       lualine_z = {"progress",'location'}
@@ -41,4 +42,4 @@ function M.config()
   }
 end
 
-return M
+  return M
