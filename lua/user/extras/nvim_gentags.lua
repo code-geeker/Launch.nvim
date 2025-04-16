@@ -7,6 +7,19 @@ function M.config()
   require('gentags').setup{
     disabled_filetypes = {
       "NvimTree",
+      "neo-tree"
+    },
+    debug = {
+      -- enable debug mode
+      enable = true,
+
+      -- print logs to messages.
+      console_log = true,
+
+      -- write logs to file.
+      -- For *NIX: `~/.local/share/nvim/gentags.log`.
+      -- For Windows: `$env:USERPROFILE\AppData\Local\nvim-data\gentags.log`.
+      file_log = true,
     },
     ctags = {
       "--tag-relative=never",

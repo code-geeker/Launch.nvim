@@ -1,5 +1,6 @@
 local M = {
-  "Exafunction/codeium.vim",
+  -- "Exafunction/codeium.vim",
+  "Exafunction/windsurf.vim",
   event = "BufEnter",
 }
 
