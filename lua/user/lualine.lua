@@ -10,8 +10,8 @@ function M.config()
     options = {
       icons_enabled = true,
 
-      -- component_separators = { left = '', right = ''},
-      component_separators = { left = '', right = '|'},
+      component_separators = { left = '', right = ''},
+      -- component_separators = { left = '', right = '|'},
       section_separators = { left = '', right = ''},
       ignore_focus = { "neo-tree" },
     },
@@ -34,11 +34,14 @@ function M.config()
         -- 'encoding', 'fileformat', 'filetype'
         'filetype'
       },
+      -- lualine_y = {},
       lualine_y = { require("recorder").displaySlots,require("recorder").recordingStatus },
+
+
       lualine_z = {"progress",'location'}
 
     },
-    extensions = { "quickfix", "man", "fugitive" },
+    extensions = {'oil'},
   }
 end
 

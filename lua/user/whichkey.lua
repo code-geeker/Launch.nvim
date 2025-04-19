@@ -53,6 +53,7 @@ function M.config()
 
       {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
+
       { "<leader>p", "<cmd>lua require('user.utils').copy_current_buffer_path()<cr>", desc = "Copy File Path", mode = "n", icon = { icon = "", color = "green" } },
 
       { "<leader>b", "<cmd>lua require('snipe').open_buffer_menu()<cr>", desc = "Buffers List", mode = "n", icon = { icon = "", color = "green" } },
