@@ -7,7 +7,8 @@ function M.config()
   require('gentags').setup{
     disabled_filetypes = {
       "NvimTree",
-      "neo-tree"
+      "neo-tree",
+      "oil",
     },
     debug = {
       -- enable debug mode
