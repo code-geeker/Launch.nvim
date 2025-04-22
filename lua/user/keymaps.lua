@@ -31,6 +31,9 @@ keymap("n", "#", "*``", opts)
 keymap("n", "*", "#``", opts)
 
 
+keymap('n', '<Esc>', '<cmd>nohlsearch<CR><Esc>', opts)
+
+
 -- keymap("n", "g*", "g*zz", opts)
 -- keymap("n", "g#", "g#zz", opts)
 
@@ -60,6 +63,12 @@ keymap({ "n", "x" }, "k", "gk", opts)
 -- vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 
 keymap("n", "cc", ":bp|bd #<CR><ESC>", opts)
+
+
+keymap("n", "ycc", function()
+    return 'yy' .. vim.v.count1 .. "gcc']p"
+end, { remap = true, expr = true })
+
 
 -- 已放到wk配置
 -- keymap("n", "<leader>1", "<cmd>lua require('bufferline').go_to(1, true)<cr>", opts)

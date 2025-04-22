@@ -48,7 +48,6 @@ spec "user.lualine"
 spec "user.snipe"
 -- spec "user.extras.flash"
 
--- spec "user.avante"
 
 spec "user.extras.hop"
 -- spec "user.conform"
@@ -69,7 +68,7 @@ spec "user.extras.numb"   --:数字 定位
 spec "user.extras.outline"    -- 查看tag
 
 -- spec "user.extras.nvim-spectre"  --批量替换
-
+spec "user.extras.fzf-lua"
 
 spec "user.extras.windsurf"
 -- spec "user.extras.copilot"

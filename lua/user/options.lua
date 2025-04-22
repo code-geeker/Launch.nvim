@@ -44,6 +44,9 @@ vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
 }
+vim.opt.fillchars = {
+  diff = '╱',
+}
 
 -- vim.opt.list = true
 -- vim.opt.listchars="tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶"
