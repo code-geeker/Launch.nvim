@@ -117,7 +117,8 @@ keymap('v', 'J', ":m '>+1<CR>gv=gv", opts)
 keymap('v', 'K', ":m '<-2<CR>gv=gv", opts)
 
 -- keep cursor at front when appending lines below
-keymap('n', 'J', 'mzJ`z', opts)
+-- keymap('n', 'J', 'mzJ`z', opts)
+keymap('n', 'J', 'mzJ`z:delmarks z<cr>', opts)
 
 -- creates a new line below the cursor and goes back into normal mode
 -- keymap('n', '<CR>', 'o<Esc>', opts)

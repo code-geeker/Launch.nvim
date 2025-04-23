@@ -4,18 +4,22 @@ local M = {
   cmd = "Gitsigns",
 }
 M.config = function()
-  local icons = require "user.icons"
 
   local wk = require "which-key"
   wk.add {
     -- Actions
-    { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview Hunk" },
-    { "<leader>gb", function() require('gitsigns').blame_line({ full = true }) end, desc = "Show Blame&Diff" },
     { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff" },
     { "<leader>gD", function() require('gitsigns').diffthis('~') end, desc = "Git Diff Previous" },
+    { "<leader>gk", function() require('gitsigns').nav_hunk('prev') end, desc = "Git Previous Hunk" },
+    { "<leader>gj", function() require('gitsigns').nav_hunk('next') end, desc = "Git Next Hunk" },
+    { "<leader>gp", function() require('gitsigns').preview_hunk() end, desc = "Git Preview Hunk" },
+
+    { "<leader>gs", function() require('gitsigns').stage_hunk() end, desc = "Git Stage Hunk" },
+    { "<leader>gu", function() require('gitsigns').undo_stage_hunk() end, desc = "Git Unstage Hunk" },
+
 
     -- Toggles
-    { "<leader>gB", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Blame Toggle" },
+    { "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<cr>", desc = "Blame Toggle" },
   }
 
   require('gitsigns').setup {
