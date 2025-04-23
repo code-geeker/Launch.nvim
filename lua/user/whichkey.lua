@@ -51,6 +51,8 @@ function M.config()
       { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
       { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
 
+      { "<leader>y", "<cmd>YankBank<CR>", desc = "Yank History", mode = "n", icon = { icon = "󰒡", color = "blue" } },
+
       {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
 

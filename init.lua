@@ -27,7 +27,7 @@ spec "user.whichkey"
 -- spec "user.nvimtree"
 spec "user.neo-tree"
 spec "user.comment"
-
+spec "user.yankbank"
 spec "user.go"
 
 spec "user.extras.mini_align"
