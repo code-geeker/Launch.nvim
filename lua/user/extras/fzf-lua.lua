@@ -4,5 +4,10 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   -- or if using mini.icons/mini.nvim
   -- dependencies = { "echasnovski/mini.icons" },
-  opts = {}
+  opts = {
+     --[[ oldfiles = {
+      previewer      = false,
+    } ]]
+
+  }
 }

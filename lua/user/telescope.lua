@@ -5,11 +5,15 @@ local M = {
     { "nvim-lua/plenary.nvim" },
     { "code-geeker/nvim-telescope-ctags-plus" },
     { "fcying/telescope-ctags-outline.nvim" },
+    {
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+    },
    { "nvim-telescope/telescope-frecency.nvim" }
   },
 }
 
 function M.config()
+
   local wk = require "which-key"
   -- wk.add {
   --   ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
@@ -24,7 +28,7 @@ function M.config()
   -- }
 
   wk.add{
-      { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
+      -- { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
   }
 
   --[[ require("telescope").extensions.frecency.frecency {
@@ -167,6 +171,16 @@ function M.config()
         },
         sorting_strategy = 'ascending',
       },
+      live_grep_args = {
+        auto_quoting = true,
+        mappings = { -- extend mappings
+          i = {
+            ["<M-q>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = ' --smart-case ' }),
+            -- freeze the current list and start a fuzzy search in the frozen list
+            -- ["<M-i>"] = require("telescope-live-grep-args.actions").to_fuzzy_refine
+          },
+        },
+      },
 
     },
   }
@@ -174,6 +188,7 @@ function M.config()
   require('telescope').load_extension('ctags_plus')
   require("telescope").load_extension "frecency"
   require('telescope').load_extension('fzf')
+  require("telescope").load_extension("live_grep_args")
 
   vim.api.nvim_command('highlight! link TelescopePathSeparator NONE')
 end

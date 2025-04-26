@@ -1,5 +1,6 @@
 local M = {
-  "jiaoshijie/undotree",
+  -- "jiaoshijie/undotree",
+  "ruskei/undotree",
   dependencies = "nvim-lua/plenary.nvim",
   config = true,
 }

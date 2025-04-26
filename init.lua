@@ -71,6 +71,8 @@ spec "user.extras.outline"    -- 查看tag
 spec "user.extras.fzf-lua"
 
 spec "user.extras.windsurf"
+
+spec "user.extras.codecompanion"
 -- spec "user.extras.copilot"
 
 spec "user.extras.undotree"

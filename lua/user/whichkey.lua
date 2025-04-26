@@ -41,21 +41,32 @@ function M.config()
       { "<leader>9", "<cmd>lua require('bufferline').go_to(9, true)<cr>", desc = "Buffer 9", mode = "n", icon = { icon = "󰓩", color = "blue" } },
       { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Prev", mode = "n", icon = { icon = "", color = "blue" } },
       { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Next", mode = "n", icon = { icon = "", color = "blue" } },
-      { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
-      -- { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
-      { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
-      -- { "<leader>a", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Formating", mode = "n" },
 
-      -- { "<leader>w", "<cmd>w<cr>", desc = "Save", mode = "n" },
+      -- { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
+      -- { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
 
-      { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+      -- { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
+      -- { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+
+      -- { "<leader>w", "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' --smart-case ' })<cr>", desc = "Search Word", mode = "n" },
+      -- { "<leader>s", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
       { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
+
+
+      --fzf-lua
+      { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files", mode = "n" },
+      { "<leader>m", "<cmd>lua require('fzf-lua').oldfiles()<cr>", desc = "Recent Files", mode = "n" },
+
+      { "<leader>w", "<cmd>lua require('fzf-lua').grep_cword()<cr>", desc = "Search Word", mode = "n" },
+      { "<leader>s", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+
+
 
       { "<leader>y", "<cmd>YankBank<CR>", desc = "Yank History", mode = "n", icon = { icon = "󰒡", color = "blue" } },
 
       {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
-
+      -- { "<leader>a", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Formating", mode = "n" },
       { "<leader>p", "<cmd>lua require('user.utils').copy_current_buffer_path()<cr>", desc = "Copy File Path", mode = "n", icon = { icon = "", color = "green" } },
 
       { "<leader>b", "<cmd>lua require('snipe').open_buffer_menu()<cr>", desc = "Buffers List", mode = "n", icon = { icon = "", color = "green" } },
