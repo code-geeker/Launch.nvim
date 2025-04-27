@@ -44,14 +44,22 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()
     vim.cmd "tabdo wincmd ="
   end,
+  pattern = { "!vim" }, -- Exclude internal vim buffers if needed, though checktime might be safe
+  callback = function()
+    -- Combine actions for BufWinEnter
+    vim.cmd "set formatoptions-=cro" -- From the first BufWinEnter
+    vim.cmd "checktime"             -- From the second BufWinEnter
+  end,
 })
 
+--[[ The original separate BufWinEnter for checktime is now merged above
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   pattern = { "!vim" },
   callback = function()
     vim.cmd "checktime"
   end,
 })
+]]
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
