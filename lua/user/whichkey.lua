@@ -42,23 +42,23 @@ function M.config()
       { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Prev", mode = "n", icon = { icon = "", color = "blue" } },
       { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Next", mode = "n", icon = { icon = "", color = "blue" } },
 
-      -- { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
-      -- { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
+      { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
+      { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
 
       -- { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "Search Word", mode = "n" },
       -- { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
 
-      -- { "<leader>w", "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' --smart-case ' })<cr>", desc = "Search Word", mode = "n" },
-      -- { "<leader>s", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+      -- { "<leader>w", "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' -i ' })<cr>", desc = "Search Word", mode = "n" },
+      { "<leader>s", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+
       { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
 
 
       --fzf-lua
-      { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files", mode = "n" },
-      { "<leader>m", "<cmd>lua require('fzf-lua').oldfiles()<cr>", desc = "Recent Files", mode = "n" },
-
-      { "<leader>w", "<cmd>lua require('fzf-lua').grep_cword()<cr>", desc = "Search Word", mode = "n" },
-      { "<leader>s", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+      -- { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files", mode = "n" },
+      -- { "<leader>m", "<cmd>lua require('fzf-lua').oldfiles()<cr>", desc = "Recent Files", mode = "n" },
+      -- { "<leader>w", "<cmd>lua require('fzf-lua').grep_cword()<cr>", desc = "Search Word", mode = "n" },
+      -- { "<leader>s", "<cmd>lua require('fzf-lua').live_grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
 
 
 

@@ -68,7 +68,7 @@ spec "user.extras.numb"   --:数字 定位
 spec "user.extras.outline"    -- 查看tag
 
 -- spec "user.extras.nvim-spectre"  --批量替换
-spec "user.extras.fzf-lua"
+-- spec "user.extras.fzf-lua"
 
 spec "user.extras.windsurf"
 
@@ -78,7 +78,7 @@ spec "user.extras.codecompanion"
 spec "user.extras.undotree"
 spec "user.extras.recorder"
 
-spec "user.extras.nvim_gentags"
+-- spec "user.extras.nvim_gentags"
 spec "user.noice"
 spec "user.extras.dressing"
 

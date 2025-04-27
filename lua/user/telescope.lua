@@ -14,6 +14,25 @@ local M = {
 
 function M.config()
 
+_G.smart_grep = function()
+  local mode = vim.fn.mode()
+  -- 如果是 VISUAL 模式，或者有视觉选区
+  if mode == "v"  then
+    require('telescope-live-grep-args.shortcuts').grep_visual_selection({ postfix = ' -i ' })
+  else
+      require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' -i ' })
+    -- 检查选区是不是实际存在
+    --[[ local vstart = vim.fn.getpos("'<")
+    local vend = vim.fn.getpos("'>")
+    if vstart[2] ~= vend[2] or vstart[3] ~= vend[3] then
+      require('telescope-live-grep-args.shortcuts').grep_visual_selection({ postfix = ' -i ' })
+    else
+        print("No selection")
+      require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' -i ' })
+    end ]]
+  end
+end
+
   local wk = require "which-key"
   -- wk.add {
   --   ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
@@ -28,7 +47,7 @@ function M.config()
   -- }
 
   wk.add{
-      -- { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
+      { "<leader>w", "<cmd>lua smart_grep()<cr>", desc = "Word Smart Grep", mode = { "n", "v" } },
   }
 
   --[[ require("telescope").extensions.frecency.frecency {
@@ -69,6 +88,9 @@ function M.config()
         "--glob=!.git/",
       },
 
+
+    -- grep_previewer =  require("telescope.previewers").vimgrep.new,
+
       mappings = {
         i = {
           ["<C-n>"] = actions.cycle_history_next,
@@ -86,7 +108,6 @@ function M.config()
       },
     },
     pickers = {
-
       find_files = {
         theme = "dropdown",
         previewer = false,
@@ -175,9 +196,9 @@ function M.config()
         auto_quoting = true,
         mappings = { -- extend mappings
           i = {
-            ["<M-q>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = ' --smart-case ' }),
+            ["<M-q>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = ' -i ' }),
             -- freeze the current list and start a fuzzy search in the frozen list
-            -- ["<M-i>"] = require("telescope-live-grep-args.actions").to_fuzzy_refine
+            ["<M-f>"] = require('telescope.actions').to_fuzzy_refine
           },
         },
       },
@@ -192,5 +213,6 @@ function M.config()
 
   vim.api.nvim_command('highlight! link TelescopePathSeparator NONE')
 end
+
 
 return M
