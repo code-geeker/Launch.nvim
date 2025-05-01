@@ -5,7 +5,6 @@ require "user.keymaps"
 require "user.autocmds"
 require "user.lsp"
 spec "user.colorscheme.dracula"
--- spec "user.colorscheme.kanagawa"
 
 spec "user.devicons"
 spec "user.treesitter"
@@ -79,6 +78,8 @@ spec "user.extras.undotree"
 spec "user.extras.recorder"
 
 -- spec "user.extras.nvim_gentags"
+spec "user.extras.gentags"
+
 spec "user.noice"
 spec "user.extras.dressing"
 

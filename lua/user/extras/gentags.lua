@@ -4,19 +4,14 @@ local M = {
   cond = vim.fn.executable("ctags") == 1,
   dependencies = {
     "nvim-lua/plenary.nvim",
+    -- lazy = true,
   },
+opts = {}
 }
 
 function M.config()
-  local Path = require("plenary.path")
 
   require("gentags").setup {
-    autostart = true,
-
-    root_dir = vim.g.gentags_root_dir or vim.loop.cwd(),
-    cache = {
-      path = Path:new(vim.fn.stdpath("cache")):joinpath("tags"), -- path where generated tags store, currently required plenary Path object
-    },
     async = true, -- run ctags asynchronous
     bin = "ctags",
     --[[ args = { -- extra args
@@ -109,7 +104,7 @@ function M.config()
       ["JavaScript"] = { "javascript" },
       ["Go"] = { "go" },
       ["PHP"] = { "php" },
-      ["cfml"] = { "cf" },
+      ["ColdFusion"] = { "cf" },
     }
 
   }

@@ -300,7 +300,8 @@ function M.config()
             ["<c-x>"] = "clear_filter",
             ["[g"] = "prev_git_modified",
             ["]g"] = "next_git_modified",
-            ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+            -- ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+            ["o"] = "system_open",
             ["oc"] = { "order_by_created", nowait = false },
             ["od"] = { "order_by_diagnostics", nowait = false },
             ["og"] = { "order_by_git_status", nowait = false },
@@ -320,7 +321,21 @@ function M.config()
           },
         },
 
-        commands = {}, -- Add a custom command or override a global one using the same function name
+        commands = {
+          system_open = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+
+            if node.type == "file" then
+              -- 文件的话，取上一级目录
+              path = vim.fn.fnamemodify(path, ":h")
+            end
+
+            -- macOs: open file in default application in the background.
+            vim.fn.jobstart({ "open", path }, { detach = true })
+          end,
+
+        }, -- Add a custom command or override a global one using the same function name
       },
       buffers = {
         follow_current_file = {

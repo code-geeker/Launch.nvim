@@ -68,3 +68,4 @@ vim.cmd "au BufRead,BufNewFile *.blade.php set filetype=blade"
 
 -- 关掉ts才有效
 -- vim.g.php_sql_query = 1
+
