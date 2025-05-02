@@ -27,6 +27,10 @@ function M.config()
     show_first_indent_level = true,
     use_treesitter = true,
     show_current_context = true,
+    whitespace = {
+      remove_blankline_trail = true,
+    },
+
   }
 
   -- indent = { char = icons.ui.LineMiddle },

@@ -10,6 +10,16 @@ local M = {
 
 function M.config()
   require("codecompanion").setup {
+    adapters = {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          env = {
+            api_key = "AIzaSyAAXFkgaMzWTVOjEsg0CtIvYyzCyVQEA8k",
+             model = "gemini-2.0-flash"
+          },
+        })
+      end,
+    },
     strategies = {
       inline = {
         keymaps = {

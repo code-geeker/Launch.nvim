@@ -45,11 +45,10 @@ spec "user.indentline"
 spec "user.bufferline"
 spec "user.lualine"
 spec "user.snipe"
+
 -- spec "user.extras.flash"
-
-
 spec "user.extras.hop"
--- spec "user.conform"
+
 
 --spec "user.extras.eyeliner"  -- F快速选择
 
