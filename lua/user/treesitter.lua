@@ -32,7 +32,7 @@ function M.config()
     auto_install = true,
     ignore_install = {},
     modules ={},
-    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "phpdoc", "markdown", "bash", "python", "yaml" },
+    ensure_installed = { "html", "css", "javascript", "lua", "vimdoc", "php", "php_only", "phpdoc", "markdown", "bash", "python", "yaml", "regex" },
     highlight = { enable = true, additional_vim_regex_highlighting = false,  --[[ disable = { "php" }  ]]},
     indent = { enable = true },
     matchup = {

@@ -5,8 +5,11 @@ require "user.keymaps"
 require "user.autocmds"
 require "user.lsp"
 spec "user.colorscheme.dracula"
+-- spec "user.colorscheme.catppuccin"
 
 spec "user.devicons"
+spec "user.extras.snacks"
+
 spec "user.treesitter"
 spec "user.mason"
 -- spec "user.schemastore"
@@ -39,8 +42,8 @@ spec "user.extras.mini_align"
 -- spec "user.autopairs"
 -- spec "user.neogit"
 spec "user.alpha"
-spec "user.project"
-spec "user.indentline"
+-- spec "user.project";
+-- spec "user.indentline"
 -- spec "user.toggleterm"
 spec "user.bufferline"
 spec "user.lualine"
@@ -53,7 +56,7 @@ spec "user.extras.hop"
 --spec "user.extras.eyeliner"  -- F快速选择
 
 spec "user.extras.colorizer"
-spec "user.extras.neoscroll"
+-- spec "user.extras.neoscroll"
 -- spec "user.extras.rainbow"    --彩色括号
 -- spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
@@ -80,6 +83,6 @@ spec "user.extras.recorder"
 spec "user.extras.gentags"
 
 spec "user.noice"
-spec "user.extras.dressing"
+-- spec "user.extras.dressing"
 
 require "user.lazy"

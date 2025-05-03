@@ -55,6 +55,7 @@ function M.config()
   local wk = require "which-key"
   wk.add{
     { "<leader>e", "<cmd>Neotree toggle reveal<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
+    { "\\", "<cmd>Neotree reveal<CR>", desc = "Reveal", icon = { icon = "󰙅", color = "blue" } },
   }
 
   --[[ vim.diagnostic.config({
@@ -383,7 +384,7 @@ function M.config()
       },
     })
 
-    vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+    -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     vim.api.nvim_command('highlight! NeoTreeDirectoryIcon guifg=#8094b4')
   end
 
