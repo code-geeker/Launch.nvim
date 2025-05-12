@@ -14,8 +14,9 @@ function M.config()
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            api_key = "AIzaSyAAXFkgaMzWTVOjEsg0CtIvYyzCyVQEA8k",
-             model = "gemini-2.0-flash"
+            api_key = "AIzaSyAL64ghjUR95zN3kLzI8o3QHj1H1y9FKvw",
+             -- model = "gemini-2.0-flash"
+            model = "gemini-2.5-pro-exp-03-25"
           },
         })
       end,
