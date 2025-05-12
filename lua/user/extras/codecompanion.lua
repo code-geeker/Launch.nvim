@@ -8,14 +8,16 @@ local M = {
 }
 
 
+-- This function configures the "codecompanion" plugin
 function M.config()
   require("codecompanion").setup {
     adapters = {
       gemini = function()
+        -- Extend the "gemini" adapter with additional environment settings
         return require("codecompanion.adapters").extend("gemini", {
           env = {
-            api_key = "AIzaSyAL64ghjUR95zN3kLzI8o3QHj1H1y9FKvw",
-             -- model = "gemini-2.0-flash"
+            -- Specify the model to be used for the "gemini" adapter
+            -- api_key is commented out for security reasons
             model = "gemini-2.5-pro-exp-03-25"
           },
         })
@@ -25,10 +27,12 @@ function M.config()
       inline = {
         keymaps = {
           accept_change = {
+            -- Keymap for accepting the suggested change in normal mode
             modes = { n = "ga" },
             description = "Accept the suggested change",
           },
           reject_change = {
+            -- Keymap for rejecting the suggested change in normal mode
             modes = { n = "gr" },
             description = "Reject the suggested change",
           },
@@ -36,8 +40,8 @@ function M.config()
       },
     },
   }
-
 end
+
 
 return M
 
