@@ -106,12 +106,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- })
 
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+-- blade.php 有问题
+--[[ vim.api.nvim_create_autocmd("BufWritePre", {   
   pattern = { "*.php", "*.go" },
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
-})
+}) ]]
 
 
 vim.cmd[[autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]

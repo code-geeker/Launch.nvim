@@ -54,6 +54,7 @@ function M.config()
       { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
 
 
+
       --fzf-lua
       -- { "<leader>f", "<cmd>lua require('fzf-lua').files()<cr>", desc = "Find Files", mode = "n" },
       -- { "<leader>m", "<cmd>lua require('fzf-lua').oldfiles()<cr>", desc = "Recent Files", mode = "n" },

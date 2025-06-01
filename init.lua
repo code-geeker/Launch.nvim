@@ -66,7 +66,9 @@ spec "user.extras.numb"   --:数字 定位
 -- spec "user.extras.various-textobjs"  --块选择
 
 -- spec "user.extras.navbuddy"   -- 查看tag
-spec "user.extras.outline"    -- 查看tag
+-- spec "user.extras.taglist"
+spec "user.extras.tagbar"
+-- spec "user.extras.vista"
 
 -- spec "user.extras.nvim-spectre"  --批量替换
 -- spec "user.extras.fzf-lua"
