@@ -17,7 +17,8 @@ function M.config()
               -- filetype = "NvimTree",
               -- filetype = "neo-tree",
               filetype = "snacks_layout_box",
-              text = '󰙅  File Explorer',
+              -- text = '󰙅  File Explorer',
+              text = 'File Explorer',
               text_align = "left",
               separator = true,
             }

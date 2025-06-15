@@ -29,7 +29,8 @@ M.copy_current_buffer_path = function()
       if i then
         local result = results[i]
         vim.fn.setreg('*', result) -- 复制到系统剪贴板
-        vim.notify("Copied: " .. result)
+        -- vim.notify("Copied: " .. result)
+          Snacks.notify.info("Yanked `" .. result .. "`")
       else
         vim.notify("Invalid selection")
       end
