@@ -27,12 +27,12 @@ spec "user.illuminate"
 spec "user.gitsigns"
 spec "user.whichkey"
 -- spec "user.nvimtree"
-spec "user.neo-tree"
+-- spec "user.neo-tree"
 spec "user.comment"
 spec "user.yankbank"
 spec "user.go"
 
-spec "user.extras.mini_align"
+-- spec "user.extras.mini_align"
 
 -- spec "user.navic"       --显示导航函数
 -- spec "user.breadcrumbs" --增强导航显示
@@ -41,7 +41,7 @@ spec "user.extras.mini_align"
 -- spec "user.harpoon"
 -- spec "user.autopairs"
 -- spec "user.neogit"
-spec "user.alpha"
+-- spec "user.alpha"
 -- spec "user.project";
 -- spec "user.indentline"
 -- spec "user.toggleterm"
