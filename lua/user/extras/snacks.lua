@@ -31,7 +31,6 @@ local M = {
           history_bonus = true,
         },
         win = {
-          -- input window
           list = {
             keys = {
               ["<Tab>"] = { "confirm", mode = { "i", "n" } },
@@ -44,7 +43,7 @@ local M = {
           explorer = {
             -- focus = "input",
             -- auto_close = true,
-            hidden = true,
+            -- hidden = true,
             --[[ layout = {
               preset = "default",
               preview = false,
@@ -155,7 +154,10 @@ local M = {
 
   local wk = require "which-key"
   wk.add{
-    { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
+      { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
+
+      { "<leader>s", "<cmd>lua Snacks.picker.grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+      { "<leader>w", "<cmd>lua Snacks.picker.grep_word()<cr>", desc = "Word Grep", mode = { "n", "x" },icon = { icon = "", color = "blue" } },
   }
 
 
@@ -170,14 +172,15 @@ local M = {
           local bt = vim.api.nvim_buf_get_option(buf, "buftype")
           local ft = vim.api.nvim_buf_get_option(buf, "filetype")
 
-          -- print("win: " .. win .. " buf: " .. buf .. " bt: " .. bt .. " ft: " .. ft )
+          print("win: " .. win .. " buf: " .. buf .. " bt: " .. bt .. " ft: " .. ft )
           -- 普通 buffer（非特殊类型）
           if bt == "" and ft ~= "" then
             normal_count = normal_count + 1
           end
 
           -- snacks explorer buffer
-          if ft == "snacks_layout_box" then
+          -- snacks_picker_list, snacks_layout_box
+          if ft == "snacks_picker_list" then
             snacks_explorer_found = true
           end
         end

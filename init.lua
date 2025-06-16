@@ -8,6 +8,7 @@ spec "user.colorscheme.dracula"
 -- spec "user.colorscheme.catppuccin"
 
 spec "user.devicons"
+-- spec "user.mini_icons"
 spec "user.extras.snacks"
 
 spec "user.treesitter"
@@ -22,7 +23,7 @@ spec "user.cmp"
 
 -- spec "user.floating-help"
 spec "user.extras.oil"
-spec "user.telescope"
+-- spec "user.telescope"
 -- spec "user.illuminate"
 spec "user.gitsigns"
 spec "user.whichkey"

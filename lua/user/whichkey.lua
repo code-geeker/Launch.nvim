@@ -52,7 +52,7 @@ function M.config()
       -- { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
 
       -- { "<leader>w", "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ postfix = ' -i ' })<cr>", desc = "Search Word", mode = "n" },
-      { "<leader>s", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
+      -- { "<leader>s", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
 
       { "<leader>c", "<cmd>Telescope git_status<cr>", desc = "Git Unstaged Files", mode = "n", icon = { icon = "󱀺", color = "orange" } },
 
