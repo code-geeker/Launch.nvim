@@ -47,7 +47,7 @@ end
   -- }
 
   wk.add{
-      { "<leader>w", "<cmd>lua smart_grep()<cr>", desc = "Word Smart Grep", mode = { "n", "v" } },
+      -- { "<leader>w", "<cmd>lua smart_grep()<cr>", desc = "Word Smart Grep", mode = { "n", "v" } },
   }
 
   --[[ require("telescope").extensions.frecency.frecency {

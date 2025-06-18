@@ -23,8 +23,6 @@ keymap("n", "<m-tab>", "<c-6>", opts)
 keymap('n', 'n', 'nzzzv', opts)
 keymap('n', 'N', 'Nzzzv', opts)
 
--- keymap("n", "n", "/<CR>", opts)
--- keymap("n", "N", "?<CR>", opts)
 
 
 keymap("n", "#", "*``", opts)
