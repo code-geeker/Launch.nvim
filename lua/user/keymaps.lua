@@ -122,8 +122,7 @@ keymap('n', 'J', 'mzJ`z:delmarks z<cr>', opts)
 -- keymap('n', '<CR>', 'o<Esc>', opts)
 
 
--- keymap({ "n", "o", "x" }, "g]", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
-keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('telescope').extensions.ctags_plus.jump_to_tag()<cr>", opts)
+keymap({ "n", "o", "x" }, "<C-]>", "<cmd>lua require('picker-tags').tags()<cr>", opts)
 
 -- keymap('n', '<leader>u', "<cmd>lua require('undotree').toggle()<cr>", opts)
 

@@ -1,13 +1,13 @@
 local M = {
-  "code-geeker/snacks.nvim",
-  branch = 'tags-picker',
+  "folke/snacks.nvim",
+  -- branch = 'tags-picker',
   priority = 1000,
   lazy = false,
   config = function()
     require("snacks").setup({
       bigfile = { enabled = true },
       explorer = {
-        enabled = false,
+        enabled = true,
       },
       indent = { enabled = true },
       input = { enabled = true },
@@ -41,14 +41,52 @@ local M = {
           }
         },
          sources = {
+          files = { hidden = true,
+            layout = {
+              preview = false,
+              layout = { -- the layout itself
+                backdrop = false,
+                width = 0.3, -- 0 is max
+                height = 0.5,
+              }
+              -- preset = "telescope",
+            }
+          },
+          recent = {
+            layout = {
+              preset = "telescope",
+              reverse = true,
+              layout = {
+                box = "horizontal",
+                backdrop = false,
+                width = 0.8,
+                height = 0.9,
+                border = "none",
+                {
+                  box = "vertical",
+                  { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+                  { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+                },
+                {
+                  win = "preview",
+                  title = "{preview:Preview}",
+                  width = 0.55,
+                  border = "rounded",
+                  title_pos = "center",
+                },
+              },
+
+            }
+          },
           explorer = {
             -- focus = "input",
             -- auto_close = true,
-            -- hidden = true,
-            --[[ layout = {
-              preset = "default",
-              preview = false,
-            }, ]]
+            hidden = true,
+            layout = {
+              auto_hide = { "input" },
+              -- preset = "default",
+              -- preview = false,
+            },
             actions = {
               copy_file_path = {
                 action = function(_, item)
@@ -152,10 +190,14 @@ local M = {
 
     vim.api.nvim_command('highlight! link SnacksDashboardFooter DraculaPurpleBold')
 
+    vim.api.nvim_command('highlight! link SnacksPickerDirectory DraculaPurpleBold')
+
+    vim.api.nvim_command('highlight! Directory guifg=#8094b4')
+
 
   local wk = require "which-key"
   wk.add{
-      -- { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
+      { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
 
       { "<leader>s", "<cmd>lua Snacks.picker.grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
       { "<leader>w", "<cmd>lua Snacks.picker.grep_word()<cr>", desc = "Word Grep", mode = { "n", "x" },icon = { icon = "", color = "blue" } },

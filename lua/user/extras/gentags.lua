@@ -1,10 +1,11 @@
 local M = {
   "JMarkin/gentags.lua",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  lazy = false,
+  priority = 10000,
   cond = vim.fn.executable("ctags") == 1,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    -- lazy = true,
   },
 opts = {}
 }
