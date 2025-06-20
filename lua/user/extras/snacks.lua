@@ -11,7 +11,7 @@ local M = {
       },
       indent = { enabled = true },
       input = { enabled = true },
-      dashboard = { enabled = true },
+      dashboard = { enabled = false },
       notifier = {
         enabled = true,
         timeout = 3000,
@@ -41,7 +41,8 @@ local M = {
           }
         },
          sources = {
-          files = { hidden = true,
+          files = { 
+            -- hidden = true,
             layout = {
               preview = false,
               layout = { -- the layout itself
@@ -180,19 +181,27 @@ local M = {
 
     })
 
+
+    --[[ vim.api.nvim_command('highlight! link SnacksDashboardHeader DraculaPurpleBold')
+    vim.api.nvim_command('highlight! link SnacksDashboardIcon DraculaPurpleBold')
+    vim.api.nvim_command('highlight! link SnacksDashboardDesc Normal')
+    vim.api.nvim_command('highlight! link SnacksDashboardFooter DraculaPurpleBold') ]]
+
     vim.api.nvim_command('highlight! link SnacksPickerDir LineNr')
 
-    vim.api.nvim_command('highlight! link SnacksDashboardHeader DraculaPurpleBold')
-
-    vim.api.nvim_command('highlight! link SnacksDashboardIcon DraculaPurpleBold')
-
-    vim.api.nvim_command('highlight! link SnacksDashboardDesc Normal')
-
-    vim.api.nvim_command('highlight! link SnacksDashboardFooter DraculaPurpleBold')
 
     vim.api.nvim_command('highlight! link SnacksPickerDirectory DraculaPurpleBold')
-
     vim.api.nvim_command('highlight! Directory guifg=#8094b4')
+
+       vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#45475A', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerTitle', { bg = '#7aa2f7', fg = '#1f2335' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerPreview', { bg = '#1a1b26' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerList', { bg = '#1a1b26' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerListTitle', { bg = '#9ece6a', fg = '#1f2335' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerInputTitle', { bg = '#f7768e', fg = '#1f2335' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerInputBorder', { bg = '#1a1b26', fg = '#45475a' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerInputSearch', { bg = '#f7768e', fg = '#1f2335' })
+      vim.api.nvim_set_hl(0, 'SnacksPickerInput', { bg = '#1a1b26' })
 
 
   local wk = require "which-key"
@@ -201,6 +210,8 @@ local M = {
 
       { "<leader>s", "<cmd>lua Snacks.picker.grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
       { "<leader>w", "<cmd>lua Snacks.picker.grep_word()<cr>", desc = "Word Grep", mode = { "n", "x" },icon = { icon = "", color = "blue" } },
+
+      { "<leader>u", "<cmd>lua Snacks.picker.undo()<cr>", desc = "Undotree", icon = { icon = "", color = "red" } },
   }
 
 -- quit nvim if explorer is the last window

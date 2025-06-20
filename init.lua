@@ -41,7 +41,7 @@ spec "user.go"
 -- spec "user.harpoon"
 -- spec "user.autopairs"
 -- spec "user.neogit"
--- spec "user.alpha"
+spec "user.alpha"
 -- spec "user.project";
 -- spec "user.indentline"
 -- spec "user.toggleterm"
@@ -78,7 +78,7 @@ spec "user.extras.windsurf"
 spec "user.extras.codecompanion"
 -- spec "user.extras.copilot"
 
-spec "user.extras.undotree"
+-- spec "user.extras.undotree"
 spec "user.extras.recorder"
 
 -- spec "user.extras.nvim_gentags"
