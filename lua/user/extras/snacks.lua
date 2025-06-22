@@ -1,6 +1,5 @@
 local M = {
   "folke/snacks.nvim",
-  -- branch = 'tags-picker',
   priority = 1000,
   lazy = false,
   config = function()
@@ -18,6 +17,7 @@ local M = {
       },
       picker = {
         enabled = true,
+        -- title = "TEST",
         formatters = {
           file = {
             filename_first = true,
@@ -38,19 +38,26 @@ local M = {
               ["Y"] = "copy_file_path",
               ["s"] = "search_in_directory",
             }
-          }
+          },
         },
          sources = {
-          files = { 
-            -- hidden = true,
+          files = {
+            hidden = true,
             layout = {
               preview = false,
               layout = { -- the layout itself
+                box = "horizontal",
                 backdrop = false,
                 width = 0.3, -- 0 is max
                 height = 0.5,
+                {
+                  box = "vertical",
+                  border = "rounded",
+                  title = "Files",
+                  { win = "input", height = 1, border = "bottom" },
+                  { win = "list", border = "none" },
+                },
               }
-              -- preset = "telescope",
             }
           },
           recent = {
@@ -87,6 +94,25 @@ local M = {
               auto_hide = { "input" },
               -- preset = "default",
               -- preview = false,
+            layout = {
+                backdrop = false,
+                width = 40,
+                min_width = 40,
+                height = 0,
+                position = "left",
+                border = "none",
+                box = "vertical",
+                {
+                  win = "input",
+                  height = 1,
+                  border = "rounded",
+                  title = "{title}",
+                  title_pos = "center",
+                },
+                { win = "list", border = "none" },
+                { win = "preview", title = "{preview}", height = 0.4, border = "top" },
+              },
+
             },
             actions = {
               copy_file_path = {
@@ -192,6 +218,7 @@ local M = {
 
     vim.api.nvim_command('highlight! link SnacksPickerDirectory DraculaPurpleBold')
     vim.api.nvim_command('highlight! Directory guifg=#8094b4')
+    vim.api.nvim_command('highlight! SnacksPickerPathHidden  guifg=#8094b4')
 
        vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#45475A', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'SnacksPickerTitle', { bg = '#7aa2f7', fg = '#1f2335' })

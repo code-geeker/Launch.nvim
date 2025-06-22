@@ -36,7 +36,6 @@ spec "user.go"
 
 -- spec "user.navic"       --显示导航函数
 -- spec "user.breadcrumbs" --增强导航显示
---spec "user.null-ls"
 
 -- spec "user.harpoon"
 -- spec "user.autopairs"
@@ -56,7 +55,6 @@ spec "user.extras.hop"
 --spec "user.extras.eyeliner"  -- F快速选择
 
 spec "user.extras.colorizer"
--- spec "user.extras.neoscroll"
 -- spec "user.extras.rainbow"    --彩色括号
 -- spec "user.extras.cmp-tabnine"
 spec "user.extras.fidget"
