@@ -6,7 +6,7 @@ local M = {
     require("snacks").setup({
       bigfile = { enabled = true },
       explorer = {
-        enabled = true,
+        enabled = false,
       },
       indent = { enabled = true },
       input = { enabled = true },
@@ -215,10 +215,10 @@ local M = {
 
     vim.api.nvim_command('highlight! link SnacksPickerDir LineNr')
 
-
-    vim.api.nvim_command('highlight! link SnacksPickerDirectory DraculaPurpleBold')
+    -- explorer
+    --[[ vim.api.nvim_command('highlight! link SnacksPickerDirectory DraculaPurpleBold')
     vim.api.nvim_command('highlight! Directory guifg=#8094b4')
-    vim.api.nvim_command('highlight! SnacksPickerPathHidden  guifg=#8094b4')
+    vim.api.nvim_command('highlight! SnacksPickerPathHidden  guifg=#8094b4') ]]
 
        vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#45475A', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'SnacksPickerTitle', { bg = '#7aa2f7', fg = '#1f2335' })
@@ -233,7 +233,7 @@ local M = {
 
   local wk = require "which-key"
   wk.add{
-      { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
+      -- { "<leader>e", "<cmd>lua Snacks.explorer()<CR>", desc = "Explorer", icon = { icon = "󰙅", color = "orange" } },
 
       { "<leader>s", "<cmd>lua Snacks.picker.grep()<cr>", desc = "Live Grep", mode = "n", icon = { icon = "", color = "orange" } },
       { "<leader>w", "<cmd>lua Snacks.picker.grep_word()<cr>", desc = "Word Grep", mode = { "n", "x" },icon = { icon = "", color = "blue" } },
