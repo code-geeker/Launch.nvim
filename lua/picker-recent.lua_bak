@@ -1,0 +1,66 @@
+local M = {}
+
+function M.show()
+  local items = {}
+  local util = require("snacks.util")
+
+-- Load web-devicons if available
+  local has_devicons, devicons = pcall(require, "nvim-web-devicons")
+  if not has_devicons then
+    vim.notify("nvim-web-devicons not found - showing without icons", vim.log.levels.WARN)
+  end
+
+  for i, path in ipairs(_G.recent_files) do
+    if vim.fn.filereadable(path) == 1 then
+        local filename = vim.fn.fnamemodify(path, ":t")  -- Just the filename
+        local filepath = vim.fn.fnamemodify(path, ":~:.:h")  -- Relative path without filename
+
+        local icon, icon_hl = "", ""
+        
+        if has_devicons then
+          -- icon, icon_hl = devicons.get_icon(path, filename, { default = true })
+            icon, icon_hl = util.icon(vim.fn.fnamemodify(filename, ":e"),'extension')
+        end
+        
+
+
+      table.insert(items, {
+        idx = i,
+        -- text = string.format("%s  ‣ ⋮%s", filename, filepath),  -- Filename first format
+        display = {
+          filename = filename,
+          filepath = filepath,
+          icon = icon,
+          icon_hl = icon_hl
+        },
+        file = path,
+        preview = true,
+      })
+    end
+  end
+
+  Snacks.picker({
+    title = "Recent Files",
+    layout = {
+      preset = "telescope",
+      preview = true,
+    },
+    items = items,
+  format = function(item, _)
+
+       -- Format with icon and filename first
+        return {
+          { item.display.icon .. " ", item.display.icon_hl },  -- Icon with its highlight
+          { item.display.filename },                           -- Filename
+          { " ⋮" .. item.display.filepath, "Comment" }        -- Path with separator
+        }
+
+      end,
+    confirm = function(picker, item)
+      picker:close()
+      vim.cmd("edit " .. vim.fn.fnameescape(item.path))
+    end,
+  })
+end
+
+return M

@@ -166,3 +166,65 @@ vim.api.nvim_create_user_command('TSNodeInfo', function()
         print("No node found under cursor")
     end
 end, {})
+
+
+
+--[[
+local json = vim.fn.json_encode and vim.fn.json_decode and vim.fn or require("dkjson")  -- fallback
+local cache_path = vim.fn.stdpath("cache") .. "/recent_files.json"
+
+-- Recent files list
+_G.recent_files = _G.recent_files or {}
+
+-- 加载缓存文件
+local function load_recent_files()
+  if vim.fn.filereadable(cache_path) == 1 then
+    local lines = vim.fn.readfile(cache_path)
+    local ok, data = pcall(vim.fn.json_decode, table.concat(lines, "\n"))
+    if ok and type(data) == "table" then
+      _G.recent_files = data
+    end
+  end
+end
+
+-- 保存到缓存文件
+local function save_recent_files()
+  local encoded = vim.fn.json_encode(_G.recent_files)
+  if encoded then
+    vim.fn.writefile({ encoded }, cache_path)
+  end
+end
+
+-- 初始化：开机加载，退出保存
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = load_recent_files,
+})
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = save_recent_files,
+})
+
+-- 更新 recent 文件
+local function add_file(path)
+  if path == '' or vim.fn.filereadable(path) == 0 then return end
+  -- local cwd = vim.fn.getcwd()
+  -- if not path:find(cwd, 1, true) then return end -- 只保存 cwd 范围内的文件
+
+  for i, f in ipairs(_G.recent_files) do
+    if f == path then
+      table.remove(_G.recent_files, i)
+      break
+    end
+  end
+  table.insert(_G.recent_files, 1, path)
+  if #_G.recent_files > 100 then
+    table.remove(_G.recent_files)
+  end
+end
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
+  callback = function(args)
+    local fname = vim.api.nvim_buf_get_name(args.buf)
+    print(fname)
+    add_file(fname)
+  end,
+}) ]]

@@ -42,8 +42,6 @@ function M.config()
       { "<leader>h", "<cmd>BufferLineCyclePrev<CR>", desc = "Buffer Prev", mode = "n", icon = { icon = "", color = "blue" } },
       { "<leader>l", "<cmd>BufferLineCycleNext<CR>", desc = "Buffer Next", mode = "n", icon = { icon = "", color = "blue" } },
 
-      { "<leader>f", "<cmd> lua Snacks.picker.files()<cr>", desc = "Find Files", mode = "n" },
-      { "<leader>m", "<cmd>lua Snacks.picker.recent()<cr>", desc = "Recent Files", mode = "n" },
 
       -- { "<leader>f", "<cmd>Telescope frecency workspace=CWD theme=dropdown previewer=false prompt_title=Find_Files<cr>", desc = "Find Files", mode = "n" },
       -- { "<leader>m", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files", mode = "n" },
