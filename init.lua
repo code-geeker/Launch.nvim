@@ -11,6 +11,7 @@ spec "user.colorscheme.dracula"
 spec "user.devicons"
 -- spec "user.mini_icons"
 spec "user.extras.snacks"
+-- spec "user.mru"
 
 spec "user.treesitter"
 spec "user.mason"

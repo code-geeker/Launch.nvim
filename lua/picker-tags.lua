@@ -57,9 +57,12 @@ function M.tags()
 for _, tag in ipairs(tags) do
     ---@type snacks.picker.finder.Item
     ---@diagnostic disable-next-line: missing-fields
+
     local item = {}
     item = {
-      text = Snacks.picker.util.text(tag, { "name", "kind" }),
+      -- text = Snacks.picker.util.text(tag, { "name", "kind" }),
+      -- text = Snacks.picker.util.text(tag, {"filename"}),
+      text = vim.fn.fnamemodify(tag.filename, ':.'),
       name = tag.name,
       kind = tag.kind,
       tag = tag,

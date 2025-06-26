@@ -169,8 +169,7 @@ end, {})
 
 
 
---[[
-local json = vim.fn.json_encode and vim.fn.json_decode and vim.fn or require("dkjson")  -- fallback
+
 local cache_path = vim.fn.stdpath("cache") .. "/recent_files.json"
 
 -- Recent files list
@@ -195,36 +194,46 @@ local function save_recent_files()
   end
 end
 
--- 初始化：开机加载，退出保存
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = load_recent_files,
-})
-vim.api.nvim_create_autocmd("VimLeavePre", {
-  callback = save_recent_files,
-})
-
 -- 更新 recent 文件
 local function add_file(path)
   if path == '' or vim.fn.filereadable(path) == 0 then return end
-  -- local cwd = vim.fn.getcwd()
-  -- if not path:find(cwd, 1, true) then return end -- 只保存 cwd 范围内的文件
 
+  -- 移除重复项
   for i, f in ipairs(_G.recent_files) do
     if f == path then
       table.remove(_G.recent_files, i)
       break
     end
   end
+  
+  -- 添加到列表开头
   table.insert(_G.recent_files, 1, path)
+  
+  -- 限制列表长度
   if #_G.recent_files > 100 then
     table.remove(_G.recent_files)
   end
 end
 
+-- 初始化：开机加载
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = load_recent_files,
+})
+
+-- 退出时保存
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = save_recent_files,
+})
+
+-- 访问文件时更新并保存
 vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
   callback = function(args)
     local fname = vim.api.nvim_buf_get_name(args.buf)
-    print(fname)
+    load_recent_files()
     add_file(fname)
+    save_recent_files()  -- 每次访问文件后立即保存
   end,
-}) ]]
+})
+
+-- 为picker提供加载函数（通过全局变量）
+_G.load_recent_files_for_picker = load_recent_files
