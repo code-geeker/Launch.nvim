@@ -31,7 +31,10 @@ spec "user.whichkey"
 -- spec "user.nvimtree"
 spec "user.neo-tree"
 spec "user.comment"
-spec "user.yankbank"
+-- spec "user.yankbank"
+
+spec "user.yanky"
+
 spec "user.go"
 
 -- spec "user.extras.mini_align"
@@ -62,7 +65,7 @@ spec "user.extras.colorizer"
 spec "user.extras.fidget"
 spec "user.extras.matchup"
 spec "user.extras.surround"
-spec "user.extras.numb"   --:数字 定位
+-- spec "user.extras.numb"   --:数字 定位
 -- spec "user.extras.various-textobjs"  --块选择
 
 -- spec "user.extras.navbuddy"   -- 查看tag

@@ -64,7 +64,7 @@ function M.config()
 
 
 
-      { "<leader>y", "<cmd>YankBank<CR>", desc = "Yank History", mode = "n", icon = { icon = "󰒡", color = "blue" } },
+      -- { "<leader>y", "<cmd>YankBank<CR>", desc = "Yank History", mode = "n", icon = { icon = "󰒡", color = "blue" } },
 
       -- {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
