@@ -5,34 +5,11 @@ function M.show()
   if _G.load_recent_files_for_picker then
     _G.load_recent_files_for_picker()
   end
-
   local items = {}
-  local util = require("snacks.util")
-
-
-  -- Load web-devicons if available
-  local has_devicons = pcall(require, "nvim-web-devicons")
-  
   for i, path in ipairs(_G.recent_files) do
     if vim.fn.filereadable(path) == 1 then
-      local filename = vim.fn.fnamemodify(path, ":t")
-      local filepath = vim.fn.fnamemodify(path, ":~:.:h")
-      local icon, icon_hl = "", ""
-      
-
-      if has_devicons then
-        icon, icon_hl = util.icon(vim.fn.fnamemodify(filename, ":e"), 'extension')
-      end
-
-      -- print(vim.fn.fnamemodify(path, ":~:."))
       table.insert(items, {
         idx = i,
-        display = {
-          filename = filename,
-          filepath = filepath,
-          icon = icon,
-          icon_hl = icon_hl
-        },
         file = path,
         path = path,
         preview = true,
@@ -43,12 +20,34 @@ function M.show()
     end
   end
 
-
   Snacks.picker({
     title = "Recent",
+    matcher = {
+      fuzzy = false,
+    },
     layout = {
       preset = "telescope",
-      preview = true,
+      reverse = true,
+      -- preview = true,
+      layout = {
+        box = "horizontal",
+        backdrop = false,
+        width = 0.8,
+        height = 0.9,
+        border = "none",
+        {
+          box = "vertical",
+          { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+          { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+        },
+        {
+          win = "preview",
+          title = "{preview:Preview}",
+          width = 0.55,
+          border = "rounded",
+          title_pos = "center",
+        },
+      },
     },
     items = items,
   })

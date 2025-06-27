@@ -47,7 +47,7 @@ local M = {
               layout = { -- the layout itself
                 box = "horizontal",
                 backdrop = false,
-                width = 0.3, -- 0 is max
+                width = 90, -- 0 is max
                 height = 0.5,
                 {
                   box = "vertical",
@@ -59,7 +59,62 @@ local M = {
               }
             }
           },
-          recent = {
+
+          grep = {
+              layout = {
+                preset = "telescope",
+                reverse = true,
+                -- preview = true,
+                layout = {
+                  box = "horizontal",
+                  backdrop = false,
+                  width = 0.8,
+                  height = 0.9,
+                  border = "none",
+                  {
+                    box = "vertical",
+                    { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+                    { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+                  },
+                  {
+                    win = "preview",
+                    title = "{preview:Preview}",
+                    width = 0.55,
+                    border = "rounded",
+                    title_pos = "center",
+                  },
+                },
+              },
+          },
+
+          grep_word = {
+              layout = {
+                preset = "telescope",
+                reverse = true,
+                -- preview = true,
+                layout = {
+                  box = "horizontal",
+                  backdrop = false,
+                  width = 0.8,
+                  height = 0.9,
+                  border = "none",
+                  {
+                    box = "vertical",
+                    { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+                    { win = "input", height = 1, border = "rounded", title = "{title}", title_pos = "center" },
+                  },
+                  {
+                    win = "preview",
+                    title = "{preview:Preview}",
+                    width = 0.55,
+                    border = "rounded",
+                    title_pos = "center",
+                  },
+                },
+              },
+          },
+
+          --[[ recent = {
             layout = {
               preset = "telescope",
               reverse = true,
@@ -84,7 +139,7 @@ local M = {
               },
 
             }
-          },
+          }, ]]
           explorer = {
             -- focus = "input",
             -- auto_close = true,

@@ -169,6 +169,7 @@ end, {})
 
 
 
+--- start recent files ---
 
 local cache_path = vim.fn.stdpath("cache") .. "/recent_files.json"
 
@@ -216,14 +217,14 @@ local function add_file(path)
 end
 
 -- 初始化：开机加载
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = load_recent_files,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = load_recent_files,
+-- })
 
 -- 退出时保存
-vim.api.nvim_create_autocmd("VimLeavePre", {
+--[[ vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = save_recent_files,
-})
+}) ]]
 
 -- 访问文件时更新并保存
 vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
@@ -237,3 +238,5 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
 
 -- 为picker提供加载函数（通过全局变量）
 _G.load_recent_files_for_picker = load_recent_files
+
+--- end recent files ---

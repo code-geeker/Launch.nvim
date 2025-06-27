@@ -20,6 +20,8 @@ function visual_or_cword()
   return vim.fn.expand('<cword>')
 end
 
+local  format = require("snacks.picker.format")
+
 
 function M.tags()
   -- vim.notify(vim.inspect(vim.fn.tagfiles()), vim.log.levels.INFO)
@@ -127,19 +129,49 @@ for _, tag in ipairs(tags) do
     -- source = "select",
     title="Tags for: " .. word,
     items = items,
-    format = function(item, _)
-      local ret = {} ---@type snacks.picker.Highlight[]
+    matcher = {
+      fuzzy = false,
+    },
+    format = function(item, picker)
+      
+         return format.filename(item, picker)
+
+
+      --[[ local ret = {} ---@type snacks.picker.Highlight[]
       local tag = item.tag
       ret[#ret + 1] = { tag.kind, "Type" }
       ret[#ret + 1] = { "::", "SnacksPickerDelim" }
       -- ret[#ret + 1] = { tag.name }
       -- ret[#ret + 1] = { ":", "SnacksPickerDelim" }
       ret[#ret + 1] = { vim.fn.fnamemodify(tag.filename, ':.'), "SnacksPickerDirectory" }
-      return ret
+      return ret ]]
     end,
     layout = {
-      preset = "default",
-      preview = true
+      preset = "vertical",
+      reverse = true,
+      layout = {
+        backdrop = false,
+        width = 0.5,
+        min_width = 80,
+        height = 0.8,
+        min_height = 30,
+        box = "vertical",
+        {
+          win = "preview",
+          title = "{preview:Preview}",
+          border = "rounded",
+          title_pos = "center",
+        },
+        {
+          box = "vertical",
+          border = "none",
+          title_pos = "center",
+          height = 0.2,
+          { win = "list", title = " Results ", title_pos = "center", border = "rounded", },
+          { win = "input", height = 1, border = "rounded", title = "{title} {live} {flags}", title_pos = "center" },
+        },
+
+      },
     },
   })
 end
