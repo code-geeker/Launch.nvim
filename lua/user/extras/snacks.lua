@@ -274,7 +274,7 @@ local M = {
     vim.api.nvim_command('highlight! Directory guifg=#8094b4')
     vim.api.nvim_command('highlight! SnacksPickerPathHidden  guifg=#8094b4') ]]
 
-       vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#45475A', bg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'FloatBorder', { fg = '#45475A', bg = 'NONE' })
       vim.api.nvim_set_hl(0, 'SnacksPickerTitle', { bg = '#7aa2f7', fg = '#1f2335' })
       vim.api.nvim_set_hl(0, 'SnacksPickerPreview', { bg = '#1a1b26' })
       vim.api.nvim_set_hl(0, 'SnacksPickerList', { bg = '#1a1b26' })

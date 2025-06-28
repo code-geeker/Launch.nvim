@@ -224,6 +224,10 @@ vim.lsp.config("*", {
           telemetry = {
             enable = false,
           },
+          diagnostics = {
+            -- globals = { "vim" },
+           disable = { "undefined-global" },
+          }
         },
       },
     }
