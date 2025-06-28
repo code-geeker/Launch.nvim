@@ -26,7 +26,7 @@ function M.config()
     button("f", icons.ui.Files .. " Find file", ":lua Snacks.picker.files() <CR>"),
     button("n", icons.ui.NewFile .. " New file", ":ene <BAR> startinsert <CR>"),
     button("p", icons.git.Repo .. " Find project", ":lua Snacks.picker.projects() <CR>"),
-    button("m", icons.ui.History .. " Recent files", ":lua require('picker-recent').show()<CR>"),
+    button("r", icons.ui.History .. " Recent files", ":lua require('picker-recent').show()<CR>"),
     button("t", icons.ui.Text .. " Find text", ":lua Snacks.picker.grep() <CR>"),
     button("c", icons.ui.Gear .. " Config", ":e ~/.config/nvim/init.lua <CR>"),
     button("q", icons.ui.SignOut .. " Quit", ":qa<CR>"),

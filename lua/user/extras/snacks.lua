@@ -296,7 +296,8 @@ local M = {
 
       { "<leader>f", "<cmd>lua Snacks.picker.files()<cr>", desc = "Find Files", mode = "n" },
       -- { "<leader>m", "<cmd>lua Snacks.picker.recent()<cr>", desc = "Recent Files", mode = "n" },
-      { "<leader>m", "<cmd>lua require('picker-recent').show()<cr>", desc = "Recent Files", mode = "n" },
+      { "<leader>r", "<cmd>lua require('picker-recent').show()<cr>", desc = "Recent Files", mode = "n" },
+      { "<leader>m", "<cmd>lua Snacks.picker.marks()<cr>", desc = "Marks", mode = "n" },
   }
 
     -- quit nvim if explorer is the last window

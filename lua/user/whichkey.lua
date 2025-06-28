@@ -66,7 +66,7 @@ function M.config()
 
       -- { "<leader>y", "<cmd>YankBank<CR>", desc = "Yank History", mode = "n", icon = { icon = "󰒡", color = "blue" } },
 
-      -- {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
+      {"<leader>g", "", desc = "Git", icon = { icon = "" , color = "red" } },
 
       -- { "<leader>a", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Formating", mode = "n" },
       { "<leader>p", "<cmd>lua require('user.utils').copy_current_buffer_path()<cr>", desc = "Copy File Path", mode = "n", icon = { icon = "", color = "green" } },
